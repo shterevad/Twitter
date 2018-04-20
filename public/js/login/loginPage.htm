@@ -1,11 +1,12 @@
 <html>
 
 <head>
-    <title>Express</title>
+    <title>Twitter</title>
 
     <!-- jquery and bootstrap -->
     <script src="/vendor/jqlite/jqlite.min.js"></script>
     <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-route/angular-route.min.js"></script>
     <script src="/vendor/angular-animate/angular-animate.min.js"></script>
 
     <!-- css -->
@@ -15,12 +16,11 @@
     <link rel="stylesheet" href="/stylesheets/login.css">
     <link rel="stylesheet" href="/stylesheets/about.css">
 
-    <!-- front end js -->
-    <script src="/js/login/loginController.js"></script>
+
 
 </head>
 
-<body>
+<body ng-app='loginApp' ng-controller="LoginController">
 
     <main id="main-login-pg">
         <div id="login-left-side-container">
@@ -49,11 +49,10 @@
             </div>
 
             <div id="login-right-buttons">
-                <button class="log-pg-btn" id="login-pg-sign-btn">Sign Up</button>
+                <button class="log-pg-btn" id="login-pg-sign-btn" (click)="signupClick($event)">Sign Up</button>
                 <button class="log-pg-btn" id="login-pg-log-btn">Log In</button>
             </div>
         </div>
-
 
         <div id="login-right-side-container-login-field" style="display:none">
             <div class="login-right-header">
@@ -73,7 +72,6 @@
             </form>
         </div>
 
-
         <div id="login-right-side-container-signup-field" style="display:none">
             <div class="login-right-header">
                 <img src="/images/logo.png" alt="" class="login-right-logo">
@@ -92,6 +90,7 @@
                     <a id="login-submit-cookieuse">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</p>
             </form>
         </div>
+
     </main>
 
     <footer>
@@ -147,6 +146,10 @@
             <li id="copiright">&copy; 2018 Twitter</li>
         </ul>
     </footer>
+
+    <!-- front end js -->
+    <script src="/js/login/loginApp.js"></script>
+    <script src="/js/login/loginController.js"></script>
 </body>
 
 </html>
