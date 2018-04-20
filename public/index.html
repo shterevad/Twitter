@@ -1,30 +1,272 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Express</title>
-  
-  <!-- jquery and bootstrap -->
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/vendor/jquery-ui-dist/jquery-ui.min.js"></script>    
-    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/vendor/typed.js/lib/typed.min.js"></script>
-    
-    
-    <!-- css -->
-    <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./stylesheets/reset.css">
-    <link rel="stylesheet" href="./stylesheets/fonts.css">
-    <link rel="stylesheet" href="./stylesheets/login.css"> 
-    <link rel="stylesheet" href="./stylesheets/about.css"> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Twitter</title>
 
-    <!-- front end js -->
-    <script src="/js/controllers/loginController.js"></script>
-  
+  <!-- jquery and bootstrap -->
+ <!--  <script src="vendor/jquery/dist/jquery.min.js"></script>
+  <script src="vendor/jquery-ui-dist/jquery-ui.min.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="vendor/typed.js/lib/typed.min.js"></script> -->
+
+
+  <script src="vendor/angular/angular.min.js"></script>
+  <script src="vendor/angular-route/angular-route.min.js"></script>
+
+  <!-- css -->
+  <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./stylesheets/reset.css">
+  <link rel="stylesheet" href="./stylesheets/index.css">
+  <link rel="stylesheet" href="./stylesheets/fonts.css">
+
+<!-- 
+  <link rel="stylesheet" href="./stylesheets/login.css">
+  <link rel="stylesheet" href="./stylesheets/about.css">
+   front end js 
+   <script src="js/controllers/loginController.js"></script> -->
 </head>
 
-<body>
-  <h1>Express</h1>
-  <p>Welcome to Express</p>
+
+<body ng-app="mainApp">
+  <header class='greyBorder'>
+    <div>
+      <nav id="mainNav">
+        <ul>
+          <li>
+            <a href="#/!" class='grey'>
+              <img src="images/home/icons/home.png">
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#!notifications" class='grey'>
+              <img src="images/home/icons/notification.png" id='notificationImg'>
+              <span>Notifications</span>
+            </a>
+          </li>
+          <li>
+            <a href="" class='grey'>
+              <img src="images/home/icons/messages.png">
+              <span>Messages</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <nav id="rightNav">
+
+        <ul>
+          <li>
+            <a href="" id='logo'>
+              <img src="images/home/icons/logo.png">
+            </a>
+          </li>
+          <li>
+            <input type="text" class='greyBorder' id='search' placeholder="Search Twitter">
+          </li>
+          <li>
+            <a href="">
+              <img src="images/home/icons/profile.png" class='greyBorder' title="Progile and settings">
+            </a>
+          </li>
+          <li>
+            <button class='filledButton' id="tweet">Tweet</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div id='mainContent'>
+    <aside id='leftAside'>
+      <div id='profileDiv'>
+        <img src="images/home/banner.jpeg">
+        <img src="images/home/photo.jpg">
+        <div>
+          <a href="">
+            <h1 class='black'>Petya Sokolova</h1>
+          </a>
+          <br/>
+          <a href="">
+            <h2 class='grey'>@Sokolowva</h2>
+          </a>
+        </div>
+        <div>
+          <table>
+            <tr class='grey bold'>
+              <td>Tweets</td>
+              <td>Following</td>
+              <td>Followers</td>
+            </tr>
+            <tr class='blue bold'>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div id='trendsDiv'>
+        <h1>Trends for you</h1>
+        <a href="">Change</a>
+        <ul>
+          <li>
+            <a href="">
+              <h2>#teen</h2>
+              <span>12.9K Tweets</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#youthconf</h2>
+              <span>4342</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#EU2018BG</h2>
+              <span>42432</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#shipping</h2>
+              <span>1666 Tweets</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#euycsofia</h2>
+              <span></span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#EuroVolleyU17W</h2>
+              <span></span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#Bulgaria</h2>
+              <span>4,621 Tweets</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="">
+              <h2>#OTEIConcierto</h2>
+              <span></span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <h2>#S04SGE</h2>
+              <span>9,987 Tweets</span>
+            </a>
+
+          </li>
+          <li>
+            <a href="">
+              <h2>Syria</h2>
+              <span>60.4K Tweets</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT GOES HERE -->
+    <main ng-view>
+
+    </main>
+
+    <aside id='rightAside'>
+
+      <section id='whoToFollow'>
+        <h1>Who To Follow</h1>
+        <a href="">Refresh</a>
+        <a href="">View all</a>
+        <ul>
+          <li>
+
+            <div>
+              <a href="">
+                <img src="images/home/photo1.jpg">
+                <span>Microsoft
+                  <img src="">
+                </span>
+              </a>
+              <button class='hollowButton'>Follow</button>
+              <span class='deleteFProposal'>&#xd7;</span>
+            </div>
+          </li>
+          <li>
+
+            <div>
+              <a href="">
+                <img src="images/home/photo2.jpeg">
+                <span>Google Chrome
+                  <img src="images/home/icons/verified.png">
+                </span>
+              </a>
+              <button class='hollowButton'>Follow</button>
+              <span class='deleteFProposal'>&#xd7;</span>
+            </div>
+          </li>
+          <li>
+            <div>
+              <a href="">
+                <img src="images/home/photo3.jpg">
+                <span>The Travel Megazine
+                  <img src="images/home/icons/verified.png">
+                </span>
+              </a>
+              <button class='hollowButton'>Follow</button>
+              <span class='deleteFProposal'>&#xd7;</span>
+            </div>
+
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <ul>
+
+          <li>
+            <a href="">About</a>
+          </li>
+          <li>
+            <a href="">Help Center</a>
+          </li>
+          <li>
+            <a href="">Terms</a>
+          </li>
+
+        </ul>
+        <ul>
+          <li>
+            <a href="">Privacy policy</a>
+          </li>
+          <li>
+            <a href="">Blog</a>
+          </li>
+          <li>
+            <a href="">Ads Info</a>
+          </li>
+        </ul>
+        <p>© 2018 Twitter</p>
+      </footer>
+    </aside>
+  </div>
+
+  <!-- Angular Routing -->
+  <script src="js/routing.js"></script>
 </body>
 
 </html>
