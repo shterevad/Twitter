@@ -1,0 +1,87 @@
+{
+  "_from": "angular-typed",
+  "_id": "angular-typed@0.0.3",
+  "_inBundle": false,
+  "_integrity": "sha1-50iHEpUZDd6lfB2/5FQFNPtRfzA=",
+  "_location": "/angular-typed",
+  "_nodeVersion": "5.7.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/angular-typed-0.0.1.tgz_1466686831153_0.8351201680488884"
+  },
+  "_npmUser": {
+    "name": "codekraft-studio",
+    "email": "info@codekraft.it"
+  },
+  "_npmVersion": "3.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular-typed",
+    "name": "angular-typed",
+    "escapedName": "angular-typed",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-typed/-/angular-typed-0.0.3.tgz",
+  "_shasum": "e748871295190ddea57c1dbfe4540534fb517f30",
+  "_spec": "angular-typed",
+  "_where": "E:\\Shitstorm\\IT_Talents_Projects\\Final_Project_New\\Twitter",
+  "author": {
+    "name": "codekraft-studio"
+  },
+  "bugs": {
+    "url": "https://github.com/codekraft-studio/angular-typed/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "angular": "^1.5.7"
+  },
+  "deprecated": false,
+  "description": "the angularjs typing tool module, that helps you with typing animation",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-ng-annotate": "^2.0.2"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "d29777226aad7484f5d7043e887d8451d508e483",
+    "tarball": "https://registry.npmjs.org/angular-typed/-/angular-typed-0.0.1.tgz"
+  },
+  "gitHead": "71994a4667483140f3d73d78208cc749152de220",
+  "homepage": "https://github.com/codekraft-studio/angular-typed#readme",
+  "keywords": [
+    "angular",
+    "directive",
+    "text animation",
+    "typed",
+    "type animation",
+    "typing"
+  ],
+  "license": "ISC",
+  "main": "",
+  "maintainers": [
+    {
+      "name": "codekraft-studio",
+      "email": "info@codekraft.it"
+    }
+  ],
+  "name": "angular-typed",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codekraft-studio/angular-typed.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.3"
+}

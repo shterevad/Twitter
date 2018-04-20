@@ -8,13 +8,16 @@
   "dependencies": {
     "angular": "^1.6.10",
     "angular-animate": "^1.6.10",
+    "angular-typed": "0.0.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "ejs": "^2.5.9",
     "express": "~4.16.0",
     "jqlite": "^0.2.42",
     "mongodb": "^3.0.7",
     "monk": "^6.0.5",
     "morgan": "~1.9.0",
+    "path": "^0.12.7",
     "pg": "^7.4.1"
   }
 }
