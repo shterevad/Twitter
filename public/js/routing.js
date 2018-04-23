@@ -1,5 +1,6 @@
 var mainApp = angular.module("mainApp", ["ngRoute"]);
 
+
 mainApp.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -9,3 +10,11 @@ mainApp.config(function($routeProvider) {
         templateUrl : "js/notifications/notifications.htm"
     })
 });
+
+
+mainApp.controller('mainController', function($scope) {
+    $event.preventDefault();
+    $scope.showProfile =function(){
+      angular.element(document.querySelector('.profile-wrapper > ul')).toggle(200);
+    }
+  });
