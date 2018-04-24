@@ -14,11 +14,9 @@ router.get('/', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
   res.setHeader('content-type', 'application/json');
-  let db = req.db;
-  var users = db.get("users");
+  var users = req.db.get("users");  
   var userToCheck = req.body;
-  let checkedUser = users.find({ name: req.body.name }, function (e, docs) {
-    console.log("checked user: " + checkedUser);
+  users.find({ name: req.body.name }, {}, function (e, docs) {
     if ((req.body.name == 'pesho') && (req.body.password == '1234567')) {
       res.status(200);
       res.json({ message: "bravo" });
