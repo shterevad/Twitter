@@ -1,0 +1,159 @@
+<html>
+
+<head>
+    <title>Twitter</title>
+
+    <!-- jquery and bootstrap -->
+    <script src="/vendor/jqlite/jqlite.min.js"></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>    
+    <script src="/vendor/jquery-ui-dist/jquery-ui.min.js"></script>        
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/angular-route/angular-route.min.js"></script>
+    <script src="/vendor/angular-animate/angular-animate.min.js"></script>
+
+    <!-- css -->
+    <link rel="shortcut icon" href="/images/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/reset.css">
+    <link rel="stylesheet" href="/stylesheets/fonts.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link rel="stylesheet" href="/stylesheets/about.css">
+
+
+
+</head>
+
+<body ng-app='loginApp'>
+
+    <main id="main-login-pg">
+        <div id="login-left-side-container">
+            <img id="login-page-big-bird-logo" src="./images/login/login_bird.png" alt="">
+            <div id="login-left-text-container">
+                <p class="login-left-text-row">
+                    <img src="/images/login/icons/search.png" alt="search icon" class="login-left-icons">
+                    <span class="login-left-text">Follow your interest.</span>
+                </p>
+                <p class="login-left-text-row">
+                    <img src="/images/login/icons/multiple_users.png" alt="search icon" class="login-left-icons">
+                    <span class="login-left-text">Hear what people are talking about.</span>
+                </p>
+                <p class="login-left-text-row">
+                    <img src="/images/login/icons/speech_bubble.png" alt="search icon" class="login-left-icons">
+                    <span class="login-left-text">Join the conversation.</span>
+                </p>
+            </div>
+        </div>
+
+        <div id="login-right-side-container">
+            <div class="login-right-header">
+                <img src="/images/logo.png" alt="" class="login-right-logo">
+                <p class="login-right-title">See what’s happening in the world right now</p>
+                <p id="login-right-join">Join Twitter today.</p>
+            </div>
+
+            <div id="login-right-buttons">
+                <button class="log-pg-btn" id="login-pg-sign-btn" (click)="signupClick($event)">Sign Up</button>
+                <button class="log-pg-btn" id="login-pg-log-btn">Log In</button>
+            </div>
+        </div>
+
+        <div id="login-right-side-container-login-field" style="display:none">
+            <div class="login-right-header">
+                <img src="/images/logo.png" alt="" class="login-right-logo">
+                <p class="login-right-title">See what’s happening in the world right now</p>
+                <p id="login-right-join-login">Login to Twitter.</p>
+            </div>
+
+            <form action="/login" method="POST" id="login-form">
+                <input type="text" name="user" id="login-user" placeholder="Email or username" />
+                <input type="password" name="password" id="login-pass" placeholder="Password" />
+                <input typte="submit" value="Log in" id="login-page-login-submit" />
+                <p id="login-page-login-form-sign-text">
+                    <span>New to Twitter? </span>
+                    <button id="login-page-login-form-sign-btn">Sign up</button>
+                </p>
+            </form>
+        </div>
+
+        <div id="login-right-side-container-signup-field" style="display:none">
+            <div class="login-right-header">
+                <img src="/images/logo.png" alt="" class="login-right-logo">
+                <p class="login-right-title">See what’s happening in the world right now</p>
+                <p id="login-right-join-signup">Join Twitter today.</p>
+            </div>
+
+            <form action="/signup" method="POST" id="signup-form">
+                <input type="text" name="name" id="name-signup" placeholder="Full name" />
+                <input type="email" name="email" id="email-signup" placeholder="Email" />
+                <input type="password" name="password" id="password-signup" placeholder="Password" />
+                <input type="submit" value="Sign up" id="login-page-signup-submit" />
+                <p id="signup-form-disclamer">By signing up, you agree to the
+                    <a id="login-submit-tands">Terms of Service</a> and
+                    <a id="login-submit-pp">Privacy Policy</a>, including
+                    <a id="login-submit-cookieuse">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</p>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <ul id="footer-ul">
+            <li class="footer-link">
+                <a href="/about">About</a>
+            </li>
+            <li class="footer-link">
+                <a>Help Center</a>
+            </li>
+            <li class="footer-link">
+                <a>Blog</a>
+            </li>
+            <li class="footer-link">
+                <a>Status</a>
+            </li>
+            <li class="footer-link">
+                <a>Jobs</a>
+            </li>
+            <li class="footer-link">
+                <a>Terms</a>
+            </li>
+            <li class="footer-link">
+                <a>Privacy Policy</a>
+            </li>
+            <li class="footer-link">
+                <a>Cookies</a>
+            </li>
+            <li class="footer-link">
+                <a>Ads Info</a>
+            </li>
+            <li class="footer-link">
+                <a>Brand</a>
+            </li>
+            <li class="footer-link">
+                <a>Apps</a>
+            </li>
+            <li class="footer-link">
+                <a>Advertise</a>
+            </li>
+            <li class="footer-link">
+                <a>Marketing</a>
+            </li>
+            <li class="footer-link">
+                <a>Business</a>
+            </li>
+            <li class="footer-link">
+                <a>Developers</a>
+            </li>
+            <li class="footer-link">
+                <a>Directory</a>
+            </li>
+            <li id="copiright">&copy; 2018 Twitter</li>
+        </ul>
+    </footer>
+
+    <!-- front end js -->
+    <script src="/js/login/loginApp.js"></script>
+    <script src="/js/login/loginController.js"></script>
+    <script src="/js/login/loginService.js"></script>
+    
+</body>
+
+</html>
