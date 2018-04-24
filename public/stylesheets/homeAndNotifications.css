@@ -15,7 +15,7 @@ main{
     height: 630px;
   }
 
-  
+
   aside {
     width: 25%;
     height: 200px;
@@ -206,7 +206,7 @@ main{
   
   
   
-  mainDiv{
+  #mainDiv{
     display: inline-block;
     margin: 0em 0.5em 0em 0.8em;
     width: 48%;
