@@ -12,10 +12,13 @@ mainApp.config(function($routeProvider) {
     .when("/profile", {
         templateUrl : "js/profile/profile.htm"
     })
+    .when("/hashtag", {
+        templateUrl : "js/hashtag/hashtag.htm"
+    })
 });
 
 
 mainApp.controller('mainController', function($scope) {
  
-    
+
   });

@@ -3,7 +3,7 @@ main{
     width: 100%;
   }
 
-  #mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
+  .mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
     border-radius: 5%;
   }
   /* Asides */
@@ -33,19 +33,19 @@ main{
   }
   
   
-  #rightAside{
+  .rightAside{
     float:right;
     height: 520px;
   }
   
-  #rightAside section{
+  .rightAside section{
     width: 100%;
     background-color: white;
     height: 67%; 
     padding: 1em;
   }
   
-  #leftAside{
+  .leftAside{
     float:left;
     height: 700px;
   }
@@ -206,7 +206,7 @@ main{
   
   
   
-  #mainDiv{
+  .mainDiv{
     display: inline-block;
     margin: 0em 0.5em 0em 0.8em;
     width: 48%;
