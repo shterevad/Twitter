@@ -147,3 +147,42 @@ nav>ul>li{
 
 
 
+ 
+  /* profile drop down menu */
+  
+  .profile-wrapper ul{
+    position: absolute;
+    line-height: 1em;
+    z-index: 10;
+    background-color: white;
+    border: 1px ridge;
+    width: 16%;
+    left: 980px;
+    top: 51px;
+  }
+  
+  .profile-wrapper li a{
+    display: block;
+    color:black;
+    text-indent: 30px;
+    padding: 1em 0em;
+  }
+  
+  .profile-wrapper li a:hover{
+    background-color: #1da1f2;
+    cursor: pointer;
+    color:white;
+  }
+
+  .profile-wrapper h1{
+    font-weight: bold;
+    padding:0.5em 0em;
+  }
+
+  .profile-wrapper h2{
+    color: #657786;
+    font-weight: 100;
+  }
+
+
+
