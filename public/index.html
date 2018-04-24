@@ -10,7 +10,7 @@
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.min.js"></script>
   <script src="js/routing.js"></script>
-  
+
   <!-- directives  -->
   <script src='directives/profile/profileDirective.js'></script>
   <script src='directives/trends/trendsDirective.js'></script>
@@ -23,8 +23,8 @@
   <link rel="stylesheet" href="./stylesheets/fonts.css">
   <link rel="stylesheet" href="./stylesheets/header.css">
   <link rel="stylesheet" href="./stylesheets/homeAndNotifications.css">
-  <link rel="stylesheet" href="./stylesheets/profile.css">  
-   
+  <link rel="stylesheet" href="./stylesheets/profile.css">
+
 </head>
 
 <body ng-app="mainApp">
@@ -45,7 +45,7 @@
             </a>
           </li>
           <li>
-            <a href="#!messages" data-toggle="modal" class="grey" data-target="#myModal">
+            <a href="" data-toggle="modal" class="grey" data-target="#myModal">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
             </a>
@@ -64,18 +64,28 @@
             <input type="text" class='greyBorder' id='search' placeholder="Search Twitter">
           </li>
           <li class="profile-wrapper">
-                <a href="" ng-click="showProfile($event)">
-                    <img src="images/home/icons/profile.png" class='greyBorder' title="Profile and settings">
-                  </a>
-                  <ul id="profileMenu">
-                    <li><a href="#!profile"><h1>Petya Sokolova</h1>
-                    <h2>@Sokolovwa</h2></a></li>
-                    <li><a href="#!profile">Profile</a></li>
-                    <hr/>
-                    <li><a href="#">Settings and Privacy</a></li>
-                    <hr/>
-                    <li><a href="#">Logout</a></li>
-                  </ul>
+            <a href="" ng-click="collapsed=!collapsed">
+              <img src="images/home/icons/profile.png" class='greyBorder' title="Profile and settings">
+            </a>
+            <ul ng-show="collapsed" id="profileMenu">
+              <li ng-click="collapsed=!collapsed">
+                <a href="#!profile">
+                  <h1>Petya Sokolova</h1>
+                  <h2>@Sokolovwa</h2>
+                </a>
+              </li>
+              <li ng-click="collapsed=!collapsed">
+                <a href="#!profile">Profile</a>
+              </li>
+              <hr/>
+              <li ng-click="collapsed=!collapsed">
+                <a href="#">Settings and Privacy</a>
+              </li>
+              <hr/>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
           </li>
           <li>
             <button class='filledButton' id="tweet">Tweet</button>
@@ -85,13 +95,14 @@
     </div>
   </header>
 
-  <div id='mainContent' ng-view>
- 
-  </div>
+  <main ng-view>
+
+  </main>
 
   <!-- Angular Routing -->
 
 
 
 </body>
+
 </html>

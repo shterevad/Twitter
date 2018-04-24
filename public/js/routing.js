@@ -16,8 +16,6 @@ mainApp.config(function($routeProvider) {
 
 
 mainApp.controller('mainController', function($scope) {
-    $event.preventDefault();
-    $scope.showProfile =function(){
-      angular.element(document.querySelector('.profile-wrapper > ul')).toggle(200);
-    }
+ 
+    
   });

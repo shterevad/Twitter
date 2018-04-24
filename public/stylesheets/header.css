@@ -21,6 +21,7 @@ button{
   cursor: pointer;
 }
 
+
 .bold{
 font-weight: bolder;
 }
@@ -155,10 +156,11 @@ nav>ul>li{
     line-height: 1em;
     z-index: 10;
     background-color: white;
-    border: 1px ridge;
+    border: 0.5px ridge;
     width: 16%;
     left: 980px;
     top: 51px;
+    border-radius: 4%;
   }
   
   .profile-wrapper li a{
@@ -166,6 +168,7 @@ nav>ul>li{
     color:black;
     text-indent: 30px;
     padding: 1em 0em;
+    border-radius: 5%;
   }
   
   .profile-wrapper li a:hover{
