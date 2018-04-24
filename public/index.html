@@ -29,7 +29,7 @@
 </head>
 
 <body ng-app="mainApp">
-  <header class='greyBorder'>
+  <header class='greyBorder' ng-controller='headerController'>
     <div>
       <nav id="mainNav">
         <ul>
@@ -96,7 +96,7 @@
     </div>
   </header>
 
-  <main ng-view>
+  <main ng-view ng-controller='mainController'>
 
     
 

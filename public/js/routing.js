@@ -18,7 +18,13 @@ mainApp.config(function($routeProvider) {
 });
 
 
-mainApp.controller('mainController', function($scope) {
+mainApp.controller('headerController', function($scope) {
  
 
   });
+
+
+mainApp.controller('mainController', function($scope) {
+ 
+
+});

@@ -13,14 +13,9 @@ a {
   text-decoration: none;
 }
 
-#rightAside a>span:hover, #leftAside a>h2:hover{
-  text-decoration: underline;
-}
-
-button{
+button, a{
   cursor: pointer;
 }
-
 
 .bold{
 font-weight: bolder;
@@ -34,8 +29,6 @@ font-weight: bolder;
 .filledButton:hover{
   background-color:rgb(29, 161, 242);
 }
-
-a{cursor: pointer;}
 
 .hollowButton{
   background-color:white;
@@ -136,7 +129,6 @@ nav>ul>li{
   top: -11px;
 }
 
-
 #rightNav>ul>li:last-of-type{
   padding:0em;
 }
@@ -147,8 +139,6 @@ nav>ul>li{
 }
 
 
-
- 
   /* profile drop down menu */
   
   .profile-wrapper ul{
