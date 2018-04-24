@@ -1,14 +1,20 @@
 /* MAIN CONTENT */
 main{
-    width: 82%;
-    margin:5em auto;
-    height: 630px;
+    width: 100%;
   }
 
   #mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
     border-radius: 5%;
   }
   /* Asides */
+  
+
+  .mainContent{
+    width: 82%;
+    margin:5em auto;
+    height: 630px;
+  }
+
   
   aside {
     width: 25%;
