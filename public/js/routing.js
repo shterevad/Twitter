@@ -9,6 +9,9 @@ mainApp.config(function($routeProvider) {
     .when("/notifications", {
         templateUrl : "js/notifications/notifications.htm"
     })
+    .when("/profile", {
+        templateUrl : "js/profile/profile.htm"
+    })
 });
 
 

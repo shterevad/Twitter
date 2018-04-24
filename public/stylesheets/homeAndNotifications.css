@@ -1,0 +1,262 @@
+/* MAIN CONTENT */
+#mainContent{
+    width: 82%;
+    margin:5em auto;
+    height: 630px;
+  }
+  
+  /* Asides */
+  
+  aside {
+    width: 25%;
+    height: 200px;
+    text-align: center;
+  }
+  
+  aside h1{
+    font-weight: bolder;
+    font-size:1.2em;
+  }
+  
+  aside h1, aside a{
+    display: inline-block;
+    padding: 0.3em 0.3em 0em 0em;
+  }
+  
+  
+  #rightAside{
+    float:right;
+    height: 520px;
+  }
+  
+  #rightAside section{
+    width: 100%;
+    background-color: white;
+    height: 67%; 
+    padding: 1em;
+  }
+  
+  #leftAside{
+    float:left;
+    height: 700px;
+  }
+  
+  #profileDiv, #trendsDiv{
+    display: block;
+    background-color:white;
+  }
+  
+  
+  #profileDiv{
+    height: 28%;
+    margin:0em 0em 1em 0em;
+  }
+  
+  #profileDiv img{
+    width: 100%;
+    height: 100px;
+  }
+  
+  #profileDiv img:last-of-type{
+    width: 27%;
+    height: 72px;
+    border-radius: 50%;
+    position: relative;
+    top: -34px;
+    left: -26px;
+    border: 3px solid white;
+  }
+  
+  #profileDiv div:first-of-type{
+    position: relative;
+    left: -27px;
+    top: -37px;
+    text-align: left;
+  }
+  
+  #profileDiv span{
+    font-size:20px;
+  }
+  #profileDiv div a{
+    padding:0.1em;
+  }
+  
+  #profileDiv div{
+    display: inline-block;
+  }
+  
+  #profileDiv div:last-of-type{
+    display: inline-block;
+    position: relative;
+    top: -26px;
+  }
+  
+  #profileDiv td{
+    padding: 0em 2.6em 0em 0em;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  #profileDiv tr:first-of-type>td{
+    font-size:12px;
+  }
+  
+  #profileDiv tr:first-of-type>td:hover{
+    color:#1da1f2; 
+  }
+  
+  #profileDiv tr:last-of-type>td{
+    font-size: 20px;
+    padding: 0em 0.2em;
+  }
+  
+  #trendsDiv{
+    height: 66%;
+    font-weight: bold;
+    text-align: left;
+    padding:1em;
+  }
+  
+  #trendsDiv ul, #whoToFollow ul{
+    height: 100%;
+    overflow: auto;
+  }
+  
+  #trendsDiv li{
+    margin:0em 0em 0.1em 0em;
+    padding: 0.2em 0em 0em 0em;
+    height: 39px;
+  }
+  
+  #trendsDiv span{
+    color:#657786;
+    font-size:0.9em;
+    font-weight: 100;
+  }
+  
+  #whoToFollow li{
+    margin: 1em 0.4em 0.1em 0.4em;
+    padding: 0.7em 0em 0em 0em;
+    height: 80px;
+    text-align: left;
+    border-bottom: 1px solid #D8D8D8;
+  }
+  
+  
+  #whoToFollow img:last-of-type{
+    width: 26px;
+  }
+  
+  #whoToFollow a>img:first-of-type{
+    border-radius: 50%;
+    position: relative;
+    top:8px;
+    left:0px;
+    width: 23%;
+    height: 50px;
+  }
+  
+  #whoToFollow li>div{
+    position: relative;
+    top: -13px;
+    left: 3px;
+    line-height: 1.7em;
+  }
+  
+  #whoToFollow button{
+    position: relative;
+    left:63px;
+    top:-27px;
+  }
+  
+  #whoToFollow span{
+    position: relative;
+    left: 8px;
+    top: -26px;
+  }
+  #whoToFollow ul a{
+    font-weight: bold;
+    color:black;
+  }
+  
+  #whoToFollow span img{
+    position: relative;
+    top: 7px;
+    left: -4px;
+  }
+  
+  #whoToFollow div>span{
+    color: rgba(152,152,152,0.5);
+    font-size: 12px;
+    position: relative;
+    top: -52px;
+    left: 162px;
+    cursor: pointer;
+  }
+  
+  
+  
+  main{
+    display: inline-block;
+    margin: 0em 0.5em 0em 0.8em;
+    width: 48%;
+    height: 700px;
+    background-color: white;
+  }
+  
+  footer{
+    width: 100%;
+    height: 30%;
+    margin:1em 0em;
+    background-color:white;
+    padding: 1em;
+    text-align: left;
+  }
+  
+  footer a, footer p{
+    font-size:0.9em;
+    font-weight: 100;
+    color: rgba(27, 26, 26, 0.6);
+    padding:0.3em;
+  }
+  
+  
+  footer ul{
+    display: inline-block;
+    height: 50%;
+    margin: 1em 1em 2em 0em;
+  }
+  
+  footer a:hover{
+    text-decoration: underline;
+    color:#1da1f2;
+  }
+  
+  
+  /* profile drop down menu */
+  
+  .profile-wrapper ul{
+    position: absolute;
+    padding: 1em 0em;
+    line-height: 2em;
+    z-index: 10;
+    background-color: white;
+    border: 1px ridge;
+    width: 220px;
+    left: 980px;
+    top: 51px;
+  }
+  
+  .profile-wrapper li a{
+    display: block;
+    color:black;
+    text-indent: 30px;
+  
+  }
+  
+  .profile-wrapper li a:hover{
+    background-color: #1da1f2;
+    cursor: pointer;
+    color:white;
+  }
+  

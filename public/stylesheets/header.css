@@ -1,0 +1,149 @@
+body {
+  background-color: #e6ecf0;
+  width: 100%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color:#1da1f2;
+  text-decoration: none;
+}
+
+#rightAside a>span:hover, #leftAside a>h2:hover{
+  text-decoration: underline;
+}
+
+button{
+  cursor: pointer;
+}
+
+.bold{
+font-weight: bolder;
+}
+
+.filledButton{
+  background-color:rgba(29, 161, 242, 0.8);
+  border-radius: 100px;
+  color:white;
+}
+.filledButton:hover{
+  background-color:rgb(29, 161, 242);
+}
+
+a{cursor: pointer;}
+
+.hollowButton{
+  background-color:white;
+  border-radius: 100px;
+  color:#1da1f2;
+  border:1px solid #1da1f2;
+  width: 80px;
+  height: 25px;
+  font-weight: bolder;
+
+}
+
+.hollowButton:hover{
+  background-color: #e8f5fd;
+}
+
+.greyBorder{
+  border: 1px solid #b3b6b7;
+}
+
+.black{
+    color:black;
+}
+
+.grey{
+  color:#657786;
+}
+
+.blue{
+  color:#1da1f2;
+}
+
+/* HEADER */
+header{
+  background-color:white;
+  width: 100%;
+  position: fixed;
+  top:0px;
+  z-index:100;
+}
+
+
+header>div{
+  width:82%;
+  margin: 0 auto;
+}
+nav>ul{
+  height: 50px;
+  
+}
+
+nav>ul>li{
+  display: inline-block;
+  height: 100%;
+  padding: 0.3em 1em 0em 0em;
+ 
+}
+
+#mainNav img{
+  height: 25px;
+  position: relative;
+  top: 7px;
+}
+
+#rightNav img, #logo img, #search{
+  height:35px;
+  border-radius: 100px;
+}
+#search{
+  width: 200px;
+  background-color: #f5f8fa;
+  padding:1em;
+}
+
+#mainNav{
+  float: left;
+}
+
+#rightNav{
+  float: right;
+}
+
+
+#tweet{
+  width: 90px;
+  height: 40px;
+  font-weight: bolder;
+  font-size:1em;
+}
+
+#logo{
+  position: relative;
+  left:-226px;
+}
+
+#tweet, #search{
+  position: relative;
+  top: -11px;
+}
+
+
+#rightNav>ul>li:last-of-type{
+  padding:0em;
+}
+
+#mainNav li:hover{
+  color:#1da1f2;
+  border-bottom: 2px solid #1da1f2;
+}
+
+
+
