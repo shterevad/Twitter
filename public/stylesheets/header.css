@@ -129,6 +129,7 @@ nav>ul>li{
   top: -11px;
 }
 
+
 #rightNav>ul>li:last-of-type{
   padding:0em;
 }
@@ -137,6 +138,7 @@ nav>ul>li{
   color:#1da1f2;
   border-bottom: 2px solid #1da1f2;
 }
+
 
 
   /* profile drop down menu */

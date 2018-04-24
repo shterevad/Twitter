@@ -25,12 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
     req.db = db;
-  
     next();
   });
 
-app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/', indexRouter);
 app.use('/profile', profileRouter);
 
 module.exports = app;

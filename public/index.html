@@ -7,9 +7,13 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Twitter</title>
 
+  <!-- angular -->
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.min.js"></script>
+
+  <!-- Angular Routing and mainController -->
   <script src="js/routing.js"></script>
+  <script src="js/mainController.js"></script>
 
   <!-- directives  -->
   <script src='directives/profile/profileDirective.js'></script>
@@ -25,7 +29,6 @@
   <link rel="stylesheet" href="./stylesheets/homeAndNotifications.css">
   <link rel="stylesheet" href="./stylesheets/profile.css">
   <link rel="stylesheet" href="./stylesheets/hashtag.css">
-
 </head>
 
 <body ng-app="mainApp">
@@ -57,9 +60,9 @@
 
         <ul>
           <li>
-            <a href="" id='logo'>
-              <img src="images/home/icons/logo.png">
-            </a>
+              <a href="" id='logo'>
+                  <img src="images/home/icons/logo.png">
+                </a>
           </li>
           <li>
             <input type="text" class='greyBorder' id='search' placeholder="Search Twitter">
@@ -97,15 +100,7 @@
   </header>
 
   <main ng-view ng-controller='mainController'>
-
-    
-
   </main>
 
-  <!-- Angular Routing -->
-
-
-
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 var mainApp = angular.module("mainApp", ["ngRoute"]);
 
-
 mainApp.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -17,14 +16,3 @@ mainApp.config(function($routeProvider) {
     })
 });
 
-
-mainApp.controller('headerController', function($scope) {
- 
-
-  });
-
-
-mainApp.controller('mainController', function($scope) {
- 
-
-});

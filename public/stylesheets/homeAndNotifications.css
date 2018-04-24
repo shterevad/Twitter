@@ -71,6 +71,7 @@
     border-top-right-radius: 10%;
     width: 100%;
     height: 100px;
+    object-fit: cover;
   }
   
   #profileDiv img:last-of-type{
@@ -169,14 +170,16 @@
     top:8px;
     left:0px;
     width: 23%;
-    height: 50px;
+    height: 100%;
+    object-fit: cover;
   }
   
   #whoToFollow li>div{
     position: relative;
-    top: -13px;
+    top: -21px;
     left: 3px;
     line-height: 1.7em;
+    height: 100%;
   }
   
   #whoToFollow button{
@@ -193,6 +196,7 @@
   #whoToFollow ul a{
     font-weight: bold;
     color:black;
+    height: 100%;
   }
   
   #whoToFollow span img{
