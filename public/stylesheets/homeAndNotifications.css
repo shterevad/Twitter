@@ -1,6 +1,11 @@
+body{
+  font-family: 'Noto Sans';
+}
+
 /* MAIN CONTENT */
 main{
     width: 100%;
+    height: 100%;
   }
 
   .mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
