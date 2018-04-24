@@ -1,0 +1,118 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    background: rgba(80, 169, 221, 0.1);
+}
+
+*{
+    box-sizing: border-box;
+}
+
+#profile-page-main{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    margin-top: 3.8%;
+    font-family: 'Noto Sans';
+    background-color: unset;
+}
+
+/* PROFILE HEADER */
+    /* wallpaper */
+#profile-page-header{
+    width: 100%;
+    height: 100%;
+}
+
+#profile-page-header-banner-container{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    border-bottom: 1px solid gray
+}
+
+#profile-page-header-banner{
+    width: 100%;
+}
+
+    /* navigation */
+
+#profile-page-header-nav-container{
+    width: 100%;
+    height: 52px;
+    background-color: rgb(29, 163, 242);
+    color: white;
+    border-bottom: 1px solid gray;
+}
+
+#profile-page-profile-picture-nav-container{
+    width: 15%;
+    position: absolute;
+    top: 40%;
+    left: 5%;
+}
+
+#profile-page-profile-picture-nav{
+    height: 100%;
+    width: 100%;
+    border: 5px solid white;
+    border-radius: 50%;
+}
+
+#profile-page-header-nav{
+    margin-left: 30%;
+    display: inline-block;
+    width: 55%;
+    vertical-align: middle;
+    font-size: 0.9em;
+    height: 100%;
+}
+
+#profile-page-header-nav>li{
+    display: inline-block;
+    height: 100%;
+    padding: 0.5em 2em;
+    vertical-align: middle;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    height: 100%;
+}
+
+
+.profile-page-nav-numbers{
+    font-size: 1.3em;
+}
+
+#profile-page-header-nav>li:hover{
+    border-bottom: 3px solid rgb(3, 110, 174);
+}
+
+#profile-page-header-nav>li:hover .profile-page-nav-numbers{
+    color: rgb(3, 110, 174);
+}
+
+.profile-page-nav-button{
+    all:unset;
+    display: inline-block;
+    float: right;
+    color: white;
+    background-color: rgb(29, 163, 242);
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-top: 0.8%;
+    margin-right: 2%;
+}
+
+.profile-page-nav-button:hover{
+    color:rgb(29, 163, 242);
+    background-color: white;
+}
