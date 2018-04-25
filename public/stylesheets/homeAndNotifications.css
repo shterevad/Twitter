@@ -1,6 +1,10 @@
+main{
+  height: 100%;
+}
+
 /* MAIN CONTENT */
   .mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
-    border-radius: 5%;
+    border-radius: 15px;
   }
 
   .mainDiv{
