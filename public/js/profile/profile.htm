@@ -1,79 +1,80 @@
-    <div id="profile-page-main">
-        <div id="profile-page-header">
-            <div id="profile-page-header-banner-container">
-                <img src="https://www.marwell.org.uk/images/uploads/features/f/bwr_1500x400.jpg" alt="" id="profile-page-header-banner">
-            </div>
+<div id="profile-page-main" ng-app='profileApp'>
+    <div id="profile-page-header">
 
-            <div id="profile-page-header-nav-container">
-
-                <div id="profile-page-profile-picture-nav-container">
-                    <img src="http://beatler.com/wp-content/uploads/2016/06/Picture-of-a-real-alien-or-Baby-Opossum-01.jpg" alt="" id="profile-page-profile-picture-nav">
-                </div>
-
-                <ul id="profile-page-header-nav">
-                    <li>
-                        <p class="profile-page-nav-title">Tweets</p>
-                        <p class="profile-page-nav-numbers" id="profile-page-nav-tweets">2,576</p>
-                    </li>
-                    <li>
-                        <p class="profile-page-nav-title">Following</p>
-                        <p class="profile-page-nav-numbers" id="profile-page-nav-following">124</p>
-                    </li>
-                    <li>
-                        <p class="profile-page-nav-title">Followers</p>
-                        <p class="profile-page-nav-numbers" id="profile-page-nav-followers">63</p>
-                    </li>
-                    <li>
-                        <p class="profile-page-nav-title">Likes</p>
-                        <p class="profile-page-nav-numbers" id="profile-page-nav-likes">1,342</p>
-                    </li>
-                </ul>
-
-                <button class="profile-page-nav-button" id="profile-page-edit-profile-button">
-                    Edit profile
-                </button>
-
-                <button style="display:none" class="profile-page-nav-button" id="profile-page-follow-button">
-                    Follow
-                </button>
-            </div>
-
-            
+        <div id="profile-page-profile-picture-nav-container">
+            <img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.adapt.945.1.jpg" alt="" id="profile-page-profile-picture-nav">
         </div>
 
-        <div class='mainContent' id="profile-page-inner-content-div" ng-app='profileApp'>
-                <aside id='profile-pg-left-aside'>
-                    <div id="profile-pg-user-details">
-                        <p id="profile-pg-user-details-name"></p>
-                        <p id="profile-pg-user-details-username"></p>
-                        <p id="profile-pg-user-details-bio"></p>
-                        <div id="profile-pg-user-details-location-container">
-                            <img class="profile-location-icon" src="" alt="">
-                            <span id="profile-pg-user-details-location"></span>
-                        </div>
-                        <div id="profile-pg-user-details-web-container">
-                            <img class="profile-web-icon" src="" alt="">
-                            <a href="" id="profile-pg-user-details-web"></a>
-                        </div>                   
-                    </div>
-                    <div id="profile-page-user-gallery-container">
-                        <div id="profile-pg-user-details-joined-container">
-                            <img class="profile-joined-icon" src="" alt="">
-                            <span href="" id="profile-pg-user-details-joined"></span>
-                        </div>
-                        <div id="profile-pg-user-gallery">
-                            <div class="profile-pg-gallery-pic-container">
-                                <img class="profile-pg-gallery-pic" src="" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-                
-                <div id='mainDiv'></div>
-        
-                <aside id='rightAside'>
-                    <follow></follow>
-                    <foot></foot>
-                </aside>
+        <div id="profile-page-header-banner-container">
+            <img src="https://www.marwell.org.uk/images/uploads/features/f/bwr_1500x400.jpg" alt="" id="profile-page-header-banner">
         </div>
+
+        <div id="profile-page-header-nav-container">
+
+            <ul id="profile-page-header-nav">
+                <li>
+                    <p class="profile-page-nav-title">Tweets</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-tweets">2,576</p>
+                </li>
+                <li>
+                    <p class="profile-page-nav-title">Following</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-following">124</p>
+                </li>
+                <li>
+                    <p class="profile-page-nav-title">Followers</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-followers">63</p>
+                </li>
+                <li>
+                    <p class="profile-page-nav-title">Likes</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-likes">1,342</p>
+                </li>
+            </ul>
+
+            <button class="profile-page-nav-button" id="profile-page-edit-profile-button">
+                Edit profile
+            </button>
+
+            <button style="display:none" class="profile-page-nav-button" id="profile-page-follow-button">
+                Follow
+            </button>
+        </div>
+
+
     </div>
+
+    <div class='mainContent' id="profile-page-inner-content-div">
+        <aside id='profile-pg-left-aside'>
+            <div id="profile-pg-user-details">
+                <p id="profile-pg-user-details-name"></p>
+                <p id="profile-pg-user-details-username"></p>
+                <p id="profile-pg-user-details-bio"></p>
+                <div id="profile-pg-user-details-location-container">
+                    <img class="profile-location-icon" src="" alt="">
+                    <span id="profile-pg-user-details-location"></span>
+                </div>
+                <div id="profile-pg-user-details-web-container">
+                    <img class="profile-web-icon" src="" alt="">
+                    <a href="" id="profile-pg-user-details-web"></a>
+                </div>
+            </div>
+            <div id="profile-page-user-gallery-container">
+                <div id="profile-pg-user-details-joined-container">
+                    <img class="profile-joined-icon" src="" alt="">
+                    <span href="" id="profile-pg-user-details-joined"></span>
+                </div>
+                <div id="profile-pg-user-gallery">
+                    <div class="profile-pg-gallery-pic-container">
+                        <img class="profile-pg-gallery-pic" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class='mainDiv'></div>
+
+        <aside class='rightAside'>
+            <follow></follow>
+            <foot></foot>
+        </aside>
+    </div>
+</div>
