@@ -186,8 +186,8 @@ body{
 }
 
 .profile-pg-gallery-pic-container{
-    width: 90px;
-    height: 90px;
+    width: 83px;
+    height: 83px;
     float: left;
     object-fit: cover;
     padding: 0.2em;
@@ -209,4 +209,121 @@ body{
 
 .who-to-follow-img{
     object-fit: cover;
+}
+
+#profile-trends-dir{
+    margin-top: 5%;
+}
+
+/* DYNAMIC CONTENT CONTAINER */
+#profile-page-dynamic-content-container{
+    width: 73%;
+    float: right;
+}
+
+/* FOLLOWING CONTENT and FOLLOWED*/
+
+#profile-page-main-div-following, #profile-page-main-div-followers{
+    display: inline-block;
+    width: 100%;
+    padding: 0.2em;
+}
+
+.followed-user-container, .follower-container{
+    width: 32%;
+    height: 300px;
+    float: left;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 2%;
+    margin-bottom: 2%;  
+}
+
+.followed-user-container:nth-of-type(3n), .follower-container:nth-of-type(3n){
+    margin-right: 0;
+}
+
+.followed-user-background-container, .follower-background-container{
+    width: 100%;
+    height: 80px;
+    overflow: hidden;    
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.followed-user-background, .follower-background{
+    width: 100%;
+}
+
+.followed-user-profile-pic, .follower-profile-pic{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: relative;
+    top: -35px;
+    left: 5%;
+}
+
+.followed-user-button, .follower-button{
+    all:unset;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgb(29, 163, 242);
+    color: rgb(29, 163, 242);
+    border-radius: 20px;
+    padding: 0.4em;
+    width: 30%;
+    text-align: center;
+    position: relative;
+    left: 20%;
+    top: -40px;
+    font-weight: bold;
+}
+
+.followed-user-button:hover, .follower-button:hover{
+    background-color: rgb(29, 163, 242);
+    color: white;
+}
+
+
+.followed-user-details, .follower-details{
+    position: relative;
+    top: -20px;
+    left: 0;
+    padding: 0 1em;
+    color: rgb(3, 110, 174);
+}
+
+.followed-user-name, .follower-name{
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.followed-user-username, .follower-username{
+    all:unset;
+    color: rgba(7, 152, 238, 0.5);
+    font-size: 0.9em;
+    font-style: italic;
+    cursor: pointer;
+}
+
+.followed-user-username:hover, .follower-username:hover{
+    color: rgb(29, 163, 242);
+}
+
+.followed-user-bio, .follower-bio{
+    font-size: 0.8em;
+    margin-top: 3%;
+}
+
+/* MAIN */
+
+#profile-page-main-div-tweets-inner, #profile-page-main-div-likes-inner{
+    width: 63%;
+}
+
+#profile-page-right-aside-likes, #profile-page-right-aside-tweets{
+    width: 34%
 }

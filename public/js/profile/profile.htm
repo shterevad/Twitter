@@ -2,7 +2,8 @@
     <div id="profile-page-header">
 
         <div id="profile-page-profile-picture-nav-container">
-            <img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.adapt.945.1.jpg" alt="" id="profile-page-profile-picture-nav">
+            <img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.adapt.945.1.jpg"
+                alt="" id="profile-page-profile-picture-nav">
         </div>
 
         <div id="profile-page-header-banner-container">
@@ -48,9 +49,9 @@
                 <p id="profile-pg-user-details-name">Person Name</p>
                 <p id="profile-pg-user-details-username">@personUsername</p>
                 <p id="profile-pg-user-details-bio">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore officiis iste,
-                    eum porro cupiditate non velit unde illo explicabo veritatis suscipit voluptates
-                    labore pariatur perferendis eligendi, facere incidunt architecto asperiores.
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore officiis iste, eum porro cupiditate non velit unde illo
+                    explicabo veritatis suscipit voluptates labore pariatur perferendis eligendi, facere incidunt architecto
+                    asperiores.
                 </p>
                 <div id="profile-pg-user-details-location-container">
                     <img class="profile-details-icon" src="images/icons/location_icon.png" alt="">
@@ -62,35 +63,204 @@
                 </div>
             </div>
             <div id="profile-page-user-gallery-container">
-                <div id="profile-pg-user-details-joined-container">
+                <div id="profile-pg-user-details-gallery-container">
                     <img class="profile-details-icon" src="images/icons/gallery_icon.png" alt="">
-                    <span id="profile-page-gallery-title"> <span>753</span> photos and videos</span>
+                    <span id="profile-page-gallery-title">
+                        <span>753</span> photos and videos</span>
                 </div>
                 <div id="profile-pg-user-gallery">
                     <div class="profile-pg-gallery-pic-container">
-                        <img class="profile-pg-gallery-pic" src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2017/chemistexpla.jpg" alt="">
+                        <img class="profile-pg-gallery-pic" src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2017/chemistexpla.jpg"
+                            alt="">
                     </div>
                     <div class="profile-pg-gallery-pic-container">
-                            <img class="profile-pg-gallery-pic" src="https://www.berries.com/blog/wp-content/uploads/2017/06/Strawberry-Desserts-recipegirl.jpg" alt="">
+                        <img class="profile-pg-gallery-pic" src="https://www.berries.com/blog/wp-content/uploads/2017/06/Strawberry-Desserts-recipegirl.jpg"
+                            alt="">
                     </div>
                     <div class="profile-pg-gallery-pic-container">
-                            <img class="profile-pg-gallery-pic" src="https://jordankasper.com/web-dev-workflow/images/ie.jpg" alt="">
+                        <img class="profile-pg-gallery-pic" src="https://jordankasper.com/web-dev-workflow/images/ie.jpg" alt="">
                     </div>
                     <div class="profile-pg-gallery-pic-container">
-                            <img class="profile-pg-gallery-pic" src="https://i.imgur.com/k9gMBGA.png" alt="">
+                        <img class="profile-pg-gallery-pic" src="https://i.imgur.com/k9gMBGA.png" alt="">
                     </div>
                 </div>
             </div>
         </aside>
 
-        <div class='mainDiv'></div>
+        <div id="profile-page-dynamic-content-container">
 
-        <aside class='rightAside'>
-            <follow></follow>
-            <trends></trends>
-            <foot></foot>
-        </aside>
+            <!-- <div id="profile-page-main-div-tweets">
+                <div class='mainDiv' id="profile-page-main-div-tweets-inner">
+                </div>
+
+                <aside class='rightAside' id="profile-page-right-aside-tweets">
+                    <follow></follow>
+                    <trends id="profile-trends-dir"></trends>
+                    <foot></foot>
+
+                </aside>
+            </div> -->
+
+            <div id="profile-page-main-div-following">
+
+                <div class="followed-user-container">
+                    <div class="followed-user-background-container">
+                        <img src="https://pbs.twimg.com/profile_banners/25073877/1524597997/1500x500" alt="" class="followed-user-background" />
+                    </div>
+
+                    <img src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" alt="" class="followed-user-profile-pic"
+                    />
+                    <button class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
+
+                    <div class="followed-user-details">
+                        <p class="followed-user-name">Donald Trump</p>
+                        <a class="followed-user-username" href="">@fakenews</a>
+                        <p class="followed-user-bio">My hair has its own account. Go follow it.</p>
+                    </div>
+
+                </div>
+
+                <div class="followed-user-container">
+                    <div class="followed-user-background-container">
+                        <img src="https://pbs.twimg.com/profile_banners/37013920/1474003541/1500x500" alt="" class="followed-user-background" />
+                    </div>
+
+                    <img src="https://pbs.twimg.com/profile_images/191651253/trumpshairicon_400x400.jpg" alt="" class="followed-user-profile-pic"
+                    />
+                    <button class="followed-user-follow-button followed-user-button" style="display:none">Follow</button>
+                    <button class="followed-user-unfollow-button followed-user-button">Following</button>
+
+
+                    <div class="followed-user-details">
+                        <p class="followed-user-name">Donald Trump's Hair</p>
+                        <a class="followed-user-username" href="">@trumpshair</a>
+                        <p class="followed-user-bio">HOTUS (Hair of the United States). I'm on top of the man who is on top of the world.</p>
+                    </div>
+                </div>
+
+                <div class="followed-user-container">
+                    <div class="followed-user-background-container">
+                        <img src="https://i.ytimg.com/vi/-TXBxxPAtb0/maxresdefault.jpg" alt="" class="followed-user-background" />
+                    </div>
+                    <img src="https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/02/24/15/vladimir-putin-2.jpg"
+                        alt="" class="followed-user-profile-pic" />
+                    <button class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
+
+                    <div class="followed-user-details">
+                        <p class="followed-user-name">Vladimir Putin</p>
+                        <a class="followed-user-username" href="">@vputin</a>
+                        <p class="followed-user-bio">Professional bear whisperer.</p>
+                    </div>
+                </div>
+
+                <div class="followed-user-container">
+                    <div class="followed-user-background-container">
+                        <img src="https://i.ytimg.com/vi/1FRcBiY4sc0/maxresdefault.jpg" alt="" class="followed-user-background" />
+                    </div>
+                    <img src="http://4.bp.blogspot.com/-8-D0e6Z2cR0/VVlY1gKRXbI/AAAAAAAALec/7MBqniB2J1o/s1600/o-BARACK-OBAMA-FROWN-facebook.jpg"
+                        alt="" class="followed-user-profile-pic" />
+                    <button class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
+
+
+                    <div class="followed-user-details">
+                        <p class="followed-user-name">Barack Obama</p>
+                        <a class="followed-user-username" href="">@imsodone</a>
+                        <p class="followed-user-bio">I'm so done with this.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- <div id="profile-page-main-div-followers">
+
+                <div class="follower-container">
+                    <div class="follower-background-container">
+                        <img src="https://pbs.twimg.com/profile_banners/25073877/1524597997/1500x500" alt="" class="follower-background" />
+                    </div>
+
+                    <img src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" alt="" class="follower-profile-pic"
+                    />
+                    <button class="follower-follow-button follower-button">Follow</button>
+                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
+
+                    <div class="follower-details">
+                        <p class="follower-name">Donald Trump</p>
+                        <a class="follower-username" href="">@fakenews</a>
+                        <p class="follower-bio">My hair has its own account. Go follow it.</p>
+                    </div>
+
+                </div>
+
+                <div class="follower-container">
+                    <div class="follower-background-container">
+                        <img src="https://pbs.twimg.com/profile_banners/37013920/1474003541/1500x500" alt="" class="follower-background" />
+                    </div>
+
+                    <img src="https://pbs.twimg.com/profile_images/191651253/trumpshairicon_400x400.jpg" alt="" class="follower-profile-pic"
+                    />
+                    <button class="follower-follow-button follower-button" style="display:none">Follow</button>
+                    <button class="follower-unfollow-button follower-button">Following</button>
+
+
+                    <div class="follower-details">
+                        <p class="follower-name">Donald Trump's Hair</p>
+                        <a class="follower-username" href="">@trumpshair</a>
+                        <p class="follower-bio">HOTUS (Hair of the United States). I'm on top of the man who is on top of the world.</p>
+                    </div>
+                </div>
+
+                <div class="follower-container">
+                    <div class="follower-background-container">
+                        <img src="https://i.ytimg.com/vi/-TXBxxPAtb0/maxresdefault.jpg" alt="" class="follower-background" />
+                    </div>
+                    <img src="https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/02/24/15/vladimir-putin-2.jpg"
+                        alt="" class="follower-profile-pic" />
+                    <button class="follower-follow-button follower-button">Follow</button>
+                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
+
+                    <div class="follower-details">
+                        <p class="follower-name">Vladimir Putin</p>
+                        <a class="follower-username" href="">@vputin</a>
+                        <p class="follower-bio">Professional bear whisperer.</p>
+                    </div>
+                </div>
+
+                <div class="follower-container">
+                    <div class="follower-background-container">
+                        <img src="https://i.ytimg.com/vi/1FRcBiY4sc0/maxresdefault.jpg" alt="" class="follower-background" />
+                    </div>
+                    <img src="http://4.bp.blogspot.com/-8-D0e6Z2cR0/VVlY1gKRXbI/AAAAAAAALec/7MBqniB2J1o/s1600/o-BARACK-OBAMA-FROWN-facebook.jpg"
+                        alt="" class="follower-profile-pic" />
+                    <button class="follower-follow-button follower-button">Follow</button>
+                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
+
+
+                    <div class="follower-details">
+                        <p class="follower-name">Barack Obama</p>
+                        <a class="follower-username" href="">@imsodone</a>
+                        <p class="follower-bio">I'm so done with this.</p>
+                    </div>
+                </div>
+
+            </div> -->
+
+            <!-- <div id="profile-page-main-div-likes">
+                <div class='mainDiv' id="profile-page-main-div-likes-inner">
+                </div>
+
+                <aside class='rightAside' id="profile-page-right-aside-likes">
+                    <follow></follow>
+                    <trends id="profile-trends-dir"></trends>
+                    <foot></foot>
+
+                </aside>
+            </div> -->
+
+        </div>
+
     </div>
-
 
 </div>
