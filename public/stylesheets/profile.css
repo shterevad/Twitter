@@ -8,6 +8,7 @@ body{
     background: rgba(80, 169, 221, 0.1);
 }
 
+
 *{
     box-sizing: border-box;
 }
@@ -26,7 +27,7 @@ body{
     /* wallpaper */
 #profile-page-header{
     width: 100%;
-    height: 60%;
+    height: 350px;
 }
 
 #profile-page-header-banner-container{
@@ -51,10 +52,12 @@ body{
 }
 
 #profile-page-profile-picture-nav-container{
-    width: 15%;
+    width: 180px;
+    height: 180px;
     position: absolute;
-    top: 40%;
-    left: 5%;
+    top: 190px;
+    left: 7%;
+    object-fit: cover
 }
 
 #profile-page-profile-picture-nav{
@@ -62,6 +65,7 @@ body{
     width: 100%;
     border: 5px solid white;
     border-radius: 50%;
+    object-fit: cover
 }
 
 #profile-page-header-nav{
@@ -133,4 +137,41 @@ body{
 #profile-pg-left-aside{
     display: inline-block;
     float:left;
+    color: rgba(7, 152, 238, 0.5);
+    font-size: 0.85em;
 }
+
+        /* USER DETAILS */
+
+#profile-pg-user-details{
+    width: 100%;
+    margin-bottom: 3%;
+    text-align: left;
+}
+
+#profile-pg-user-details>p, #profile-pg-user-details>div{
+    margin-bottom: 2.5%;
+}
+
+#profile-pg-user-details-name {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: rgb(3, 110, 174);
+}
+
+#profile-pg-user-details-bio {
+    color: rgb(3, 110, 174);   
+}
+
+#profile-pg-user-details-web{
+    all:unset;
+    cursor: pointer;
+}
+
+
+        /* USER GALLERY */
+
+#profile-page-user-gallery-container{
+    border: 1px solid red;
+}
+

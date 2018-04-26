@@ -1,30 +1,24 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET login page. */
+// GET login page.
 router.get('/', function (req, res, next) {
   res.sendFile('login.html', {
     root: './public'
   });
-  // var users = req.db.get("users");  
-  // users.find({}, {}, function(err, users){
-  //   res.json(users);
-  // });
 });
 
+// CHECK USER
 router.post('/login', function (req, res, next) {
   res.setHeader('content-type', 'application/json');
-  let db = req.db;
-  var users = db.get("users");
-  var userToCheck = req.body;
-  let checkedUser = users.find({ name: req.body.name }, function (e, docs) {
-    console.log("checked user: " + checkedUser);
-    if ((req.body.name == 'pesho') && (req.body.password == '1234567')) {
+  var users = req.db.get("users");
+  users.findOne({ "name": req.body.name }, {}, function (err, doc) {
+    if ((req.body.name == doc.name) && (req.body.password == doc.pass)) {
       res.status(200);
-      res.json({ message: "bravo" });
+      res.json({ message: "Success" });
     } else {
       res.status(403);
-      res.json({ error: "Ti ne si Pesho, ae chao!" });
+      res.json({ error: "Incorrect credentials" });
     }
   });
 });

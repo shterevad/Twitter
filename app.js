@@ -12,7 +12,6 @@ var db = monk(MONGO_URL);
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
-// var profileRouter = require('./routes/profile');
 
 var app = express();
 
