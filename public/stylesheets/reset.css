@@ -47,4 +47,4 @@ table {
 	border-spacing: 0;
 }
 
-input,button{outline:none}
+input,button, textarea{outline:none}
