@@ -41,7 +41,39 @@
             
         </div>
 
-        <aside>
-
-        </aside>
+        <div class='mainContent' id="profile-page-inner-content-div" ng-app='profileApp'>
+                <aside id='profile-pg-left-aside'>
+                    <div id="profile-pg-user-details">
+                        <p id="profile-pg-user-details-name"></p>
+                        <p id="profile-pg-user-details-username"></p>
+                        <p id="profile-pg-user-details-bio"></p>
+                        <div id="profile-pg-user-details-location-container">
+                            <img class="profile-location-icon" src="" alt="">
+                            <span id="profile-pg-user-details-location"></span>
+                        </div>
+                        <div id="profile-pg-user-details-web-container">
+                            <img class="profile-web-icon" src="" alt="">
+                            <a href="" id="profile-pg-user-details-web"></a>
+                        </div>                   
+                    </div>
+                    <div id="profile-page-user-gallery-container">
+                        <div id="profile-pg-user-details-joined-container">
+                            <img class="profile-joined-icon" src="" alt="">
+                            <span href="" id="profile-pg-user-details-joined"></span>
+                        </div>
+                        <div id="profile-pg-user-gallery">
+                            <div class="profile-pg-gallery-pic-container">
+                                <img class="profile-pg-gallery-pic" src="" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                
+                <div id='mainDiv'></div>
+        
+                <aside id='rightAside'>
+                    <follow></follow>
+                    <foot></foot>
+                </aside>
+        </div>
     </div>

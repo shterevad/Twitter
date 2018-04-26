@@ -5,12 +5,14 @@ var logger = require('morgan');
 var path = require('path');
 var mongodb = require('mongodb');
 var monk = require('monk');
-const MONGO_URL = 'mongodb://<shterevad>:<Spaghett1>@ds249079.mlab.com:49079/twitterittalents';
+var mongoose = require('mongoose');
+const MONGO_URL = 'mongodb://shterevad:Spaghett1@ds249079.mlab.com:49079/twitterittalents';
 var db = monk(MONGO_URL);
+  
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
-var profileRouter = require('./routes/profile');
+// var profileRouter = require('./routes/profile');
 
 var app = express();
 
@@ -30,6 +32,5 @@ app.use(function (req, res, next) {
 
 app.use('/login', loginRouter);
 app.use('/', indexRouter);
-app.use('/profile', profileRouter);
 
 module.exports = app;

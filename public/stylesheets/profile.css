@@ -26,12 +26,12 @@ body{
     /* wallpaper */
 #profile-page-header{
     width: 100%;
-    height: 100%;
+    height: 60%;
 }
 
 #profile-page-header-banner-container{
     width: 100%;
-    height: 50%;
+    height: 80%;
     overflow: hidden;
     border-bottom: 1px solid gray
 }
@@ -116,4 +116,21 @@ body{
 .profile-page-nav-button:hover{
     color:rgb(29, 163, 242);
     background-color: white;
+}
+
+/* INNER CONTENT */
+
+#profile-page-inner-content-div{
+    margin-top: 0;
+}
+
+/* #trendsDiv{
+    background-color: transparent;
+}
+ */
+    /* LEFT ASIDE */
+
+#profile-pg-left-aside{
+    display: inline-block;
+    float:left;
 }
