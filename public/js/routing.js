@@ -14,5 +14,8 @@ mainApp.config(function($routeProvider) {
     .when("/hashtag", {
         templateUrl : "js/hashtag/hashtag.htm"
     })
+    .when("/settings", {
+        templateUrl : "js/settings/settings.htm"
+    })
 });
 
