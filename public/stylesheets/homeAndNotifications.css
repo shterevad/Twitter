@@ -148,7 +148,7 @@ main{
   #trendsDiv li{
     margin:0em 0em 0.1em 0em;
     padding: 0.2em 0em 0em 0em;
-    height: 39px;
+    height: 10%;
   }
   
   #trendsDiv span{
@@ -160,7 +160,7 @@ main{
   #whoToFollow li{
     margin: 1em 0.4em 0.1em 0.4em;
     padding: 0.7em 0em 0em 0em;
-    height: 80px;
+    height: 27%;
     text-align: left;
     border-bottom: 1px solid #D8D8D8;
   }
@@ -204,18 +204,12 @@ main{
     height: 100%;
   }
   
-  #whoToFollow span img{
-    position: relative;
-    top: 7px;
-    left: -4px;
-  }
-  
   #whoToFollow div>span{
     color: rgba(152,152,152,0.5);
     font-size: 12px;
     position: relative;
     top: -52px;
-    left: 162px;
+    left: 160px;
     cursor: pointer;
   }
   

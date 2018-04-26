@@ -1,0 +1,59 @@
+
+section.postSection{
+    width: 100%;
+    height: 27%;
+    background-color: #e8f5fd;
+}
+
+.postSection img{
+    border-radius: 50%;
+    width: 6%;
+    height: 32%;
+    object-fit: cover;
+    margin: 0em 0.1em 4em 0em;
+}
+section.postSection>div:first-child{
+    width: 100%;
+    text-align: center;
+    padding: 1em 0em 0em 0em;
+    height: 66%;
+}
+
+section.postSection>div:last-child{
+    width: 100%;
+    height: 23%;
+}
+
+section.postSection textarea{
+    border-radius: 20px;
+    resize: none;
+    font-size: 1em;
+    padding: 1em;
+    width: 84%;
+    height: 81%;
+    border:2px solid rgb(29, 161, 242);  
+}
+
+section.postSection ul li{
+    list-style: none;
+    display: inline-block; 
+}
+section.postSection ul {
+    display: inline-block;  
+}
+
+
+section.postSection ul:first-child {
+    float: left;
+    margin:0em 0em 0em 5em;
+}
+
+section.postSection ul:last-child {
+    float: right;
+    margin:0em 2em 0em 5em;
+}
+
+section.postSection ul:last-child button {
+    margin:0em 0em 0em 1em;
+}
+

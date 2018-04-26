@@ -25,6 +25,10 @@ font-weight: bolder;
   background-color:rgba(29, 161, 242, 0.8);
   border-radius: 100px;
   color:white;
+  width: 90px;
+  height: 40px;
+  font-weight: bolder;
+  font-size: 1em;
 }
 .filledButton:hover{
   background-color:rgb(29, 161, 242);
@@ -35,8 +39,8 @@ font-weight: bolder;
   border-radius: 100px;
   color:#1da1f2;
   border:1px solid #1da1f2;
-  width: 80px;
-  height: 25px;
+  width: 30%;
+  height: 33%;
   font-weight: bolder;
 
 }
@@ -114,14 +118,6 @@ nav>ul>li{
 
 #rightNav{
   float: right;
-}
-
-
-#tweet{
-  width: 90px;
-  height: 40px;
-  font-weight: bolder;
-  font-size:1em;
 }
 
 #logo{
