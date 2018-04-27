@@ -11,6 +11,7 @@
     "angular-route": "^1.6.10",
     "angular-typed": "0.0.3",
     "bootstrap": "^4.1.0",
+    "bootstrap-filestyle": "^1.2.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "ejs": "^2.5.9",

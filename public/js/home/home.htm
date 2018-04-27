@@ -1,10 +1,10 @@
-<div class='mainContent' ng-app='homeApp'>
+<div class='mainContent'>
         <aside class='leftAside'>
             <profile></profile>
             <trends></trends>
         </aside>
         
-        <div class='mainDiv' infinite-scroll="myPagingFunction()" infinite-scroll-distance="3">
+        <div class='mainDiv' infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"   ng-controller="postController">
             <post></post>
         </div>
 

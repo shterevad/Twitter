@@ -5,13 +5,14 @@ section.postSection{
     background-color: #e8f5fd;
 }
 
-.postSection img{
+.postSection #profilePic{
     border-radius: 50%;
     width: 6%;
     height: 32%;
     object-fit: cover;
     margin: 0em 0.1em 4em 0em;
 }
+
 section.postSection>div:first-child{
     width: 100%;
     text-align: center;
@@ -34,26 +35,46 @@ section.postSection textarea{
     border:2px solid rgb(29, 161, 242);  
 }
 
+section.postSection textarea:focus{
+    border:2px solid rgb(29, 161, 242);  
+}
+
 section.postSection ul li{
     list-style: none;
-    display: inline-block; 
+    display: inline-block;
+    width: 32%;
+    height: 100%;
 }
 section.postSection ul {
+    height: 100%;
     display: inline-block;  
 }
 
 
 section.postSection ul:first-child {
+    display: inline;
+    width: 20%;
     float: left;
     margin:0em 0em 0em 5em;
 }
 
 section.postSection ul:last-child {
     float: right;
-    margin:0em 2em 0em 5em;
+   margin: 0em 2em 0em 0em;
 }
 
 section.postSection ul:last-child button {
     margin:0em 0em 0em 1em;
 }
 
+
+.upload{
+    width: 100%;
+    border-radius: 17;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+#gif{
+    width: 96%;
+}

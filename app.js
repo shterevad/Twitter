@@ -12,6 +12,7 @@ var db = monk(MONGO_URL);
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var postsRouter = require('./routes/posts');
 
 var app = express();
 
@@ -31,5 +32,6 @@ app.use(function (req, res, next) {
 
 app.use('/login', loginRouter);
 app.use('/', indexRouter);
+app.use('/posts', postsRouter);
 
 module.exports = app;

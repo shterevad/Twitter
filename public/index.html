@@ -10,12 +10,14 @@
   <!-- angular -->
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.min.js"></script>
-  <script src="vendor/infiniteScroll/ng-infinite-scroll.min.js"></script>
+<!--   <script src="vendor/infiniteScroll/ng-infinite-scroll.min.js"></script> -->
   <script src="vendor/jqlite/jqlite.min.js"></script>
 
-  <!-- Angular Routing and mainController -->
+ <!--  Angular Routing -->
   <script src="js/routing.js"></script>
-  <script src="js/mainController.js"></script>
+
+ <!--  services -->
+ <script src='js/posts/postsService.js'></script>
 
   <!-- directives  -->
   <script src='directives/profile/profileDirective.js'></script>
@@ -23,6 +25,10 @@
   <script src='directives/follow/followDirective.js'></script>
   <script src='directives/footer/footerDirective.js'></script>
   <script src='directives/post/postDirective.js'></script>
+
+    <!--mainController -->
+    <script src="js/mainController.js"></script>
+    <script src="js/home/homeController.js"></script>
 
   <!-- css -->
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
@@ -34,15 +40,18 @@
   <link rel="stylesheet" href="./stylesheets/hashtag.css">
   <link rel="stylesheet" href="./stylesheets/settings.css">  
   <link rel="stylesheet" href="./stylesheets/postDirective.css">
+
+
+
 </head>
 
-<body ng-app="mainApp">
+<body ng-app="mainApp" ng-controller='mainAppController'>
   <header class='greyBorder' ng-controller='headerController'>
     <div>
       <nav id="mainNav">
         <ul>
           <li>
-            <a href="#/!" class='grey'>
+            <a href="#/!" class='grey' ng-click="loadPosts()" >
               <img src="images/home/icons/home.png">
               <span>Home</span>
             </a>
@@ -104,7 +113,7 @@
     </div>
   </header>
 
-  <main ng-view ng-controller='mainController'>
+  <main ng-view ng-controller='mainController' >
   </main>
 
 </body>

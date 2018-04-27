@@ -1,25 +1,25 @@
 <section class='postSection'>
         <div>
-            <img src="../images/home/photo.jpg" alt="">
-            <textarea ng-model="tweetText" cols="90" rows="5" maxlength='245' placeholder="What's happening?"></textarea>
+            <img src="../images/home/photo.jpg" id="profilePic">
+            <textarea ng-model="tweetText" cols="90" rows="5" maxlength="245" placeholder="What's happening?"></textarea>
         </div>
 
         <div>
                 <ul>
                     <li>
-                        <a href="">fewfw</a>
+                        <label for="#photo">
+                                <img src="../images/home/icons/uploadPhoto.png" class="upload"/>
+                        </label>
+                        <input type="file" accept="image/*" multiple="false" style="display:none" id="photo">
                     </li>
                     <li>
-                        <a href="">fwef</a>
+                        <img src="../images/home/icons/gif.png" class="upload" id='gif'>
                     </li>
                 </ul>
                 <ul>
-                   <!--  <li>
-                        <a href="" id='plus'>&plus;</a>
-                    </li> -->
                     <li>
                         <a href="">
-                            <button ng-click="tweet()" class='filledButton'>Tweet</button>
+                            <button ng-click="addPost()" class="filledButton">Tweet</button>
                         </a>
                     </li>
                 </ul>
