@@ -1,7 +1,11 @@
 // LOGIN CHECK WITH BACKEND - TESTING
 loginApp.controller('LoginController', function ($scope, $http, userService) {
-    //SIGN UP FORM
+    
+    const OK_STATUS = 200;
+    const USER_EXISTS_STATUS = 403;
+    const INVALID_CREDENTIALS_STATUS = 401;
 
+    //SIGN UP FORM
 
     $scope.signUp = function($event){
         let newUser = {
@@ -9,12 +13,20 @@ loginApp.controller('LoginController', function ($scope, $http, userService) {
             email: $scope.email,
             password: $scope.password
         }
-
-        if(userService.signUpNewUser(newUser)){
-            console.log("success");
+        
+        let createUserResponse = userService.signUpNewUser(newUser);
+        console.log(createUserResponse);
+        if(createUserResponse == OK_STATUS){
+            $window.location.href = "/";
         } else {
-            console.log("something went wrong");
-        };
+            var element = document.getElementById("error-message-box");
+            element.classList.remove("hidden-error");
+            if(createUserResponse === USER_EXISTS_STATUS){
+                element.innerHTML = "A user with this email address already exists!";
+            } else {
+                element.innerHTML = "Invalid credentials. Please keep in mind that your password must be at least 6 symbols and it should contain a capital letter and a number!";
+            }
+        }
     }
 
 });

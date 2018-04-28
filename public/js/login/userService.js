@@ -1,6 +1,9 @@
 loginApp.service('userService', function () {
     const NAME_MIN_LENGTH = 2;
     const NAME_MAX_LENGTH = 15;
+    const OK_STATUS = 200;
+    const USER_EXISTS_STATUS = 403;
+    const INVALID_CREDENTIALS_STATUS = 401;
 
     this.validateEmail = function(email) {
         let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -34,15 +37,21 @@ loginApp.service('userService', function () {
 
     this.signUpNewUser = function(user){
         if(this.validateUserWhenSignup(user)){
-            return new Promise(function (resolve, reject) {
-                $http.get('jirafi.json')
-                    .then(function (response) {
-                        resolve(response.data);
-                    })
-                    .catch(err => reject(err));
+            new Promise(function (resolve, reject) {
+                $.post('/login/signup', user)
+                .then(function (response) {
+                    if(response.status === OK_STATUS){
+                        resolve(response.status);
+                        return OK_STATUS;
+                    }
+                })
+                .catch(function(err){
+                    reject(response.status);
+                    return USER_EXISTS_STATUS;
+                });
             });
         } else {
-
+            return INVALID_CREDENTIALS_STATUS;
         }
     }
 });
