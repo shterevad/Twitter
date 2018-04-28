@@ -1,10 +1,21 @@
-
 mainApp.controller('postController', function ($scope, PostsService) {
+    /* var postRequest = PostsService.getPosts().then(posts => {
+        return posts.data;
+        $scope.$apply();
+    }); */
     $scope.tags = [];
     $scope.links = [];
     $scope.videos = [];
-    $scope.filterLinks = function () {
+ 
 
+    $scope.loadPosts = function () {
+        postRequest.then(data=>{
+            $scope.posts=data;
+            console.log($scope.posts);
+        });
+    };
+
+    $scope.filterLinks = function () {
         $scope.splited = $scope.tweetText.split(' ').map(w => {
             if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
                 $scope.tags.push(w);
@@ -29,7 +40,7 @@ mainApp.controller('postController', function ($scope, PostsService) {
         $scope.postText = $scope.filterLinks();
         console.log($scope.postText);
 
-        var post = {
+        $scope.newPost = {
             text: $scope.postText,
             tags: $scope.tags,
             links: $scope.links,
@@ -37,11 +48,16 @@ mainApp.controller('postController', function ($scope, PostsService) {
             likes: [],
             retweets: [],
             comments: [],
+            photos: [],
+            giffs: []
         }
-        console.log(post);
+        console.log($scope.newPost);
 
-        PostsService.savePost(post).then(p => {
-            console.log('Succesfully added:' + p.data);
+        PostsService.savePost($scope.newPost).then(post => {
+            console.log('Succesfully added:' + post.data);
+            $scope.posts.push(post.data);
+            console.log($scope.posts);
+        
         })
     }
 

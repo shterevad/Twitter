@@ -24,7 +24,7 @@
   <script src='directives/trends/trendsDirective.js'></script>
   <script src='directives/follow/followDirective.js'></script>
   <script src='directives/footer/footerDirective.js'></script>
-  <script src='directives/post/postDirective.js'></script>
+  <script src='directives/newPost/newPostDirective.js'></script>
 
     <!--mainController -->
     <script src="js/mainController.js"></script>
@@ -50,7 +50,7 @@
     <div>
       <nav id="mainNav">
         <ul>
-          <li>
+          <li ng-controller="postController">
             <a href="#/!" class='grey' ng-click="loadPosts()" >
               <img src="images/home/icons/home.png">
               <span>Home</span>

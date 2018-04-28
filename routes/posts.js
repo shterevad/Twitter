@@ -28,7 +28,7 @@ router.post('/', function (req, res) {
     posts.insert(post, function (err) {
         if (!err) {
             res.status(200);
-            res.json({ id: post._id });
+            res.json({post:post});
         } else {
             res.status(404);
             res.json("No such post!");
