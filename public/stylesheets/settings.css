@@ -1,6 +1,10 @@
-
-
 /* PROFILE CONTAINER */
+
+#settings-page-left-aside{
+    display: inline-block;
+    float:left;
+    font-family: "Noto Sans";
+}
 
 #settings-page-profile-container{
     display: inline-block;
@@ -36,7 +40,7 @@
 #settings-page-profile-details{
     position: relative;
     top: -70px;
-    left: 100px;
+    left: 90px;
     text-align: left;
 }
 
@@ -53,6 +57,10 @@
 }
 
 /* SETTINGS PAGES */
+
+#settings-page-main{
+    height: 100%;
+}
 
 #settings-page-options-container{
     background: white;
@@ -96,3 +104,124 @@
 #settings-page-footer>footer{
     height: unset;
 }
+
+/* CHANGE ACCOUNT */
+#settings-main-content-container{
+    font-family: "Noto Sans";
+    display: inline-block;
+    width: 50%;
+    background-color: white;
+    border-radius: 15px;
+    float: left;
+    margin-left: 2%;
+    margin-bottom: 3%;
+    padding: 1em 1em;
+}
+
+#settings-account-main>h1{
+    all:unset;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#settings-account-main>hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#account-form,
+#password-form{
+    width: 100%;
+
+}
+
+#account-form-table,
+#password-form-table{
+    width: 100%;
+    border-spacing: 20px;
+    border-collapse: separate;
+}
+
+.account-field-name{
+    text-align: right;
+}
+
+.account-field-content{
+    text-align: left;
+}
+
+.account-field-content>input{
+    width: 80%;
+    font-family: "Noto Sans";
+}
+
+#account-bio{
+    resize: none;
+    overflow: auto;
+}
+
+.account-field-content>input, #account-bio{
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 0.5em;
+}
+
+.account-field-content>input:focus, #account-bio:focus{
+    box-shadow: 0 0 0.7pt 0.7pt rgb(29, 163, 242);
+}
+
+.inputfile{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label,
+#settings-account-submit-btn,
+#settings-password-submit-btn {
+    font-size: 1em;
+    font-weight: bold;
+    color: gray;
+    border: 1.3px solid gray;
+    border-radius: 20px;
+    background-color: white;
+    display: inline-block;
+    padding: 0.3em 1em;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: gray;
+    color: white;
+}
+
+#account-profile-picture,
+#account-banner{
+    width: auto;
+}
+
+#settings-account-submit-btn,
+#settings-password-submit-btn{
+    display: inline-block;
+    color: white;
+    background-color: gray;
+    padding: 0.5em 1.5em;
+    margin-left: 35%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+#settings-account-submit-btn:hover,
+#settings-password-submit-btn:hover{
+    color: gray;
+    background-color: rgb(211,211,211);
+}
+
+/* PASSWORD SETTINGS */
