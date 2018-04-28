@@ -262,3 +262,13 @@ footer{
     color: rgb(29, 163, 242);
     cursor: pointer;
 }
+
+#error-message-box{
+    color: red;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+.hidden-error{
+    display: none;
+}

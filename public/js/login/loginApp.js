@@ -1,1 +1,1 @@
-var loginApp = angular.module('loginApp', ['ngAnimate']);
+var loginApp = angular.module('loginApp', ['ngAnimate', "ngRoute"]);
