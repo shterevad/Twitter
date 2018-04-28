@@ -24,7 +24,7 @@
 
 <body ng-app='loginApp'>
 
-    <main id="main-login-pg">
+    <main id="main-login-pg" ng-controller="LoginController">
         <div id="login-left-side-container">
             <img id="login-page-big-bird-logo" src="./images/login/login_bird.png" alt="">
             <div id="login-left-text-container">
@@ -82,10 +82,10 @@
             </div>
 
             <form action="/signup" method="POST" id="signup-form">
-                <input type="text" name="name" id="name-signup" placeholder="Full name" />
-                <input type="email" name="email" id="email-signup" placeholder="Email" />
-                <input type="password" name="password" id="password-signup" placeholder="Password" />
-                <input type="submit" value="Sign up" id="login-page-signup-submit" />
+                <input type="text" ng-model="name" id="name-signup" placeholder="Full name" />
+                <input type="email" ng-model="email" id="email-signup" placeholder="Email" />
+                <input type="password" ng-model="password" id="password-signup" placeholder="Password" />
+                <input value="Sign up" id="login-page-signup-submit" ng-click="signUp($event)"/>
                 <p id="signup-form-disclamer">By signing up, you agree to the
                     <a id="login-submit-tands">Terms of Service</a> and
                     <a id="login-submit-pp">Privacy Policy</a>, including
@@ -152,7 +152,7 @@
     <!-- front end js -->
     <script src="/js/login/loginApp.js"></script>
     <script src="/js/login/loginController.js"></script>
-    <script src="/js/login/loginService.js"></script>
+    <script src="/js/login/userService.js"></script>
     
 </body>
 

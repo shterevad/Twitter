@@ -1,4 +1,23 @@
 // LOGIN CHECK WITH BACKEND - TESTING
+loginApp.controller('LoginController', function ($scope, $http, userService) {
+    //SIGN UP FORM
+
+
+    $scope.signUp = function($event){
+        let newUser = {
+            name: $scope.name,
+            email: $scope.email,
+            password: $scope.password
+        }
+
+        if(userService.signUpNewUser(newUser)){
+            console.log("success");
+        } else {
+            console.log("something went wrong");
+        };
+    }
+
+});
 
 $(function () {
     $('#login-page-login-submit').on('click', function (event) {
@@ -15,8 +34,8 @@ $(function () {
     });
 });
 
-// ANIMATION
 
+// ANIMATION WITH JQUERY
 $(function () {
     //clicking Sign up:
     $("#login-pg-sign-btn").on('click', function(event){
