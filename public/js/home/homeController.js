@@ -1,8 +1,7 @@
 mainApp.controller('postController', function ($scope, PostsService) {
-    /* var postRequest = PostsService.getPosts().then(posts => {
+     var postRequest = PostsService.getPosts().then(posts => {
         return posts.data;
-        $scope.$apply();
-    }); */
+    }); 
     $scope.tags = [];
     $scope.links = [];
     $scope.videos = [];
@@ -55,10 +54,8 @@ mainApp.controller('postController', function ($scope, PostsService) {
 
         PostsService.savePost($scope.newPost).then(post => {
             console.log('Succesfully added:' + post.data);
-            $scope.posts.push(post.data);
-            console.log($scope.posts);
-        
         })
+        
     }
 
 
