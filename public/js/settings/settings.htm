@@ -1,7 +1,7 @@
 <div class='mainContent' id="settings-page-main" ng-app='settingsApp'>
     <aside id="settings-page-left-aside">
 
-        <div id="settings-page-profile-container">
+        <div id="settings-page-profile-container" class="container">
             <div id="settings-page-profile-banner-container">
                 <img id="settings-page-profile-banner" src="https://pbs.twimg.com/profile_banners/25073877/1524597997/1500x500" alt="">
             </div>
@@ -11,10 +11,10 @@
             <div id="settings-page-profile-details">
                 <p id="settings-page-user-name">Donald Trump</p>
                 <p id="settings-page-user-username">@fakenews</p>
-            </div> 
+            </div>
         </div>
 
-        <ul id="settings-page-options-container">
+        <ul id="settings-page-options-container" class="container">
             <li class="settings-page-option settings-page-selected-option" id="settings-page-account-option">
                 Account
                 <img class="settings-page-right-arrow-icon" src="images/icons/right_arrow_icon.png" alt="">
@@ -27,4 +27,94 @@
 
         <foot id="settings-page-footer"></foot>
     </aside>
+
+    <div id="settings-main-content-container" class="container">
+        <div id="settings-account-main">
+            <h1>Account</h1>
+            <hr>
+            <form  action="" method="" id="account-form">
+                <table id="account-form-table">
+                    <tbody>
+                        <tr>
+                            <td class="account-field-name">Name </td>
+                            <td class="account-field-content">
+                                <input type="text" name="name" id="account-name" value="Donald Trump" maxlength="15">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Username </td>
+                            <td class="account-field-content">
+                                <input type="text" name="username" id="account-username" value="fakenews" maxlength="15">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Bio </td>
+                            <td class="account-field-content">
+                                <textarea name="bio" id="account-bio" value="" rows="6" cols="25" maxlength="250"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Email </td>
+                            <td class="account-field-content">
+                                <input type="email" name="email" id="account-email" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Profile picture </td>
+                            <td class="account-field-content">
+                                <input type="file" name="picture" id="account-profile-picture" class="inputfile">
+                                <label for="account-profile-picture">Chose a file</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Profile header </td>
+                            <td class="account-field-content">
+                                <input type="file" name="banner" id="account-banner" class="inputfile">
+                                <label for="account-baner">Chose a file</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Location </td>
+                            <td class="account-field-content">
+                                <input type="text" name="location" id="account-location" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Website </td>
+                            <td class="account-field-content">
+                                <input type="url" name="web" id="account-web" value="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Save Changes" id="settings-account-submit-btn">
+            </form>
+
+            <form style="display:none" action="" method="" id="password-form">
+                <table id="password-form-table">
+                    <tbody>
+                        <tr>
+                            <td class="account-field-name">Current password </td>
+                            <td class="account-field-content">
+                                <input type="text" name="oldpassword" id="old-password" value="" minlength="6">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">New password </td>
+                            <td class="account-field-content">
+                                <input type="text" name="newpassword" id="new-password" value="" minlength="6">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="account-field-name">Verify password </td>
+                            <td class="account-field-content">
+                                <input type="text" name="verifypassword" id="verify-password" value="" minlength="6">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Save Changes" id="settings-password-submit-btn">
+            </form>
+        </div>
+    </div>
 </div>

@@ -2,6 +2,13 @@ main{
   height: 100%;
 }
 
+
+.container{
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(117,117,117,0.3);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(117,117,117,0.3);
+  box-shadow: 0px 0px 2px 0px rgba(117,117,117,0.3);
+}
+
 /* MAIN CONTENT */
   .mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
     border-radius: 15px;
