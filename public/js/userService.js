@@ -50,4 +50,20 @@ mainApp.service('userService', function () {
                 });
         });
     }
+
+    this.checkIfUserExists = function (user) {
+        return new Promise(function (resolve, reject) {
+            $.post('/login/login', user)
+                .then(function (response) {
+                    if (response.status === OK_STATUS) {
+                        resolve(response.status);
+                    } else {
+                        reject(response.status);
+                    }
+                })
+                .catch(function (err) {
+                    reject(err);
+                })
+        })
+    }
 });

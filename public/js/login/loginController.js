@@ -1,12 +1,13 @@
-// LOGIN CHECK WITH BACKEND - TESTING
 mainApp.controller('LoginController', function ($scope, $http, $location, $window, userService) {
     const OK_STATUS = 200;
+    const USER_DOESNT_EXIST_STATUS = 404;
     const USER_EXISTS_STATUS = 403;
     const INVALID_CREDENTIALS_STATUS = 401;
 
     //SIGN UP FORM
 
-    $scope.signUp = function($event){
+    $scope.signUp = function(e){
+        e.preventDefault();
         let newUser = {
             name: $scope.name,
             email: $scope.email,
@@ -16,43 +17,67 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
 
         if(userService.validateUserWhenSignup(newUser)){
             userService.signUpNewUser(newUser).then(function(res){
-                console.log(res)
                 if(res === OK_STATUS){
-                    var path = $location.absUrl();
-                    $window.location.href = "/"
+                    // var path = $location.absUrl();
+                    $window.location.href = "/";
                 } else {
                     console.log(res);
                 }
             }).catch(function(err){
-                console.log(err)
-                var element = document.getElementById("error-message-box");
+                var element = document.getElementById("error-message-box-signup");
                 element.classList.remove("hidden-error");
                 element.innerHTML = "A user with this email address already exists!";
             })
         } else {
-            var element = document.getElementById("error-message-box");
+            var element = document.getElementById("error-message-box-signup");
             element.classList.remove("hidden-error");
             element.innerHTML = "Invalid credentials. Please keep in mind that your password must be at least 6 symbols and it should contain a capital letter and a number!";
         }
 
     }
 
-});
+    // LOGIN FORM
+    $scope.login = function(e){
+        e.preventDefault();
 
-$(function () {
-    $('#login-page-login-submit').on('click', function (event) {
-        var user = {
-            name: "pesho",
-            password: "1234567"
+        let checkUser = {
+            name: $scope.user,
+            password: $scope.password,
         }
 
-        $.post('/login/login', user).then(function (data) {
-            console.log(data.message);
-        }).catch(function (data) {  
-            console.log(data.responseJSON.error);
-        });
-    });
+        userService.checkIfUserExists(checkUser).then(function(res){
+            console.log(res)
+            if(res === OK_STATUS){
+                $window.location.href = "/";
+            } else {
+                var element = document.getElementById("error-message-box-signup");
+                element.classList.remove("hidden-error");
+                if(res === USER_DOESNT_EXIST_STATUS){
+                    element.innerHTML = "This user doesn't exists";
+                };
+
+                if(res === INVALID_CREDENTIALS_STATUS) {
+                    element.innerHTML = "Invalid credentials. Please check again!";
+                }
+            }
+        })
+    }
 });
+
+// $(function () {
+//     $('#login-page-login-submit').on('click', function (event) {
+//         var user = {
+//             name: "pesho",
+//             password: "1234567"
+//         }
+
+//         $.post('/login/login', user).then(function (data) {
+//             console.log(data.message);
+//         }).catch(function (data) {  
+//             console.log(data.responseJSON.error);
+//         });
+//     });
+// });
 
 
 // ANIMATION WITH JQUERY
