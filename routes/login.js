@@ -20,7 +20,7 @@ router.post('/signup', function(req, res, next){
       && (req.body.email.trim().length > 0)){
         req.db.collection("users").insert(req.body, function(err, re){
           if(err) throw err;
-          res.json({ message: "A new user has been added successfully.", status: "200" });
+          res.json({ message: "A new user has been added successfully.", status: 200 });
         })
       }
     }

@@ -1,4 +1,4 @@
-mainApp.controller('mainAppController', function($scope, PostsService){
+mainApp.controller('mainAppController', function($scope, PostsService, userService){
     
  
 
