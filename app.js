@@ -15,19 +15,6 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-// var Schema = mongoose.Schema;
-// var UserSchema = new Schema({
-//     name: String,
-//     email: String,
-//     password: String
-//   });
-
-// var Users = mongoose.model("Users", UserSchema);
-// console.log(">>>>>>>>>>>>>>>>>")
-// Users.findOne({"name" : "Strax"}, {}, function(err, doc){
-//   console.log(doc)
-// });
-
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var postsRouter = require('./routes/posts');
