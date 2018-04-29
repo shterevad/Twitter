@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
-
-
+var Posts = require("../modules/posts.js")
 
 /* get all posts */
 router.get("/", function (req, res) {
-    var posts = req.db.get('posts');
+    // var posts = req.db.get('posts'); => Posts заменя този ред. Директно пишеш Posts.find долу 
+    //(само не съм сигурна дали е find за mongoose, малко им се разминават някои функции, например няма insert, ами create);
 
-    posts.find({}, {}, function (err, posts) {
+    Posts.find({}, {}, function (err, posts) {
         if (!err) {
             res.status(200);
             res.json(posts);

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Users = require("../modules/users.js")
 
 // GET login page.
 router.get('/', function (req, res, next) {
@@ -11,14 +12,16 @@ router.get('/', function (req, res, next) {
 // SIGN UP USER
 router.post('/signup', function(req, res, next){
   res.setHeader('content-type', 'application/json');
-  var users = req.db.get("users");
-  users.findOne({ "email": req.body.email }, {}, function (err, doc) {
+  // var users = req.db.get("users");
+  console.log(Users);
+  Users.findOne({ "email": req.body.email }, {}, function (err, doc) {
     if (doc) {
       res.json({ error: "User with this email already exists", status: 403 });
     } else {
       if((req.body.name.trim().length > 0) && (req.body.password.trim().length >= 6) 
       && (req.body.email.trim().length > 0)){
-        req.db.collection("users").insert(req.body, function(err, re){
+        // req.db.collection("users").insert(req.body, function(err, re){
+          Users.create(req.body, function(err, re){
           if(err) throw err;
           res.json({ message: "A new user has been added successfully.", status: 200 });
         })

@@ -7,8 +7,26 @@ var mongodb = require('mongodb');
 var monk = require('monk');
 var mongoose = require('mongoose');
 const MONGO_URL = 'mongodb://shterevad:Spaghett1@ds249079.mlab.com:49079/twitterittalents';
-var db = monk(MONGO_URL);
-  
+// var db = monk(MONGO_URL);
+
+//connect mongoose
+mongoose.connect(MONGO_URL);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// var Schema = mongoose.Schema;
+// var UserSchema = new Schema({
+//     name: String,
+//     email: String,
+//     password: String
+//   });
+
+// var Users = mongoose.model("Users", UserSchema);
+// console.log(">>>>>>>>>>>>>>>>>")
+// Users.findOne({"name" : "Strax"}, {}, function(err, doc){
+//   console.log(doc)
+// });
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -16,8 +34,6 @@ var postsRouter = require('./routes/posts');
 
 var app = express();
 
-//favicon
-// app.use(favicon(__dirname + '/public/images/icons/favicon.ico'));
 
 app.use(logger('dev'));
 app.use(express.json());

@@ -19,7 +19,6 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
                 console.log(res)
                 if(res === OK_STATUS){
                     var path = $location.absUrl();
-                    path = path.replace("/login", "/");
                     $window.location.href = "/"
                 } else {
                     console.log(res);
