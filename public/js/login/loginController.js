@@ -36,20 +36,6 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
             element.innerHTML = "Invalid credentials. Please keep in mind that your password must be at least 6 symbols and it should contain a capital letter and a number!";
         }
 
-        
-        
-
-        // if(createUserResponse == OK_STATUS){
-        //     $window.location.href = "/";
-        // } else {
-        //     var element = document.getElementById("error-message-box");
-        //     element.classList.remove("hidden-error");
-        //     if(createUserResponse === USER_EXISTS_STATUS){
-        //         element.innerHTML = "A user with this email address already exists!";
-        //     } else {
-        //         element.innerHTML = "Invalid credentials. Please keep in mind that your password must be at least 6 symbols and it should contain a capital letter and a number!";
-        //     }
-        // }
     }
 
 });
