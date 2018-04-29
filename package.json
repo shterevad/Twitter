@@ -10,6 +10,7 @@
     "angular": "^1.6.10",
     "angular-animate": "^1.6.10",
     "angular-route": "^1.6.10",
+    "angular-sanitize": "^1.6.10",
     "angular-typed": "0.0.3",
     "bootstrap": "^4.1.0",
     "bootstrap-filestyle": "^1.2.1",

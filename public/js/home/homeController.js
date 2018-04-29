@@ -1,65 +1,61 @@
+
 mainApp.controller('postController', function ($scope, PostsService) {
-     var postRequest = PostsService.getPosts().then(posts => {
-        return posts.data;
-    }); 
-    $scope.tags = [];
-    $scope.links = [];
-    $scope.videos = [];
- 
+    PostsService.getPosts().then(data => {
+        $scope.posts = data.reverse();
+        $scope.tags = [];
+        $scope.links = [];
+        $scope.videos = [];
 
-    $scope.loadPosts = function () {
-        postRequest.then(data=>{
-            $scope.posts=data;
-            console.log($scope.posts);
-        });
-    };
-
-    $scope.filterLinks = function () {
-        $scope.splited = $scope.tweetText.split(' ').map(w => {
-            if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
-                $scope.tags.push(w);
-                return w = "<a href=''>" + w + "</a>";
-            }
-            return w;
-        }).map(w => {
-            if (/(^https?:\/\/[^\s]+)/g.test(w)) {
-                if (/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g.test(w)) {
-                    $scope.videos.push(w);
+        $scope.filterLinks = function () {
+            $scope.splited = $scope.tweetText.split(' ').map(w => {
+                if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
+                    $scope.tags.push(w);
+                    return w = "<a href=''>" + w + "</a>";
                 }
-                $scope.links.push(w);
-                return w = "<a href=" + w + ">" + w + "</a>";
-            }
-            return w;
-        });
+                return w;
+            }).map(w => {
+                if (/(^https?:\/\/[^\s]+)/g.test(w)) {
+                    if (/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g.test(w)) {
+                        $scope.videos.push(w);
+                    }
+                    $scope.links.push(w);
+                    return w = "<a href='" + w + "' target='_blank'>" + w + "</a>";
+                }
+                return w;
+            });
 
-        return $scope.splited.join(' ');
-    }
-
-    $scope.addPost = function () {
-        $scope.postText = $scope.filterLinks();
-        console.log($scope.postText);
-
-        $scope.newPost = {
-            text: $scope.postText,
-            tags: $scope.tags,
-            links: $scope.links,
-            videos: $scope.videos,
-            likes: [],
-            retweets: [],
-            comments: [],
-            photos: [],
-            giffs: []
+            return $scope.splited.join(' ');
         }
-        console.log($scope.newPost);
-
-        PostsService.savePost($scope.newPost).then(post => {
-            console.log('Succesfully added:' + post.data);
-        })
-        
-    }
 
 
 
+
+        $scope.addPost = function () {
+ 
+            $scope.postText = $scope.filterLinks();
+
+            $scope.newPost = {
+                text: $scope.postText,
+                tags: $scope.tags,
+                links: $scope.links,
+                videos: $scope.videos,
+                likes: [],
+                retweets: [],
+                comments: [],
+                photo: '',
+                giffs: []
+            }
+
+            PostsService.savePost($scope.newPost).then(post => {
+                console.log('Succesfully added:', post.data);
+                $scope.posts.unshift(post.data);
+            });
+
+
+        }
+
+
+    })
 });
 
 mainApp.filter('trusted', ['$sce', function ($sce) {
