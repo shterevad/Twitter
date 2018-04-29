@@ -18,7 +18,7 @@ main{
     display: inline-block;
     margin: 0em 0.5em 0em 0.8em;
     width: 48%;
-    height: 700px;
+    height: auto;
     background-color: white;
   }
 
