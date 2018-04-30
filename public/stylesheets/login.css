@@ -263,7 +263,8 @@ footer{
     cursor: pointer;
 }
 
-#error-message-box{
+#error-message-box-signup,
+#error-message-box-login{
     color: red;
     font-size: 0.8em;
     font-style: italic;

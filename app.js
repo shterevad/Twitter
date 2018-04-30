@@ -19,6 +19,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 
 var app = express();
@@ -42,18 +43,17 @@ app.use(function (req, res, next) {
   });
 
 function checkLogin(req, res, next){
-  // console.log(req.session);
   if((req.session) && (req.session.user)){
     next();
   } else {
-    // res.json({status: 'not authorized'})
-    // res.status(401);
-    res.redirect('/login');
+    next();
+    // res.redirect('/login');
   }
 }
 
 app.use('/login', loginRouter);
 app.use('/', checkLogin, indexRouter);
+app.use('/users', checkLogin, usersRouter);
 app.use('/posts', checkLogin, postsRouter);
 app.use('/logout', checkLogin, function(req, res, next){
   req.session.destroy();
