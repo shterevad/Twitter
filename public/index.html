@@ -22,8 +22,9 @@
   <script src="js/routing.js"></script>
 
  <!--  services -->
- <script src='js/posts/postsService.js'></script>
  <script src='js/userService.js'></script>
+ <script src='js/posts/postsService.js'></script>
+ <script src='directives/trends/trendsService.js'></script>
 
   <!-- directives  -->
   <script src='directives/profile/profileDirective.js'></script>
@@ -36,7 +37,8 @@
 
     <!--mainController -->
     <script src="js/mainController.js"></script>
-    <script src="js/home/homeController.js"></script>
+    <script src="js/posts/postController.js"></script>
+    <script src="directives/trends/trendsController.js"></script>
 
   <!-- css -->
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
@@ -61,7 +63,7 @@
       <nav id="mainNav">
         <ul>
           <li ng-controller="postController">
-            <a href="#/!" class='grey' ng-click="loadPosts()" >
+            <a href="#!/" class='grey' ng-click="loadPosts()" >
               <img src="images/home/icons/home.png">
               <span>Home</span>
             </a>

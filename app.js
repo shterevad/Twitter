@@ -20,6 +20,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var postsRouter = require('./routes/posts');
+var tagsRouter = require('./routes/tags');
 
 var app = express();
 
@@ -55,6 +56,7 @@ function checkLogin(req, res, next){
 app.use('/login', loginRouter);
 app.use('/', checkLogin, indexRouter);
 app.use('/posts', checkLogin, postsRouter);
+app.use('/tags', checkLogin, tagsRouter);
 app.use('/logout', checkLogin, function(req, res, next){
   req.session.destroy();
   res.redirect('/login');

@@ -1,14 +1,14 @@
-<div id='trendsDiv' class="container">
+<div id='trendsDiv' class="container" ng-controller="trendsController">
         <h1>Trends for you</h1>
         <a href="">Change</a>
-        <ul>
+        <ul ng-repeat="tag in tags">
           <li>
             <a href="#!hashtag">
-              <h2>#teen</h2>
-              <span>12.9K Tweets</span>
+              <h2>{{tag.title}}</h2>
+              <span>{{tag.posts.length}} Tweets</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#!hashtag">
               <h2>#youthconf</h2>
               <span>4342</span>
@@ -63,6 +63,6 @@
               <h2>Syria</h2>
               <span>60.4K Tweets</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </div>

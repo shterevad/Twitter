@@ -4,3 +4,4 @@ mainApp.directive('trends', function () {
         restrict: 'E',
     };
 });
+

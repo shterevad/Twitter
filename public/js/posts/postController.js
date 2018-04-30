@@ -1,7 +1,7 @@
-
-mainApp.controller('postController', function ($scope, PostsService) {
+mainApp.controller('postController', function ($scope, PostsService, TrendsService) {
     PostsService.getPosts().then(data => {
         $scope.posts = data.reverse();
+        console.log(data);
         $scope.tags = [];
         $scope.links = [];
         $scope.videos = [];
@@ -29,29 +29,40 @@ mainApp.controller('postController', function ($scope, PostsService) {
 
 
 
-
-        $scope.addPost = function () {
- 
+        $scope.addPost = function () {  
             $scope.postText = $scope.filterLinks();
-
             $scope.newPost = {
                 text: $scope.postText,
+                user: null,
                 tags: $scope.tags,
                 links: $scope.links,
                 videos: $scope.videos,
                 likes: [],
                 retweets: [],
-                comments: [],
+                replies: [],
                 photo: '',
                 giffs: []
             }
 
             PostsService.savePost($scope.newPost).then(post => {
                 console.log('Succesfully added:', post.data);
-                $scope.posts.unshift(post.data);
+                var post = post.data;
+                console.log(post.post.tags.length);
+                if (post.post.tags.length > 0) {
+                    for (var i = 0; i < post.post.tags.length; i++) {
+                        console.log(post.post.tags[i]);
+                        let tag = {
+                            title:post.post.tags[i],
+                            posts:[post.post._id]
+                        };
+                        TrendsService.saveOrUpdateTag(tag).then(tag => console.log(tag.data));
+                        tag={};
+                    }
+                }
+                $scope.posts.unshift(post.post);
+                $scope.tags=[];
+                $scope.tweetText='';
             });
-
-
         }
 
 

@@ -3,7 +3,7 @@ var router = express.Router();
 var Posts = require("../modules/posts.js")
 
 /* get all posts */
-router.get("/", function (req, res) {
+router.get("/posts", function (req, res) {
     // var posts = req.db.get('posts'); => Posts заменя този ред. Директно пишеш Posts.find долу 
     //(само не съм сигурна дали е find за mongoose, малко им се разминават някои функции, например няма insert, ами create);
 
@@ -20,41 +20,33 @@ router.get("/", function (req, res) {
 });
 
 /* add new post */
-router.post('/', function (req, res) {
-    var posts = req.db.get('posts');
+router.post('/posts', function (req, res) {
     var post = req.body;
     //todo: validation
-
-    posts.insert(post, function (err) {
-        if (!err) {
-            res.status(200);
-            res.json({post:post});
-        } else {
-            res.status(404);
-            res.json("No such post!");
-        }
-
-    });
+        Posts.create(post, function (err, doc) {
+            if (!err) {
+                res.status(200);
+                res.json({post:doc});
+            } else {
+                res.status(404);
+                res.json(err);
+    }});
 });
 
 /* delete post by id */
-router.delete('/:id', function (req, res) {
-    var posts = req.db.get('posts');
+router.delete('/posts:id', function (req, res) {
     var id = req.params.id;
 
-    posts.remove({ _id: id }, function (err) {
+    Posts.remove({ _id: id }, function (err) {
         if (!err) {
             res.status(200);
-            res.json("Post has been removed!");
+            res.json({id:post._id});
         } else {
             res.status(404);
             res.json("No such post!");
         }
     });
 });
-
-
-
 
 
 module.exports = router;

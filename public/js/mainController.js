@@ -1,5 +1,5 @@
 mainApp.controller('mainAppController', function($scope, PostsService, userService){
-    
+ 
  
 
 });

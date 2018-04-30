@@ -16,22 +16,22 @@
             <a href="">
                 <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo'>
             </a>
-            <div ng-show="!post.photo">
-                <a href="" ng-if="post.videos.length>0" class='posts-video'>
-                    <iframe ng-src="{{post.videos[0] | trusted}}" frameborder="0"></iframe>
+            <div>
+                <a href="" class='posts-video' >
+                    <iframe ng-if="post.videos.length>0" ng-src="{{post.videos[0] | trusted}}" frameborder="0"></iframe>
                 </a>
             </div>
         </div>
         <div class="posts-action-list">
             <ul>
                 <li>&#x1F4AC; Reply
-                    <span></span>
+                    <span ng-bind="{{post.replies.length}}"></span>
                 </li>
                 <li> &#x21ba; Retweet
-                    <span></span>
+                    <span ng-bind="{{post.retweets.length}}"></span>
                 </li>
                 <li> &#x2661; Like
-                    <span></span>
+                    <span ng-bind={{post.likes.length}}></span>
                 </li>
             </ul>
         </div>
