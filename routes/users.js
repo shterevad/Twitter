@@ -37,4 +37,40 @@ router.get('/session', function(req, res, next){
     }
 })
 
+router.post('/follow', function(req, res, next){
+    res.setHeader('content-type', 'application/json');
+    console.log(">>>>>>>>>>>>>>>>>>>>>")   
+    toFollowId = req.body.toFollowId;
+    followerId = req.body.followerId;
+
+    Users.findOne({"_id" : followerId}, function(err, user){
+        if(user.following.indexOf(toFollowId) < 0){
+            user.following.push(toFollowId);
+            user.save(function(err){
+                if(err){
+                    console.log(err)
+                };
+            })
+        } else {
+            res.status(INVALID_PARAMS_STATUS).send({messate : "Already followed"});
+            console.log("User alreay followed");
+        }
+    })
+
+    Users.findOne({"_id" : toFollowId}, function(err, user){
+        if(user.followers.indexOf(followerId) < 0){
+            user.followers.push(followerId);
+            user.save(function(err){
+                if(err){
+                    console.log(err)
+                };
+            })
+        } else {
+            res.status(INVALID_PARAMS_STATUS).send({messate : "Already followed"});
+            console.log("User alreay followed");
+        }
+    })
+    res.status(200).send({message : "Success"})
+})
+
 module.exports = router;

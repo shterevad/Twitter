@@ -1,10 +1,9 @@
 mainApp.controller('mainAppController', function ($scope, $http, $location, $window, $timeout, PostsService, userService) {
 
-userService.checkUserInSession().then(function(res){
-    console.log(res)
-}).catch(function(err){
-    console.log(err.status)
-})
+    userId = '5ae5a679f2c4112d78d0866a';
+    userService.getUserById(userId).then(function(res){
+        console.log(res)
+    })
 
 
 });

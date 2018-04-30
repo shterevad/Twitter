@@ -39,7 +39,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     this.signUpNewUser = function (user) {
-        var deferred = $q.defer();
+        let deferred = $q.defer();
             $http.post('/login/signup', user)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
@@ -55,7 +55,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     this.loginUser = function (user) {
-        var deferred = $q.defer();
+        let deferred = $q.defer();
             $http.post('/login/login', user)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
@@ -71,7 +71,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     this.getUserById = function (userId) {
-        var deferred = $q.defer();
+        let deferred = $q.defer();
         if (userId.length > 20) {
             let toSend = "/users/id/" + userId;
             $http.get(toSend, userId)
@@ -92,7 +92,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     this.checkUserInSession = function () {
-        var deferred = $q.defer();
+        let deferred = $q.defer();
         $http.get("/users/session").then(function (res) {
             deferred.resolve(res.data.user);
         })
@@ -104,8 +104,8 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.getUserInSession = function () {
         let self = this;
-        var deferred = $q.defer();
-        var userId;
+        let deferred = $q.defer();
+        let userId;
 
         this.checkUserInSession().then(function (res) {
             self.getUserById(res).then(function(response){
@@ -121,5 +121,23 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             return deferred.promise;
     }
 
+    this.followUser = function(userToFollowId){
+        let deferred = $q.defer();
+        
+        this.checkUserInSession().then(function(response){
+                $http.post("/users/follow", {followerId : response, toFollowId : userToFollowId})
+                    .then(function(res){
+                        deferred.resolve(res.status)
+                    })
+                    .catch(function(err){
+                        deferred.reject(err.status)
+                    })
+            })
+            .catch(function(error){
+                deferred.reject(error)
+            })
+        
+        return deferred.promise;
+    }
 
 });
