@@ -65,9 +65,9 @@
             <form action="/login" method="GET" id="login-form">
                 <input type="text" ng-model="user" id="login-user" placeholder="Email or username" />
                 <input type="password" ng-model="password" id="login-pass" placeholder="Password" />
-                <p id="login-error-container"></p>
+                <p id="error-message-box-login" class="hidden-error"></p>
                 <input typte="submit" value="Log in" id="login-page-login-submit" ng-click="login($event)" />
-                <p id="error-message-box-login" class="hidden-error">
+                <p id="login-page-login-form-sign-text">
                     <span>New to Twitter? </span>
                     <button id="login-page-login-form-sign-btn">Sign up</button>
                 </p>
