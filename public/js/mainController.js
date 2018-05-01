@@ -2,9 +2,13 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
 
     userId = '5ae5a679f2c4112d78d0866a';
     userService.getUserById(userId).then(function(res){
-        console.log(res)
-    })
+        console.log(res);
+    });
 
+    
+    
+
+   
 
 });
 

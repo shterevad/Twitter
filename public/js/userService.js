@@ -140,4 +140,5 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    this.saveNewPost = (post) =>$http.post('/users/post', post);
 });

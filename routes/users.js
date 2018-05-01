@@ -37,6 +37,23 @@ router.get('/session', function(req, res, next){
     }
 })
 
+router.post('/post', function(req, res, next){
+    userId=req.body.userId;
+    post=req.body.post;    
+    Users.findOne({"_id" : userId}, function(err, user){
+        if(user){
+            let posts = user.posts;
+            posts.push(post);
+            user.save();
+            res.status(200);
+            res.json(user);
+        } else {
+            res.status(404);
+            res.json(err);
+        }
+    });
+});
+
 router.post('/follow', function(req, res, next){
     res.setHeader('content-type', 'application/json');
     console.log(">>>>>>>>>>>>>>>>>>>>>")   

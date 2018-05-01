@@ -10,6 +10,7 @@ var PostSchema = new Schema({
   _userId: {
     type: Schema.Types.ObjectId,
   },
+  userName: String,
   photo: String,
   tags: [String],
   links: [String],

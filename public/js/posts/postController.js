@@ -1,11 +1,11 @@
-mainApp.controller('postController', function ($scope, PostsService, TrendsService) {
+mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
     PostsService.getPosts().then(data => {
         $scope.posts = data.reverse();
-        console.log(data);
+
+        console.log($scope.posts);
         $scope.tags = [];
         $scope.links = [];
         $scope.videos = [];
-
         $scope.filterLinks = function () {
             $scope.splited = $scope.tweetText.split(' ').map(w => {
                 if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
@@ -29,43 +29,46 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
 
-        $scope.addPost = function () {  
-            $scope.postText = $scope.filterLinks();
-            $scope.newPost = {
-                text: $scope.postText,
-                user: null,
-                tags: $scope.tags,
-                links: $scope.links,
-                videos: $scope.videos,
-                likes: [],
-                retweets: [],
-                replies: [],
-                photo: '',
-                giffs: []
-            }
+        $scope.addPost = function () {
 
-            PostsService.savePost($scope.newPost).then(post => {
-                console.log('Succesfully added:', post.data);
-                var post = post.data;
-                console.log(post.post.tags.length);
-                if (post.post.tags.length > 0) {
-                    for (var i = 0; i < post.post.tags.length; i++) {
-                        console.log(post.post.tags[i]);
-                        let tag = {
-                            title:post.post.tags[i],
-                            posts:[post.post._id]
-                        };
-                        TrendsService.saveOrUpdateTag(tag).then(tag => console.log(tag.data));
-                        tag={};
-                    }
+            userService.getUserInSession().then(function (user) {
+                $scope.user = user;
+                $scope.postText = $scope.filterLinks();
+
+                $scope.newPost = {
+                    text: $scope.postText,
+                    _userId: $scope.user._id,
+                    userName: $scope.user.name,
+                    tags: $scope.tags,
+                    links: $scope.links,
+                    videos: $scope.videos,
                 }
-                $scope.posts.unshift(post.post);
-                $scope.tags=[];
-                $scope.tweetText='';
+                console.log($scope.user);
+                PostsService.savePost($scope.newPost).then(post => {
+                    var post = post.data;
+                    if (post.post.tags.length > 0) {
+                        for (var i = 0; i < post.post.tags.length; i++) {
+                            let tag = {
+                                title: post.post.tags[i],
+                                posts: [post.post._id]
+                            };
+                            TrendsService.saveOrUpdateTag(tag).then(tag => console.log());
+                        }
+                    }
+                    userService.saveNewPost({ userId: $scope.user._id, post: post.post._id })
+                        .then(post => console.log(post.data))
+                        .catch(err => {
+                            console.log(err);
+                        });
+                    $scope.posts.unshift(post.post);
+                    $scope.tags = [];
+                    $scope.tweetText = '';
+                }).catch(err => {
+                    //todo:validation
+                });
             });
+
         }
-
-
     })
 });
 
