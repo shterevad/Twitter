@@ -54,6 +54,15 @@ router.post('/post', function(req, res, next){
     });
 });
 
+// Random users, Who to follow list
+router.get("/randomusers", function (req, res) {
+    Users.findRandom({}, {}, { limit: 3 }, function (err, results) {
+        if (!err) {
+            res.json(results); 
+        }
+    });
+});
+
 router.post('/follow', function(req, res, next){
     res.setHeader('content-type', 'application/json');
     console.log(">>>>>>>>>>>>>>>>>>>>>")   

@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var random = require('mongoose-simple-random');
 var Schema = mongoose.Schema;
 var ObjectIdSchema = Schema.ObjectId;
 
@@ -54,4 +55,6 @@ var UserSchema = new Schema({
     likes: []
   });
 
+
+UserSchema.plugin(random);
 module.exports = mongoose.model('Users', UserSchema);

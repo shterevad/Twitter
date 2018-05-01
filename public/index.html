@@ -40,6 +40,7 @@
     <script src="js/posts/postController.js"></script>
     <script src="js/hashtag/hashtagController.js"></script>
     <script src="directives/trends/trendsController.js"></script>
+    <script src="directives/follow/followController.js"></script>
 
   <!-- css -->
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
@@ -101,8 +102,8 @@
             <ul ng-show="collapsed" id="profileMenu">
               <li ng-click="collapsed=!collapsed">
                 <a href="#!profile">
-                  <h1>Petya Sokolova</h1>
-                  <h2>@Sokolovwa</h2>
+                  <h1>{{user.name}}</h1>
+                  <h2>{{user.email}}</h2>
                 </a>
               </li>
               <li ng-click="collapsed=!collapsed">

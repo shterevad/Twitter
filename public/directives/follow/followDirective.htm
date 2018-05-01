@@ -1,46 +1,19 @@
-<section id='whoToFollow' class="container">
+<section id='whoToFollow' class="container" ng-controller='followController'>
   <h1>Who To Follow</h1>
   <a href="">Refresh</a>
   <a href="">View all</a>
   <ul>
-    <li>
-
+    <li ng-repeat="user in users">
       <div>
         <a class="who-to-follow-a" href="">
-          <img class="who-to-follow-img" src="images/home/photo1.jpg">
-          <span>Microsoft
 
-          </span>
+            <!-- ng-src="{{user.profilePicture}}" -->
+           <img class="who-to-follow-img" src="images/home/photo1.jpg"> 
+          <span>{{user.name}}</span>
         </a>
         <button class='hollowButton'>Follow</button>
         <span class='deleteFProposal'>&#xd7;</span>
       </div>
-    </li>
-    <li>
-
-      <div>
-        <a class="who-to-follow-a" href="">
-          <img class="who-to-follow-img" src="images/home/photo2.jpeg">
-          <span>Google Chrome
-
-          </span>
-        </a>
-        <button class='hollowButton'>Follow</button>
-        <span class='deleteFProposal'>&#xd7;</span>
-      </div>
-    </li>
-    <li>
-      <div>
-        <a class="who-to-follow-a" href="">
-          <img class="who-to-follow-img" src="images/home/photo3.jpg">
-          <span>The Travel Megazine
-
-          </span>
-        </a>
-        <button class='hollowButton'>Follow</button>
-        <span class='deleteFProposal'>&#xd7;</span>
-      </div>
-
     </li>
   </ul>
 </section>

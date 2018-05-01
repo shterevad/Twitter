@@ -141,4 +141,13 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     this.saveNewPost = (post) =>$http.post('/users/post', post);
+
+    this.getRandomUsers = () => {
+        var deferred = $q.defer();
+        var promise = $http.get('/users/randomusers').then(function (response) {
+            deferred.resolve(response.data);
+        });
+        return deferred.promise;
+    };
+
 });
