@@ -170,6 +170,26 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    // unfollow user by id
+    this.unfollowUser = function(userToUnfollowId){
+        let deferred = $q.defer();
+        this.checkUserInSession().then(function(response){
+                $http.post("/users/unfollow", {followerId : response, toUnfollowId : userToUnfollowId})
+                    .then(function(res){
+                        deferred.resolve(res.status)
+                    })
+                    .catch(function(err){
+                        deferred.reject(err.status)
+                    })
+            })
+            .catch(function(error){
+                deferred.reject(error)
+            })
+        
+        return deferred.promise;
+    }
+
+
     this.saveNewPost = (post) =>$http.post('/users/post', post);
 
     this.updateUserFields = (user) =>$http.post('/users/user', user);

@@ -13,6 +13,16 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
         });
     }
 
+    // unfollow user by id
+    $scope.unfollowUser = function(event, userToUnfollow){
+        event.preventDefault();
+
+        userService.unfollowUser(userToUnfollow)
+        .catch(function(err){
+            console.log(err)
+        })
+    }
+
 
     userService.getUserById(pageUserId).then(function(user){
         userService.getUserInSession().then(function(userInSession){

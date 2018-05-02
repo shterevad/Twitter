@@ -95,6 +95,7 @@ router.get("/following/:userId", function (req, res) {
 
 });
 
+//follow user by id
 router.post('/follow', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     toFollowId = req.body.toFollowId;
@@ -128,6 +129,45 @@ router.post('/follow', function (req, res, next) {
         }
     })
     res.status(200).send({ message: "Success" })
+})
+
+//unfollow user by id
+router.post('/unfollow', function (req, res, next) {
+    res.setHeader('content-type', 'application/json');
+    toUnfollowId = req.body.toUnfollowId;
+    followerId = req.body.followerId;
+
+    Users.findOne({ "_id": followerId }, function (err, user) {
+        let indexToDelete = user.following.indexOf(toUnfollowId);
+        if (indexToDelete >= 0) {
+            user.following.splice(indexToDelete, 1);
+            user.save(function (err) {
+                if (err) {
+                    console.log(err)
+                };
+            })
+        } else {
+            res.status(INVALID_PARAMS_STATUS).send({ messate: "Not following" });
+            console.log("User not followed");
+        }
+    })
+
+    Users.findOne({ "_id": toUnfollowId }, function (err, user) {
+        let indexToDelete = user.followers.indexOf(followerId);
+        if (indexToDelete >= 0) {
+            user.followers.splice(indexToDelete, 1);
+            user.save(function (err) {
+                if (err) {
+                    console.log(err)
+                    res.status(DOESNT_EXISTS_STATUS);
+                };
+            })
+        } else {
+            res.status(INVALID_PARAMS_STATUS).send({ messate: "Not following" });
+            console.log("User not followed");
+        }
+    })
+    res.status(OK_STATUS).send({ message: "Success" })
 })
 
 module.exports = router;
