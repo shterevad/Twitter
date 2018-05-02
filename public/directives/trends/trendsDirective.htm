@@ -3,7 +3,10 @@
         <a href="">Change</a>
         <ul>
           <li ng-repeat="tag in tags">
-            <a ng-href="#!hashtag/hashtag/{{tag.title}}">
+
+            <!-- тук малко хардкоднах таг -->
+            <a href="#!tags/jfoe">
+              <!-- {{tag.title}} -->
               <h2>{{tag.title}}</h2>
               <span>{{tag.posts.length}} Tweets</span>
             </a>

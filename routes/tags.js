@@ -11,15 +11,22 @@ router.get("/randomtags", function (req, res) {
     });
 });
 
-router.get("/hashtag/:title", function (req, res) {
+//тук ти го промених, защото това /tags което беше го прави двойно, тъй като рутера си се зарежда, когато вече си в /tags
+//виж и надолу дали не са излишни другите, за да не бърникам
+
+router.get("/tag/:title", function (req, res) {
     res.setHeader('content-type', 'application/json');
+    console.log(">>>>>>>>>>>>>>>>>>>>")
+    console.log(req.params)
     Tags.findOne({ "title": req.params.title }, {}, function (err, tag) {
         if (!err) {
-            status(200);
-            res.json(tag); 
+            console.log(tag);
+            // status(200);
+            res.status(200).json(tag); 
         }else {
-            status(402);
-            res.json(err.data);
+            console.log(err);
+            // status(402);
+            res.status(402).json(err.data);
         }
     });
 });

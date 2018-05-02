@@ -14,7 +14,7 @@ mainApp.config(function($routeProvider) {
         templateUrl : "js/profile/profile.htm",
         requireAuth: true
     })
-    .when("/hashtag/:hashtagName", {
+    .when("/tags/:tagName", {
         templateUrl :"js/hashtag/hashtag.htm",
         requireAuth: true
     })  
