@@ -97,7 +97,6 @@ router.get("/following/:userId", function (req, res) {
 
 router.post('/follow', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
-    console.log(">>>>>>>>>>>>>>>>>>>>>")
     toFollowId = req.body.toFollowId;
     followerId = req.body.followerId;
 

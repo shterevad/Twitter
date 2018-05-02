@@ -1,4 +1,4 @@
-mainApp.controller('LoginController', function ($scope, $http, $location, $window, userService) {
+mainApp.controller('LoginController', function ($scope, $http, $location, $window, $route, userService) {
     const OK_STATUS = 200;
     const USER_DOESNT_EXIST_STATUS = 404;
     const USER_EXISTS_STATUS = 403;
@@ -19,7 +19,8 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
             userService.signUpNewUser(newUser).then(function (res) {
                 if (res === OK_STATUS) {
                     // var path = $location.absUrl();
-                    $window.location.href = "/";
+                    // $window.location.href = "/";
+                    $route.reload();
                 } else {
                     console.log(res);
                 }

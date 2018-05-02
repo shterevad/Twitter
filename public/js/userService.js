@@ -1,6 +1,6 @@
 mainApp.service('userService', function ($http, $q, $timeout) {
     const NAME_MIN_LENGTH = 2;
-    const NAME_MAX_LENGTH = 15;
+    const NAME_MAX_LENGTH = 20;
     const PASSWORD_MIN_LENGTH = 6;
     const OK_STATUS = 200;
     const INVALID_DATA_STATUS = 400;
@@ -34,10 +34,13 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             && (this.hasLetters(password)) && (this.hasCapitalLetter(password)));
     }
 
+    //validate credentials when signing up
     this.validateUserWhenSignup = function (user) {
-        return (this.validateEmail(user.email)) && (this.validateName(user.name)) && (this.validatePassword(user.password));
+        return (this.validateEmail(user.email)) && (this.validateName(user.name)) 
+        && (this.validateName(user.username)) && (this.validatePassword(user.password));
     }
 
+    //sign up user
     this.signUpNewUser = function (user) {
         let deferred = $q.defer();
             $http.post('/login/signup', user)
@@ -55,6 +58,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    //login user
     this.loginUser = function (user) {
         let deferred = $q.defer();
             $http.post('/login/login', user)
@@ -71,6 +75,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    //get user by id
     this.getUserById = function (userId) {
         let deferred = $q.defer();
         if (userId.length > 20) {
@@ -92,6 +97,29 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    //get user by username
+    // this.getUserById = function (userId) {
+    //     let deferred = $q.defer();
+    //     if (userId.length > 20) {
+    //         let toSend = "/users/id/" + userId;
+    //         $http.get(toSend, userId)
+    //             .then(function (response) {
+    //                 if (response.status === OK_STATUS) {
+    //                     deferred.resolve(response.data.user);
+    //                 } else {
+    //                     deferred.reject(response.data);
+    //                 }
+    //             })
+    //             .catch(function (err) {
+    //                 deferred.reject(err);
+    //             })
+    //     } else {
+    //         deferred.reject(err = INVALID_DATA_STATUS);
+    //     }
+    //     return deferred.promise;
+    // }
+
+    //get id of user in session if logged
     this.checkUserInSession = function () {
         let deferred = $q.defer();
         $http.get("/users/session").then(function (res) {
@@ -103,6 +131,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    //get the user in session
     this.getUserInSession = function () {
         let self = this;
         let deferred = $q.defer();
@@ -122,9 +151,9 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             return deferred.promise;
     }
 
+    //follow user
     this.followUser = function(userToFollowId){
         let deferred = $q.defer();
-        
         this.checkUserInSession().then(function(response){
                 $http.post("/users/follow", {followerId : response, toFollowId : userToFollowId})
                     .then(function(res){
@@ -161,6 +190,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }; 
 
+    //check if given user is the one in session
     this.checkIfUserIsInSession = (idToCheck) => {
         var deferred = $q.defer();
 

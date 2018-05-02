@@ -82,10 +82,10 @@
             </div>
 
             <form action="/signup" method="POST" id="signup-form">
-                <input type="text" ng-model="name" id="name-signup" placeholder="Full name" />
-                <input type="text" ng-model="username" id="username-signup" placeholder="Username" />                
+                <input type="text" ng-model="name" id="name-signup" placeholder="Full name" maxlength="20"/>
+                <input type="text" ng-model="username" id="username-signup" placeholder="Username" maxlength="20"/>                
                 <input type="email" ng-model="email" id="email-signup" placeholder="Email" />
-                <input type="password" ng-model="password" id="password-signup" placeholder="Password" />
+                <input type="password" ng-model="password" id="password-signup" placeholder="Password" minlength="6" />
                 <p id="error-message-box-signup" class="hidden-error"></p>
                 <input value="Sign up" id="login-page-signup-submit" ng-click="signUp($event)"/>
                 <p id="signup-form-disclamer">By signing up, you agree to the
@@ -93,7 +93,7 @@
                     <a id="login-submit-pp">Privacy Policy</a>, including
                     <a id="login-submit-cookieuse">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</p>
             </form>
-        </div>
+        </div> 
 
     </main>
 

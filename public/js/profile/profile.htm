@@ -108,139 +108,36 @@
 
                     <img ng-src="{{followed.profilePicture}}" alt="" class="followed-user-profile-pic"
                     />
-                    <button ng-show="followed.followBack" class="followed-user-follow-button followed-user-button">Follow</button>
-                    <button ng-show="followed.followBack" class="followed-user-unfollow-button followed-user-button">Following</button>
+                    <button ng-show="!{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="followUser($event, followed._id)" class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button ng-show="{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="unfollowUser($event, followed._id)" class="followed-user-unfollow-button followed-user-button">Following</button>
 
                     <div class="followed-user-details">
-                        <p class="followed-user-name">{{followed.name}}</p>
-                        <a ng-show="followed.username" class="followed-user-username" href="">@{{followed.username}}</a>
+                        <p class="followed-user-name"><a href="#!profile/{{followed._id}}">{{followed.name}}</a></p>
+                        <a ng-show="followed.username" class="followed-user-username" href="#!profile/{{followed._id}}">@{{followed.username}}</a>
                         <p ng-show="followed.description" class="followed-user-bio">{{followed.description}}</p>
                     </div>
 
                 </div>
-
-                <!-- <div class="followed-user-container container">
-                    <div class="followed-user-background-container">
-                        <img src="https://pbs.twimg.com/profile_banners/37013920/1474003541/1500x500" alt="" class="followed-user-background" />
-                    </div>
-
-                    <img src="https://pbs.twimg.com/profile_images/191651253/trumpshairicon_400x400.jpg" alt="" class="followed-user-profile-pic"
-                    />
-                    <button class="followed-user-follow-button followed-user-button" style="display:none">Follow</button>
-                    <button class="followed-user-unfollow-button followed-user-button">Following</button>
-
-
-                    <div class="followed-user-details">
-                        <p class="followed-user-name">Donald Trump's Hair</p>
-                        <a class="followed-user-username" href="">@trumpshair</a>
-                        <p class="followed-user-bio">HOTUS (Hair of the United States). I'm on top of the man who is on top of the world.</p>
-                    </div>
-                </div>
-
-                <div class="followed-user-container container">
-                    <div class="followed-user-background-container">
-                        <img src="https://i.ytimg.com/vi/-TXBxxPAtb0/maxresdefault.jpg" alt="" class="followed-user-background" />
-                    </div>
-                    <img src="https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/02/24/15/vladimir-putin-2.jpg"
-                        alt="" class="followed-user-profile-pic" />
-                    <button class="followed-user-follow-button followed-user-button">Follow</button>
-                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
-
-                    <div class="followed-user-details">
-                        <p class="followed-user-name">Vladimir Putin</p>
-                        <a class="followed-user-username" href="">@vputin</a>
-                        <p class="followed-user-bio">Professional bear whisperer.</p>
-                    </div>
-                </div>
-
-                <div class="followed-user-container container">
-                    <div class="followed-user-background-container">
-                        <img src="https://i.ytimg.com/vi/1FRcBiY4sc0/maxresdefault.jpg" alt="" class="followed-user-background" />
-                    </div>
-                    <img src="http://4.bp.blogspot.com/-8-D0e6Z2cR0/VVlY1gKRXbI/AAAAAAAALec/7MBqniB2J1o/s1600/o-BARACK-OBAMA-FROWN-facebook.jpg"
-                        alt="" class="followed-user-profile-pic" />
-                    <button class="followed-user-follow-button followed-user-button">Follow</button>
-                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
-
-
-                    <div class="followed-user-details">
-                        <p class="followed-user-name">Barack Obama</p>
-                        <a class="followed-user-username" href="">@imsodone</a>
-                        <p class="followed-user-bio">I'm so done with this.</p>
-                    </div>
-                </div> -->
-
             </div>
 
             <div ng-show="sectionInUse === 3" id="profile-page-main-div-followers">
 
-                <div class="follower-container container">
+                <div ng-repeat="follower in followers"class="follower-container container">
                     <div class="follower-background-container">
-                        <img src="https://pbs.twimg.com/profile_banners/25073877/1524597997/1500x500" alt="" class="follower-background" />
+                        <img ng-src="{{follower.headerPicture}}" alt="" class="follower-background" />
                     </div>
 
-                    <img src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" alt="" class="follower-profile-pic"
+                    <img ng-src="{{follower.profilePicture}}" alt="" class="follower-profile-pic"
                     />
-                    <button class="follower-follow-button follower-button">Follow</button>
-                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
+                    <button ng-show="!{{follower.followBack}} && !{{follower.thatsYou}}" ng-click="followUser($event, follower._id)" class="follower-follow-button follower-button">Follow</button>
+                    <button ng-show="{{follower.followBack}}  && !{{follower.thatsYou}}" ng-click="unfollowUser($event, follower._id)" class="follower-unfollow-button follower-button">Following</button>
 
                     <div class="follower-details">
-                        <p class="follower-name">Donald Trump</p>
-                        <a class="follower-username" href="">@fakenews</a>
-                        <p class="follower-bio">My hair has its own account. Go follow it.</p>
+                        <p class="follower-name"><a href="#!profile/{{follower._id}}">{{follower.name}}</a></p>
+                        <a ng-show="follower.username" class="follower-username" href="#!profile/{{follower._id}}">@{{follower.username}}</a>
+                        <p ng-show="follower.username" class="follower-bio">{{follower.description}}.</p>
                     </div>
 
-                </div>
-
-                <div class="follower-container container">
-                    <div class="follower-background-container">
-                        <img src="https://pbs.twimg.com/profile_banners/37013920/1474003541/1500x500" alt="" class="follower-background" />
-                    </div>
-
-                    <img src="https://pbs.twimg.com/profile_images/191651253/trumpshairicon_400x400.jpg" alt="" class="follower-profile-pic"
-                    />
-                    <button class="follower-follow-button follower-button" style="display:none">Follow</button>
-                    <button class="follower-unfollow-button follower-button">Following</button>
-
-
-                    <div class="follower-details">
-                        <p class="follower-name">Donald Trump's Hair</p>
-                        <a class="follower-username" href="">@trumpshair</a>
-                        <p class="follower-bio">HOTUS (Hair of the United States). I'm on top of the man who is on top of the world.</p>
-                    </div>
-                </div>
-
-                <div class="follower-container container">
-                    <div class="follower-background-container">
-                        <img src="https://i.ytimg.com/vi/-TXBxxPAtb0/maxresdefault.jpg" alt="" class="follower-background" />
-                    </div>
-                    <img src="https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/02/24/15/vladimir-putin-2.jpg"
-                        alt="" class="follower-profile-pic" />
-                    <button class="follower-follow-button follower-button">Follow</button>
-                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
-
-                    <div class="follower-details">
-                        <p class="follower-name">Vladimir Putin</p>
-                        <a class="follower-username" href="">@vputin</a>
-                        <p class="follower-bio">Professional bear whisperer.</p>
-                    </div>
-                </div>
-
-                <div class="follower-container container">
-                    <div class="follower-background-container">
-                        <img src="https://i.ytimg.com/vi/1FRcBiY4sc0/maxresdefault.jpg" alt="" class="follower-background" />
-                    </div>
-                    <img src="http://4.bp.blogspot.com/-8-D0e6Z2cR0/VVlY1gKRXbI/AAAAAAAALec/7MBqniB2J1o/s1600/o-BARACK-OBAMA-FROWN-facebook.jpg"
-                        alt="" class="follower-profile-pic" />
-                    <button class="follower-follow-button follower-button">Follow</button>
-                    <button class="follower-unfollow-button follower-button" style="display:none">Following</button>
-
-
-                    <div class="follower-details">
-                        <p class="follower-name">Barack Obama</p>
-                        <a class="follower-username" href="">@imsodone</a>
-                        <p class="follower-bio">I'm so done with this.</p>
-                    </div>
                 </div>
 
             </div>

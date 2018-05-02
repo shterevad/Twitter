@@ -299,6 +299,7 @@ body{
 .followed-user-name, .follower-name{
     font-size: 1.3em;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .followed-user-username, .follower-username{
