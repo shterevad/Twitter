@@ -10,7 +10,7 @@ mainApp.service('PostsService', function ($q,$http, userService) {
     
         this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts' + id);
     
-        this.savePost = (post) =>$http.post('http://localhost:3000/posts/posts', post);
+        this.savePost = (post) =>$http.post('http://localhost:3000/posts/newpost', post);
 
 
         //get all users post

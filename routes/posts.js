@@ -47,13 +47,17 @@ router.get("/posts/:userId", function (req, res) {
 
 
 //add  new post 
-router.post('/posts', function (req, res) {
+router.post('/newpost', function (req, res) {
+    res.setHeader('content-type', 'application/json');
+    console.log(">>>>>>>>>>>>>>>>>>>>>")
     var post=req.body.post;
-    Posts.findOne({"_id":post._id}, {}, function(err, p){
+    console.log(post);
+    Posts.findOne({_id:post._id}, {}, function(err, p){
         if(!p){
             Posts.create(post, function (err, post) {
                 if (!err) {
                     res.status(200);
+                    console.log(post);
                     res.json({ post: post });
                 } else {
                     res.status(404);
@@ -73,9 +77,6 @@ router.post('/posts', function (req, res) {
           }
         });  
 });
-
-
-
 
 
 /* delete post by id */

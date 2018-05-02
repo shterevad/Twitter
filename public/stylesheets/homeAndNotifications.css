@@ -10,16 +10,21 @@ main{
 }
 
 /* MAIN CONTENT */
-  .mainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
+  .mainDiv, .widerMainDiv, footer, #trendsDiv, #whoToFollow, #profileDiv{
     border-radius: 15px;
   }
 
-  .mainDiv{
+  .mainDiv, .widerMainDiv{
     display: inline-block;
     margin: 0em 0.5em 0em 0.8em;
     width: 48%;
     height: auto;
     background-color: white;
+  }
+
+  .widerMainDiv{
+    margin: 0em 0em 0em 0.8em;
+    width: 74%;
   }
 
   .mainContent{

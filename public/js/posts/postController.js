@@ -22,8 +22,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.filterLinks = function () {
         $scope.splited = $scope.tweetText.split(' ').map(w => {
             if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
-                $scope.tags.push(w);
-                return w = `<a href='#!hashtag/${w}'>` + w + "</a>";
+                $scope.tags.push(w.slice(1));
+                return w = `<a href='#!tags/${w.slice(1)}'>` + w + "</a>";
             }
             return w;
         }).map(w => {
@@ -54,8 +54,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 videos: $scope.videos,
             }
 
-            PostsService.savePost($scope.newPost).then(post => {
+            console.log($scope.newPost);
+            PostsService.savePost({post: $scope.newPost}).then(post => {
                 var post = post.data;
+                console.log(post);
                 if (post.post.tags.length > 0) {
                     for (var i = 0; i < post.post.tags.length; i++) {
                         let tag = {

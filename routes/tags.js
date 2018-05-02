@@ -2,30 +2,34 @@ var express = require('express');
 var router = express.Router();
 var Tags = require("../modules/tags.js")
 
-/* get all posts */
+/* get 10 random tags */
 router.get("/randomtags", function (req, res) {
     Tags.findRandom({}, {}, { limit: 10 }, function (err, results) {
         if (!err) {
-            res.json(results); // 5 elements
+            res.json(results);
         }
     });
 });
 
-//тук ти го промених, защото това /tags което беше го прави двойно, тъй като рутера си се зарежда, когато вече си в /tags
-//виж и надолу дали не са излишни другите, за да не бърникам
-
+//get tag by title
 router.get("/tag/:title", function (req, res) {
     res.setHeader('content-type', 'application/json');
-    console.log(">>>>>>>>>>>>>>>>>>>>")
-    console.log(req.params)
     Tags.findOne({ "title": req.params.title }, {}, function (err, tag) {
         if (!err) {
-            console.log(tag);
-            // status(200);
             res.status(200).json(tag); 
         }else {
-            console.log(err);
-            // status(402);
+            res.status(402).json(err.data);
+        }
+    });
+});
+
+
+//get tag by id
+router.get("/:id", function (req, res) {
+    Tags.findOne({ "_id": req.params.id }, {}, function (err, tag) {
+        if (!err) {
+            res.status(200).json(tag); 
+        }else {
             res.status(402).json(err.data);
         }
     });
