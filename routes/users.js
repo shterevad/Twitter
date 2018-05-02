@@ -12,36 +12,36 @@ const INVALID_CREDENTIALS_STATUS = 401;
 const INVALID_PARAMS_STATUS = 406;
 
 
-router.get('/id/:id', function(req, res, next){
-  res.setHeader('content-type', 'application/json');
-  var idToCheck = req.params.id;
-  if(!Object.keys(idToCheck).length == 0){
-    Users.findById(idToCheck, function(err, user){
-        if(user){
-          res.status(OK_STATUS).json({user: user});
-        } else {
-          res.status(DOESNT_EXISTS_STATUS).send({error: "User with this ID doesn't exist"});
-        }
-    })
-  } else {
-      res.status(INVALID_CREDENTIALS_STATUS).send({error: "Invalid ID"});
-  }
+router.get('/id/:id', function (req, res, next) {
+    res.setHeader('content-type', 'application/json');
+    var idToCheck = req.params.id;
+    if (!Object.keys(idToCheck).length == 0) {
+        Users.findById(idToCheck, function (err, user) {
+            if (user) {
+                res.status(OK_STATUS).json({ user: user });
+            } else {
+                res.status(DOESNT_EXISTS_STATUS).send({ error: "User with this ID doesn't exist" });
+            }
+        })
+    } else {
+        res.status(INVALID_CREDENTIALS_STATUS).send({ error: "Invalid ID" });
+    }
 });
 
-router.get('/session', function(req, res, next){
+router.get('/session', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
-    if(req.session.user){
-        res.status(OK_STATUS).json({user : req.session.user})
+    if (req.session.user) {
+        res.status(OK_STATUS).json({ user: req.session.user })
     } else {
-        res.status(DOESNT_EXISTS_STATUS).send({error: "There is no user in session"});
+        res.status(DOESNT_EXISTS_STATUS).send({ error: "There is no user in session" });
     }
 })
 
-router.post('/post', function(req, res, next){
-    userId=req.body.userId;
-    post=req.body.post;    
-    Users.findOne({"_id" : userId}, function(err, user){
-        if(user){
+router.post('/post', function (req, res, next) {
+    userId = req.body.userId;
+    post = req.body.post;
+    Users.findOne({ "_id": userId }, function (err, user) {
+        if (user) {
             let posts = user.posts;
             posts.push(post);
             user.save();
@@ -58,45 +58,56 @@ router.post('/post', function(req, res, next){
 router.get("/randomusers", function (req, res) {
     Users.findRandom({}, {}, { limit: 3 }, function (err, results) {
         if (!err) {
-            res.json(results); 
+            res.json(results);
         }
     });
 });
 
-router.post('/follow', function(req, res, next){
+router.get("/following/:userId", function (req, res) {
+        Users.findOne({ _id: req.params.userId }, {}, function (err, results) {
+            if (!err) {
+                res.json(results);
+            }
+        });
+ 
+
+
+});
+
+router.post('/follow', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
-    console.log(">>>>>>>>>>>>>>>>>>>>>")   
+    console.log(">>>>>>>>>>>>>>>>>>>>>")
     toFollowId = req.body.toFollowId;
     followerId = req.body.followerId;
 
-    Users.findOne({"_id" : followerId}, function(err, user){
-        if(user.following.indexOf(toFollowId) < 0){
+    Users.findOne({ "_id": followerId }, function (err, user) {
+        if (user.following.indexOf(toFollowId) < 0) {
             user.following.push(toFollowId);
-            user.save(function(err){
-                if(err){
+            user.save(function (err) {
+                if (err) {
                     console.log(err)
                 };
             })
         } else {
-            res.status(INVALID_PARAMS_STATUS).send({messate : "Already followed"});
+            res.status(INVALID_PARAMS_STATUS).send({ messate: "Already followed" });
             console.log("User alreay followed");
         }
     })
 
-    Users.findOne({"_id" : toFollowId}, function(err, user){
-        if(user.followers.indexOf(followerId) < 0){
+    Users.findOne({ "_id": toFollowId }, function (err, user) {
+        if (user.followers.indexOf(followerId) < 0) {
             user.followers.push(followerId);
-            user.save(function(err){
-                if(err){
+            user.save(function (err) {
+                if (err) {
                     console.log(err)
                 };
             })
         } else {
-            res.status(INVALID_PARAMS_STATUS).send({messate : "Already followed"});
+            res.status(INVALID_PARAMS_STATUS).send({ messate: "Already followed" });
             console.log("User alreay followed");
         }
     })
-    res.status(200).send({message : "Success"})
+    res.status(200).send({ message: "Success" })
 })
 
 module.exports = router;

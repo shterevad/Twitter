@@ -5,13 +5,7 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         console.log(res);
     });
 
-    userService.getUserInSession().then(function(user){
-        $scope.user=user;
-    })
-    
-
-   
-
+  
 });
 
 mainApp.controller('headerController', function ($scope) {
