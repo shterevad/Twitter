@@ -1,41 +1,41 @@
-<div id="profile-page-main" ng-app='profileApp'>
+<div id="profile-page-main" ng-app='mainApp' ng-controller='profileController'>
     <div id="profile-page-header">
 
         <div id="profile-page-profile-picture-nav-container">
-            <img src="https://kids.nationalgeographic.com/content/dam/kids/photos/animals/Mammals/Q-Z/raccoon-grass.adapt.945.1.jpg"
+            <img ng-src="{{userProfile.profilePicture}}"
                 alt="" id="profile-page-profile-picture-nav">
         </div>
 
         <div id="profile-page-header-banner-container">
-            <img src="https://www.marwell.org.uk/images/uploads/features/f/bwr_1500x400.jpg" alt="" id="profile-page-header-banner">
+            <img ng-src="{{userProfile.headerPicture}}" alt="" id="profile-page-header-banner">
         </div>
 
         <div id="profile-page-header-nav-container">
 
             <ul id="profile-page-header-nav">
-                <li>
+                <li ng-click="sectionInUse = 1">
                     <p class="profile-page-nav-title">Tweets</p>
-                    <p class="profile-page-nav-numbers" id="profile-page-nav-tweets">2,576</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-tweets">{{userProfile.posts.length}}</p>
                 </li>
-                <li>
+                <li ng-click="sectionInUse = 2">
                     <p class="profile-page-nav-title">Following</p>
-                    <p class="profile-page-nav-numbers" id="profile-page-nav-following">124</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-following">{{userProfile.following.length}}</p>
                 </li>
-                <li>
+                <li ng-click="sectionInUse = 3">
                     <p class="profile-page-nav-title">Followers</p>
-                    <p class="profile-page-nav-numbers" id="profile-page-nav-followers">63</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-followers">{{userProfile.followers.length}}</p>
                 </li>
-                <li>
+                <li ng-click="sectionInUse = 4">
                     <p class="profile-page-nav-title">Likes</p>
-                    <p class="profile-page-nav-numbers" id="profile-page-nav-likes">1,342</p>
+                    <p class="profile-page-nav-numbers" id="profile-page-nav-likes">{{userProfile.likes.length}}</p>
                 </li>
             </ul>
 
-            <button class="profile-page-nav-button" id="profile-page-edit-profile-button">
+            <button class="profile-page-nav-button" id="profile-page-edit-profile-button" ng-show="isInSession">
                 Edit profile
             </button>
 
-            <button style="display:none" class="profile-page-nav-button" id="profile-page-follow-button">
+            <button style="display:none" class="profile-page-nav-button" id="profile-page-follow-button" ng-show="!isInSession">
                 Follow
             </button>
         </div>
@@ -46,34 +46,32 @@
     <div class='mainContent' id="profile-page-inner-content-div">
         <aside id='profile-pg-left-aside'>
             <div id="profile-pg-user-details">
-                <p id="profile-pg-user-details-name">Person Name</p>
-                <p id="profile-pg-user-details-username">@personUsername</p>
-                <p id="profile-pg-user-details-bio">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore officiis iste, eum porro cupiditate non velit unde illo
-                    explicabo veritatis suscipit voluptates labore pariatur perferendis eligendi, facere incidunt architecto
-                    asperiores.
+                <p id="profile-pg-user-details-name">{{userProfile.name}}</p>
+                <p ng-hide="!userProfile.username" id="profile-pg-user-details-username">@{{userProfile.username}}</p>
+                <p ng-hide="!userProfile.description" id="profile-pg-user-details-bio">
+                        {{userProfile.description}}
                 </p>
-                <div id="profile-pg-user-details-location-container">
+                <div ng-hide="!userProfile.location" id="profile-pg-user-details-location-container">
                     <img class="profile-details-icon" src="images/icons/location_icon.png" alt="">
-                    <span id="profile-pg-user-details-location">Bulgaria</span>
+                    <span href="https://www.google.bg/maps/place/{{userProfile.location}}" id="profile-pg-user-details-location">{{userProfile.location}}</span>
                 </div>
-                <div id="profile-pg-user-details-web-container">
+                <div ng-hide="!userProfile.website" id="profile-pg-user-details-web-container">
                     <img class="profile-details-icon" src="images/icons/link_icon.png" alt="">
-                    <a href="" id="profile-pg-user-details-web">www.google.com</a>
+                    <a href="{{userProfile.website}}" id="profile-pg-user-details-web">{{userProfile.website}}</a>
                 </div>
             </div>
-            <div id="profile-page-user-gallery-container">
+            <div ng-hide="userProfile.gallery.length === 0" id="profile-page-user-gallery-container">
                 <div id="profile-pg-user-details-gallery-container">
                     <img class="profile-details-icon" src="images/icons/gallery_icon.png" alt="">
                     <span id="profile-page-gallery-title">
-                        <span>753</span> photos and videos</span>
+                        <span>{{userProfile.gallery.length}}</span> photos and videos</span>
                 </div>
                 <div id="profile-pg-user-gallery">
-                    <div class="profile-pg-gallery-pic-container">
-                        <img class="profile-pg-gallery-pic" src="https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2017/chemistexpla.jpg"
+                    <div ng-repeat="pic in gallery" class="profile-pg-gallery-pic-container">
+                        <img class="profile-pg-gallery-pic" ng-src="{{pic}}"
                             alt="">
                     </div>
-                    <div class="profile-pg-gallery-pic-container">
+                    <!-- <div class="profile-pg-gallery-pic-container">
                         <img class="profile-pg-gallery-pic" src="https://www.berries.com/blog/wp-content/uploads/2017/06/Strawberry-Desserts-recipegirl.jpg"
                             alt="">
                     </div>
@@ -82,14 +80,14 @@
                     </div>
                     <div class="profile-pg-gallery-pic-container">
                         <img class="profile-pg-gallery-pic" src="https://i.imgur.com/k9gMBGA.png" alt="">
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </aside>
 
         <div id="profile-page-dynamic-content-container">
 
-            <div style="display:none" id="profile-page-main-div-tweets">
+            <div ng-show="sectionInUse === 1" id="profile-page-main-div-tweets">
                 <div class='mainDiv container' id="profile-page-main-div-tweets-inner">
                 </div>
 
@@ -101,27 +99,27 @@
                 </aside>
             </div>
 
-            <div style="display:none" id="profile-page-main-div-following">
+            <div ng-show="sectionInUse === 2" id="profile-page-main-div-following">
 
-                <div class="followed-user-container container">
+                <div ng-repeat="followed in following"class="followed-user-container container">
                     <div class="followed-user-background-container">
-                        <img src="https://pbs.twimg.com/profile_banners/25073877/1524597997/1500x500" alt="" class="followed-user-background" />
+                        <img ng-src="{{followed.headerPicture}}" alt="" class="followed-user-background" />
                     </div>
 
-                    <img src="https://pbs.twimg.com/profile_images/874276197357596672/kUuht00m_400x400.jpg" alt="" class="followed-user-profile-pic"
+                    <img ng-src="{{followed.profilePicture}}" alt="" class="followed-user-profile-pic"
                     />
-                    <button class="followed-user-follow-button followed-user-button">Follow</button>
-                    <button class="followed-user-unfollow-button followed-user-button" style="display:none">Following</button>
+                    <button ng-show="followed.followBack" class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button ng-show="followed.followBack" class="followed-user-unfollow-button followed-user-button">Following</button>
 
                     <div class="followed-user-details">
-                        <p class="followed-user-name">Donald Trump</p>
-                        <a class="followed-user-username" href="">@fakenews</a>
-                        <p class="followed-user-bio">My hair has its own account. Go follow it.</p>
+                        <p class="followed-user-name">{{followed.name}}</p>
+                        <a ng-show="followed.username" class="followed-user-username" href="">{{followed.username}}</a>
+                        <p ng-show="followed.description" class="followed-user-bio">{{followed.description}}</p>
                     </div>
 
                 </div>
 
-                <div class="followed-user-container container">
+                <!-- <div class="followed-user-container container">
                     <div class="followed-user-background-container">
                         <img src="https://pbs.twimg.com/profile_banners/37013920/1474003541/1500x500" alt="" class="followed-user-background" />
                     </div>
@@ -170,11 +168,11 @@
                         <a class="followed-user-username" href="">@imsodone</a>
                         <p class="followed-user-bio">I'm so done with this.</p>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
-            <div style="display:none" id="profile-page-main-div-followers">
+            <div ng-show="sectionInUse === 3" id="profile-page-main-div-followers">
 
                 <div class="follower-container container">
                     <div class="follower-background-container">
@@ -247,7 +245,7 @@
 
             </div>
 
-            <div id="profile-page-main-div-likes">
+            <div ng-show="sectionInUse === 4" id="profile-page-main-div-likes">
                 <div class='mainDiv container' id="profile-page-main-div-likes-inner">
                 </div>
 
