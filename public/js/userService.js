@@ -43,7 +43,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.post('/login/signup', user)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
-                        resolve(response.status);
+                        deferred.resolve(response.status);
                     } else {
                         deferred.reject(response.status);
                     }
@@ -51,6 +51,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
                 .catch(function (err) {
                     deferred.reject(err);
                 });
+
         return deferred.promise;
     }
 

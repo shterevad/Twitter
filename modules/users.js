@@ -48,9 +48,12 @@ var UserSchema = new Schema({
     birthdate: Date,
     profilePicture: {
       type: String,
-      default: "../public/public/images/default"
+      default: "images/default/default_profile_icon.png"
     },
-    headerPicture: String,
+    headerPicture: {
+      type: String,
+      default: "images/default/default_header_image.png"
+    },
     posts: [],
     followers: [],
     following: [],
