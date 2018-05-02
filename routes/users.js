@@ -37,6 +37,7 @@ router.get('/session', function (req, res, next) {
     }
 })
 
+//add new post
 router.post('/post', function (req, res, next) {
     userId = req.body.userId;
     post = req.body.post;
@@ -49,6 +50,26 @@ router.post('/post', function (req, res, next) {
             res.json(user);
         } else {
             res.status(404);
+            res.json(err);
+        }
+    });
+});
+
+//update user fields
+router.post('/user', function (req, res) {
+    var user = req.body.user;
+    Users.findOne({"_id":user._id}, {}, function(err, u){
+        if(!err){
+            for (var field in Users.schema.paths) {
+                if ((field !== '_id') && (field !== '__v')) {
+                   if (req.body.user[field] !== undefined) {
+                      u[field] = req.body.user[field];
+                   }  
+                }  
+             }  
+             u.save();
+             res.json(u);
+        }else{
             res.json(err);
         }
     });

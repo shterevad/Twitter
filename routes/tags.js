@@ -11,8 +11,9 @@ router.get("/randomtags", function (req, res) {
     });
 });
 
-router.get("/:name", function (req, res) {
-    Tags.findOne({ title: req.params.name }, {}, function (err, tag) {
+router.get("/hashtag/:title", function (req, res) {
+    res.setHeader('content-type', 'application/json');
+    Tags.findOne({ "title": req.params.title }, {}, function (err, tag) {
         if (!err) {
             status(200);
             res.json(tag); 

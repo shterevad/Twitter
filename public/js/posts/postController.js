@@ -80,15 +80,35 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     }
 
     $scope.likePost = (id) => {
-        userService.getUserInSession().then(user =>{
-            PostsService.getPostById(id).then(post=>{
-                console.log(post);
-        
-               var post = post;
-               post.likes.push(user._id);
-                console.log(post);
-                PostsService.savePost({post:post}).then(p=>{
-                    console.log(p);
+        userService.getUserInSession().then(user => {
+            PostsService.getPostById(id).then(post => {
+                var post = post;
+                let alreadyLiked = post.likes.findIndex(id => {
+                    console.log(id);
+                    console.log(user._id);
+                    return id == user._id
+                });
+                console.log(post.likes);
+
+                if (alreadyLiked != -1) {
+                    $scope.liked = "unliked";
+                    post.likes.splice(alreadyLiked, 1);
+                } else {
+                    $scope.liked = "liked";
+                    post.likes.push(user._id);
+                }
+
+                PostsService.savePost({ post: post }).then(p => {
+                    let alreadyLiked = user.likes.findIndex(id => id === p.data._id);
+                    if (alreadyLiked != -1) {
+                        user.likes.splice(alreadyLiked, 1);
+                    } else {
+                        user.likes.push(p.data._id);
+                    }
+
+                    userService.updateUserFields({ user: user }).then(u => {
+                        console.log("Succesfully liked/unliked");
+                    })
                 })
             })
         });

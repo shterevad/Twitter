@@ -12,6 +12,8 @@ mainApp.service('PostsService', function ($q,$http, userService) {
     
         this.savePost = (post) =>$http.post('http://localhost:3000/posts/posts', post);
 
+
+        //get all users post
         this.getPostsByUserId = (userId) => {
             var deferred = $q.defer();
             var promise = $http.get('http://localhost:3000/posts/posts/' + userId).then(function (response) {

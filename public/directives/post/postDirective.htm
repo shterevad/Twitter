@@ -18,7 +18,7 @@
                 <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo'>
             </a>
             <div>
-                <a href="" class='posts-video' >
+                <a href="" class='posts-video'>
                     <iframe ng-if="post.videos.length>0" ng-src="{{post.videos[0] | trusted}}" frameborder="0"></iframe>
                 </a>
             </div>
@@ -31,8 +31,11 @@
                 <li> &#x21ba; Retweet
                     <span ng-bind="{{post.retweets.length}}"></span>
                 </li>
-                <li ng-click="likePost(post._id)"> &#x2661; Like
-                    <span ng-bind={{post.likes.length}}></span>
+                <li ng-click="likePost(post._id)">
+                    <span ng-class="liked">
+                        &#x2661; Like
+                        <span ng-bind={{post.likes.length}}></span>
+                    </span>
                 </li>
             </ul>
         </div>

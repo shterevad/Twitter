@@ -14,7 +14,7 @@ mainApp.config(function($routeProvider) {
         templateUrl : "js/profile/profile.htm",
         requireAuth: true
     })
-     .when("/hashtag/:hashtagName", {
+    .when("/hashtag/:hashtagName", {
         templateUrl :"js/hashtag/hashtag.htm",
         requireAuth: true
     })  
@@ -36,4 +36,4 @@ mainApp.run([
         console.log('Starting to leave %s to go to %s', oldUrl, newUrl);
       });
     }
-  ]);
+  ]); 
