@@ -140,6 +140,24 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    this.checkIfUserIsInSession = (idToCheck) => {
+        var deferred = $q.defer();
+
+        this.checkUserInSession().then(function(response){
+            if(response === idToCheck){
+                deferred.resolve(true);
+            } else {
+                deferred.reject(false);
+            }
+
+        })
+        .catch(function(error){
+            deferred.reject(false);
+        })
+     
+        return deferred.promise;
+    }
+
     this.saveNewPost = (post) =>$http.post('/users/post', post);
 
     this.getRandomUsers = () => {

@@ -38,6 +38,7 @@
     <!--mainController -->
     <script src="js/mainController.js"></script>
     <script src="js/posts/postController.js"></script>
+    <script src="js/profile/profileController.js"></script>
     <script src="js/hashtag/hashtagController.js"></script>
     <script src="directives/trends/trendsController.js"></script>
     <script src="directives/follow/followController.js"></script>
@@ -107,7 +108,7 @@
                 </a>
               </li>
               <li ng-click="collapsed=!collapsed">
-                <a href="#!profile">Profile</a>
+                <a href="#!profile/{{user._id}}">Profile</a>
               </li>
               <hr/>
               <li ng-click="collapsed=!collapsed">

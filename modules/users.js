@@ -46,7 +46,10 @@ var UserSchema = new Schema({
     location: String,
     website: String,
     birthdate: Date,
-    profilePicture: String,
+    profilePicture: {
+      type: String,
+      default: "../public/public/images/default"
+    },
     headerPicture: String,
     posts: [],
     followers: [],
