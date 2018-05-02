@@ -23,7 +23,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         $scope.splited = $scope.tweetText.split(' ').map(w => {
             if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
                 $scope.tags.push(w);
-                return w = "<a href=''>" + w + "</a>";
+                return w = `<a href='#!hashtag/${w}'>` + w + "</a>";
             }
             return w;
         }).map(w => {
@@ -39,8 +39,6 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
         return $scope.splited.join(' ');
     }
-
-
 
     $scope.addPost = function () {
         userService.getUserInSession().then(function (user) {
@@ -79,9 +77,27 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 //todo:validation
             });
         });
+    }
+
+    $scope.likePost = (id) => {
+        userService.getUserInSession().then(user =>{
+            PostsService.getPostById(id).then(post=>{
+                console.log(post);
+        
+               var post = post;
+               post.likes.push(user._id);
+                console.log(post);
+                PostsService.savePost({post:post}).then(p=>{
+                    console.log(p);
+                })
+            })
+        });
 
     }
-})
+
+
+
+});
 /* }); */
 
 mainApp.filter('trusted', ['$sce', function ($sce) {
@@ -92,7 +108,7 @@ mainApp.filter('trusted', ['$sce', function ($sce) {
 }]);
 
 
-function sortByDateDesc(data){
+function sortByDateDesc(data) {
     data.sort((d1, d2) => {
         if (d1.posted > d2.posted) {
             return -1;

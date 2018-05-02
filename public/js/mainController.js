@@ -4,6 +4,9 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         $scope.user=user;
     })
 
+    userService.getUserInSession().then(function (user) {
+        $scope.user=user;
+    });
   
 });
 

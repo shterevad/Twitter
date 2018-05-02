@@ -23,7 +23,7 @@ router.get("/:name", function (req, res) {
     });
 });
 
-/* add new post */
+/* add or modify tag */
 router.post('/tags', function (req, res) {
     var tag = req.body;
     Tags.findOne({ "title": tag.title }, {}, function (err, t) {
@@ -40,7 +40,7 @@ router.post('/tags', function (req, res) {
         } else {
             let posts = t.posts;
             posts.push(tag.posts[0]);
-            return t.save();
+             t.save();
         }
     });
 });
