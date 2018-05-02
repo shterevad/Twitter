@@ -15,7 +15,8 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
 
 
     userService.getUserInSession().then(function(user){
-        $scope.userProfile=user;
+        userInSession = JSON.parse(JSON.stringify(user));
+        $scope.userProfile = user;
         $scope.checkUser(user._id);
         $scope.gallery = user.gallery;
         $scope.following = [];
@@ -25,7 +26,8 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
                     toPush.followBack = true;
                 } else {
                     toPush.followBack = false;
-                }
+                };
+                
                 $scope.following.push(toPush);
             })
         })

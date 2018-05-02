@@ -102,9 +102,9 @@
             </a>
             <ul ng-show="collapsed" id="profileMenu">
               <li ng-click="collapsed=!collapsed">
-                <a href="#!profile">
+                <a href="#!profile/{{user._id}}">
                   <h1>{{user.name}}</h1>
-                  <h2>{{user.email}}</h2>
+                  <h2>@{{user.username}}</h2>
                 </a>
               </li>
               <li ng-click="collapsed=!collapsed">

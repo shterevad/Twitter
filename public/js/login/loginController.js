@@ -11,7 +11,8 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
         let newUser = {
             name: $scope.name,
             email: $scope.email,
-            password: $scope.password
+            password: $scope.password,
+            username: $scope.username
         }
 
         if (userService.validateUserWhenSignup(newUser)) {
@@ -25,7 +26,7 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
             }).catch(function (err) {
                 var element = document.getElementById("error-message-box-signup");
                 element.classList.remove("hidden-error");
-                element.innerHTML = "A user with this email address already exists!";
+                element.innerHTML = "A user with this email address or username already exists!";
             })
         } else {
             var element = document.getElementById("error-message-box-signup");

@@ -20,7 +20,9 @@ var UserSchema = new Schema({
     username: { 
       type: String, 
       minlength: MIN_LENGTH_NAME, 
-      maxlength: MAX_LENGTH_NAME
+      maxlength: MAX_LENGTH_NAME,
+      unique: true,
+      required: true
     },
     email: { 
       type: String, 
