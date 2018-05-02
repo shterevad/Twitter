@@ -196,14 +196,14 @@ main{
   
   #whoToFollow button{
     position: relative;
-    left:63px;
-    top:-27px;
+    left: 69px;
+    top: -36px;
   }
   
   #whoToFollow span{
     position: relative;
-    left: 8px;
-    top: -26px;
+    left: 9px;
+    top: -40px;
   }
   #whoToFollow ul a{
     font-weight: bold;
