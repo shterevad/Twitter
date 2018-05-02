@@ -168,4 +168,12 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     };
 
+    this.getFollowing = (usersId) => {
+        var deferred = $q.defer();
+        var promise = $http.get('/users/following/' + usersId).then(function (response) {
+            deferred.resolve(response.data);
+        });
+        return deferred.promise;
+    }; 
+
 });

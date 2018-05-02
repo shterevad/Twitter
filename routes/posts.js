@@ -19,6 +19,20 @@ router.get("/posts", function (req, res) {
     });
 });
 
+
+//get users posts 
+router.get("/posts/:userId", function(req, res){
+    Posts.find({_userId: req.params.userId}, {}, function (err, posts) {
+        if (!err) {
+            res.status(200);
+            res.json(posts);
+        } else {
+            res.status(404);
+            res.json("There are no posts yet");
+        }
+    });
+})
+
 /* add new post */
 router.post('/posts', function (req, res) {
     var post = req.body;
