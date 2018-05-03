@@ -159,7 +159,7 @@ router.post('/unfollow', function (req, res, next) {
             user.save(function (err) {
                 if (err) {
                     console.log(err)
-                    res.status(DOESNT_EXISTS_STATUS);
+                    res.status(DOESNT_EXISTS_STATUS).send(err);
                 };
             })
         } else {
