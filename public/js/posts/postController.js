@@ -1,5 +1,6 @@
-mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
+mainApp.controller('postController', function ($scope, $rootScope, PostsService, TrendsService, userService) {
 
+    console.log($scope.user);   
     // get following posts and user posts
     userService.getUserInSession().then(function (user) {
         $scope.posts = [];
@@ -94,14 +95,14 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.likePost = (id) => {
         userService.getUserInSession().then(user => {
             PostsService.getPostById(id).then(post => {
-                var post = post;
-                let alreadyLiked = post.likes.findIndex(id => {
+                $scope.post = post;
+                let alreadyLiked = $scope.post.likes.findIndex(id => {
                     return id == user._id
                 });
                 if (alreadyLiked != -1) {
-                    post.likes.splice(alreadyLiked, 1);
+                    $scope.post.likes.splice(alreadyLiked, 1);
                 } else {
-                    post.likes.push(user._id);
+                    $scope.post.likes.push(user._id);
                 }
 
                 PostsService.savePost({ post: post }).then(p => {
@@ -114,15 +115,12 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
                     userService.updateUserFields({ user: user }).then(u => {
                         console.log("Succesfully liked/unliked");
+                        
                     })
                 })
             })
         });
-
     }
-
-
-
 });
 /* }); */
 
@@ -133,16 +131,3 @@ mainApp.filter('trusted', ['$sce', function ($sce) {
     };
 }]);
 
-
-function sortByDateDesc(data) {
-    data.sort((d1, d2) => {
-        if (d1.posted > d2.posted) {
-            return -1;
-        }
-        if (d1.posted < d2.posted) {
-            return 1;
-        } else {
-            return 0;
-        }
-    })
-}

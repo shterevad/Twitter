@@ -1,5 +1,6 @@
 mainApp.controller('followController', function ($scope, $http, userService) {
 
+    console.log($scope.user);
     $scope.users = [];
     $scope.refresh = function () {
         userService.getRandomUsers().then(users => {
@@ -61,22 +62,4 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             })
     }
 
-
-
-    // //load user
-    // userService.getRandomUsers().then(users => {
-    //     userService.getUserInSession()
-    //         .then(function (userInSession) {
-    //             $scope.users = [];
-    //             users.forEach(u => {
-    //                 if (userInSession.following.indexOf(u._id) >= 0) {
-    //                     u.followBack = true;
-    //                 } else {
-    //                     u.followBack = false;
-    //                 };
-    //                 $scope.users.push(u);
-    //             })
-    //         })
-    //         .catch(err => { console.log(err) })
-    // }).catch(err => { console.log(err) })
 });

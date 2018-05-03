@@ -1,13 +1,25 @@
 <div ng-controller='hashtagController'>
     <section id='hashtagHeader'>
-        <div><h1>#{{tag.title}}</h1></div>
+        <div>
+            <h1>#{{tag.title}}</h1>
+        </div>
         <div>
             <ul>
-                <li><a href="">Top</a></li>
-                <li><a href="" ng-click="showLatestTrends(tag._id)">Latest</a></li>
-                <li><a href="">People</a></li>
-                <li><a href="">Photos</a></li>
-                <li><a href="">Videos</a></li>
+                <li>
+                    <a href="" ng-click="showTopTrends(tag._id)">Top</a>
+                </li>
+                <li>
+                    <a href="" ng-click="showLatestTrends(tag._id)">Latest</a>
+                </li>
+                <li>
+                    <a href="" ng-click="showPeople(tag._id)">People</a>
+                </li>
+                <li>
+                    <a href="">Photos</a>
+                </li>
+                <li>
+                    <a href="">Videos</a>
+                </li>
             </ul>
         </div>
     </section>
@@ -19,13 +31,22 @@
             <foot></foot>
         </aside>
 
-        <div class='mainDiv'> 
+        <div class='mainDiv'>
+            <div ng-if="showPosts">
                 <ol ng-repeat='post in posts'>
-                        <li>
-                            <post></post>
-                        </li>
+                    <li>
+                        <post></post>
+                    </li>
                 </ol>
-        </div>
+            </div>
 
+            <div ng-if="showPeople">
+                <ol ng-repeat='user in users | unique : "_id"'>
+                    <li>
+                        <user></user>
+                    </li>
+                </ol>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,17 @@
+
+<div class="follower-container container">
+        <div class="follower-background-container">
+                <img ng-src="{{user.headerPicture}}" alt="" class="follower-background" />
+            </div>
+        
+            <img ng-src="{{user.profilePicture}}" alt="" class="follower-profile-pic"
+            />
+           <!--  <button ng-show="!{{follower.followBack}} && !{{follower.thatsYou}}" ng-click="followUser($event, follower._id)" class="follower-follow-button follower-button">Follow</button>
+            <button ng-show="{{follower.followBack}}  && !{{follower.thatsYou}}" ng-click="unfollowUser($event, follower._id)" class="follower-unfollow-button follower-button">Following</button>
+         -->
+            <div class="follower-details">
+                <p class="follower-name"><a href="#!profile/{{user.username}}">{{user.name}}</a></p>
+                <a  class="follower-username" href="#!profile/{{user.username}}">@{{user.username}}</a>
+                <p  class="follower-bio">{{user.description}}.</p>
+            </div>
+</div>

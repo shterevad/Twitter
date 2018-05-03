@@ -83,7 +83,6 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, userId)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
-                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
@@ -106,7 +105,6 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, username)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
-                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
@@ -134,15 +132,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     //get the user in session
-    this.getUserInSession = function () {
+     this.getUserInSession = function () {
         let self = this;
         let deferred = $q.defer();
         let userId;
 
         this.checkUserInSession().then(function (res) {
             self.getUserById(res).then(function(response){
-                    delete response.password;
-                    deferred.resolve(response);
+                    deferred.resolve(response)
                 }).catch(function(error){
                     deferred.reject(error);
                 })
@@ -152,7 +149,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             });
 
             return deferred.promise;
-    }
+    } 
+
+
+
 
     //follow user
     this.followUser = function(userToFollowId){
@@ -199,7 +199,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.getRandomUsers = () => {
         var deferred = $q.defer();
-        var promise = $http.get('/users/randomusers').then(function (response) {
+        var promise = $http.get('/users/randomusers/').then(function (response) {
             deferred.resolve(response.data);
         });
         return deferred.promise;
