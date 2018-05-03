@@ -97,7 +97,7 @@ router.post('/user', function (req, res) {
 
 // Random users, Who to follow list
 router.get("/randomusers", function (req, res) {
-    Users.findRandom({}, {}, { limit: 3 }, function (err, results) {
+    Users.findRandom({}, {}, { limit: 10 }, function (err, results) {
         if (!err) {
             res.json(results);
         }

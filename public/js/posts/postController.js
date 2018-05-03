@@ -11,6 +11,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 PostsService.getPostsByUserId(user._id).then(userPosts => {
                     let toPush = [];
                     userPosts.forEach(p => {
+                        p.userUsername=user.username;
                         p.profilePicture = user.profilePicture;
                         toPush.push(p);
                     })

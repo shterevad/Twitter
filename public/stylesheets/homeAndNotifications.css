@@ -224,6 +224,11 @@ main{
     left: 160px;
     cursor: pointer;
   }
+  #whoToFollow div>span:hover{
+    color:#1da1f2;
+    font-size:16px;
+  }
+  
   
  /*  footer */
 
@@ -262,3 +267,5 @@ footer a, footer p{
   .unliked{
     color:gray;
   }
+
+  

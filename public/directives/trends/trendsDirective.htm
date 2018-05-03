@@ -1,12 +1,8 @@
 <div id='trendsDiv' class="container" ng-controller="trendsController">
         <h1>Trends for you</h1>
-        <a href="">Change</a>
         <ul>
           <li ng-repeat="tag in tags">
-
-            <!-- тук малко хардкоднах таг -->
             <a href="#!tags/{{tag.title}}">
-              <!-- {{tag.title}} -->
               <h2>#{{tag.title}}</h2>
               <span>{{tag.posts.length}} Tweets</span>
             </a>

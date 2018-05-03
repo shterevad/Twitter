@@ -2,11 +2,14 @@
     <div>
         <div ng-show="false">{{post._id}}</div>
         <div class="posts-item-header">
-            <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
+            <a href="#!profile/{{post.userUsername}}">
+                    <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
+            </a>
             <div>
                 <span class='post-drop-down'>&#8964;</span>
-                <a href="">
+                <a href="#!profile/{{post.userUsername}}">
                     <h1>{{post.userName}}</h1>
+                    <span>@{{post.userUsername}}</span>
                 </a>
                 </br>
                 <p ng-bind-HTML="post.text"></p>

@@ -14,6 +14,7 @@ mainApp.controller('hashtagController', function($scope, $http, $location, $wind
           tag.posts.forEach(postId=>{
             PostsService.getPostById(postId).then(post=>{
               userService.getUserById(post._userId).then(user=>{
+                post.userUsername=user.username;
                 post.profilePicture = user.profilePicture;  
               }) 
               $scope.posts.push(post);
