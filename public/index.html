@@ -96,7 +96,7 @@
           </li>
           <li class="profile-wrapper">
             <a href="" ng-click="collapsed=!collapsed">
-              <img src="images/home/icons/profile.png" class='greyBorder' title="Profile and settings">
+              <img ng-src="{{user.profilePicture}}" class='greyBorder' title="Profile and settings">
             </a>
             <ul ng-show="collapsed" id="profileMenu">
               <li ng-click="collapsed=!collapsed">
