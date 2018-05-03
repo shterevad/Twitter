@@ -11,14 +11,9 @@
            <img class="who-to-follow-img" ng-src="{{user.profilePicture}}"> 
           <span>{{user.name}}</span>
         </a>
-<<<<<<< HEAD
-        <button class='hollowButton'>Follow</button>
-        <span class='deleteFProposal' ng-click"deleteFollow()">&#xd7;</span>
-=======
         <button ng-show="!{{user.followBack}}" ng-click="followUser($event, user._id)" class="hollowButton">Follow</button>
         <button ng-show="{{user.followBack}}" ng-click="unfollowUser($event, user._id)" class="hollowButton">Following</button>
-        <span class='deleteFProposal'>&#xd7;</span>
->>>>>>> bc0c8a4a4ba5785bc5e50d52d4a77290f67a3be6
+        <span class='deleteFProposal' ng-click="deleteFollow()">&#xd7;</span>
       </div>
     </li>
   </ul>

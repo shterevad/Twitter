@@ -29,6 +29,9 @@ $scope.users=[];
      }
     
     $scope.refresh();
+
+
+    
         // follow user by id
         $scope.followUser = function(event, userToFollowId){
             event.preventDefault();
