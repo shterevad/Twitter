@@ -80,6 +80,7 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
 
             user.posts.forEach(post=>{
                 PostsService.getPostById(post).then(p=>{
+                    p.profilePicture = user.profilePicture;
                     $scope.posts.push(p);
                 })
             })
