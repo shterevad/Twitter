@@ -7,6 +7,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         followingIds.push(user._id);
         followingIds.forEach(id => {
             userService.getFollowing(id).then(user => {
+                $scope.profilePicture=user.profilePicture;
                 PostsService.getPostsByUserId(user._id).then(post => {
                     $scope.posts = $scope.posts.concat(post);
                     sortByDateDesc($scope.posts);
