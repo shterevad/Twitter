@@ -59,15 +59,16 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
                 p.userUsername = user.username;
                 p.profilePicture = user.profilePicture;
                 $scope.posts.push(p);
-            })
-
+                $scope.posts = PostsService.sortByDateEsc($scope.posts);
+            });
         });
+
     });
 
         // follow user by id
         $scope.followUser = function (event, userToFollowId) {
             event.preventDefault();
-    
+            // console.log($scope.followBack); 
             userService.followUser(userToFollowId)
                 .catch(function (err) {
                     console.log(err)

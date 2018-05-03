@@ -1,10 +1,9 @@
 mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
 
     // get following posts and user posts
-    let user = $scope.userInSession;
     $scope.posts = [];
-    var followingIds = user.following;
-    followingIds.push(user._id);
+    var followingIds = $scope.userInSession.following.slice();
+    followingIds.push( $scope.userInSession._id);
 
     followingIds.forEach(id => {
         userService.getFollowing(id).then(user => {

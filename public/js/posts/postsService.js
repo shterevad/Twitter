@@ -30,4 +30,15 @@ mainApp.service('PostsService', function ($q,$http, userService) {
             return deferred.promise;
         }
 
+        this.sortByDateDesc = function (data) {
+           return data.sort((d1, d2) => {
+            return new Date(d1.posted) - new Date(d2.posted);
+            })
+        }
+
+        this.sortByDateEsc = function (data) {
+            return data.sort((d1, d2) => {
+             return new Date(d2.posted) - new Date(d1.posted);
+             })
+         }
 });
