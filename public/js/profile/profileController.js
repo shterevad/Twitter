@@ -17,7 +17,9 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
     $scope.unfollowUser = function(event, userToUnfollow){
         event.preventDefault();
 
-        userService.unfollowUser(userToUnfollow)
+        userService.unfollowUser(userToUnfollow).then(function(res){
+            console.log(res)
+        })
         .catch(function(err){
             console.log(err)
         })
