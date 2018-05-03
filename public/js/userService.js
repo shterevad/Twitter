@@ -98,26 +98,26 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     //get user by username
-    // this.getUserById = function (userId) {
-    //     let deferred = $q.defer();
-    //     if (userId.length > 20) {
-    //         let toSend = "/users/id/" + userId;
-    //         $http.get(toSend, userId)
-    //             .then(function (response) {
-    //                 if (response.status === OK_STATUS) {
-    //                     deferred.resolve(response.data.user);
-    //                 } else {
-    //                     deferred.reject(response.data);
-    //                 }
-    //             })
-    //             .catch(function (err) {
-    //                 deferred.reject(err);
-    //             })
-    //     } else {
-    //         deferred.reject(err = INVALID_DATA_STATUS);
-    //     }
-    //     return deferred.promise;
-    // }
+    this.getUserByUsername = function (username) {
+        let deferred = $q.defer();
+        if (username.length <= 20) {
+            let toSend = "/users/username/" + username;
+            $http.get(toSend, username)
+                .then(function (response) {
+                    if (response.status === OK_STATUS) {
+                        deferred.resolve(response.data.user);
+                    } else {
+                        deferred.reject(response.data);
+                    }
+                })
+                .catch(function (err) {
+                    deferred.reject(err);
+                })
+        } else {
+            deferred.reject(err = INVALID_DATA_STATUS);
+        }
+        return deferred.promise;
+    }
 
     //get id of user in session if logged
     this.checkUserInSession = function () {

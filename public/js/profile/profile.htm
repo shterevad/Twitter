@@ -117,8 +117,8 @@
                     <button ng-show="{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="unfollowUser($event, followed._id)" class="followed-user-unfollow-button followed-user-button">Following</button>
 
                     <div class="followed-user-details">
-                        <p class="followed-user-name"><a href="#!profile/{{followed._id}}">{{followed.name}}</a></p>
-                        <a ng-show="followed.username" class="followed-user-username" href="#!profile/{{followed._id}}">@{{followed.username}}</a>
+                        <p class="followed-user-name"><a href="#!profile/{{followed.username}}">{{followed.name}}</a></p>
+                        <a ng-show="followed.username" class="followed-user-username" href="#!profile/{{followed.username}}">@{{followed.username}}</a>
                         <p ng-show="followed.description" class="followed-user-bio">{{followed.description}}</p>
                     </div>
 
@@ -138,8 +138,8 @@
                     <button ng-show="{{follower.followBack}}  && !{{follower.thatsYou}}" ng-click="unfollowUser($event, follower._id)" class="follower-unfollow-button follower-button">Following</button>
 
                     <div class="follower-details">
-                        <p class="follower-name"><a href="#!profile/{{follower._id}}">{{follower.name}}</a></p>
-                        <a ng-show="follower.username" class="follower-username" href="#!profile/{{follower._id}}">@{{follower.username}}</a>
+                        <p class="follower-name"><a href="#!profile/{{follower.username}}">{{follower.name}}</a></p>
+                        <a ng-show="follower.username" class="follower-username" href="#!profile/{{follower.username}}">@{{follower.username}}</a>
                         <p ng-show="follower.username" class="follower-bio">{{follower.description}}.</p>
                     </div>
 

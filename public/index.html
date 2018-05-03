@@ -100,13 +100,13 @@
             </a>
             <ul ng-show="collapsed" id="profileMenu">
               <li ng-click="collapsed=!collapsed">
-                <a href="#!profile/{{user._id}}">
+                <a href="#!profile/{{user.username}}">
                   <h1>{{user.name}}</h1>
                   <h2>@{{user.username}}</h2>
                 </a>
               </li>
               <li ng-click="collapsed=!collapsed">
-                <a href="#!profile/{{user._id}}">Profile</a>
+                <a href="#!profile/{{user.username}}">Profile</a>
               </li>
               <hr/>
               <li ng-click="collapsed=!collapsed">

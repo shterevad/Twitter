@@ -10,7 +10,7 @@ mainApp.config(function($routeProvider) {
         templateUrl : "js/notifications/notifications.htm",
         requireAuth: true
     })
-    .when("/profile/:id", {
+    .when("/profile/:username", {
         templateUrl : "js/profile/profile.htm",
         requireAuth: true
     })

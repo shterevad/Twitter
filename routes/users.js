@@ -11,7 +11,7 @@ const DOESNT_EXISTS_STATUS = 404;
 const INVALID_CREDENTIALS_STATUS = 401;
 const INVALID_PARAMS_STATUS = 406;
 
-
+//get user user by id
 router.get('/id/:id', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     var idToCheck = req.params.id;
@@ -27,6 +27,26 @@ router.get('/id/:id', function (req, res, next) {
         res.status(INVALID_CREDENTIALS_STATUS).send({ error: "Invalid ID" });
     }
 });
+
+//get user by username
+router.get('/username/:username', function (req, res, next) {
+    res.setHeader('content-type', 'application/json');
+    var usernameToCheck = req.params.username;
+    console.log(usernameToCheck)
+    if (!Object.keys(usernameToCheck).length == 0) {
+        Users.findOne({"username" : usernameToCheck}, function (err, user) {
+            console.log(user)
+            if (user) {
+                res.status(OK_STATUS).json({ user: user });
+            } else {
+                res.status(DOESNT_EXISTS_STATUS).send({ error: "User with this ID doesn't exist" });
+            }
+        })
+    } else {
+        res.status(INVALID_CREDENTIALS_STATUS).send({ error: "Invalid ID" });
+    }
+});
+
 
 router.get('/session', function (req, res, next) {
     res.setHeader('content-type', 'application/json');

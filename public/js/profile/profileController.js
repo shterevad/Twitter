@@ -26,7 +26,7 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
     }
 
 
-    userService.getUserById(pageUserId).then(function(user){
+    userService.getUserByUsername(pageUserId).then(function(user){
         userService.getUserInSession().then(function(userInSession){
             if(user._id === userInSession._id){
                 $scope.isInSession = false;
@@ -38,6 +38,8 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
             $scope.gallery = user.gallery;
             $scope.following = [];
             $scope.followers = [];
+            $scope.posts=[];
+
             user.following.forEach(u => {
                 userService.getUserById(u).then(function(toPush){
                     if(userInSession.following.indexOf(toPush._id) >= 0){
@@ -75,17 +77,12 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
                 })
             })
 
-            $scope.posts=[];
-console.log(user.posts);
+
             user.posts.forEach(post=>{
                 PostsService.getPostById(post).then(p=>{
                     $scope.posts.push(p);
                 })
-                console.log($scope.posts);
             })
-
-
-
 
         }).catch(err => console.log(err))
        
