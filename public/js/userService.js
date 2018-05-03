@@ -36,24 +36,24 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     //validate credentials when signing up
     this.validateUserWhenSignup = function (user) {
-        return (this.validateEmail(user.email)) && (this.validateName(user.name)) 
-        && (this.validateName(user.username)) && (this.validatePassword(user.password));
+        return (this.validateEmail(user.email)) && (this.validateName(user.name))
+            && (this.validateName(user.username)) && (this.validatePassword(user.password));
     }
 
     //sign up user
     this.signUpNewUser = function (user) {
         let deferred = $q.defer();
-            $http.post('/login/signup', user)
-                .then(function (response) {
-                    if (response.status === OK_STATUS) {
-                        deferred.resolve(response.status);
-                    } else {
-                        deferred.reject(response.status);
-                    }
-                })
-                .catch(function (err) {
-                    deferred.reject(err);
-                });
+        $http.post('/login/signup', user)
+            .then(function (response) {
+                if (response.status === OK_STATUS) {
+                    deferred.resolve(response.status);
+                } else {
+                    deferred.reject(response.status);
+                }
+            })
+            .catch(function (err) {
+                deferred.reject(err);
+            });
 
         return deferred.promise;
     }
@@ -61,24 +61,26 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     //login user
     this.loginUser = function (user) {
         let deferred = $q.defer();
-            $http.post('/login/login', user)
-                .then(function (response) {
-                    if (response.status === OK_STATUS) {
-                        deferred.resolve(response.status);
-                    } else {
-                        deferred.reject(response.status);
-                    }
-                })
-                .catch(function (err) {
-                    deferred.reject(err);
-                })
+        $http.post('/login/login', user)
+            .then(function (response) {
+                if (response.status === OK_STATUS) {
+                    delete response.data.user.password
+                    sessionStorage.setItem("loggedUser", JSON.stringify(response.data.user));
+                    deferred.resolve(response.status);
+                } else {
+                    deferred.reject(response.status);
+                }
+            })
+            .catch(function (err) {
+                deferred.reject(err);
+            })
         return deferred.promise;
     }
 
     //get user by id
     this.getUserById = function (userId) {
         let deferred = $q.defer();
-        if (userId.length > 20) {
+        if (userId.length > NAME_MAX_LENGTH) {
             let toSend = "/users/id/" + userId;
             $http.get(toSend, userId)
                 .then(function (response) {
@@ -121,6 +123,16 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    this.getUserInSession = () => {
+        let userToReturn = JSON.parse(sessionStorage.getItem("loggedUser"));
+
+        if (userToReturn) {
+            return userToReturn;
+        } else {
+            window.location.href = "/login";
+        }
+    }
+
     //get id of user in session if logged
     this.checkUserInSession = function () {
         let deferred = $q.defer();
@@ -134,68 +146,60 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     //get the user in session
-    this.getUserInSession = function () {
+    this.getUserInCookieSession = function () {
         let self = this;
         let deferred = $q.defer();
         let userId;
 
         this.checkUserInSession().then(function (res) {
-            self.getUserById(res).then(function(response){
-                    delete response.password;
-                    deferred.resolve(response);
-                }).catch(function(error){
-                    deferred.reject(error);
-                })
+            self.getUserById(res).then(function (response) {
+                delete response.password;
+                deferred.resolve(response);
+            }).catch(function (error) {
+                deferred.reject(error);
             })
+        })
             .catch(function (err) {
                 deferred.reject(err)
             });
 
-            return deferred.promise;
+        return deferred.promise;
     }
 
     //follow user
-    this.followUser = function(userToFollowId){
+    this.followUser = function (userToFollowId) {
         let deferred = $q.defer();
-        this.checkUserInSession().then(function(response){
-                $http.post("/users/follow", {followerId : response, toFollowId : userToFollowId})
-                    .then(function(res){
-                        deferred.resolve(res.status)
-                    })
-                    .catch(function(err){
-                        deferred.reject(err.status)
-                    })
+        let userInSessionId = (this.getUserInSession())._id;
+
+        $http.post("/users/follow", { followerId: userInSessionId, toFollowId: userToFollowId })
+            .then(function (res) {
+                deferred.resolve(res.status)
             })
-            .catch(function(error){
-                deferred.reject(error)
+            .catch(function (err) {
+                deferred.reject(err.status)
             })
-        
+
         return deferred.promise;
     }
 
     // unfollow user by id
-    this.unfollowUser = function(userToUnfollowId){
+    this.unfollowUser = function (userToUnfollowId) {
         let deferred = $q.defer();
-        this.checkUserInSession().then(function(response){
-                $http.post("/users/unfollow", {followerId : response, toUnfollowId : userToUnfollowId})
-                    .then(function(res){
-                        deferred.resolve(res.status)
-                    })
-                    .catch(function(err){
-                        deferred.reject(err.status)
-                    })
+        let userInSessionId = this.getUserInSession()._id;
+        $http.post("/users/unfollow", { followerId: userInSessionId, toUnfollowId: userToUnfollowId })
+            .then(function (res) {
+                deferred.resolve(res.status)
             })
-            .catch(function(error){
-                deferred.reject(error)
+            .catch(function (err) {
+                deferred.reject(err.status)
             })
-        
         return deferred.promise;
     }
 
 
-    this.saveNewPost = (post) =>$http.post('/users/post', post);
+    this.saveNewPost = (post) => $http.post('/users/post', post);
 
-    this.updateUserFields = (user) =>$http.post('/users/user', user);
+    this.updateUserFields = (user) => $http.post('/users/user', user);
 
     this.getRandomUsers = () => {
         var deferred = $q.defer();
@@ -211,25 +215,19 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             deferred.resolve(response.data);
         });
         return deferred.promise;
-    }; 
+    };
 
     //check if given user is the one in session
     this.checkIfUserIsInSession = (idToCheck) => {
-        var deferred = $q.defer();
-
-        this.checkUserInSession().then(function(response){
-            if(response === idToCheck){
-                deferred.resolve(true);
-            } else {
-                deferred.reject(false);
-            }
-
-        })
-        .catch(function(error){
-            deferred.reject(false);
-        })
-     
-        return deferred.promise;
+        let userInSessionId = this.getUserInSession()._id;
+        if(idToCheck === userInSessionId){
+            return true
+        } else {
+            return false
+        }
     }
+
+
+
 
 });

@@ -45,9 +45,8 @@ router.get('/username/:username', function (req, res, next) {
     }
 });
 
-
+//get user in cookie session
 router.get('/session', function (req, res, next) {
-    res.setHeader('content-type', 'application/json');
     if (req.session.user) {
         res.status(OK_STATUS).json({ user: req.session.user })
     } else {

@@ -4,8 +4,8 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
     const USER_EXISTS_STATUS = 403;
     const INVALID_CREDENTIALS_STATUS = 401;
 
-    //SIGN UP FORM
 
+    //SIGN UP FORM
     $scope.signUp = function (e) {
         e.preventDefault();
         let newUser = {
@@ -18,9 +18,7 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
         if (userService.validateUserWhenSignup(newUser)) {
             userService.signUpNewUser(newUser).then(function (res) {
                 if (res === OK_STATUS) {
-                    // var path = $location.absUrl();
-                    // $window.location.href = "/";
-                    $route.reload();
+                    $window.location.reload();
                 } else {
                     console.log(res);
                 }
