@@ -5,13 +5,22 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         $scope.posts = [];
         var followingIds = user.following;
         followingIds.push(user._id);
+        
         followingIds.forEach(id => {
             userService.getFollowing(id).then(user => {
-                $scope.profilePicture=user.profilePicture;
-                PostsService.getPostsByUserId(user._id).then(post => {
-                    $scope.posts = $scope.posts.concat(post);
+                PostsService.getPostsByUserId(user._id).then(userPosts => {
+                    let toPush=[];
+                    userPosts.forEach(p=>{     
+                     p.profilePicture=user.profilePicture;
+                     toPush.push(p);
+                    })
+                    $scope.posts = $scope.posts.concat(toPush);
                     sortByDateDesc($scope.posts);
+                }).catch(err=>{
+                    console.log(err);
                 })
+            }).catch(err=>{
+                console.log(err);
             })
         })
     })
