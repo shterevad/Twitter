@@ -15,32 +15,32 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         })
     })
 
-    $scope.tags = [];
-    $scope.links = [];
-    $scope.videos = [];
-
-    $scope.filterLinks = function () {
-        $scope.splited = $scope.tweetText.split(' ').map(w => {
-            if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
-                $scope.tags.push(w.slice(1));
-                return w = `<a href='#!tags/${w.slice(1)}'>` + w + "</a>";
-            }
-            return w;
-        }).map(w => {
-            if (/(^https?:\/\/[^\s]+)/g.test(w)) {
-                if (/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g.test(w)) {
-                    $scope.videos.push(w);
-                }
-                $scope.links.push(w);
-                return w = "<a href='" + w + "' target='_blank'>" + w + "</a>";
-            }
-            return w;
-        });
-
-        return $scope.splited.join(' ');
-    }
 
     $scope.addPost = function () {
+        $scope.tags = [];
+        $scope.links = [];
+        $scope.videos = [];
+    
+        $scope.filterLinks = function () {
+            $scope.splited = $scope.tweetText.split(' ').map(w => {
+                if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
+                    $scope.tags.push(w.slice(1));
+                    return w = `<a href='#!tags/${w.slice(1)}'>` + w + "</a>";
+                }
+                return w;
+            }).map(w => {
+                if (/(^https?:\/\/[^\s]+)/g.test(w)) {
+                    if (/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/g.test(w)) {
+                        $scope.videos.push(w);
+                    }
+                    $scope.links.push(w);
+                    return w = "<a href='" + w + "' target='_blank'>" + w + "</a>";
+                }
+                return w;
+            });
+    
+            return $scope.splited.join(' ');
+        }
         userService.getUserInSession().then(function (user) {
             $scope.user = user;
             $scope.postText = $scope.filterLinks();

@@ -74,8 +74,24 @@ mainApp.controller('profileController', function($scope, $window, $location, Pos
                     $scope.followers.push(toPush);
                 })
             })
+
+            $scope.posts=[];
+console.log(user.posts);
+            user.posts.forEach(post=>{
+                PostsService.getPostById(post).then(p=>{
+                    $scope.posts.push(p);
+                })
+                console.log($scope.posts);
+            })
+
+
+
+
         }).catch(err => console.log(err))
        
     });
+
+
+
   
 });
