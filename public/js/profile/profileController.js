@@ -3,13 +3,8 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
     $scope.sectionInUse = 1;
     let pageUserId = $window.location.hash.substring(11);
 
-
-
     userService.getUserByUsername(pageUserId).then(function (user) {
-
-        let userInSession = userService.getUserInSession();
-
-        if (user._id === userInSession._id) {
+        if (user._id === $scope.userInSession._id) {
             $scope.isInSession = false;
         } else {
             $scope.isInSession = true;
@@ -23,13 +18,13 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
 
         user.following.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
-                if (userInSession.following.indexOf(toPush._id) >= 0) {
+                if ($scope.userInSession.following.indexOf(toPush._id) >= 0) {
                     toPush.followBack = true;
                 } else {
                     toPush.followBack = false;
                 };
 
-                if (u === userInSession._id) {
+                if (u === $scope.userInSession._id) {
                     toPush.thatsYou = true;
                 } else {
                     toPush.thatsYou = false;
@@ -42,13 +37,13 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
         user.followers.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
 
-                if (userInSession.following.indexOf(toPush._id) >= 0) {
+                if ($scope.userInSession.following.indexOf(toPush._id) >= 0) {
                     toPush.followBack = true;
                 } else {
                     toPush.followBack = false;
                 };
 
-                if (u === userInSession._id) {
+                if (u === $scope.userInSession._id) {
                     toPush.thatsYou = true;
                 } else {
                     toPush.thatsYou = false;

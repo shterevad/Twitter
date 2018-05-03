@@ -2,9 +2,8 @@ mainApp.controller('followController', function ($scope, $http, userService) {
 
     $scope.users = [];
     $scope.refresh = function () {
-        userService.getRandomUsers().then(users => {
-            let u = userService.getUserInSession();
-            u.following.forEach(follower => {
+        userService.getRandomUsers().then(users => {  
+            $scope.userInSession.following.forEach(follower => {
                 users.forEach((u, index) => {
                     if (u._id === follower) {
                         users.splice(index, 1);
@@ -13,7 +12,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             });
 
             var userIndex = users.findIndex(usr => {
-                return usr._id === u._id;
+                return usr._id === $scope.userInSession._id;
             })
             if (userIndex) {
                 users.splice(userIndex, 1);
@@ -21,7 +20,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             users.splice(3);
 
             users.forEach(usr => {
-                if (u.following.indexOf(usr._id) >= 0) {
+                if ($scope.userInSession.following.indexOf(usr._id) >= 0) {
                     usr.followBack = true;
                 } else {
                     usr.followBack = false;
@@ -60,22 +59,5 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             })
     }
 
-
-
-    // //load user
-    // userService.getRandomUsers().then(users => {
-    //     userService.getUserInSession()
-    //         .then(function (userInSession) {
-    //             $scope.users = [];
-    //             users.forEach(u => {
-    //                 if (userInSession.following.indexOf(u._id) >= 0) {
-    //                     u.followBack = true;
-    //                 } else {
-    //                     u.followBack = false;
-    //                 };
-    //                 $scope.users.push(u);
-    //             })
-    //         })
-    //         .catch(err => { console.log(err) })
-    // }).catch(err => { console.log(err) })
+    
 });
