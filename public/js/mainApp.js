@@ -1,6 +1,3 @@
-var mainApp = angular.module("mainApp", ["ngRoute", "ngSanitize"]);
-
-
 mainApp.filter('unique', function() {
     // we will return a function which will take in a collection
     // and a keyname

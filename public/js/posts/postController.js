@@ -1,29 +1,26 @@
-mainApp.controller('postController', function ($scope, $rootScope, PostsService, TrendsService, userService) {
+mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
 
-    console.log($scope.user);   
     // get following posts and user posts
-    userService.getUserInSession().then(function (user) {
-        $scope.posts = [];
-        var followingIds = user.following;
-        followingIds.push(user._id);
+    $scope.posts = [];
+    var followingIds = $scope.userInSession.following.slice();
+    followingIds.push( $scope.userInSession._id);
 
-        followingIds.forEach(id => {
-            userService.getFollowing(id).then(user => {
-                PostsService.getPostsByUserId(user._id).then(userPosts => {
-                    let toPush = [];
-                    userPosts.forEach(p => {
-                        p.userUsername=user.username;
-                        p.profilePicture = user.profilePicture;
-                        toPush.push(p);
-                    })
-                    $scope.posts = $scope.posts.concat(toPush);
-                    sortByDateDesc($scope.posts);
-                }).catch(err => {
-                    console.log(err);
+    followingIds.forEach(id => {
+        userService.getFollowing(id).then(user => {
+            PostsService.getPostsByUserId(user._id).then(userPosts => {
+                let toPush = [];
+                userPosts.forEach(p => {
+                    p.userUsername = user.username;
+                    p.profilePicture = user.profilePicture;
+                    toPush.push(p);
                 })
+                $scope.posts = $scope.posts.concat(toPush);
+                PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
                 console.log(err);
             })
+        }).catch(err => {
+            console.log(err);
         })
     })
 
@@ -53,74 +50,74 @@ mainApp.controller('postController', function ($scope, $rootScope, PostsService,
 
             return $scope.splited.join(' ');
         }
-        userService.getUserInSession().then(function (user) {
-            $scope.user = user;
-            $scope.postText = $scope.filterLinks();
 
-            $scope.newPost = {
-                text: $scope.postText,
-                _userId: $scope.user._id,
-                userName: $scope.user.name,
-                tags: $scope.tags,
-                links: $scope.links,
-                videos: $scope.videos,
-                profilePicture: $scope.user.profilePicture
-            }
 
-            PostsService.savePost({ post: $scope.newPost }).then(post => {
-                var post = post.data;
-                if (post.post.tags.length > 0) {
-                    for (var i = 0; i < post.post.tags.length; i++) {
-                        let tag = {
-                            title: post.post.tags[i],
-                            posts: [post.post._id]
-                        };
-                        TrendsService.saveOrUpdateTag(tag).then(tag => console.log());
-                    }
+        $scope.postText = $scope.filterLinks();
+
+        $scope.newPost = {
+            text: $scope.postText,
+            _userId: $scope.userInSession._id,
+            userName: $scope.userInSession.name,
+            tags: $scope.tags,
+            links: $scope.links,
+            videos: $scope.videos,
+            profilePicture: $scope.userInSession.profilePicture
+        }
+
+        PostsService.savePost({ post: $scope.newPost }).then(post => {
+            var post = post.data;
+            if (post.post.tags.length > 0) {
+                for (var i = 0; i < post.post.tags.length; i++) {
+                    let tag = {
+                        title: post.post.tags[i],
+                        posts: [post.post._id]
+                    };
+                    TrendsService.saveOrUpdateTag(tag).then(tag => console.log());
                 }
-                userService.saveNewPost({ userId: $scope.user._id, post: post.post._id })
-                    .then(post => console.log(post.data))
-                    .catch(err => {
-                        console.log(err);
-                    });
-                $scope.posts.unshift(post.post);
-                $scope.tags = [];
-                $scope.tweetText = '';
-            }).catch(err => {
-                //todo:validation
-            });
+            }
+            userService.saveNewPost({ userId: $scope.userInSession._id, post: post.post._id })
+                .then(post => console.log(post.data))
+                .catch(err => {
+                    console.log(err);
+                });
+            $scope.posts.unshift(post.post);
+            $scope.tags = [];
+            $scope.tweetText = '';
+        }).catch(err => {
+            //todo:validation
         });
     }
 
     $scope.likePost = (id) => {
-        userService.getUserInSession().then(user => {
-            PostsService.getPostById(id).then(post => {
-                $scope.post = post;
-                let alreadyLiked = $scope.post.likes.findIndex(id => {
-                    return id == user._id
-                });
+        let user = userService.getUserInSession();
+        PostsService.getPostById(id).then(post => {
+            var post = post;
+            let alreadyLiked = post.likes.findIndex(id => {
+                return id == $scope.userInSession._id
+            });
+            if (alreadyLiked != -1) {
+                post.likes.splice(alreadyLiked, 1);
+            } else {
+                post.likes.push($scope.userInSession._id);
+            }
+
+            PostsService.savePost({ post: post }).then(p => {
+                let alreadyLiked = $scope.userInSession.likes.findIndex(id => id === p.data._id);
                 if (alreadyLiked != -1) {
-                    $scope.post.likes.splice(alreadyLiked, 1);
+                    $scope.userInSession.likes.splice(alreadyLiked, 1);
                 } else {
-                    $scope.post.likes.push(user._id);
+                    $scope.userInSession.likes.push(p.data._id);
                 }
 
-                PostsService.savePost({ post: post }).then(p => {
-                    let alreadyLiked = user.likes.findIndex(id => id === p.data._id);
-                    if (alreadyLiked != -1) {
-                        user.likes.splice(alreadyLiked, 1);
-                    } else {
-                        user.likes.push(p.data._id);
-                    }
-
-                    userService.updateUserFields({ user: user }).then(u => {
-                        console.log("Succesfully liked/unliked");
-                        
-                    })
+                userService.updateUserFields({ user: $scope.userInSession }).then(u => {
+                    console.log("Succesfully liked/unliked");
                 })
             })
-        });
+        })
     }
+
+
+
 });
 /* }); */
 
@@ -130,4 +127,3 @@ mainApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + video_id);
     };
 }]);
-

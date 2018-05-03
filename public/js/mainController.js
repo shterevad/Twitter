@@ -1,10 +1,6 @@
-mainApp.controller('mainAppController', function ($scope, $rootScope, $http, $location, $window, $timeout, PostsService, userService) {
-
-    userService.getUserInSession().then(function(user){
-        $scope.user=user;
-    })
-
-
+mainApp.controller('mainAppController', function ($scope, $http, $location, $window, $timeout, PostsService, userService) {
+    $scope.user = userService.getUserInSession();
+    $scope.userInSession = userService.getUserInSession();
   
 });
 

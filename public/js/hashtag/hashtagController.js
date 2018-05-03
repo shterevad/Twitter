@@ -23,6 +23,7 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
     }
 
     $scope.showTopTrends = (id) => {
+      $scope.posts=[];
       $scope.posts = $scope.getTagPosts(id);
       console.log($scope.posts);
       sortByLikesAsc($scope.posts);
@@ -32,8 +33,9 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
 
 
     $scope.showLatestTrends = (id) => {
+      $scope.posts=[];
       $scope.posts = $scope.getTagPosts(id);
-      sortByDateDesc($scope.posts);
+      PostsService.sortByDateDesc($scope.posts);
     }
 
     $scope.showPeople = () => {
