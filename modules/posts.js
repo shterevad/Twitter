@@ -22,7 +22,8 @@ var PostSchema = new Schema({
   posted: {
     type: Date,
     default: Date.now
-  }  
+  },
+  profilePicture:String
 });
 
 module.exports = mongoose.model('Posts', PostSchema);
