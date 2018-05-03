@@ -85,6 +85,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, userId)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
+                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
@@ -107,6 +108,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, username)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
+                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
