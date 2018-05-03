@@ -127,7 +127,7 @@ router.post('/follow', function (req, res, next) {
                 };
             })
         } else {
-            res.status(INVALID_PARAMS_STATUS).send({ messate: "Already followed" });
+            res.status(INVALID_PARAMS_STATUS).send({ message: "Already followed" });
             console.log("User alreay followed");
         }
     })
@@ -145,7 +145,7 @@ router.post('/follow', function (req, res, next) {
             console.log("User alreay followed");
         }
     })
-    res.status(200).send({ message: "Success" })
+    res.status(OK_STATUS).send({ message: "Success" })
 })
 
 //unfollow user by id

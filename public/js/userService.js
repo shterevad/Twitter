@@ -123,6 +123,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    //get user in session storage
     this.getUserInSession = () => {
         let userToReturn = JSON.parse(sessionStorage.getItem("loggedUser"));
 
@@ -131,6 +132,11 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         } else {
             window.location.href = "/login";
         }
+    }
+
+    //update user in session storage
+    this.updateUserInSession = (user) => {
+        sessionStorage.setItem("loggedUser", JSON.stringify(user))
     }
 
     //get id of user in session if logged
@@ -169,11 +175,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     //follow user
     this.followUser = function (userToFollowId) {
         let deferred = $q.defer();
-        let userInSessionId = (this.getUserInSession())._id;
+        let userInSession = this.getUserInSession();
+        let self = this;
 
-        $http.post("/users/follow", { followerId: userInSessionId, toFollowId: userToFollowId })
+        $http.post("/users/follow", { followerId: userInSession._id, toFollowId: userToFollowId })
             .then(function (res) {
-                deferred.resolve(res.status)
+                userInSession.following.push(userToFollowId);
+                self.updateUserInSession(userInSession);
+                deferred.resolve(res)
             })
             .catch(function (err) {
                 deferred.reject(err.status)
@@ -185,9 +194,11 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     // unfollow user by id
     this.unfollowUser = function (userToUnfollowId) {
         let deferred = $q.defer();
-        let userInSessionId = this.getUserInSession()._id;
-        $http.post("/users/unfollow", { followerId: userInSessionId, toUnfollowId: userToUnfollowId })
+        let userInSession = this.getUserInSession();
+        $http.post("/users/unfollow", { followerId: userInSession._id, toUnfollowId: userToUnfollowId })
             .then(function (res) {
+                userInSession.following.splice(userInSession.following.indexOf(userToUnfollowId), 1);
+                self.updateUserInSession(userInSession);
                 deferred.resolve(res.status)
             })
             .catch(function (err) {
@@ -226,8 +237,5 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             return false
         }
     }
-
-
-
 
 });
