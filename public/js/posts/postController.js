@@ -15,7 +15,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     toPush.push(p);
                 })
                 $scope.posts = $scope.posts.concat(toPush);
-                sortByDateDesc($scope.posts);
+                PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
                 console.log(err);
             })
@@ -127,17 +127,3 @@ mainApp.filter('trusted', ['$sce', function ($sce) {
         return $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + video_id);
     };
 }]);
-
-
-function sortByDateDesc(data) {
-    data.sort((d1, d2) => {
-        if (d1.posted > d2.posted) {
-            return -1;
-        }
-        if (d1.posted < d2.posted) {
-            return 1;
-        } else {
-            return 0;
-        }
-    })
-}

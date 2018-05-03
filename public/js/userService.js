@@ -85,7 +85,6 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, userId)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
-                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
@@ -108,7 +107,6 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.get(toSend, username)
                 .then(function (response) {
                     if (response.status === OK_STATUS) {
-                        delete response.data.user.password;
                         deferred.resolve(response.data.user);
                     } else {
                         deferred.reject(response.data);
@@ -214,7 +212,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.getRandomUsers = () => {
         var deferred = $q.defer();
-        var promise = $http.get('/users/randomusers').then(function (response) {
+        var promise = $http.get('/users/randomusers/').then(function (response) {
             deferred.resolve(response.data);
         });
         return deferred.promise;

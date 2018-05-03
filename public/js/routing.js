@@ -1,5 +1,6 @@
 var mainApp = angular.module("mainApp", ["ngRoute", "ngSanitize"]);
 
+
 mainApp.config(function($routeProvider) {
     $routeProvider
    .when("/", {

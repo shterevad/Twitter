@@ -1,5 +1,6 @@
 mainApp.controller('followController', function ($scope, $http, userService) {
 
+    console.log($scope.user);
     $scope.users = [];
     $scope.refresh = function () {
         userService.getRandomUsers().then(users => {  
