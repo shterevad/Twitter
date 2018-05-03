@@ -128,10 +128,6 @@ body{
     margin-top: 0;
 }
 
-/* #trendsDiv{
-    background-color: transparent;
-}
- */
     /* LEFT ASIDE */
 
 #profile-pg-left-aside{
@@ -211,8 +207,8 @@ body{
     object-fit: cover;
 }
 
-#profile-trends-dir{
-    margin-top: 5%;
+#profile-trends-dir > #trendsDiv{
+    margin-top: 10%;
 }
 
 /* DYNAMIC CONTENT CONTAINER */
