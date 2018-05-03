@@ -32,10 +32,8 @@ router.get('/id/:id', function (req, res, next) {
 router.get('/username/:username', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     var usernameToCheck = req.params.username;
-    console.log(usernameToCheck)
     if (!Object.keys(usernameToCheck).length == 0) {
         Users.findOne({"username" : usernameToCheck}, function (err, user) {
-            console.log(user)
             if (user) {
                 res.status(OK_STATUS).json({ user: user });
             } else {
