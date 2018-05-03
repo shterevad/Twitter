@@ -14,7 +14,7 @@
 }
 
 .posts-item-header{
-    height: 110px;
+    height: auto;
     width: 100%;
 }
 
@@ -32,8 +32,8 @@
     position: relative;
     border-radius: 50%;
     object-fit: cover;
-    width: 10%;
-    height: 46%;
+    width: 12%;
+    height: 52px;
 }
 
 .posts-photo, .posts-video{
@@ -46,7 +46,7 @@
 
 .posts-item-header>div, .posts-action-list{
     float: right;
-    width: 88%;
+    width: 85%;
 }
 
 .posts-action-list li {
@@ -94,4 +94,6 @@ section.post-section{
 
 .posts-frame-content div{
     width: 100%;
+    margin: 1em -1em;
+    height: auto;
 }

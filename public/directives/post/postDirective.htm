@@ -13,7 +13,7 @@
             </div>
 
         </div>
-        <div class="posts-frame-content">
+        <div class="posts-frame-content" ng-if="post.videos.length>0 || post.photo">
             <a href="">
                 <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo'>
             </a>

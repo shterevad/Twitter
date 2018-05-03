@@ -1,5 +1,5 @@
-<div>
-    <section id='hashtagHeader' ng-controller='hashtagController'>
+<div ng-controller='hashtagController'>
+    <section id='hashtagHeader'>
         <div><h1>#{{tag.title}}</h1></div>
         <div>
             <ul>
@@ -19,7 +19,7 @@
             <foot></foot>
         </aside>
 
-        <div class='widerMainDiv'> 
+        <div class='mainDiv'> 
                 <ol ng-repeat='post in posts'>
                         <li>
                             <post></post>
