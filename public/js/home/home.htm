@@ -1,21 +1,67 @@
-<div class='mainContent'>
-        <aside class='leftAside'>
-            <profile></profile>
-            <trends></trends>
-        </aside>
-        
-        <div class='mainDiv container' infinite-scroll="myPagingFunction()" infinite-scroll-distance="3"   ng-controller="postController">
-            <newpost></newpost>
+<div class='mainContent' ng-controller="postController">
+    <aside class='leftAside'>
+        <profile></profile>
+        <trends></trends>
+    </aside>
 
-            <ol ng-repeat='post in posts'>
-                <li>
-                    <post></post>
-                </li>
-            </ol>
+    <div class='mainDiv container' infinite-scroll="myPagingFunction()" infinite-scroll-distance="3">
+        <newpost></newpost>
+
+        <ol ng-repeat='post in posts'>
+            <li>
+                <post></post>
+            </li>
+        </ol>
+
+    </div>
+
+    <aside class='rightAside'>
+        <follow></follow>
+        <foot></foot>
+    </aside>
+
+    <div class="modal fade" id="retweetModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id='retweet-input'>
+                    <input type="text" placeholder="Add a comment..." ng-bind="reply">
+                </div>
+                <post></post>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary filledButton">Retweet</button>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <aside class='rightAside'>
-            <follow></follow>
-            <foot></foot>
-        </aside>
+
+    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" class="retweet-modal-label">Reply to {{post.userName}}</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div>
+                    <post></post>
+                </div>
+                <div>
+                    <newpost>
+                    </newpost>
+                    <button type="button" class="btn btn-primary filledButton replyButton">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>

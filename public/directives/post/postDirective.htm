@@ -28,10 +28,10 @@
         </div>
         <div class="posts-action-list">
             <ul>
-                <li>&#x1F4AC; Reply
+                <li ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#replyModal">&#x1F4AC; Reply
                     <span ng-bind="{{post.replies.length}}"></span>
                 </li>
-                <li> &#x21ba; Retweet
+                <li ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#retweetModal"> &#x21ba; Retweet
                     <span ng-bind="{{post.retweets.length}}"></span>
                 </li>
                 <li ng-click="likePost(post._id)">

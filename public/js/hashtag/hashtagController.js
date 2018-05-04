@@ -1,12 +1,11 @@
 mainApp.controller('hashtagController', function ($scope, $http, $location, $window, TrendsService, PostsService, userService) {
   tagName = $window.location.hash.substring(8);
-  $scope.showPosts = true;
-  $scope.showPeople = false;
   TrendsService.getTagByName(tagName).then(tag => {
     $scope.tag = tag;
+    $scope.show=true;
     $scope.getTagPosts = (id) => {
       $scope.posts = [];
-      $scope.users = [];
+      $scope.users=[];
       TrendsService.getTagById(id).then(tag => {
         tag.posts.forEach(postId => {
           PostsService.getPostById(postId).then(post => {
@@ -23,28 +22,27 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
     }
 
     $scope.showTopTrends = (id) => {
+      $scope.show=true;
       $scope.posts=[];
       $scope.posts = $scope.getTagPosts(id);
       console.log($scope.posts);
       sortByLikesAsc($scope.posts);
       console.log($scope.posts);
     }
+    
     $scope.showTopTrends($scope.tag._id);
 
-
     $scope.showLatestTrends = (id) => {
+      $scope.show=true;
       $scope.posts=[];
       $scope.posts = $scope.getTagPosts(id);
-      PostsService.sortByDateDesc($scope.posts);
+      console.log($scope.posts);
+      $scope.posts=PostsService.sortByDateDesc($scope.posts);
     }
 
     $scope.showPeople = () => {
-      $scope.users = Array.from(new Set($scope.users));
-
-
+      $scope.show=!$scope.show;
     }
-
-
   })
     .catch(err => {
       console.log(err);

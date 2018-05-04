@@ -13,11 +13,12 @@
   <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
 
   <!-- bootstrap -->
-  <script src="vendor/bootstrap/dist/css/bootstrap.min.css"></script>
+  <script src="vendor/jquery/dist/jquery.min.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
 <!--   <script src="vendor/infiniteScroll/ng-infinite-scroll.min.js"></script> -->
   <script src="vendor/jqlite/jqlite.min.js"></script>
-
+  
 
  <!--  Angular Routing -->
  <script src="js/routing.js"></script>
@@ -50,6 +51,7 @@
     <script src="directives/follow/followController.js"></script>
 
   <!-- css -->
+
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./stylesheets/reset.css">
   <link rel="stylesheet" href="./stylesheets/fonts.css">
@@ -60,6 +62,7 @@
   <link rel="stylesheet" href="./stylesheets/settings.css">  
   <link rel="stylesheet" href="./stylesheets/newPostDirective.css">
   <link rel="stylesheet" href="./stylesheets/postDirective.css">
+  <link rel="stylesheet" href="./stylesheets/modal.css">
 
 
 </head>
@@ -133,7 +136,11 @@
   </header>
 
   <main ng-view ng-controller='mainController' >
+     
   </main>
+
+
+  
 
 </body>
 </html>

@@ -1,9 +1,10 @@
 mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
-
+    
     // get following posts and user posts
     $scope.posts = [];
+    
     var followingIds = $scope.userInSession.following.slice();
-    followingIds.push( $scope.userInSession._id);
+    followingIds.push($scope.userInSession._id);
 
     followingIds.forEach(id => {
         userService.getFollowing(id).then(user => {
@@ -15,7 +16,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     toPush.push(p);
                 })
                 $scope.posts = $scope.posts.concat(toPush);
-                PostsService.sortByDateEsc($scope.posts);
+                $scope.posts = PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
                 console.log(err);
             })
@@ -23,9 +24,9 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             console.log(err);
         })
     })
-
-
+    
     $scope.addPost = function () {
+      
         $scope.tags = [];
         $scope.links = [];
         $scope.videos = [];
@@ -50,10 +51,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
             return $scope.splited.join(' ');
         }
-
-
         $scope.postText = $scope.filterLinks();
-
         $scope.newPost = {
             text: $scope.postText,
             _userId: $scope.userInSession._id,
@@ -88,6 +86,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         });
     }
 
+    $scope.post = null;
     $scope.likePost = (id) => {
         let user = userService.getUserInSession();
         PostsService.getPostById(id).then(post => {
@@ -116,7 +115,17 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         })
     }
 
+    $scope.retweetReplyPost = function (post) {
+  
+        $scope.post = post;
+        console.log($scope.post);
+    }
 
+    
+    $scope.saveRetweet = function(post){
+
+
+    }
 
 });
 /* }); */
