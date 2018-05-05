@@ -6,12 +6,12 @@
                     <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
             </a>
             <div>
-                <span class='post-drop-down'>&#8964;</span>
+                <span class='deletePost' ng-click="deletePost(post._id)" ng-if="post._userId === userInSession._id">&#xd7;</span>
                 <a href="#!profile/{{post.userUsername}}">
                     <h1>{{post.userName}}</h1>
                     <span>@{{post.userUsername}}</span>
                 </a>
-                </br>
+                
                 <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal" ng-show="post.retweetText"></p>
                 <p ng-bind-HTML="post.text" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
@@ -35,7 +35,7 @@
                 <li ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#retweetModal"> &#x21ba; Retweet
                     <span ng-bind="{{post.retweets.length}}"></span>
                 </li>
-                <li ng-click="likePost(post._id)">
+                <li ng-click="likePost(post._id, $index)">
                     <span ng-class="liked">
                         &#x2661; Like
                         <span ng-bind={{post.likes.length}}></span>

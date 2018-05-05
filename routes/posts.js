@@ -83,10 +83,10 @@ router.post('/newpost', function (req, res) {
 
 
 /* delete post by id */
-router.delete('/posts:id', function (req, res) {
+router.delete('/posts/:id', function (req, res) {
     var id = req.params.id;
 
-    Posts.remove({ _id: id }, function (err) {
+    Posts.remove({ _id: id }, function (err, post) {
         if (!err) {
             res.status(200);
             res.json({ id: post._id });

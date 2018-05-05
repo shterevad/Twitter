@@ -102,3 +102,15 @@ section.post-section{
     margin: 1em -1em;
     height: auto;
 }
+.deletePost{
+    color: rgba(152,152,152,0.5);
+    font-size: 12px;
+    position: relative;
+    float:right;
+    cursor: pointer;
+}
+
+.deletePost:hover{
+    color:rgb(29, 161, 242);  
+    font-size:15px;
+}

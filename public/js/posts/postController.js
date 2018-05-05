@@ -15,6 +15,13 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     p.profilePicture = user.profilePicture;
                     toPush.push(p);
                 })
+                toPush.forEach(post => {
+                    if ($scope.userInSession.likes.indexOf(post._id) >= 0) {
+                        post.liked = true;
+                    } else {
+                        post.liked = false;
+                    };
+                })
                 $scope.posts = $scope.posts.concat(toPush);
                 $scope.posts = PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
@@ -30,7 +37,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             links = [],
             videos = [];
 
-        var postText = $scope.filterLinks(post, tags,videos,links); 
+        var postText = $scope.filterLinks(post, tags, videos, links);
         var newPost = {
             text: postText,
             _userId: $scope.userInSession._id,
@@ -42,9 +49,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             profilePicture: $scope.userInSession.profilePicture
         }
 
-        $scope.post=$scope.savePost(newPost);
-        console.log($scope.post);
-       
+        $scope.post = $scope.savePost(newPost);
+
     }
 
     $scope.likePost = (id) => {
@@ -52,7 +58,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         let user = userService.getUserInSession();
         PostsService.getPostById(id).then(post => {
             $scope.post = post;
-            let alreadyLiked =  $scope.post.likes.findIndex(id => {
+            let alreadyLiked = $scope.post.likes.findIndex(id => {
                 return id == $scope.userInSession._id
             });
             if (alreadyLiked != -1) {
@@ -61,8 +67,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 $scope.post.likes.push($scope.userInSession._id);
             }
             console.log($scope.post);
-            PostsService.updatePost({ post:  $scope.post }).then(p => {
-                $scope.post=p.data;
+            PostsService.updatePost({ post: $scope.post }).then(p => {
+                $scope.post = p.data;
                 console.log($scope.post);
                 let alreadyLiked = $scope.userInSession.likes.findIndex(id => id === p.data._id);
                 if (alreadyLiked != -1) {
@@ -79,45 +85,63 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     }
 
     $scope.retweetReplyPost = function (post) {
-
         $scope.post = post;
         $scope.posted = getDate(post.posted);
         console.log($scope.post);
     }
 
-    $scope.retweet = function (post) {
-        var newPost=post;
-        delete newPost._id;
-          var tags = [],
-              links = [],
-              videos = [];
-          
-  
-          newPost.retweetText=$scope.filterLinks($scope.reply, tags, links, videos);
-              
-  
-        
-          newPost.videos=newPost.videos.concat(videos);
-          newPost.tags=newPost.tags.concat(tags);
-          newPost.links=newPost.links.concat(links);
-          newPost.userId=$scope.userInSession._id;
-          newPost.userName=$scope.userInSession.name;
-          var post = $scope.savePost(newPost);
-          console.log(post);
-              
-          $('#retweetModal').modal('hide');
-          newPost='';
-          $scope.reply='';
-  
-      }
 
-    $scope.savePost=function(post){
-      PostsService.savePost({ post: post }).then(post => {
+    $scope.replyPost= function (post) {
+        let reply = {
+            text: $scope.tweetText,
+            userId: $scope.userInSession._id,
+            likes:[]
+        }
+        $scope.addPost($scope.tweetText);
+        post.replies.push(reply);
+
+        PostsService.updatePost({ post: post }).then(p=>{
+            console.log(p);
+            $('#replyModal').modal('hide');
+            $scope.tweetText = '';
+        });
+    }
+
+
+    $scope.retweet = function (post) {
+        var newPost = post;
+
+        delete newPost._id, newPost.likes, newPost.replies, newPost.retweets;
+
+        var tags = [],
+            links = [],
+            videos = [];
+
+        if (newPost.retweetText) {
+            newPost.text += "<div .class='retweets'> " + newPost.retweetText + "</div>";
+        }
+
+        newPost.retweetText = $scope.filterLinks($scope.reply, tags, links, videos);
+
+        newPost.videos = newPost.videos.concat(videos);
+        newPost.tags = newPost.tags.concat(tags);
+        newPost.links = newPost.links.concat(links);
+        newPost.userId = $scope.userInSession._id;
+        newPost.userName = $scope.userInSession.name;
+        $scope.savePost(newPost);
+        console.log($scope.post);
+
+        $('#retweetModal').modal('hide');
+        newPost = '';
+        $scope.reply = '';
+
+    }
+
+    $scope.savePost = function (post) {
+        PostsService.savePost({ post: post }).then(post => {
             var post = post.data;
-        
             if (post.post.tags.length > 0) {
                 for (var i = 0; i < post.post.tags.length; i++) {
-                    
                     let tag = {
                         title: post.post.tags[i],
                         posts: [post.post._id]
@@ -125,21 +149,47 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     TrendsService.saveOrUpdateTag(tag).then(tag => console.log());
                 }
             }
-         userService.saveNewPost({ userId: $scope.userInSession._id, post: post.post._id })
-            .then(p => p)
-            .catch(err => {
-                console.log(err);
-            });
-        $scope.posts.unshift(post.post);
-        $scope.tweetText='';
-        
-           
+            userService.saveNewPost({ userId: $scope.userInSession._id, post: post.post._id })
+                .then(u => {
+                    $scope.posts.unshift(post.post);
+                    $scope.tweetText = '';
+                    userService.updateUserInSession(u.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+
         }).catch(err => {
             //todo:validation
         });
     }
 
-    $scope.filterLinks= function (post, tags, videos, links) {
+
+    $scope.deletePost = function (id) {
+        PostsService.removePost(id).then(postId => {
+            console.log(postId);
+            var postIndex = $scope.posts.findIndex(p => p._id === id);
+            var post = $scope.posts.splice(postIndex, 1);
+            console.log(post);
+            post[0].tags.forEach(tag => {
+                TrendsService.getTagByName(tag).then(t => {
+                    console.log(t);
+                    var index = t.posts.findIndex(p => {
+                        p == id;
+                    })
+                    t.posts.splice(index, 1);
+                    TrendsService.saveOrUpdateTag(t);
+                })
+            })
+            var index = $scope.userInSession.posts.findIndex(id => id === postId);
+            $scope.userInSession.posts.splice(index, 1);
+
+            userService.updateUserFields({ user: $scope.userInSession });
+            userService.updateUserInSession($scope.userInSession);
+        })
+    }
+
+    $scope.filterLinks = function (post, tags, videos, links) {
         var splited = post.split(' ').map(w => {
             if (/\B#(\d*[A-Za-z_]+\w*)\b(?!;)/g.test(w)) {
                 tags.push(w.slice(1));

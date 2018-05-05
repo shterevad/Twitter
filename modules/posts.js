@@ -14,6 +14,7 @@ var PostSchema = new Schema({
   _userId: {
     type: Schema.Types.ObjectId,
   },
+  userUsername:String,
   userName: String,
   photo: String,
   tags: [String],
@@ -22,7 +23,7 @@ var PostSchema = new Schema({
   giffs: [String],
   likes: [Schema.Types.ObjectId],
   retweets: [Schema.Types.Object],
-  replies: [Schema.Types.ObjectId],
+  replies: [],
   posted: {
     type: Date,
     default: Date.now

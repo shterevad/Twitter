@@ -8,7 +8,7 @@ mainApp.service('PostsService', function ($q,$http, userService) {
         return deferred.promise;
     }
 
-    this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts' + id);
+    this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts/' + id);
 
     this.savePost = (post) =>$http.post('http://localhost:3000/posts/newpost', post);
 
