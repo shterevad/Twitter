@@ -11,7 +11,7 @@
         </a>
         <button ng-show="!{{user.followBack}}" ng-click="followUser($event, user._id)" class="hollowButton">Follow</button>
         <button ng-show="{{user.followBack}}" ng-click="unfollowUser($event, user._id)" class="hollowButton">Following</button>
-        <span class='deleteFProposal' ng-click="deleteFollow()">&#xd7;</span>
+        <span class='deleteFProposal' ng-click="deleteFollow(user._id)">&#xd7;</span>
       </div>
     </li>
   </ul>

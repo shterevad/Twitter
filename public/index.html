@@ -32,6 +32,7 @@
  <script src='js/posts/postsService.js'></script>
  <script src='directives/trends/trendsService.js'></script>
 
+
   <!-- directives  -->
   <script src='directives/profile/profileDirective.js'></script>
   <script src='directives/trends/trendsDirective.js'></script>
@@ -84,8 +85,8 @@
               <span>Notifications</span>
             </a>
           </li>
-          <li>
-            <a href="" data-toggle="modal" class="grey" data-target="#myModal">
+          <li data-toggle="modal" data-target="#messageModal">
+            <a href="" class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
             </a>
@@ -133,10 +134,36 @@
         </ul>
       </nav>
     </div>
+
+
+    <!-- Messages modal -->
+  <!--   <div class="modal fade" id="messageModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class='retweet-input'>
+                    <input ng-model="reply" type="text" placeholder="Add a comment..." maxlength="150">
+                </div>
+                <post></post>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary filledButton" ng-click="retweet(post)">Retweet</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+
   </header>
 
   <main ng-view ng-controller='mainController' >
-     
+     <!--       retweet modal  -->
+   
+
   </main>
 
 

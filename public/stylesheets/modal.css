@@ -6,7 +6,7 @@
     font-size: 1.3em;
 }
 
-#retweet-input>input{
+.retweet-input>input{
     width: 92%;
     margin: 1em 1.5em;
     height: 37px;
@@ -16,6 +16,15 @@
     border-radius: 10px;
     font-size: 13px;
     border: 0.5px solid #1da1f2;
+}
+
+#retweetModal, #replyModal, #messageModal{
+    z-index: 1100 !important;
+}
+
+
+#postModal .posts-action-list{
+    display: inline-block;
 }
 
 .modal .posts-action-list, .modal .post-section span, .modal .postSection button{
@@ -98,6 +107,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 0.3rem;
     outline: 0;
+    margin: 3.5em 0.8em;
   }
   
   .modal-backdrop {
@@ -221,4 +231,21 @@
     .modal-lg {
       max-width: 800px;
     }
+  }
+
+
+  .modal-spans,  .modal-spans>span{
+    margin: 1em;
+  }
+
+  .modal-spans>span>span{
+    font-weight:bold;
+    color:black;
+  }
+
+  .modal-spans>span{
+      cursor: pointer;
+    color: gray;
+    margin: 1em;
+    line-height: 2em;
   }

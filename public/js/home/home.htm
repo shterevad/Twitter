@@ -21,47 +21,72 @@
     </aside>
 
     <div class="modal fade" id="retweetModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div id='retweet-input'>
-                    <input type="text" placeholder="Add a comment..." ng-bind="reply">
-                </div>
-                <post></post>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary filledButton">Retweet</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title" class="retweet-modal-label">Reply to {{post.userName}}</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class='retweet-input'>
+                        <input ng-model="reply" type="text" placeholder="Add a comment..." maxlength="150">
+                    </div>
                     <post></post>
-                </div>
-                <div>
-                    <newpost>
-                    </newpost>
-                    <button type="button" class="btn btn-primary filledButton replyButton">Reply</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary filledButton" ng-click="retweet(post)">Retweet</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    
+     <!-- reply modal -->
+        <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" class="retweet-modal-label">Reply to {{post.userName}}</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div>
+                        <post></post>
+                    </div>
+                    <div>
+                        <newpost>
+                        </newpost>
+                        <button type="button" class="btn btn-primary filledButton replyButton">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                            <post></post>  
+                          <!--   <div ng-controller='profileController'>
+                                    <button ng-show="!{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="followUser($event, followed._id)" class="followed-user-follow-button followed-user-button">Follow</button>
+                                    <button ng-show="{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="unfollowUser($event, followed._id)" class="followed-user-unfollow-button followed-user-button">Unfollow</button>
+                            </div>
+                           -->
+                        
+                        <div class='modal-spans'>
+                                <span>{{posted}}</span>
+                                <br>
+                            <span><span>{{post.retweets.length}}</span> Retweets</span>
+                            <span><span>{{post.likes.length}}</span> Likes</span>
+                        </div>
+                       
+                        <div class='retweet-input'>
+                                <input type="text" placeholder="Tweet your reply..." ng-bind="" maxlength="150">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
 
 
 </div>
