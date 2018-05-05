@@ -12,7 +12,8 @@
                     <span>@{{post.userUsername}}</span>
                 </a>
                 </br>
-                <p ng-bind-HTML="post.text"></p>
+                <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal" ng-show="post.retweetText"></p>
+                <p ng-bind-HTML="post.text" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
 
         </div>

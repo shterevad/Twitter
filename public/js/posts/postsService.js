@@ -12,6 +12,8 @@ mainApp.service('PostsService', function ($q,$http, userService) {
 
     this.savePost = (post) =>$http.post('http://localhost:3000/posts/newpost', post);
 
+    this.updatePost = (post) =>$http.post('http://localhost:3000/posts/post/update', post);
+
 
     //get all users post
     this.getPostsByUserId = (userId) => {

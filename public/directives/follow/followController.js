@@ -1,4 +1,8 @@
 mainApp.controller('followController', function ($scope, $http, userService) {
+
+    const FOLLOW_USERS=3;
+
+    console.log($scope.user);
     $scope.users = [];
     $scope.refresh = function () {
         userService.getRandomUsers().then(users => {  
@@ -16,7 +20,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             if (userIndex) {
                 users.splice(userIndex, 1);
             }
-            users.splice(3);
+            users.splice(FOLLOW_USERS);
 
             users.forEach(usr => {
                 if ($scope.userInSession.following.indexOf(usr._id) >= 0) {
@@ -26,12 +30,19 @@ mainApp.controller('followController', function ($scope, $http, userService) {
                 };
             })
 
+            
             $scope.users = users;
         });
     };
 
-    $scope.deleteFollow = function () {
-        console.log($scope.users);
+    $scope.deleteFollow = function (id) {
+        var userIndex = $scope.users.findIndex(u=>{
+            u._id===id;
+        });
+        if(userIndex){
+            $scope.users.splice(userIndex, 1);
+        
+        }
     }
 
     $scope.refresh();

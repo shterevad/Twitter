@@ -2,7 +2,7 @@
         <h1>Trends for you</h1>
         <ul>
           <li ng-repeat="tag in tags">
-            <a href="#!tags/{{tag.title}}">
+            <a href="#!tags/{{tag.title}}" ng-click="tagPosts(tag)">
               <h2>#{{tag.title}}</h2>
               <span>{{tag.posts.length}} Tweets</span>
             </a>

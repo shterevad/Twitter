@@ -1,7 +1,7 @@
 <section class='postSection container'>
         <div>
             <img src="{{user.profilePicture}}"   id="profilePic">
-            <textarea ng-model="tweetText" cols="90" rows="1" ng-click="" maxlength="230" placeholder="What's happening?"></textarea>
+            <textarea ng-model="tweetText" cols="90" rows="1" maxlength="230" placeholder="What's happening?"></textarea>
         </div>
 
         <div>
@@ -19,7 +19,7 @@
                 <ul>
                     <li>
                         <a href="">
-                            <button ng-click="addPost()" class="filledButton">Tweet</button>
+                            <button ng-click="addPost(tweetText)" class="filledButton">Tweet</button>
                         </a>
                     </li>
                 </ul>

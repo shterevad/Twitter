@@ -7,6 +7,10 @@ var PostSchema = new Schema({
     type: String,
     maxlength: MAX_LENGTH_TEXT
   },
+  retweetText:{
+    type:String,
+    maxlength: MAX_LENGTH_TEXT
+  },
   _userId: {
     type: Schema.Types.ObjectId,
   },
