@@ -1,6 +1,4 @@
 mainApp.controller('followController', function ($scope, $http, userService) {
-
-    console.log($scope.user);
     $scope.users = [];
     $scope.refresh = function () {
         userService.getRandomUsers().then(users => {  
@@ -39,21 +37,23 @@ mainApp.controller('followController', function ($scope, $http, userService) {
     $scope.refresh();
 
     // follow user by id
-    $scope.followUser = function (event, userToFollowId) {
+    $scope.followUser = function (event, userToFollowId, $index) {
         event.preventDefault();
 
-        userService.followUser(userToFollowId)
+        userService.followUser(userToFollowId).then(function(res){
+            $scope.users[$index].followBack = true;
+        })
             .catch(function (err) {
                 console.log(err)
             });
     }
 
     // unfollow user by id
-    $scope.unfollowUser = function (event, userToUnfollow) {
+    $scope.unfollowUser = function (event, userToUnfollow, $index) {
         event.preventDefault();
 
         userService.unfollowUser(userToUnfollow).then(function (res) {
-            console.log(res)
+            $scope.users[$index].followBack = false;
         })
             .catch(function (err) {
                 console.log(err)

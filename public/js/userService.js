@@ -195,6 +195,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     this.unfollowUser = function (userToUnfollowId) {
         let deferred = $q.defer();
         let userInSession = this.getUserInSession();
+        let self = this;
         $http.post("/users/unfollow", { followerId: userInSession._id, toUnfollowId: userToUnfollowId })
             .then(function (res) {
                 userInSession.following.splice(userInSession.following.indexOf(userToUnfollowId), 1);

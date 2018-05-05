@@ -31,12 +31,15 @@
                 </li>
             </ul>
 
-            <button class="profile-page-nav-button" id="profile-page-edit-profile-button" ng-show="isInSession">
+            <button class="profile-page-nav-button" id="profile-page-edit-profile-button" ng-show="isFollowing === 0">
                 Edit profile
             </button>
 
-            <button style="display:none" class="profile-page-nav-button" id="profile-page-follow-button" ng-show="!isInSession">
+            <button class="profile-page-nav-button"  id="profile-page-follow-button" ng-show="isFollowing === 2" ng-click="followUser($event, userProfile._id)">
                 Follow
+            </button>
+            <button class="profile-page-nav-button"  id="profile-page-unfollow-button" ng-show="isFollowing === 1" ng-click="unfollowUser($event, userProfile._id)">
+                Unfollow
             </button>
         </div>
 
@@ -103,8 +106,8 @@
 
                     <img ng-src="{{followed.profilePicture}}" alt="" class="followed-user-profile-pic"
                     />
-                    <button ng-show="!{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="followUser($event, followed._id)" class="followed-user-follow-button followed-user-button">Follow</button>
-                    <button ng-show="{{followed.followBack}}  && !{{followed.thatsYou}}" ng-click="unfollowUser($event, followed._id)" class="followed-user-unfollow-button followed-user-button">Unfollow</button>
+                    <button ng-show="followed.followBack == 2" ng-click="followUser($event, followed._id, $index)" class="followed-user-follow-button followed-user-button">Follow</button>
+                    <button ng-show="followed.followBack == 1" ng-click="unfollowUser($event, followed._id, $index)" class="followed-user-unfollow-button followed-user-button">Unfollow</button>
 
                     <div class="followed-user-details">
                         <p class="followed-user-name"><a href="#!profile/{{followed.username}}">{{followed.name}}</a></p>
@@ -124,8 +127,8 @@
 
                     <img ng-src="{{follower.profilePicture}}" alt="" class="follower-profile-pic"
                     />
-                    <button ng-show="!{{follower.followBack}} && !{{follower.thatsYou}}" ng-click="followUser($event, follower._id)" class="follower-follow-button follower-button">Follow</button>
-                    <button ng-show="{{follower.followBack}}  && !{{follower.thatsYou}}" ng-click="unfollowUser($event, follower._id)" class="follower-unfollow-button follower-button">Unfollow</button>
+                    <button ng-show="!follower.followBack == 1" ng-click="followUser($event, follower._id, $index)" class="follower-follow-button follower-button">Follow</button>
+                    <button ng-show="follower.followBack == 2" ng-click="unfollowUser($event, follower._id, $index)" class="follower-unfollow-button follower-button">Unfollow</button>
 
                     <div class="follower-details">
                         <p class="follower-name"><a href="#!profile/{{follower.username}}">{{follower.name}}</a></p>

@@ -1,14 +1,21 @@
-mainApp.controller('profileController', function ($scope, $window, $location, PostsService, TrendsService, userService) {
+mainApp.controller('profileController', function ($scope, $window, $location, $timeout, PostsService, TrendsService, userService) {
 
     $scope.sectionInUse = 1;
-    let pageUserId = $window.location.hash.substring(11);
-    console.log($scope.userInSession)
+    $scope.isFollowing = 0;
+    let pageUser = $window.location.hash.substring(11);
+    let userInSession = userService.getUserInSession();
 
-    userService.getUserByUsername(pageUserId).then(function (user) {
-        if (user._id === $scope.userInSession._id) {
-            $scope.isInSession = false;
-        } else {
+    userService.getUserByUsername(pageUser).then(function (user) {
+        if (user._id === userInSession._id) {
             $scope.isInSession = true;
+            $scope.isFollowing;
+        } else {
+            $scope.isInSession = false;
+            if(userInSession.following.indexOf(user._id) >= 0){
+                $scope.isFollowing = 1;
+            } else {
+                $scope.isFollowing = 2;
+            }
         }
 
         $scope.userProfile = user;
@@ -17,21 +24,17 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
         $scope.followers = [];
         $scope.posts = [];
 
-        console.log($scope.userInSession);
-
         user.following.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
-                // console.log(toPush.name + " " + $scope.userInSession.following.indexOf(u) + " " + u)
-                if ($scope.userInSession.following.indexOf(u) >= 0) {
-                    toPush.followBack = true;
+                
+                if (userInSession.following.indexOf(u) >= 0) {
+                    toPush.followBack = 1;
                 } else {
-                    toPush.followBack = false;
+                    toPush.followBack = 2;
                 };
                 
-                if (u === $scope.userInSession._id) {
-                    toPush.thatsYou = true;
-                } else {
-                    toPush.thatsYou = false;
+                if (u === userInSession._id) {
+                    toPush.followBack = 0;
                 }
 
                 $scope.following.push(toPush);
@@ -40,17 +43,15 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
 
         user.followers.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
-                if ($scope.userInSession.following.indexOf(u) >= 0) {
-                    toPush.followBack = true;
+                if (userInSession.following.indexOf(u) >= 0) {
+                    toPush.followBack = 1;
                 } else {
-                    toPush.followBack = false;
+                    toPush.followBack = 2;
                 };
 
-                if (u === $scope.userInSession._id) {
-                    toPush.thatsYou = true;
-                } else {
-                    toPush.thatsYou = false;
-                }
+                if (u === userInSession._id) {
+                    toPush.followBack = 0;
+                } 
 
                 $scope.followers.push(toPush);
             })
@@ -68,13 +69,15 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
     });
 
         // follow user by id
-        $scope.followUser = function (event, userToFollowId) {
-            event.preventDefault();
-            console.log($scope.followBack); 
+        $scope.followUser = function ($event, userToFollowId, $index) {
+            $event.preventDefault();
+            
             userService.followUser(userToFollowId).then(res => {
-                $scope.userInSession.push(userToFollowId)
-                // $scope.userInSession = userService.getUserInSession();
-                // console.log($scope.userInSession)
+                userService.getUserById(userToFollowId).then(function (toPush) {
+                    $scope.following[$index].followBack = 1;
+                }).catch(err => {
+                    console.log(err);
+                })
             })
                 .catch(function (err) {
                     console.log(err)
@@ -82,13 +85,15 @@ mainApp.controller('profileController', function ($scope, $window, $location, Po
         }
     
         // unfollow user by id
-        $scope.unfollowUser = function (event, userToUnfollow) {
+        $scope.unfollowUser = function (event, userToUnfollow, $index) {
             event.preventDefault();
-    
+
             userService.unfollowUser(userToUnfollow).then(function (res) {
-                $scope.userInSession.following.splice($scope.userInSession.following.indexOf(userToUnfollow), 1);
-                // $scope.userInSession = userService.getUserInSession();
-                // console.log($scope.userInSession);
+                userService.getUserById(userToUnfollow).then(function (toPush) {
+                    $scope.following[$index].followBack = 2;
+                }).catch(err => {
+                    console.log(err);
+                })
             })
                 .catch(function (err) {
                     console.log(err)
