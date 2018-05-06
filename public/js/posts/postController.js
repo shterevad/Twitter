@@ -57,7 +57,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             videos = [];
 
         var postText = $scope.filterLinks(post, tags, videos, links);
-        var newPost = {
+        $scope.newPost = {
             text: postText,
             _userId: $scope.userInSession._id,
             userName: $scope.userInSession.name,
@@ -68,18 +68,19 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             profilePicture: $scope.userInSession.profilePicture
         }
 
-        if($scope.newPost.photo){
+        if ($scope.newPost.photo) {
             let userToUpdate = userService.getUserInSession();
             userToUpdate.gallery.push($scope.newPost.photo);
-            userService.updateUserFields({user : userToUpdate})
-            .catch(err => console.log(err));
+            console.log($scope.newPost.photo);
+            userService.updateUserFields({ user: userToUpdate })
+                .catch(err => console.log(err));
         }
 
-        $scope.savePost(newPost).then(res => {
+        $scope.savePost($scope.newPost).then(res => {
             $scope.posts.unshift(res.post);
-            $scope.tweetText = ''
+            console.log(res.post);
         });
-
+        $scope.tweetText = '';
 
     }
 
@@ -206,7 +207,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 $scope.userInSession.posts.splice(index, 1);
             }
             userService.updateUserFields({ user: $scope.userInSession })
-    
+
 
         })
     }
@@ -267,10 +268,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         data.name = (+new Date()) + '-' + data.file.name;
         data.metadata = { contentType: data.file.type };
         userService.uploadPicture(data)
-        .then(response => {
-            $scope.newPost.photo = response;
-        })
-        .catch(err => console.log(err));
+            .then(response => {
+                $scope.newPost.photo = response;
+            })
+            .catch(err => console.log(err));
     }
 
 });
@@ -298,8 +299,8 @@ function getDate(date) {
 }
 
 
-function search(){
-    
+function search() {
+
 }
 
 
