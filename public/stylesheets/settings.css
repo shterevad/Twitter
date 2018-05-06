@@ -99,6 +99,7 @@
 .settings-page-selected-option{
     color: black;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #settings-page-footer>footer{
@@ -118,13 +119,15 @@
     padding: 1em 1em;
 }
 
-#settings-account-main>h1{
+#settings-account-main>h1,
+#settings-password-main>h1{
     all:unset;
     font-weight: bold;
     font-size: 1.5em;
 }
 
-#settings-account-main>hr {
+#settings-account-main>hr,
+#settings-password-main>hr {
     border: 0;
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);

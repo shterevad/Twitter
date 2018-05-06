@@ -7,6 +7,25 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Twitter</title>
 
+  <!-- firebase cloud storage -->
+  
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-storage.js"></script>
+<!-- <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDjF-wLRhxCVm2CKOG89G05-AzrYS6Ztog",
+    authDomain: "twitter-project-6abd2.firebaseapp.com",
+    databaseURL: "https://twitter-project-6abd2.firebaseio.com",
+    projectId: "twitter-project-6abd2",
+    storageBucket: "",
+    messagingSenderId: "827549512821"
+  };
+  firebase.initializeApp(config);
+</script> -->
+
+
   <!-- angular -->
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.min.js"></script>
@@ -41,12 +60,14 @@
   <script src='directives/newPost/newPostDirective.js'></script>
   <script src='directives/post/postDirective.js'></script>
   <script src='directives/user/userDirective.js'></script>
+  <script src="directives/uploadFile.js"></script>
 
 
     <!--mainController -->
     <script src="js/mainController.js"></script>
     <script src="js/posts/postController.js"></script>
     <script src="js/profile/profileController.js"></script>
+    <script src="js/settings/settingsController.js"></script>
     <script src="js/hashtag/hashtagController.js"></script>
     <script src="directives/trends/trendsController.js"></script>
     <script src="directives/follow/followController.js"></script>

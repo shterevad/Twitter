@@ -8,6 +8,21 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     const USER_EXISTS_STATUS = 403;
     const DOESNT_EXIST_STATUS = 404;
 
+    //google storage setup
+    let config = {
+        apiKey: "AIzaSyDjF-wLRhxCVm2CKOG89G05-AzrYS6Ztog",
+        authDomain: "twitter-project-6abd2.firebaseapp.com",
+        databaseURL: "https://twitter-project-6abd2.firebaseio.com",
+        projectId: "twitter-project-6abd2",
+        storageBucket: "",
+        messagingSenderId: "827549512821"
+    };
+    firebase.initializeApp(config);
+    let storage = firebase.storage();
+    // let storageRef = firebase.storage.ref();
+    let bucket = storage.bucket('twitter-project-6abd2.appspot.com')
+    let ref = firebase.storage().ref();
+
     this.validateEmail = function (email) {
         let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
@@ -232,11 +247,19 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     //check if given user is the one in session
     this.checkIfUserIsInSession = (idToCheck) => {
         let userInSessionId = this.getUserInSession()._id;
-        if(idToCheck === userInSessionId){
+        if (idToCheck === userInSessionId) {
             return true
         } else {
             return false
         }
+    }
+
+    //upload picture
+    this.uploadPicture = (data) => {
+        let uploadedURL;
+        ref.child(data.name).put(data.file, data.metadata).following
+            .then(snapshot => uploadedURL = snapshot.downloadURL)
+            .catch(err => console.log(err));
     }
 
 });

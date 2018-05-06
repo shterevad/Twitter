@@ -2,8 +2,7 @@
     <div id="profile-page-header">
 
         <div id="profile-page-profile-picture-nav-container">
-            <img ng-src="{{userProfile.profilePicture}}"
-                alt="" id="profile-page-profile-picture-nav">
+            <img ng-src="{{userProfile.profilePicture}}" alt="" id="profile-page-profile-picture-nav">
         </div>
 
         <div id="profile-page-header-banner-container">
@@ -31,14 +30,14 @@
                 </li>
             </ul>
 
-            <button class="profile-page-nav-button" id="profile-page-edit-profile-button" ng-show="isFollowing === 0">
+            <button class="profile-page-nav-button" id="profile-page-edit-profile-button" ng-show="isFollowing === 0" ng-click="goToSettings($event)">
                 Edit profile
             </button>
 
-            <button class="profile-page-nav-button"  id="profile-page-follow-button" ng-show="isFollowing === 2" ng-click="followUser($event, userProfile._id)">
+            <button class="profile-page-nav-button" id="profile-page-follow-button" ng-show="isFollowing === 2" ng-click="followUser($event, userProfile._id)">
                 Follow
             </button>
-            <button class="profile-page-nav-button"  id="profile-page-unfollow-button" ng-show="isFollowing === 1" ng-click="unfollowUser($event, userProfile._id)">
+            <button class="profile-page-nav-button" id="profile-page-unfollow-button" ng-show="isFollowing === 1" ng-click="unfollowUser($event, userProfile._id)">
                 Unfollow
             </button>
         </div>
@@ -52,7 +51,7 @@
                 <p id="profile-pg-user-details-name">{{userProfile.name}}</p>
                 <p ng-hide="!userProfile.username" id="profile-pg-user-details-username">@{{userProfile.username}}</p>
                 <p ng-hide="!userProfile.description" id="profile-pg-user-details-bio">
-                        {{userProfile.description}}
+                    {{userProfile.description}}
                 </p>
                 <div ng-hide="!userProfile.location" id="profile-pg-user-details-location-container">
                     <img class="profile-details-icon" src="images/icons/location_icon.png" alt="">
@@ -71,8 +70,7 @@
                 </div>
                 <div id="profile-pg-user-gallery">
                     <div ng-repeat="pic in gallery" class="profile-pg-gallery-pic-container">
-                        <img class="profile-pg-gallery-pic" ng-src="{{pic}}"
-                            alt="">
+                        <img class="profile-pg-gallery-pic" ng-src="{{pic}}" alt="">
                     </div>
                 </div>
             </div>
@@ -82,11 +80,11 @@
 
             <div ng-show="sectionInUse === 1" id="profile-page-main-div-tweets">
                 <div class='mainDiv container' id="profile-page-main-div-tweets-inner">
-                        <ol ng-repeat='post in posts'>
-                                <li>
-                                    <post></post>
-                                </li>
-                            </ol>
+                    <ol ng-repeat='post in posts'>
+                        <li>
+                            <post></post>
+                        </li>
+                    </ol>
                 </div>
 
                 <aside class='rightAside' id="profile-page-right-aside-tweets">
@@ -99,18 +97,19 @@
 
             <div ng-show="sectionInUse === 2" id="profile-page-main-div-following">
 
-                <div ng-repeat="followed in following"class="followed-user-container container">
+                <div ng-repeat="followed in following" class="followed-user-container container">
                     <div class="followed-user-background-container">
                         <img ng-src="{{followed.headerPicture}}" alt="" class="followed-user-background" />
                     </div>
 
-                    <img ng-src="{{followed.profilePicture}}" alt="" class="followed-user-profile-pic"
-                    />
+                    <img ng-src="{{followed.profilePicture}}" alt="" class="followed-user-profile-pic" />
                     <button ng-show="followed.followBack == 2" ng-click="followUser($event, followed._id, $index)" class="followed-user-follow-button followed-user-button">Follow</button>
                     <button ng-show="followed.followBack == 1" ng-click="unfollowUser($event, followed._id, $index)" class="followed-user-unfollow-button followed-user-button">Unfollow</button>
 
                     <div class="followed-user-details">
-                        <p class="followed-user-name"><a href="#!profile/{{followed.username}}">{{followed.name}}</a></p>
+                        <p class="followed-user-name">
+                            <a href="#!profile/{{followed.username}}">{{followed.name}}</a>
+                        </p>
                         <a ng-show="followed.username" class="followed-user-username" href="#!profile/{{followed.username}}">@{{followed.username}}</a>
                         <p ng-show="followed.description" class="followed-user-bio">{{followed.description}}</p>
                     </div>
@@ -120,18 +119,19 @@
 
             <div ng-show="sectionInUse === 3" id="profile-page-main-div-followers">
 
-                <div ng-repeat="follower in followers"class="follower-container container">
+                <div ng-repeat="follower in followers" class="follower-container container">
                     <div class="follower-background-container">
                         <img ng-src="{{follower.headerPicture}}" alt="" class="follower-background" />
                     </div>
 
-                    <img ng-src="{{follower.profilePicture}}" alt="" class="follower-profile-pic"
-                    />
+                    <img ng-src="{{follower.profilePicture}}" alt="" class="follower-profile-pic" />
                     <button ng-show="follower.followBack == 2" ng-click="followUser($event, follower._id, $index)" class="follower-follow-button follower-button">Follow</button>
                     <button ng-show="follower.followBack == 1" ng-click="unfollowUser($event, follower._id, $index)" class="follower-unfollow-button follower-button">Unfollow</button>
 
                     <div class="follower-details">
-                        <p class="follower-name"><a href="#!profile/{{follower.username}}">{{follower.name}}</a></p>
+                        <p class="follower-name">
+                            <a href="#!profile/{{follower.username}}">{{follower.name}}</a>
+                        </p>
                         <a ng-show="follower.username" class="follower-username" href="#!profile/{{follower.username}}">@{{follower.username}}</a>
                         <p ng-show="follower.username" class="follower-bio">{{follower.description}}.</p>
                     </div>
@@ -142,6 +142,12 @@
 
             <div ng-show="sectionInUse === 4" id="profile-page-main-div-likes">
                 <div class='mainDiv container' id="profile-page-main-div-likes-inner">
+
+                    <ol ng-repeat='post in likes'>
+                        <li>
+                            <post></post>
+                        </li>
+                    </ol>
                 </div>
 
                 <aside class='rightAside' id="profile-page-right-aside-likes">
