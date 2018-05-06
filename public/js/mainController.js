@@ -34,6 +34,11 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         });
     }
 
+    $scope.expandImage = (pic) => {
+        console.log(pic)
+        $scope.galleryPic = pic;
+    }
+
 });
 
 mainApp.controller('headerController', function ($scope, userService) {
@@ -43,5 +48,5 @@ mainApp.controller('headerController', function ($scope, userService) {
 
 mainApp.controller('mainController', function ($scope) {
 
-
+    
 });

@@ -318,3 +318,21 @@
   #messageModal a:hover{
     background-color: #f5f8fa;
   }
+
+  /* PICTURE DETAIL MODAL  */
+  .image-modal-container{
+    position: relative;
+  }
+
+  .delete-image{
+    /* color: rgb(189,29,29);
+    font-weight: bold; */
+    display: block;
+    /* font-size: 2em; */
+    width: 5%;
+    position: absolute;
+    right: 1.5%;
+    top: 1%;
+    float: right;
+    cursor: pointer;
+  }

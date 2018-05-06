@@ -307,6 +307,16 @@
     </div>
   </div>
 
+  <!--  picture detail -->
+  <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content image-modal-container">
+          <img src="images/icons/delete-icon.png" class="delete-image" ng-click="deleteImage(galleryPic)"/>
+         <img class="expanded-image" ng-src="{{galleryPic}}" />
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
