@@ -114,3 +114,19 @@ section.post-section{
     color:rgb(29, 161, 242);  
     font-size:15px;
 }
+
+.reply-body span{
+    display: inline-block !important;
+}
+
+.reply-body .replyText{
+    display: block;
+    margin-bottom: 3em;
+}
+
+
+.reply-body a{
+    line-height: 0em;
+   
+}
+

@@ -13,7 +13,7 @@
                 </a>
                 
                 <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal" ng-show="post.retweetText"></p>
-                <p ng-bind-HTML="post.text" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"></p>
+                <p ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
 
         </div>
@@ -30,16 +30,16 @@
         <div class="posts-action-list">
             <ul>
                 <li ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#replyModal">&#x1F4AC; Reply
-                    <span ng-bind="{{post.replies.length}}"></span>
+                    <span>{{post.replies.length}}</span>
                 </li>
                 <li ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#retweetModal"> &#x21ba; Retweet
-                    <span ng-bind="{{post.retweets.length}}"></span>
+                    <span>{{post.retweets.length}}</span>
                 </li>
-                <li ng-click="likePost(post._id, $index)">
-                    <span ng-class="liked">
+                <li ng-click="likePost(post)">
+                    
                         &#x2661; Like
-                        <span ng-bind={{post.likes.length}}></span>
-                    </span>
+                        <span>{{post.likes.length}}</span>
+                    
                 </li>
             </ul>
         </div>

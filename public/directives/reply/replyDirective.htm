@@ -1,0 +1,14 @@
+<section class='post-section'>
+    <div class="posts-item-header">
+        <a href="#!profile/{{reply.userUsername}}">
+            <img ng-src="{{reply.userPhoto}}" class="posts-user-photo">
+        </a>
+        <div class="reply-body">
+            <a href="#!profile/{{reply.userUsername}}">
+                <h1>{{reply.userName}}</h1>
+                <span>@{{reply.userUsername}}</span>
+                <div class='replyText' ng-bind-HTML="reply.text"></div>
+            </a>
+        </div>
+    </div>
+</section>

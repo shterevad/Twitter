@@ -1,11 +1,9 @@
 mainApp.controller('followController', function ($scope, $http, userService) {
+    const FOLLOW_USERS = 3;
 
-    const FOLLOW_USERS=3;
-
-    console.log($scope.user);
     $scope.users = [];
     $scope.refresh = function () {
-        userService.getRandomUsers().then(users => {  
+        userService.getRandomUsers().then(users => {
             $scope.userInSession.following.forEach(follower => {
                 users.forEach((u, index) => {
                     if (u._id === follower) {
@@ -13,15 +11,13 @@ mainApp.controller('followController', function ($scope, $http, userService) {
                     }
                 })
             });
-
             var userIndex = users.findIndex(usr => {
                 return usr._id === $scope.userInSession._id;
             })
-            if (userIndex) {
+            if (userIndex != -1) {
                 users.splice(userIndex, 1);
             }
             users.splice(FOLLOW_USERS);
-
             users.forEach(usr => {
                 if ($scope.userInSession.following.indexOf(usr._id) >= 0) {
                     usr.followBack = true;
@@ -29,19 +25,16 @@ mainApp.controller('followController', function ($scope, $http, userService) {
                     usr.followBack = false;
                 };
             })
-
-            
             $scope.users = users;
         });
     };
 
     $scope.deleteFollow = function (id) {
-        var userIndex = $scope.users.findIndex(u=>{
-            u._id===id;
+        var userIndex = $scope.users.findIndex(u => {
+            u._id === id;
         });
-        if(userIndex){
+        if (userIndex) {
             $scope.users.splice(userIndex, 1);
-        
         }
     }
 
@@ -51,7 +44,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
     $scope.followUser = function (event, userToFollowId, $index) {
         event.preventDefault();
 
-        userService.followUser(userToFollowId).then(function(res){
+        userService.followUser(userToFollowId).then(function (res) {
             $scope.users[$index].followBack = true;
         })
             .catch(function (err) {
@@ -71,5 +64,5 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             })
     }
 
-    
+
 });

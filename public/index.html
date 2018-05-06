@@ -16,21 +16,22 @@
   <script src="vendor/jquery/dist/jquery.min.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<!--   <script src="vendor/infiniteScroll/ng-infinite-scroll.min.js"></script> -->
+  <!--   <script src="vendor/infiniteScroll/ng-infinite-scroll.min.js"></script> -->
   <script src="vendor/jqlite/jqlite.min.js"></script>
-  
 
- <!--  Angular Routing -->
- <script src="js/routing.js"></script>
+
+  <!--  Angular Routing -->
+  <script src="js/routing.js"></script>
 
   <!-- Angular main application module -->
   <script src="js/mainApp.js"></script>
 
 
- <!--  services -->
- <script src='js/userService.js'></script>
- <script src='js/posts/postsService.js'></script>
- <script src='directives/trends/trendsService.js'></script>
+  <!--  services -->
+  <script src='js/userService.js'></script>
+  <script src='js/posts/postsService.js'></script>
+  <script src='js/messages/messagesService.js'></script>
+  <script src='directives/trends/trendsService.js'></script>
 
 
   <!-- directives  -->
@@ -41,15 +42,17 @@
   <script src='directives/newPost/newPostDirective.js'></script>
   <script src='directives/post/postDirective.js'></script>
   <script src='directives/user/userDirective.js'></script>
+  <script src='directives/reply/replyDirective.js'></script>
+  <script src='directives/likes/likesDirective.js'></script>
 
-
-    <!--mainController -->
-    <script src="js/mainController.js"></script>
-    <script src="js/posts/postController.js"></script>
-    <script src="js/profile/profileController.js"></script>
-    <script src="js/hashtag/hashtagController.js"></script>
-    <script src="directives/trends/trendsController.js"></script>
-    <script src="directives/follow/followController.js"></script>
+  <!--mainController -->
+  <script src="js/mainController.js"></script>
+  <script src="js/posts/postController.js"></script>
+  <script src="js/messages/messagesController.js"></script>
+  <script src="js/profile/profileController.js"></script>
+  <script src="js/hashtag/hashtagController.js"></script>
+  <script src="directives/trends/trendsController.js"></script>
+  <script src="directives/follow/followController.js"></script>
 
   <!-- css -->
 
@@ -60,7 +63,7 @@
   <link rel="stylesheet" href="./stylesheets/homeAndNotifications.css">
   <link rel="stylesheet" href="./stylesheets/profile.css">
   <link rel="stylesheet" href="./stylesheets/hashtag.css">
-  <link rel="stylesheet" href="./stylesheets/settings.css">  
+  <link rel="stylesheet" href="./stylesheets/settings.css">
   <link rel="stylesheet" href="./stylesheets/newPostDirective.css">
   <link rel="stylesheet" href="./stylesheets/postDirective.css">
   <link rel="stylesheet" href="./stylesheets/modal.css">
@@ -74,7 +77,7 @@
       <nav id="mainNav">
         <ul>
           <li ng-controller="postController">
-            <a href="#!/" class='grey' ng-click="loadPosts()" >
+            <a href="#!/" class='grey' ng-click="loadPosts()">
               <img src="images/home/icons/home.png">
               <span>Home</span>
             </a>
@@ -85,7 +88,7 @@
               <span>Notifications</span>
             </a>
           </li>
-          <li data-toggle="modal" data-target="#messageModal">
+          <li data-toggle="modal" data-target="#messageModal" ng-click="loadConversations()">
             <a href="" class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
@@ -97,12 +100,21 @@
 
         <ul>
           <li>
-              <a href="" id='logo'>
-                  <img src="images/home/icons/logo.png">
-                </a>
+            <a href="#!/" id='logo'>
+              <img src="images/home/icons/logo.png">
+            </a>
           </li>
           <li>
-            <input type="text" class='greyBorder' id='search' placeholder="Search Twitter" ng-model='tagName'>
+            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers()">
+            <ul ng-show='search' class="search-wrapper">
+              <li ng-repeat="user in users | filter : {name:search}">
+                <a href="#!profile/{{user.username}}">
+                  <img class="greyBorder" ng-src="{{user.profilePicture}}">
+                  <span>{{user.name}}</span>
+                  <span>@{{user.username}}</span>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="profile-wrapper">
             <a href="" ng-click="collapsed=!collapsed">
@@ -135,39 +147,159 @@
       </nav>
     </div>
 
+  </header>
 
-    <!-- Messages modal -->
-  <!--   <div class="modal fade" id="messageModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class='retweet-input'>
-                    <input ng-model="reply" type="text" placeholder="Add a comment..." maxlength="150">
-                </div>
-                <post></post>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary filledButton" ng-click="retweet(post)">Retweet</button>
-                </div>
-            </div>
-        </div> -->
+  <div ng-controller="postController">
+    <main ng-view>
+    </main>
+
+    <!--  retweet modal -->
+    <div class="modal fade" id="retweetModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" class="retweet-modal-label">Retweet this to your followers?</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class='retweet-input'>
+            <input ng-model="reply" type="text" placeholder="Add a comment..." maxlength="150">
+          </div>
+          <post></post>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary filledButton" ng-click="retweet(post)">Retweet</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- reply modal -->
+    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" class="retweet-modal-label">Reply to {{post.userName}}</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <post></post>
+          <div>
+            <newpost></newpost>
+            <button type="button" class="btn btn-primary filledButton replyButton" ng-click="replyPost(post)">Reply</button>
+          </div>
+        </div>
+      </div>
     </div>
 
 
-  </header>
+    <!--     post information -->
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <post></post>
+          <div class='modal-spans'>
+            <span>{{posted}}</span>
+            <br>
+            <span>
+              <span>{{post.retweets.length}}</span> Retweets</span>
+            <span ng-click="showLikes(post)" data-toggle="modal" data-target="#likesModal">
+              <span>{{post.likes.length}}</span> Likes</span>
+          </div>
 
-  <main ng-view ng-controller='mainController' >
-     <!--       retweet modal  -->
-   
+          <div class='retweet-input'>
+            <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
+            <button ng-click="replyPost(post)" class="filledButton">Reply</button>
+          </div>
+          <ol>
+            <li ng-repeat="reply in replies">
+              <reply></reply>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  </main>
+  <!--   likes modal -->
+  <div class="modal fade" id="likesModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" class="retweet-modal-label">Liked {{post.likes.length}} times</h1>
+        </div>
 
+        <ol>
+          <li ng-repeat="like in postUserLikes">
+            <like></like>
+          </li>
+        </ol>
 
-  
+      </div>
+    </div>
+  </div>
+
+  <!-- message modal -->
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
+          <button type="button" class="btn btn-primary filledButton" ng-click="newConversationRequest=!newConversationRequest">New Message</button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class='modal-body' ng-if="userInSession.conversations.length==0">
+          <h1>Send a message, get a message</h1>
+          <p>Direct Messages are private conversations between you and other people on Twitter. Share Tweets, media, and more!</p>
+        </div>
+
+        <div class="start-conversation" ng-if="newConversationRequest">
+          <h2>Send message to:</h2>
+          <input type="text" class='greyBorder' id='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()">
+          <ul ng-show='messageSearch'>
+            <h2>People</h2>
+            <li ng-repeat="user in users | filter : {name:messageSearch}">
+              <a ng-click="startConversation(user)">
+                <img class="greyBorder" ng-src="{{user.profilePicture}}">
+                <div>
+                  <span>{{user.name}}</span>
+                  <span>@{{user.username}}</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class='all-conversations' ng-if="userInSession.conversations.length>0 && !started">
+          <ul>
+              <li ng-repeat="conversation in conversations">
+                    <a href="">
+                        <img class="greyBorder" ng-src="{{conversation.user.profilePicture}}">
+                    </a>
+                    <a>
+                    <div>
+                      <span>{{conversation.user.name}}</span>
+                      <span>@{{conversation.user.username}}</span>
+                    </div>
+                    <div>
+                        {{conversation.messages[conversation.messages.length-1]}}
+                    </div>
+                  </a>
+                </li>
+          </ul>
+        </div>
+
+        <div class="message-window" ng-show="started">
+
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
+
 </html>
