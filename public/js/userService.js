@@ -8,6 +8,33 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     const USER_EXISTS_STATUS = 403;
     const DOESNT_EXIST_STATUS = 404;
 
+    //firebase setup
+    let config = {
+        apiKey: "AIzaSyDjF-wLRhxCVm2CKOG89G05-AzrYS6Ztog",
+        authDomain: "twitter-project-6abd2.firebaseapp.com",
+        databaseURL: "https://twitter-project-6abd2.firebaseio.com",
+        projectId: "twitter-project-6abd2",
+        storageBucket: "gs://twitter-project-6abd2.appspot.com",
+        messagingSenderId: "827549512821"
+    };
+
+    firebase.initializeApp(config);
+    let storage = firebase.app().storage();
+    let storageRef = firebase.storage().ref();
+
+    let uid;
+    firebase.auth().signInAnonymously()
+    .catch(err => console.log(err));
+
+    firebase.auth().onAuthStateChanged(user => {
+        if(user){
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid
+            // storageRef = firebase.storage().ref(user.uid);
+        }
+    })
+
+    //validations
     this.validateEmail = function (email) {
         let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
@@ -211,7 +238,17 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.saveNewPost = (post) => $http.post('/users/post', post);
 
-    this.updateUserFields = (user) => $http.post('/users/user', user);
+    this.updateUserFields = (user) => {
+        let deferred = $q.defer();
+        $http.post('/users/user', user)
+        .then(response => {
+            console.log(response);
+            sessionStorage.setItem("loggedUser", JSON.stringify(response.data));
+            deferred.resolve(response.data);
+        })
+        .catch(error => deferred.reject(error));
+        return deferred.promise
+    };
 
     this.getRandomUsers = () => {
         var deferred = $q.defer();
@@ -241,11 +278,30 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     //check if given user is the one in session
     this.checkIfUserIsInSession = (idToCheck) => {
         let userInSessionId = this.getUserInSession()._id;
-        if(idToCheck === userInSessionId){
+        if (idToCheck === userInSessionId) {
             return true
         } else {
             return false
         }
+    }
+
+    //upload picture
+    this.uploadPicture = (data) => {
+        let deferred = $q.defer();
+        storageRef.child(data.name).put(data.file, data.metadata)
+            .then(snapshot => {
+                deferred.resolve(snapshot.downloadURL)
+            })
+            .catch(err => deferred.resolve(err));
+
+        return deferred.promise;
+    }
+
+    //save changes to user settings
+    this.saveProfileChanges = (user) => {
+        let deferred = $q.defer();
+        $http.put("/users/")
+        return deferred.promise
     }
 
 });

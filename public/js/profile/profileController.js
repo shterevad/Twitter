@@ -23,6 +23,7 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
         $scope.following = [];
         $scope.followers = [];
         $scope.posts = [];
+        $scope.likes = [];
 
         user.following.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
@@ -66,6 +67,15 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
             });
         });
 
+        user.likes.forEach(like => {
+            console.log(user.likes)
+            PostsService.getPostById(like).then(l => {
+                $scope.likes.push(l);
+                $scope.likes = PostsService.sortByDateEsc($scope.likes);
+            });
+            console.log($scope.likes);
+        });
+
     });
 
         // follow user by id
@@ -98,6 +108,11 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
                 .catch(function (err) {
                     console.log(err)
                 })
+        }
+
+        $scope.goToSettings = ($event) => {
+            $event.preventDefault();
+            $window.location.href = "/#!/settings";
         }
     
 });
