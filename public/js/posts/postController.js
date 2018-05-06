@@ -56,7 +56,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             links = [],
             videos = [];
 
-        var postText = $scope.filterLinks(post, tags, videos, links);
+        if(post){
+            var postText = $scope.filterLinks(post, tags, videos, links);
+        }
+        
         $scope.newPost = {
             text: postText,
             _userId: $scope.userInSession._id,
@@ -65,9 +68,11 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             tags: tags,
             links: links,
             videos: videos,
-            profilePicture: $scope.userInSession.profilePicture
+            profilePicture: $scope.userInSession.profilePicture,
+            photo:$scope.newPost.photo
         }
 
+        
         if ($scope.newPost.photo) {
             let userToUpdate = userService.getUserInSession();
             userToUpdate.gallery.push($scope.newPost.photo);
@@ -76,11 +81,16 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 .catch(err => console.log(err));
         }
 
-        $scope.savePost($scope.newPost).then(res => {
-            $scope.posts.unshift(res.post);
-            console.log(res.post);
-        });
-        $scope.tweetText = '';
+
+        if(postText || $scope.newPost.photo){
+            $scope.savePost($scope.newPost).then(res => {
+                $scope.posts.unshift(res.post);
+            });
+            $scope.tweetText = '';
+        } else {
+            $scope.emptyPost=true;
+        }
+     
 
     }
 

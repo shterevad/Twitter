@@ -21,7 +21,7 @@
             <a href="">
                 <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo'>
             </a>
-            <div>
+            <div ng-show="!post.photo">
                 <a href="" class='posts-video'>
                     <iframe ng-if="post.videos.length>0" ng-src="{{post.videos[0] | trusted}}" frameborder="0"></iframe>
                 </a>

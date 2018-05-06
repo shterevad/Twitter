@@ -26,7 +26,7 @@
     z-index:1200 !important;
 }
 
-#postModal .posts-action-list{
+#postModal .posts-action-list, .all-conversations div{
     display: inline-block;
 }
 
@@ -272,12 +272,12 @@
     font-weight: bold;
   }
 
-  #messageModal p{
+  /* #messageModal p{
     margin: 1em 0em 2em 0em;
     color: gray;
-  }
+  } */
 
-  #messageModal .modal-body,.start-conversation{
+  #messageModal .modal-body, .start-conversation{
     margin: 1% 6% 0% 6%;
   }
 
@@ -310,11 +310,31 @@
     padding:0em 1em;
   }
 
-  #messageModal a{
+  #messageModal .start-conversation a{
     display: block;
     height: 100%;
   }
 
   #messageModal a:hover{
     background-color: #f5f8fa;
+  }
+
+  .message-window p{
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0.2em 1em 0.2em 0.5em;
+    font-size: 1.4em;
+  }
+
+  .userInSession-messages p{
+    float: right;
+    background-color: #1da1f2;
+    color: white;
+  }
+
+
+
+
+  .userInSession-messages img{
+    float:right;
   }

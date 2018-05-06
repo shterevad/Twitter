@@ -3,10 +3,8 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations=[];
+    $scope.sectionInUse=2;  
    
-    $scope.newConversationRequest=false;
-
-
 
     $scope.loadUsers = function () {
         userService.getAllUsers().then(users => {
@@ -20,16 +18,13 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
 
 
     $scope.loadConversations = function(){
-
+        $scope.sectionInUse=2;  
         $scope.userInSession.conversations.forEach(conversation => {
-            console.log(conversation);
             userService.getUserById(conversation._userId).then(user=>{
                 var index= $scope.conversations.findIndex(conv=>conv.user._id===conversation._userId);
                 if(index==-1){
                     $scope.conversations.push({user:user, messages: conversation.messages});
                 }
-                
-                console.log($scope.conversations);
             })
         });
     }
