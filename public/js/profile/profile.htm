@@ -80,6 +80,7 @@
 
             <div ng-show="sectionInUse === 1" id="profile-page-main-div-tweets">
                 <div class='mainDiv container' id="profile-page-main-div-tweets-inner">
+                    <newpost ng-controller="postController"></newpost>
                     <ol ng-repeat='post in posts'>
                         <li>
                             <post></post>

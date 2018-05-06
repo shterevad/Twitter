@@ -181,7 +181,6 @@ router.post('/unfollow', function (req, res, next) {
             })
         } else {
             res.status(INVALID_PARAMS_STATUS).send({ messate: "Not following" });
-            console.log("User not followed");
         }
     })
     res.status(OK_STATUS).send({ message: "Success" })
