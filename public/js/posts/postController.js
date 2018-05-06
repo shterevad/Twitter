@@ -4,6 +4,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.posts = [];
     $scope.tweetText = '';
     $scope.postUserLikes = [];
+    $scope.newPost = {};
 
     var followingIds = $scope.userInSession.following.slice();
     followingIds.push($scope.userInSession._id);
@@ -66,6 +67,14 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             videos: videos,
             profilePicture: $scope.userInSession.profilePicture
         }
+
+        if($scope.newPost.photo){
+            let userToUpdate = userService.getUserInSession();
+            userToUpdate.gallery.push($scope.newPost.photo);
+            userService.updateUserFields({user : userToUpdate})
+            .catch(err => console.log(err));
+        }
+
         $scope.savePost(newPost).then(res => {
             $scope.posts.unshift(res.post);
             $scope.tweetText = ''
@@ -250,6 +259,18 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             return w;
         });
         return splited.join(' ');
+    }
+
+    $scope.upload = ($event) => {
+        let data = {}
+        data.file = $event.target.files[0];
+        data.name = (+new Date()) + '-' + data.file.name;
+        data.metadata = { contentType: data.file.type };
+        userService.uploadPicture(data)
+        .then(response => {
+            $scope.newPost.photo = response;
+        })
+        .catch(err => console.log(err));
     }
 
 });

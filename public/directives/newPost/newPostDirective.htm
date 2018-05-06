@@ -7,10 +7,10 @@
         <div>
                 <ul>
                     <li>
-                        <label for="#photo">
+                        <label for="photo">
                                 <img src="../images/home/icons/uploadPhoto.png" class="upload" ng-model="newPost.photos"/>
                         </label>
-                        <input type="file" accept="image/*" multiple="false" style="display:none" id="photo">
+                        <input data-file type="file" ng-model="newPost.photo" ng-upload-change="upload($event)" accept="image/*" multiple="false" style="display:none" id="photo">
                     </li>
                     <li>
                         <img src="../images/home/icons/gif.png" class="upload" id='gif' ng-model="newPost.giffs"/>

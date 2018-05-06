@@ -4,7 +4,6 @@ mainApp.controller('settingsController', function ($scope, $window, $location, $
     $scope.userInSettings = userService.getUserInSession();
     
     $scope.saveProfileChanges = () => {
-        // console.log($scope.userInSettings);
         var updated = userService.updateUserFields({user : $scope.userInSettings});
         // userService.updateUserFields($scope.userInSettings)
         // .then(response => {
