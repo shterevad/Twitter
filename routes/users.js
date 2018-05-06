@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var sha1 = require('sha1');
 var router = express.Router();
 var Users = require("../modules/users.js");
 
@@ -191,5 +192,34 @@ router.post('/unfollow', function (req, res, next) {
     })
     res.status(OK_STATUS).send({ message: "Success" })
 })
+
+
+//change password
+router.put("/pass-change", function(req, res, next){
+    res.setHeader('content-type', 'application/json');
+    let oldPass = req.body.current;
+    let newPass = req.body.new;
+
+    Users.findOne({"_id" : req.body.userId}, {}, function(err, user){
+        if(!user){
+          res.status(DOESNT_EXISTS_STATUS).send({message: "User doesn't exist"})
+        } else {
+            console.log(sha1(oldPass))
+            console.log(user.password);
+          if(sha1(oldPass) == user.password){
+              user.password = sha1(newPass);
+              user.save(function (err) {
+                if (err) {
+                    console.log(err)
+                };
+                res.status(OK_STATUS).send({message : "Password changed"});
+            })
+          } else {
+            res.status(INVALID_CREDENTIALS_STATUS).send({message: "Invalid password"})
+          }
+        }
+      });
+    
+});
 
 module.exports = router;

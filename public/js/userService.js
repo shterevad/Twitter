@@ -24,10 +24,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     let uid;
     firebase.auth().signInAnonymously()
-    .catch(err => console.log(err));
+        .catch(err => console.log(err));
 
     firebase.auth().onAuthStateChanged(user => {
-        if(user){
+        if (user) {
             var isAnonymous = user.isAnonymous;
             var uid = user.uid
             // storageRef = firebase.storage().ref(user.uid);
@@ -241,12 +241,12 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     this.updateUserFields = (user) => {
         let deferred = $q.defer();
         $http.post('/users/user', user)
-        .then(response => {
-            console.log(response);
-            sessionStorage.setItem("loggedUser", JSON.stringify(response.data));
-            deferred.resolve(response.data);
-        })
-        .catch(error => deferred.reject(error));
+            .then(response => {
+                console.log(response);
+                sessionStorage.setItem("loggedUser", JSON.stringify(response.data));
+                deferred.resolve(response.data);
+            })
+            .catch(error => deferred.reject(error));
         return deferred.promise
     };
 
@@ -298,9 +298,38 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
     //save changes to user settings
-    this.saveProfileChanges = (user) => {
+    this.changePass = (passData) => {
         let deferred = $q.defer();
-        $http.put("/users/")
+        if (passData.new != passData.newRepeat) {
+            deferred.reject({
+                status: INVALID_DATA_STATUS,
+                message: "The new password doesn't match. Please double check."
+            })
+        }
+
+        if (!this.validatePassword(passData.new)) {
+            deferred.reject({
+                status: INVALID_CREDENTIALS_STATUS,
+                message: "New password is not valid. Please keep in mind that your password must be at least 6 characters and must contain at least one number and one capital letter!"
+            })
+        }
+
+        if ((passData.new === passData.newRepeat) && this.validatePassword(passData.new)) {
+            $http.put("/users/pass-change", passData)
+                .then(response => {
+                    deferred.resolve({
+                        status : response.status,
+                        message : "Your password has been updated successfully"
+                    });
+                })
+                .catch(err => {
+                    deferred.reject({
+                        message: "The password you've entered is not correct",
+                        status : INVALID_CREDENTIALS_STATUS
+                    });
+                })
+        }
+
         return deferred.promise
     }
 

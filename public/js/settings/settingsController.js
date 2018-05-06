@@ -2,14 +2,30 @@ mainApp.controller('settingsController', function ($scope, $window, $location, $
 
     $scope.settingsSection = 1;
     $scope.userInSettings = userService.getUserInSession();
-    
+    $scope.passwordChange = {};
+    $scope.hasResponse = false;
+    $scope.hasError = false;
+    $scope.response = {};
+
     $scope.saveProfileChanges = () => {
-        var updated = userService.updateUserFields({user : $scope.userInSettings});
-        // userService.updateUserFields($scope.userInSettings)
-        // .then(response => {
-        //     console.log(response);
-        // })
-        // .catch(err => console.log(err));
+        userService.updateUserFields({user : $scope.userInSettings})
+        .catch(err => console.log(err));
+    }
+
+    $scope.changePass = () => {
+        $scope.passwordChange.userId =  $scope.userInSettings._id;
+        userService.changePass($scope.passwordChange)
+        .then(response => {
+            $scope.hasResponse = true;
+            $scope.hasError = false;
+            $scope.response = response.message;
+        })
+        .catch(err => {
+            $scope.hasResponse = true;
+            $scope.hasError = true;
+            $scope.response = err.message;
+        });
+        $scope.passwordChange = {}
     }
 
     $scope.upload = ($event) => {
