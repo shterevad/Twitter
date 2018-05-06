@@ -101,15 +101,21 @@ router.get("/randomusers", function (req, res) {
     });
 });
 
+//get all users
+router.get("/users", function (req, res) {
+    Users.find({}, {}, function (err, results) {
+        if (!err) {
+            res.json(results);
+        }
+    });
+});
+
 router.get("/following/:userId", function (req, res) {
         Users.findOne({ _id: req.params.userId }, {}, function (err, results) {
             if (!err) {
                 res.json(results);
             }
         });
- 
-
-
 });
 
 //follow user by id

@@ -7,7 +7,7 @@
 }
 
 .retweet-input>input{
-    width: 92%;
+    width: 70%;
     margin: 1em 1.5em;
     height: 37px;
     background-color: #e8f5fd;
@@ -22,6 +22,9 @@
     z-index: 1100 !important;
 }
 
+#likesModal{
+    z-index:1200 !important;
+}
 
 #postModal .posts-action-list{
     display: inline-block;
@@ -248,4 +251,70 @@
     color: gray;
     margin: 1em;
     line-height: 2em;
+  }
+
+  #messageModal .modal-content{
+    margin: 9% -10%;
+    width: 113%;
+  }
+
+  #messageModal button:first-of-type{
+    width: 34%;
+    height: 31px;
+  }
+
+  #messageModal h1{
+    text-align: left;
+  }
+
+  #messageModal .modal-body h1{
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+
+  #messageModal p{
+    margin: 1em 0em 2em 0em;
+    color: gray;
+  }
+
+  #messageModal .modal-body,.start-conversation{
+    margin: 1% 6% 0% 6%;
+  }
+
+  #messageModal .start-conversation input{
+    width: 97%;
+    margin: 3em 0em;
+    border: 1px solid #1da1f2;
+  }
+
+  #messageModal h2{
+    font-weight: bold;
+  }
+
+
+  #messageModal img{
+    height: 35px;
+    border-radius: 100px;
+  }
+
+  #messageModal li{
+    padding:1em 0em;
+  }
+
+  #messageModal span:first-of-type{
+    color:black;
+    padding-left:1em;
+  }
+  #messageModal span:last-of-type{
+    color:gray;
+    padding:0em 1em;
+  }
+
+  #messageModal a{
+    display: block;
+    height: 100%;
+  }
+
+  #messageModal a:hover{
+    background-color: #f5f8fa;
   }

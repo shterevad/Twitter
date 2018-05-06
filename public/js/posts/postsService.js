@@ -1,12 +1,14 @@
-mainApp.service('PostsService', function ($q,$http, userService) {
+mainApp.service('PostsService', function ($q,$http, userService, TrendsService) {
 
-    this.getPosts = () => {
+     this.getPosts = () => {
         var deferred = $q.defer();
         var promise = $http.get('http://localhost:3000/posts/posts').then(function (response) {
             deferred.resolve(response.data);
         });
         return deferred.promise;
-    }
+    } 
+
+    this.getPosts = () =>$http.get('http://localhost:3000/posts/posts');
 
     this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts/' + id);
 
@@ -16,21 +18,23 @@ mainApp.service('PostsService', function ($q,$http, userService) {
 
 
     //get all users post
-    this.getPostsByUserId = (userId) => {
+     this.getPostsByUserId = (userId) => {
         var deferred = $q.defer();
         var promise = $http.get('http://localhost:3000/posts/posts/' + userId).then(function (response) {
             deferred.resolve(response.data);
         });
         return deferred.promise;
-    }
+    } 
+ 
+   
 
-    this.getPostById = (id) => {
+     this.getPostById = (id) => {
         var deferred = $q.defer();
         var promise = $http.get('http://localhost:3000/posts/' + id).then(function (response) {
             deferred.resolve(response.data);
         });
         return deferred.promise;
-    }
+    } 
 
     this.sortByDateDesc = function (data) {
        return data.sort((d1, d2) => {
@@ -43,4 +47,6 @@ mainApp.service('PostsService', function ($q,$http, userService) {
          return new Date(d2.posted) - new Date(d1.posted);
          })
      }
+
+     
 });

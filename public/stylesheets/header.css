@@ -108,7 +108,7 @@ nav>ul>li{
 }
 
 #search{
-  width: 200px;
+  width: 210px;
   background-color: #f5f8fa;
   padding:1em;
 }
@@ -155,7 +155,7 @@ nav>ul>li{
     border-radius: 4%;
   }
   
-  .profile-wrapper li a{
+  .profile-wrapper li a, .search-wrapper li a{
     display: block;
     color:black;
     text-indent: 30px;
@@ -163,6 +163,7 @@ nav>ul>li{
     border-radius: 5%;
   }
   
+
   .profile-wrapper li a:hover{
     background-color: #1da1f2;
     cursor: pointer;
@@ -179,8 +180,22 @@ nav>ul>li{
     font-weight: 100;
   }
 
+  .search-wrapper{
+    position: absolute;
+    width: 25%;
+    background-color: white;
+    border-radius: 10px;
+  }
 
 
-  #logo img{
-    
+  .search-wrapper span:first-of-type{
+    color:black;
+  }
+  .search-wrapper span:last-of-type{
+    color:gray;
+    padding:0em 1em;
+  }
+
+  .search-wrapper li{
+    padding:0.5em;
   }

@@ -4,6 +4,7 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
   TrendsService.getTagByName(tagName).then(tag => {
     $scope.tag = tag;
     $scope.show=true;
+    console.log($scope.userInSession);
 
     $scope.getTagPosts = (id) => {
       $scope.posts = [];
