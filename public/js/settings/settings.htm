@@ -3,10 +3,10 @@
 
         <div id="settings-page-profile-container" class="container">
             <div id="settings-page-profile-banner-container">
-                <img id="settings-page-profile-banner" ng-src="{{userInSettings.headerPicture}}" alt="">
+                <img id="settings-page-profile-banner" ng-src="{{userInSettings.headerPicture || images/default/default_profile_icon.png}}" alt="">
             </div>
 
-            <img id="settings-page-profile-icon" ng-src="{{userInSettings.profilePicture}}" alt="">
+            <img id="settings-page-profile-icon" ng-src="{{userInSettings.profilePicture || 'images/default/default_header_image.png'}}" alt="">
 
             <div id="settings-page-profile-details">
                 <p id="settings-page-user-name">{{userInSettings.name}}</p>
@@ -62,16 +62,15 @@
                         <tr>
                             <td class="account-field-name">Profile picture </td>
                             <td class="account-field-content">
-                                <input data-file type="file" name="picture" ng-model="userInSettings.profilePicture" ng-upload-change="upload($event)"
-                                 id="account-profile-picture" class="inputfile">
+                                <input data-file type="file" name="profilePicture" ng-model="userInSettings.profilePicture" ng-upload-change="upload($event)" id="account-profile-picture" class="inputfile">
                                 <label for="account-profile-picture">Chose a file</label>
                             </td>
                         </tr>
                         <tr>
                             <td class="account-field-name">Profile header </td>
                             <td class="account-field-content">
-                                <input type="file" name="banner" ng-model="userInSettings.headerPicture" id="account-banner" class="inputfile">
-                                <label for="account-baner">Chose a file</label>
+                                <input data-file type="file" name="headerPicture" ng-model="userInSettings.headerPicture" ng-upload-change="upload($event)" id="account-banner" class="inputfile">
+                                <label for="account-banner">Chose a file</label>
                             </td>
                         </tr>
                         <tr>
