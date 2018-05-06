@@ -77,10 +77,9 @@
 
 
 </head>
-
 <body ng-app="mainApp" ng-controller='mainAppController'>
-  <header class='greyBorder' ng-controller='headerController'>
-    <div>
+    <header class='greyBorder' ng-controller='headerController'>
+        <div>
       <nav id="mainNav">
         <ul>
           <li ng-controller="postController">
@@ -291,9 +290,10 @@
                     <div>
                       <span>{{conversation.user.name}}</span>
                       <span>@{{conversation.user.username}}</span>
+                      <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
                     </div>
                     <div>
-                        {{conversation.messages[conversation.messages.length-1]}}
+                        {{conversation.messages[conversation.messages[conversation.messages.length-1].message]}}
                     </div>
                   </a>
                 </li>

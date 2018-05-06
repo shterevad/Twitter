@@ -205,8 +205,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             if (like) {
                 $scope.userInSession.posts.splice(index, 1);
             }
-            userService.updateUserFields({ user: $scope.userInSession }).then(user => { userService.updateUserInSession(user.data); }
-            );
+            userService.updateUserFields({ user: $scope.userInSession })
+    
 
         })
     }

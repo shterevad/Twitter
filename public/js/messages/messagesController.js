@@ -13,9 +13,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
             userService.updateUserFields({ user: user }).then(u => {
                 console.log(u);
                 console.log($scope.userInSession);
-                userService.updateUserFields({ user: $scope.userInSession }).then(user => {
-                    userService.updateUserInSession(user.data); 
-                })
+                userService.updateUserFields({ user: $scope.userInSession })
             });
         }
     }
