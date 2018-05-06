@@ -69,8 +69,8 @@
                         <span>{{userProfile.gallery.length}}</span> photos and videos</span>
                 </div>
                 <div id="profile-pg-user-gallery">
-                    <div ng-repeat="pic in gallery" class="profile-pg-gallery-pic-container">
-                        <img class="profile-pg-gallery-pic" ng-src="{{pic}}" alt="">
+                    <div ng-repeat="galleryPic in gallery" class="profile-pg-gallery-pic-container">
+                        <img title="delete image" class="profile-pg-gallery-pic" ng-src="{{galleryPic}}" data-toggle="modal" data-target="#image-modal" ng-click="expandImage(galleryPic)">
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
 
             <div ng-show="sectionInUse === 1" id="profile-page-main-div-tweets">
                 <div class='mainDiv container' id="profile-page-main-div-tweets-inner">
-                    <newpost ng-controller="postController"></newpost>
+                    <!-- <newpost ng-controller="postController"></newpost> -->
                     <ol ng-repeat='post in posts'>
                         <li>
                             <post></post>

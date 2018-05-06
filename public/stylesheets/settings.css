@@ -228,3 +228,16 @@
 }
 
 /* PASSWORD SETTINGS */
+#response-password-container{
+    text-align: center;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.password-has-error{
+    color: red;
+}
+
+.password-success{
+    color: rgb(29, 163, 242)
+}
