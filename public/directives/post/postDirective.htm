@@ -6,7 +6,7 @@
                     <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
             </a>
             <div>
-                <span class='deletePost' ng-click="deletePost(post._id)" ng-if="post._userId === userInSession._id">&#xd7;</span>
+                <span class='deletePost' ng-click="deletePost(post._id, $index)" ng-if="post._userId === userInSession._id">&#xd7;</span>
                 <a href="#!profile/{{post.userUsername}}">
                     <h1>{{post.userName}}</h1>
                     <span>@{{post.userUsername}}</span>
