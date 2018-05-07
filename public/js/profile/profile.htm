@@ -34,10 +34,10 @@
                 Edit profile
             </button>
 
-            <button class="profile-page-nav-button" id="profile-page-follow-button" ng-show="isFollowing === 2" ng-click="followUser($event, userProfile._id)">
+            <button class="profile-page-nav-button" id="profile-page-follow-button" ng-show="isFollowing === 2" ng-click="followUser($event, userProfile._id, $index)">
                 Follow
             </button>
-            <button class="profile-page-nav-button" id="profile-page-unfollow-button" ng-show="isFollowing === 1" ng-click="unfollowUser($event, userProfile._id)">
+            <button class="profile-page-nav-button" id="profile-page-unfollow-button" ng-show="isFollowing === 1" ng-click="unfollowUser($event, userProfile._id, $index)">
                 Unfollow
             </button>
         </div>
