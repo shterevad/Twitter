@@ -5,7 +5,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.tweetText = '';
     $scope.postUserLikes = [];
     $scope.newPost = {};
-    
+    $scope.userInSession = userService.getUserInSession();
+
     var followingIds = $scope.userInSession.following.slice();
     followingIds.push($scope.userInSession._id);
 
@@ -187,14 +188,12 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     }
 
 
-    $scope.deletePost = function (id) {
-        PostsService.removePost(id).then(postId => {
-            postId = postId.data;
-
+    $scope.deletePost = function (id, $index) {
+        PostsService.removePost(id).then(postId => {        
             var postIndex = $scope.posts.findIndex(p => p._id === postId);
-            var post = $scope.posts.splice(postIndex, 1);
-            console.log(post);
-            post[0].tags.forEach(tag => {
+            var post = $scope.posts.splice($index, 1)[0];
+
+            post.tags.forEach(tag => {
                 TrendsService.getTagByName(tag).then(tag => {
                     var index = tag.posts.findIndex(id => id === postId)
                     if (index != -1) {
@@ -210,20 +209,21 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 })
             })
 
-            console.log($scope.userInSession);
             var index = $scope.userInSession.posts.findIndex(id => id === postId);
-            console.log(index);
             if (index != -1) {
                 $scope.userInSession.posts.splice(index, 1);
             }
+
             var like = $scope.userInSession.likes.findIndex(id => id === postId);
             if (like != -1) {
                 $scope.userInSession.likes.splice(like, 1);
             }
+
             userService.updateUserFields({user:$scope.userInSession}).then(u => {
                 console.log(u);
                 console.log('Succesfully removed');
             })
+            .catch(err => console.log(err))
 
 
         })
@@ -232,9 +232,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.savePost = function (post) {
         return new Promise(function (resolve, reject) {
             PostsService.savePost({ post: post }).then(post => {
-                console.log(post.data);
                 var post = post.data;
-                console.log(post);
                 if (post.tags.length > 0) {
                     for (var i = 0; i < post.tags.length; i++) {
 
@@ -246,15 +244,11 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                         
                     }
                 }
-                console.log(post);
 
                 userService.saveNewPost({ userId: $scope.userInSession._id, post: post._id })
                     .then(u => {
-                        console.log(post);
-                        console.log(u.data);
-                        userService.updateUserInSession(u.data);
-                        
-
+                        delete u.data.password;
+                        $scope.userInSession = u.data;
                     })
                     .catch(err => {
                         console.log(err);

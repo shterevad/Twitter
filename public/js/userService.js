@@ -236,11 +236,20 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     }
 
 
-    this.saveNewPost = (post) => $http.post('/users/post', post);
+    this.saveNewPost = (post) => {
+        let deferred = $q.defer();
+        $http.post('/users/post', post)
+            .then(response => {
+                console.log(response.data)
+                sessionStorage.setItem("loggedUser", JSON.stringify(response.data))
+                deferred.resolve(response)
+            })
+            .catch(err => deferred.reject(err));
+        return deferred.promise;
+}
 
     this.updateUserFields = (user) => {
         let deferred = $q.defer();
-        console.log(user);
         $http.post('/users/user', user)
             .then(response => {
                 delete response.data.password
@@ -300,18 +309,20 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.deleteImage = (data) => {
         let deferred = $q.defer();
-
-        storageRef.child(data.pic).delete()
-            .then(response => {
-                $http.delete("/users/delete-image", data)
-                    .then(response => {
-                        console.log(response)
-                        deferred.resolve(response)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        deferred.reject(error)
-                    })
+        let picToDeleteIndex = data.pic.slice(80).search(/.png|.jpg/);
+        let picToDelete = data.pic.slice(80, (80 + 4 + picToDeleteIndex));
+        console.log(picToDelete);
+        storageRef.child(picToDelete).delete()
+            .then(() => {
+                // $http.delete("/users/delete-image", data)
+                //     .then(response => {
+                //         console.log(response)
+                //         deferred.resolve(response)
+                //     })
+                //     .catch(error => {
+                //         console.log(error)
+                //         deferred.reject(error)
+                //     })
             })
             .catch(err => deferred.reject(err));
 
@@ -319,6 +330,8 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         
         return deferred.promise
     }
+
+
     //save changes to user settings
     this.changePass = (passData) => {
         let deferred = $q.defer();
@@ -340,14 +353,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.put("/users/pass-change", passData)
                 .then(response => {
                     deferred.resolve({
-                        status: response.status,
-                        message: "Your password has been updated successfully"
+                        status : response.status,
+                        message : "Your password has been updated successfully"
                     });
                 })
                 .catch(err => {
                     deferred.reject({
                         message: "The password you've entered is not correct",
-                        status: INVALID_CREDENTIALS_STATUS
+                        status : INVALID_CREDENTIALS_STATUS
                     });
                 })
         }

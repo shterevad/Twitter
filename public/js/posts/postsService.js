@@ -12,7 +12,14 @@ mainApp.service('PostsService', function ($q,$http, userService, TrendsService) 
 
 /*     this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts/' + id); */
 
-    this.removePost = (id) => $http.delete('http://localhost:3000/posts/posts/' + id);
+    this.removePost = (id) => {
+        var deferred = $q.defer();
+        $http.delete('http://localhost:3000/posts/posts/' + id)
+        .then(response => {deferred.resolve(response.data)})
+        .catch(err => {deferred.reject(err)})
+        return deferred.promise;
+        // $http.delete('http://localhost:3000/posts/posts/' + id)
+    }
        
     this.savePost = (post) =>$http.post('http://localhost:3000/posts/newpost', post);
 
