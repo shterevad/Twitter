@@ -150,16 +150,16 @@ nav>ul>li{
     background-color: white;
     border: 0.5px ridge;
     width: 16%;
-    left: 980px;
-    top: 51px;
-    border-radius: 4%;
+    left: 68%;
+    top: 101%;
+    border-radius: 5%;
   }
   
   .profile-wrapper li a, .search-wrapper li a{
     display: block;
-    color:black;
+    color: black;
     text-indent: 30px;
-    padding: 1em 0em;
+    line-height: 2.5em;
     border-radius: 5%;
   }
   
@@ -185,6 +185,10 @@ nav>ul>li{
     width: 25%;
     background-color: white;
     border-radius: 10px;
+  }
+
+  #profileMenu li{
+    border-bottom: 1px solid gray;
   }
 
 

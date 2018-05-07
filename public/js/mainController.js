@@ -3,10 +3,18 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
-    $scope.sectionInUse = 2;
+    $scope.messageSection = 2;
+    
+    window.onclick = function() {
+        if ($scope.search) {
+            $scope.search = '';
+            $scope.$apply();
+        }
+    };
 
 
-    $scope.loadUsers = function () {
+    $scope.loadUsers = function ($event) {
+
         userService.getAllUsers().then(users => {
             var loggedUserIndex = users.findIndex(u => u._id == $scope.userInSession._id);
             if (loggedUserIndex != -1) {
@@ -14,12 +22,13 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
             }
             $scope.users = users;
         })
+
+       
     }
 
     $timeout(function () {
     $scope.loadConversations = (function () {
-        
-            $scope.sectionInUse = 2;
+            $scope.messageSection = 2;
             $scope.userInSession.conversations.forEach(conversation => {
                 userService.getUserById(conversation._userId).then(user => {
                     var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
@@ -51,8 +60,20 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 });
 
-mainApp.controller('headerController', function ($scope, userService) {
+mainApp.controller('headerController', function ($scope, $location) {
+    $scope.menuOpened = false;
 
+    $scope.toggleMenu = function(event) {
+        $scope.menuOpened = !($scope.menuOpened);
+        event.stopPropagation();
+    };
+
+    window.onclick = function() {
+        if ($scope.menuOpened) {
+            $scope.menuOpened = false;
+            $scope.$apply();
+        }
+    };
 });
 
 

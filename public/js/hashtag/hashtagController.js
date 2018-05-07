@@ -7,12 +7,12 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
     console.log($scope.userInSession);
 
     $scope.getTagPosts = (id) => {
-      $scope.posts = [];
+      $scope.tagPosts = [];
       $scope.users=[];
       TrendsService.getTagById(id).then(tag => {
         tag.posts.forEach(postId => {
           PostsService.getPostById(postId).then(post => {
-            $scope.posts.push(post);
+            $scope.tagPosts.push(post);
             userService.getUserById(post._userId).then(user => {
               post.userUsername = user.username;
               post.profilePicture = user.profilePicture;
