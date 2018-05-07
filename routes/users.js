@@ -57,12 +57,11 @@ router.get('/session', function (req, res, next) {
 
 //add new post
 router.post('/post', function (req, res, next) {
-    userId = req.body.userId;
-    post = req.body.post;
+    var userId = req.body.userId;
+    var post = req.body.post;
     Users.findOne({ "_id": userId }, function (err, user) {
         if (user) {
-            let posts = user.posts;
-            posts.push(post);
+            user.posts.push(post);
             user.save();
             res.status(200);
             res.json(user);
@@ -74,18 +73,10 @@ router.post('/post', function (req, res, next) {
 });
 
 //update user fields
-router.post('/user', function (req, res) {
-    var user = req.body.user;
-    Users.findOne({"_id":user._id}, {}, function(err, u){
+router.put('/user/:id', function (req, res) {
+    Users.findByIdAndUpdate(req.params.id, req.body, {}, function(err, u){
         if(!err){
-            for (var field in Users.schema.paths) {
-                if ((field !== '_id') && (field !== '__v')) {
-                   if (req.body.user[field] !== undefined) {
-                      u[field] = req.body.user[field];
-                   }  
-                }  
-             }  
-             u.save();
+            console.log(u);
              res.json(u);
         }else{
             res.json(err);

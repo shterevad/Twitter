@@ -238,9 +238,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.saveNewPost = (post) => $http.post('/users/post', post);
 
-    this.updateUserFields = (user) => {
+    this.updateUserFields = (id, user) => {
         let deferred = $q.defer();
-        $http.post('/users/user', user)
+        console.log(user);
+        $http.put('/users/user/' + id, user)
             .then(response => {
                 console.log(response);
                 sessionStorage.setItem("loggedUser", JSON.stringify(response.data));
@@ -318,14 +319,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.put("/users/pass-change", passData)
                 .then(response => {
                     deferred.resolve({
-                        status : response.status,
-                        message : "Your password has been updated successfully"
+                        status: response.status,
+                        message: "Your password has been updated successfully"
                     });
                 })
                 .catch(err => {
                     deferred.reject({
                         message: "The password you've entered is not correct",
-                        status : INVALID_CREDENTIALS_STATUS
+                        status: INVALID_CREDENTIALS_STATUS
                     });
                 })
         }
