@@ -114,7 +114,7 @@
             </a>
           </li>
           <li>
-            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers()">
+            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)">
             <ul ng-show='search' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}">
@@ -126,10 +126,10 @@
             </ul>
           </li>
           <li class="profile-wrapper">
-            <a href="" ng-click="collapsed=!collapsed">
+            <a ng-click="toggleMenu($event)">
               <img ng-src="{{user.profilePicture}}" class='greyBorder' title="Profile and settings">
             </a>
-            <ul ng-show="collapsed" id="profileMenu">
+            <ul ng-show="menuOpened" id="profileMenu">
               <li ng-click="collapsed=!collapsed">
                 <a href="#!profile/{{user.username}}">
                   <h1>{{user.name}}</h1>
@@ -139,11 +139,9 @@
               <li ng-click="collapsed=!collapsed">
                 <a href="#!profile/{{user.username}}">Profile</a>
               </li>
-              <hr/>
               <li ng-click="collapsed=!collapsed">
                 <a href="#!settings">Settings and Privacy</a>
               </li>
-              <hr/>
               <li>
                 <a href="/logout">Logout</a>
               </li>
@@ -254,7 +252,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
-          <button type="button" class="btn btn-primary filledButton" ng-click="sectionInUse = 1">New Message</button>
+          <button type="button" class="btn btn-primary filledButton" ng-click="messageSection = 1">New Message</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -265,7 +263,7 @@
           <p>Direct Messages are private conversations between you and other people on Twitter. Share Tweets, media, and more!</p>
         </div>
 
-        <div class="start-conversation" ng-if="sectionInUse == 1">
+        <div class="start-conversation" ng-if="messageSection == 1">
           <h2>Send message to:</h2>
           <input type="text" class='greyBorder' id='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()">
           <ul ng-show='messageSearch'>
@@ -282,7 +280,7 @@
           </ul>
         </div>
 
-        <div ng-if="userInSession.conversations.length>0 && sectionInUse==2" class='all-conversations'>
+        <div ng-if="messageSection==2" class='all-conversations'>
           <ul>
               <li ng-repeat="conversation in conversations" ng-click="startConversation(conversation.user)">
                     <a href="#!profile/{{coversation.user.username}}">
@@ -307,7 +305,7 @@
           </ul>
         </div>
 
-        <div class="message-window" ng-if="sectionInUse == 3">
+        <div class="message-window" ng-if="messageSection == 3">
           <ul>
             <li ng-repeat="m in messages">
               <div>

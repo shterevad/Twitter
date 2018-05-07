@@ -2,8 +2,8 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
     
     $scope.startConversation = function (user) {
         $scope.messages=[];
-        $scope.sectionInUse = 3;
-        $scope.messageToSend='';
+        $scope.messageSection = 3;
+        
         console.log(user);
         console.log($scope.userInSession);
 

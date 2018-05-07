@@ -86,12 +86,12 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
         $scope.savePost($scope.newPost).then(res => {
             console.log(res);
+            
             $scope.posts.unshift(res);
-
             $scope.tweetText = '';
+           
         })
-
-
+       
     }
 
     $scope.likePost = (post) => {
@@ -241,7 +241,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                             posts: post._id
                         };
                         TrendsService.saveOrUpdateTag(tag).then(tag => { $scope.tags.push(tag) });
-
+                        
                     }
                 }
 
@@ -253,7 +253,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     .catch(err => {
                         console.log(err);
                     })
-
+                    
                 resolve(post);
             }).catch(err => {
                 //todo:validation

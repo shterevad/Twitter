@@ -33,7 +33,7 @@
 
         <div class='mainDiv'>
             <div ng-show="show" ng-show="showTop">
-                <ol ng-repeat='post in posts | orderBy: "sort"' >
+                <ol ng-repeat='post in tagPosts | orderBy: "sort"' >
                     <li>
                         <post></post>
                     </li>

@@ -15,14 +15,14 @@
         <div>
           <table>
             <tr class='grey bold'>
-              <td>Tweets</td>
-              <td>Following</td>
-              <td>Followers</td>
+              <td><a href="#!profile/{{user.username}}">Tweets</a></td>
+              <td><a href="#!profile/{{user.username}}">Following</a></td>
+              <td><a href="#!profile/{{user.username}}">Followers</a></td>
             </tr>
             <tr class='blue bold'>
-              <td>{{user.posts.length}}</td>
-              <td>{{user.following.length}}</td>
-              <td>{{user.followers.length}}</td>
+              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=1">{{user.posts.length}}</a></td>
+              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=2">{{user.following.length}}</a></td>
+              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=3">{{user.followers.length}}</a></td>
             </tr>
           </table>
         </div>
