@@ -1,6 +1,6 @@
 mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
     // get following posts and user posts
-
+    $scope.tags=[];
     $scope.posts = [];
     $scope.tweetText = '';
     $scope.postUserLikes = [];
@@ -90,10 +90,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         } else {
             $scope.emptyPost=true;
         }
-     
+        
 
     }
-
+    
     $scope.likePost = (post) => {
         let user = userService.getUserInSession();
         let alreadyLiked = post.likes.findIndex(id => {
@@ -184,37 +184,45 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.loadReplies = function (post) {
         $scope.post = post;
         $scope.posted = getDate(post.posted);
-        $scope.replies = post.replies;
-        console.log($scope.replies);
-
+        $scope.replies = $scope.post.replies;
     }
 
 
     $scope.deletePost = function (id) {
         PostsService.removePost(id).then(postId => {
-            console.log(postId);
-            var postIndex = $scope.posts.findIndex(p => p._id === id);
-            var post = $scope.posts.splice(postIndex, 1);
-            console.log(post);
-            post[0].tags.forEach(tag => {
-                TrendsService.getTagByName(tag).then(tag => {
-                    console.log(id);
-                    var index = tag.posts.findIndex(post => post._id === id)
-                    if (index != -1) {
-                        post.posts.splice(index, 1);
-                    }
-                    TrendsService.saveOrUpdateTag(tag).then(t => {
-                        console.log(t);
-                    });
+            var postIndex = $scope.posts.findIndex(p => p._id === postId);
+            if(postIndex!=-1){
+                let post = $scope.posts.splice(postIndex, 1);
+
+                post[0].tags.forEach(tag => {
+                    TrendsService.getTagByName(tag).then(tag => {
+                        var index = tag.posts.findIndex(post => post._id === postId)
+                        if (index != -1) {
+                            tag.posts.splice(index, 1);
+                            if(tag.posts.length==0){
+                                TrendsService.removeTagById(tag._id).then(t=>{
+                                    console.log(t);
+                                })
+                                
+                            }else {
+                                TrendsService.saveOrUpdateTag(tag).then(t => {
+                                    console.log(t);
+                                });
+                            }
+                            
+                        }
+                        
+                    })
                 })
-            })
+            }
+           
             let index = $scope.userInSession.posts.findIndex(id => id === postId);
             if (index) {
                 $scope.userInSession.posts.splice(index, 1);
             }
             let like = $scope.userInSession.likes.findIndex(id => id === postId);
             if (like) {
-                $scope.userInSession.posts.splice(index, 1);
+                $scope.userInSession.likes.splice(index, 1);
             }
             userService.updateUserFields({ user: $scope.userInSession })
 
@@ -222,20 +230,24 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         })
     }
 
-    $scope.savePost = function (post) {
+    $scope.savePost = function (postToSave) {
         return new Promise(function (resolve, reject) {
-            PostsService.savePost({ post: post }).then(post => {
-                var post = post.data;
-                if (post.post.tags.length > 0) {
-                    for (var i = 0; i < post.post.tags.length; i++) {
-                        let tag = {
-                            title: post.post.tags[i],
-                            posts: [post.post._id]
-                        };
-                        TrendsService.saveOrUpdateTag(tag).then(tag => console.log());
+            PostsService.savePost({ post: postToSave }).then(p => {
+                console.log(p);
+                var post=p.data;
+                console.log(post.tags.length);
+                 if (post.tags.length > 0) {
+                    for (var i = 0; i < post.tags.length; i++) {
+                        console.log(post.tags[i]);
+                        var tag = {
+                            title: post.tags[i]
+                        } 
+                        tag.posts.push(post._id);
+                       console.log(tag.posts);
+                     /*    TrendsService.saveOrUpdateTag(tag).then(tag => $scope.tags.push(tag)).catch(err=>console.log(err));
+                        console.log(tag); */
                     }
                 }
-                resolve(post);
                 userService.saveNewPost({ userId: $scope.userInSession._id, post: post.post._id })
                     .then(u => {
                         userService.updateUserInSession(u.data);
@@ -243,8 +255,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     })
                     .catch(err => {
                         console.log(err);
-                    });
-
+                    }); 
+                    resolve(post);
             }).catch(err => {
                 //todo:validation
             });
@@ -308,10 +320,6 @@ function getDate(date) {
         minuteFormatted + morning + " - " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 }
 
-
-function search() {
-
-}
 
 
 

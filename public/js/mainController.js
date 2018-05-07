@@ -2,9 +2,9 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.user = userService.getUserInSession();
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
-    $scope.conversations=[];
-    $scope.sectionInUse=2;  
-   
+    $scope.conversations = [];
+    $scope.sectionInUse = 2;
+
 
     $scope.loadUsers = function () {
         userService.getAllUsers().then(users => {
@@ -16,19 +16,21 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         })
     }
 
-
-    $scope.loadConversations = function(){
-        $scope.sectionInUse=2;  
-        $scope.userInSession.conversations.forEach(conversation => {
-            userService.getUserById(conversation._userId).then(user=>{
-                var index= $scope.conversations.findIndex(conv=>conv.user._id===conversation._userId);
-                if(index==-1){
-                    $scope.conversations.push({user:user, messages: conversation.messages});
-                }
-            })
-        });
-    }
-
+    $timeout(function () {
+    $scope.loadConversations = (function () {
+        
+            $scope.sectionInUse = 2;
+            $scope.userInSession.conversations.forEach(conversation => {
+                userService.getUserById(conversation._userId).then(user => {
+                    var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
+                    if (index == -1) {
+                        $scope.conversations.push({ user: user, messages: conversation.messages });
+                        console.log($scope.conversations);
+                    }
+                })
+            });  
+    })();
+}, 1);
     $scope.expandImage = (pic) => {
         console.log(pic)
         $scope.galleryPic = pic;
@@ -43,5 +45,5 @@ mainApp.controller('headerController', function ($scope, userService) {
 
 mainApp.controller('mainController', function ($scope) {
 
-    
+
 });

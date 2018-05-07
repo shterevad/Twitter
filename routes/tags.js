@@ -50,9 +50,15 @@ router.post('/tags', function (req, res) {
                 }
             });
         } else {
-            let posts = t.posts;
-            posts.push(tag.posts[0]);
-             t.save();
+            for (var field in Tags.schema.paths) {
+                if ((field !== '_id') && (field !== '__v')) {
+                    if (req.body[field] !== undefined) {
+                        t[field] = req.body[field];
+                    }
+                }
+            }
+            t.save();
+            res.json(t);
         }
     });
 });

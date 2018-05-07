@@ -73,7 +73,7 @@ router.post('/newpost', function (req, res) {
         if (!err) {
             res.status(200);
             console.log(post);
-            res.json({ post: post });
+            res.json(post);
         } else {
             res.status(404);
             res.json(err);
@@ -84,12 +84,10 @@ router.post('/newpost', function (req, res) {
 
 /* delete post by id */
 router.delete('/posts/:id', function (req, res) {
-    var id = req.params.id;
-
-    Posts.remove({ _id: id }, function (err, post) {
+    Posts.findByIdAndRemove(req.params.id, function (err, post) {
         if (!err) {
             res.status(200);
-            res.json({ id: post._id });
+            res.json(post._id);
         } else {
             res.status(404);
             res.json("No such post!");
