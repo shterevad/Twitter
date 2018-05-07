@@ -299,9 +299,11 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.deleteImage = (data) => {
         let deferred = $q.defer();
-
-        storageRef.child(data.pic).delete()
-            .then(response => {
+        let picToDeleteIndex = data.pic.slice(80).search(/.png|.jpg/);
+        let picToDelete = data.pic.slice(80, (80 + 4 + picToDeleteIndex));
+        console.log(picToDelete);
+        storageRef.child(picToDelete).delete()
+            .then(() => {
                 $http.delete("/users/delete-image", data)
                     .then(response => {
                         console.log(response)
@@ -318,6 +320,8 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         
         return deferred.promise
     }
+
+
     //save changes to user settings
     this.changePass = (passData) => {
         let deferred = $q.defer();

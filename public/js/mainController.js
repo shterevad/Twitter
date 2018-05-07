@@ -39,7 +39,7 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
             userId : $scope.userInSession._id
         }
         console.log(data)
-        // userService.deleteImage(data)
+        userService.deleteImage(data)
         // .then(response => console.log(response))
         // .catch(error => console.log(error))
     }
