@@ -240,6 +240,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
 
     this.updateUserFields = (user) => {
         let deferred = $q.defer();
+        console.log(user);
         $http.post('/users/user', user)
             .then(response => {
                 delete response.data.password
@@ -343,14 +344,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             $http.put("/users/pass-change", passData)
                 .then(response => {
                     deferred.resolve({
-                        status : response.status,
-                        message : "Your password has been updated successfully"
+                        status: response.status,
+                        message: "Your password has been updated successfully"
                     });
                 })
                 .catch(err => {
                     deferred.reject({
                         message: "The password you've entered is not correct",
-                        status : INVALID_CREDENTIALS_STATUS
+                        status: INVALID_CREDENTIALS_STATUS
                     });
                 })
         }

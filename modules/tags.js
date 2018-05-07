@@ -5,10 +5,8 @@ const MAX_LENGTH_TITLE = 100;
 var TagsSchema = new Schema({
    title: {
        type:String,
-       unique:true,
-       require:true
    },
-  posts: [Schema.Types.ObjectId],
+  posts: [],
 
 });
 

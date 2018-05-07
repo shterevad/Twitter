@@ -58,12 +58,11 @@ router.get('/session', function (req, res, next) {
 
 //add new post
 router.post('/post', function (req, res, next) {
-    userId = req.body.userId;
-    post = req.body.post;
+    var userId = req.body.userId;
+    var post = req.body.post;
     Users.findOne({ "_id": userId }, function (err, user) {
         if (user) {
-            let posts = user.posts;
-            posts.push(post);
+            user.posts.push(post);
             user.save();
             res.status(200);
             res.json(user);

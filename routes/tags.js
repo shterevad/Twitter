@@ -16,8 +16,8 @@ router.get("/tag/:title", function (req, res) {
     res.setHeader('content-type', 'application/json');
     Tags.findOne({ "title": req.params.title }, {}, function (err, tag) {
         if (!err) {
-            res.status(200).json(tag); 
-        }else {
+            res.status(200).json(tag);
+        } else {
             res.status(402).json(err.data);
         }
     });
@@ -28,12 +28,14 @@ router.get("/tag/:title", function (req, res) {
 router.get("/:id", function (req, res) {
     Tags.findOne({ "_id": req.params.id }, {}, function (err, tag) {
         if (!err) {
-            res.status(200).json(tag); 
-        }else {
+            res.status(200).json(tag);
+        } else {
             res.status(402).json(err.data);
         }
     });
 });
+
+
 
 /* add or modify tag */
 router.post('/tags', function (req, res) {
@@ -51,19 +53,40 @@ router.post('/tags', function (req, res) {
             });
         } else {
             let posts = t.posts;
-            posts.push(tag.posts[0]);
-             t.save();
+            posts.push(tag.posts);
+            t.save();
+        }
+    });
+});
+
+
+router.post('/update', function (req, res) {
+
+    Tags.findOne({ "title": req.body.title }, {}, function (err, t) {
+        if (t) {
+            for (var field in Tags.schema.paths) {
+                if ((field !== '_id') && (field !== '__v')) {
+                    if (req.body[field] !== undefined) {
+                        t[field] = req.body[field];
+                    }
+                }
+            }
+            t.save();
+            res.status("200");
+            res.json(t);
+        } else {
+            res.status("404");
+            res.json("No such tag!");
         }
     });
 });
 
 /* delete post by id */
 router.delete('/tags/:id', function (req, res) {
-    var id = req.params.id;
-    Tags.remove({ _id: id }, function (err) {
+    Tags.findByIdAndRemove(req.params.id, function (err,tag) {
         if (!err) {
             res.status(200);
-            res.json({ id: tag._id });
+            res.json(tag._id);
         } else {
             res.status(404);
             res.json("No such post!");

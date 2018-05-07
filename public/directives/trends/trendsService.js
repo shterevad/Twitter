@@ -29,4 +29,8 @@ mainApp.service('TrendsService', function ($q, $http) {
         return deferred.promise;
     }
 
+    this.removeTagById=(id)=>$http.delete(`http://localhost:3000/tags/tags/`+ id);
+
+    this.updateTag = (tag) =>$http.post('http://localhost:3000/tags/update', tag);
+
 })

@@ -10,8 +10,10 @@ mainApp.service('PostsService', function ($q,$http, userService, TrendsService) 
 
     this.getPosts = () =>$http.get('http://localhost:3000/posts/posts');
 
-    this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts/' + id);
+/*     this.removePost = (id) =>$http.delete('http://localhost:3000/posts/posts/' + id); */
 
+    this.removePost = (id) => $http.delete('http://localhost:3000/posts/posts/' + id);
+       
     this.savePost = (post) =>$http.post('http://localhost:3000/posts/newpost', post);
 
     this.updatePost = (post) =>$http.post('http://localhost:3000/posts/post/update', post);
