@@ -39,11 +39,14 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
             userId : $scope.userInSession._id
         }
         console.log(data)
-        userService.deleteImage(data)
-        .then(response => console.log(response))
-        .catch(error => console.log(error))
+        // userService.deleteImage(data)
+        // .then(response => console.log(response))
+        // .catch(error => console.log(error))
     }
 
+    $scope.openImageNewTab = (pic) => {
+        $window.open(pic);
+    }
 });
 
 mainApp.controller('headerController', function ($scope, userService) {
