@@ -42,8 +42,16 @@
     height: 52px;
 }
 
-.posts-photo, .posts-video{
-    margin: 1em 2em 0em 4em;
+.posts-photo{
+    margin-top: 1em;
+}
+
+.posts-frame-content{
+    text-align: center;
+}
+
+.posts-video{
+    margin: 1em 2em 0em 2em;
 }
 
 .post-section>div{

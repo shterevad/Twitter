@@ -339,7 +339,9 @@
   /* PICTURE DETAIL MODAL  */
   .image-modal-container{
     position: relative;
-    flex-direction: unset !important
+    flex-direction: unset !important;
+    background-color: unset;
+    width: auto;
   }
 
   .delete-image{
