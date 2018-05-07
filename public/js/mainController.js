@@ -30,8 +30,18 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 
     $scope.expandImage = (pic) => {
-        console.log(pic)
         $scope.galleryPic = pic;
+    }
+
+    $scope.deleteImage = (pic) => {
+        let data = {
+            pic : pic,
+            userId : $scope.userInSession._id
+        }
+        console.log(data)
+        userService.deleteImage(data)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
     }
 
 });

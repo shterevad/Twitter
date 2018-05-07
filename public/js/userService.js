@@ -242,7 +242,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         let deferred = $q.defer();
         $http.post('/users/user', user)
             .then(response => {
-                console.log(response);
+                delete response.data.password
                 sessionStorage.setItem("loggedUser", JSON.stringify(response.data));
                 deferred.resolve(response.data);
             })
@@ -297,6 +297,27 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise;
     }
 
+    this.deleteImage = (data) => {
+        let deferred = $q.defer();
+
+        storageRef.child(data.pic).delete()
+            .then(response => {
+                $http.delete("/users/delete-image", data)
+                    .then(response => {
+                        console.log(response)
+                        deferred.resolve(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        deferred.reject(error)
+                    })
+            })
+            .catch(err => deferred.reject(err));
+
+
+        
+        return deferred.promise
+    }
     //save changes to user settings
     this.changePass = (passData) => {
         let deferred = $q.defer();
