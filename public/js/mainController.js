@@ -32,10 +32,23 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     })();
 }, 1);
     $scope.expandImage = (pic) => {
-        console.log(pic)
         $scope.galleryPic = pic;
     }
 
+    $scope.deleteImage = (pic) => {
+        let data = {
+            pic : pic,
+            userId : $scope.userInSession._id
+        }
+        console.log(data)
+        // userService.deleteImage(data)
+        // .then(response => console.log(response))
+        // .catch(error => console.log(error))
+    }
+
+    $scope.openImageNewTab = (pic) => {
+        $window.open(pic);
+    }
 });
 
 mainApp.controller('headerController', function ($scope, userService) {

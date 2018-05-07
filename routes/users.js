@@ -3,6 +3,7 @@ var session = require('express-session');
 var sha1 = require('sha1');
 var router = express.Router();
 var Users = require("../modules/users.js");
+var Posts = require("../modules/posts.js");
 
 // const NAME_MIN_LENGTH = 2;
 // const NAME_MAX_LENGTH = 15;
@@ -34,7 +35,7 @@ router.get('/username/:username', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     var usernameToCheck = req.params.username;
     if (!Object.keys(usernameToCheck).length == 0) {
-        Users.findOne({"username" : usernameToCheck}, function (err, user) {
+        Users.findOne({ "username": usernameToCheck }, function (err, user) {
             if (user) {
                 res.status(OK_STATUS).json({ user: user });
             } else {
@@ -73,15 +74,32 @@ router.post('/post', function (req, res, next) {
 });
 
 //update user fields
-router.put('/user/:id', function (req, res) {
-    Users.findByIdAndUpdate(req.params.id, req.body, {}, function(err, u){
+router.post('/user', function (req, res) {
+    let user = req.body.user;
+    let conditions = { _id : req.body.user._id};
+
+    Users.update(conditions, req.body.user, function(err, u){
         if(!err){
-            console.log(u);
-             res.json(u);
-        }else{
-            res.json(err);
+            res.status(OK_STATUS).json(req.body.user);
+        } else {
+            res.status(INVALID_PARAMS_STATUS).json(err)
         }
-    });
+    })
+    // Users.findOne({ "_id": user._id }, {}, function (err, u) {
+    //     if (!err) {
+    //         for (var field in Users.schema.paths) {
+    //             if ((field !== '_id') && (field !== '__v')) {
+    //                 if (req.body.user[field] !== undefined) {
+    //                     u[field] = req.body.user[field];
+    //                 }
+    //             }
+    //         }
+    //         u.save();
+    //         res.json(u);
+    //     } else {
+    //         res.json(err);
+    //     }
+    // });
 });
 
 // Random users, Who to follow list
@@ -103,11 +121,11 @@ router.get("/users", function (req, res) {
 });
 
 router.get("/following/:userId", function (req, res) {
-        Users.findOne({ _id: req.params.userId }, {}, function (err, results) {
-            if (!err) {
-                res.json(results);
-            }
-        });
+    Users.findOne({ _id: req.params.userId }, {}, function (err, results) {
+        if (!err) {
+            res.json(results);
+        }
+    });
 });
 
 //follow user by id
@@ -186,31 +204,57 @@ router.post('/unfollow', function (req, res, next) {
 
 
 //change password
-router.put("/pass-change", function(req, res, next){
+router.put("/pass-change", function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     let oldPass = req.body.current;
     let newPass = req.body.new;
 
-    Users.findOne({"_id" : req.body.userId}, {}, function(err, user){
-        if(!user){
-          res.status(DOESNT_EXISTS_STATUS).send({message: "User doesn't exist"})
+    Users.findOne({ "_id": req.body.userId }, {}, function (err, user) {
+        if (!user) {
+            res.status(DOESNT_EXISTS_STATUS).send({ message: "User doesn't exist" })
         } else {
             console.log(sha1(oldPass))
             console.log(user.password);
-          if(sha1(oldPass) == user.password){
-              user.password = sha1(newPass);
-              user.save(function (err) {
-                if (err) {
-                    console.log(err)
-                };
-                res.status(OK_STATUS).send({message : "Password changed"});
-            })
-          } else {
-            res.status(INVALID_CREDENTIALS_STATUS).send({message: "Invalid password"})
-          }
+            if (sha1(oldPass) == user.password) {
+                user.password = sha1(newPass);
+                user.save(function (err) {
+                    if (err) {
+                        console.log(err)
+                    };
+                    res.status(OK_STATUS).send({ message: "Password changed" });
+                })
+            } else {
+                res.status(INVALID_CREDENTIALS_STATUS).send({ message: "Invalid password" })
+            }
         }
-      });
+    });
+
+// DELETE IMAGE FROM GALLERY + POST
     
+router.delete("/delete-image", function(req, res, next){
+    res.setHeader('content-type', 'application/json');
+    console.log(req.body);
+    // Users.findOne({ "_id": req.body.userId }, {}, function (err, user) {
+    //     if (!user) {
+    //         res.status(DOESNT_EXISTS_STATUS).send({ message: "Something went wrong" })
+    //     } else {
+    //         if (sha1(oldPass) == user.password) {
+    //             user.password = sha1(newPass);
+    //             user.save(function (err) {
+    //                 if (err) {
+    //                     console.log(err)
+    //                 };
+    //                 res.status(OK_STATUS).send({ message: "Password changed" });
+    //             })
+    //         } else {
+    //             res.status(INVALID_CREDENTIALS_STATUS).send({ message: "Invalid password" })
+    //         }
+    //     }
+    // })
+})
+
+
+
 });
 
 module.exports = router;

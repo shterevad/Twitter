@@ -220,7 +220,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             if (like != -1) {
                 $scope.userInSession.likes.splice(like, 1);
             }
-            userService.updateUserFields($scope.userInSession._id, $scope.userInSession.posts).then(u => {
+            userService.updateUserFields({user:$scope.userInSession}).then(u => {
                 console.log(u);
                 console.log('Succesfully removed');
             })
