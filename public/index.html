@@ -17,6 +17,7 @@
   <script src="vendor/angular/angular.min.js"></script>
   <script src="vendor/angular-route/angular-route.min.js"></script>
   <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="vendor/angular-tooltips/dist/angular-tooltips.min.js"></script>
 
   <!-- bootstrap -->
   <script src="vendor/jquery/dist/jquery.min.js"></script>
@@ -74,6 +75,7 @@
   <link rel="stylesheet" href="./stylesheets/newPostDirective.css">
   <link rel="stylesheet" href="./stylesheets/postDirective.css">
   <link rel="stylesheet" href="./stylesheets/modal.css">
+  <link rel="stylesheet" href="vendor/angular-tooltips/dist/angular-tooltips.min.css">
 
 
 </head>
@@ -327,7 +329,7 @@
   <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content image-modal-container">
-          <img src="images/icons/delete-icon.png" class="delete-image" ng-click="deleteImage(galleryPic)"/>
+          <img src="images/icons/delete-icon.png" class="delete-image" ng-click="deleteImage(galleryPic)" tooltips tooltip-side="top" tooltip-template="Delete image" />
          <img class="expanded-image" ng-src="{{galleryPic}}" />
       </div>
     </div>

@@ -339,17 +339,19 @@
   /* PICTURE DETAIL MODAL  */
   .image-modal-container{
     position: relative;
+    flex-direction: unset !important
   }
 
   .delete-image{
-    /* color: rgb(189,29,29);
-    font-weight: bold; */
     display: block;
-    /* font-size: 2em; */
     width: 5%;
     position: absolute;
-    right: 1.5%;
+    left: 1.5%;
     top: 1%;
-    float: right;
+    /* float: right; */
     cursor: pointer;
+  }
+
+  tooltip{
+    position: unset !important
   }

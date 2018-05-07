@@ -1,4 +1,4 @@
-var mainApp = angular.module("mainApp", ["ngRoute", "ngSanitize"]);
+var mainApp = angular.module("mainApp", ["ngRoute", "ngSanitize", "720kb.tooltips"]);
 
 
 mainApp.config(function($routeProvider) {
