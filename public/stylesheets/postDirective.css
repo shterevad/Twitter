@@ -99,10 +99,13 @@ section.post-section{
 }
 
 .posts-frame-content img, .posts-frame-content iframe{
-    object-fit: contain;
-    width: 89%;
-    height: 300px;
-    border-radius: 15px;
+    width: 84%;
+    margin: 0em 1em 1em 3.5em;
+    border-radius: 10px;
+    border: 1px solid #1da1f2;
+}
+.posts-frame-content iframe{
+    height: 100%;
 }
 
 .posts-frame-content div{
