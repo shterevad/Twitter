@@ -1,28 +1,28 @@
-<div id='profileDiv'  class="container">
-        <img ng-src="{{user.headerPicture}}">
+<div id='profileDiv'  class="container" ng-controller="postController">
+        <img ng-src="{{userInSession.headerPicture}}">
 
-        <img ng-src="{{user.profilePicture}}">
+        <img ng-src="{{userInSession.profilePicture}}">
         <div>
-          <div ng-show='false'>{{user._id}}</div>
-          <a href="#!profile/{{user.username}}">
-            <h1 class='black'>{{user.name}}</h1>
+          <div ng-show='false'>{{userInSession._id}}</div>
+          <a href="#!profile/{{userInSession.username}}">
+            <h1 class='black'>{{userInSession.name}}</h1>
           </a>
           <br/>
-          <a href="#!profile/{{user.username}}">
-            <h2 class='grey'>@{{user.username}}</h2>
+          <a href="#!profile/{{userInSession.username}}">
+            <h2 class='grey'>@{{userInSession.username}}</h2>
           </a>
         </div>
         <div>
           <table>
             <tr class='grey bold'>
-              <td><a href="#!profile/{{user.username}}">Tweets</a></td>
-              <td><a href="#!profile/{{user.username}}">Following</a></td>
-              <td><a href="#!profile/{{user.username}}">Followers</a></td>
+              <td><a href="#!profile/{{userInSession.username}}">Tweets</a></td>
+              <td><a href="#!profile/{{userInSession.username}}">Following</a></td>
+              <td><a href="#!profile/{{userInSession.username}}">Followers</a></td>
             </tr>
             <tr class='blue bold'>
-              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=1">{{user.posts.length}}</a></td>
-              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=2">{{user.following.length}}</a></td>
-              <td><a href="#!profile/{{user.username}}" ng-click="sectionInUse=3">{{user.followers.length}}</a></td>
+              <td><a href="#!profile/{{userInSession.username}}" ng-click="sectionInUse=1">{{userInSession.posts.length}}</a></td>
+              <td><a href="#!profile/{{userInSession.username}}" ng-click="sectionInUse=2">{{userInSession.following.length}}</a></td>
+              <td><a href="#!profile/{{userInSession.username}}" ng-click="sectionInUse=3">{{userInSession.followers.length}}</a></td>
             </tr>
           </table>
         </div>

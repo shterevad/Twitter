@@ -3,7 +3,7 @@
         <div ng-show="false">{{post._id}}</div>
         <div class="posts-item-header">
             <a href="#!profile/{{post.userUsername}}">
-                    <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
+                <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
             </a>
             <div>
                 <span class='deletePost' ng-click="deletePost(post._id, $index)" ng-if="post._userId === userInSession._id">&#xd7;</span>
@@ -11,8 +11,9 @@
                     <h1>{{post.userName}}</h1>
                     <span>@{{post.userUsername}}</span>
                 </a>
-                
-                <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal" ng-show="post.retweetText"></p>
+
+                <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
+                    ng-show="post.retweetText"></p>
                 <p ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
 
@@ -36,10 +37,10 @@
                     <span>{{post.retweets.length}}</span>
                 </li>
                 <li ng-click="likePost(post)">
-                    
+                    <span ng-class={liked:post.liked}>
                         &#x2661; Like
                         <span>{{post.likes.length}}</span>
-                    
+                    </span>
                 </li>
             </ul>
         </div>

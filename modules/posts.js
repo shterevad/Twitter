@@ -22,6 +22,7 @@ var PostSchema = new Schema({
   videos: [String],
   giffs: [String],
   likes: [Schema.Types.ObjectId],
+  liked:Boolean,
   retweets: [Schema.Types.Object],
   replies: [],
   posted: {
