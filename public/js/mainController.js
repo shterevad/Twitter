@@ -25,6 +25,7 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
 
    
     $scope.loadConversations = function () {
+        console.log($scope.messageSection);
         $scope.messageSection=1;
             $scope.userInSession.conversations.forEach(conversation => {
                 userService.getUserById(conversation._userId).then(user => {
@@ -58,7 +59,8 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 });
 
-mainApp.controller('headerController', function ($scope, $location) {
+mainApp.controller('headerController', function ($scope, $location, userService) {
+    $scope.userInSession = userService.getUserInSession();
     $scope.menuOpened = false;
 
     $scope.toggleMenu = function(event) {

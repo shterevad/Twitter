@@ -3,7 +3,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
     $scope.started = false;
     $scope.messages=[];
     $scope.userInSession = userService.getUserInSession();
-    $scope.messageSection=1;
+
     $scope.startConversation = function (user) {
         $scope.messageSection=3;
         $scope.started = true;
@@ -53,9 +53,9 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                     userService.updateUserFields({user: $scope.userInSession}).then(
                         userService.updateFields({user:user})
                     )
-                    $scope.messageToSend='';
+                   
                 }   
-            
+            $scope.messageToSend='';
         }
     }
 });

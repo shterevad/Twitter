@@ -98,7 +98,7 @@
               <span>Notifications</span>
             </a>
           </li>
-          <li data-toggle="modal" data-target="#messageModal" ng-click="loadConversations()">
+          <li data-toggle="modal" data-target="#messageModal" ng-click="messageSection=1; loadConversations()">
             <a class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
@@ -132,13 +132,13 @@
             </a>
             <ul ng-show="menuOpened" id="profileMenu">
               <li>
-                <a href="#!profile/{{user.username}}">
+                <a href="#!profile/{{userInSession.username}}">
                   <h1>{{userInSession.name}}</h1>
                   <h2>@{{userInSession.username}}</h2>
                 </a>
               </li>
               <li>
-                <a href="#!profile/{{user.username}}">Profile</a>
+                <a href="#!profile/{{userInSession.username}}">Profile</a>
               </li>
               <li>
                 <a href="#!settings">Settings and Privacy</a>
@@ -248,7 +248,7 @@
   </div>
 
   <!-- message modal -->
-  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController">
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -310,7 +310,7 @@
         <div class="message-window" ng-if="messageSection==3">
           <div class='send-message-div'>
             <input type="text" ng-model='messageToSend' class='input-field'>
-            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend)">Send</button>
+            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''";>Send</button>
           </div>
 
           <div class="message-container">

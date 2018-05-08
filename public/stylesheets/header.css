@@ -99,8 +99,10 @@ nav>ul>li{
 }
 
 #rightNav img, #logo img, #search{
-  height:35px;
+  height: 35px;
+  width: 38px;
   border-radius: 100px;
+  object-fit: cover;
 } 
 
 #search:focus, #rightNav img:hover{

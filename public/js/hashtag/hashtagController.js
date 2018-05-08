@@ -7,12 +7,12 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
     console.log($scope.userInSession);
 
     $scope.getTagPosts = (id) => {
-      $scope.tagPosts = [];
+      tagPosts = [];
       $scope.users=[];
       TrendsService.getTagById(id).then(tag => {
         tag.posts.forEach(postId => {
           PostsService.getPostById(postId).then(post => {
-            $scope.tagPosts.push(post);
+            tagPosts.push(post);
             userService.getUserById(post._userId).then(user => {
               post.userUsername = user.username;
               post.profilePicture = user.profilePicture;
@@ -21,25 +21,22 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
           })
         })
       });
-      return $scope.posts;
+      return tagPosts;
     } 
 
-     $scope.showTopTrends = (id) => {
-      $scope.show=true;
-      $scope.showTop=true;
-      $scope.posts=[];
+     $scope.showTopTrends = (id) => { 
+      $scope.tagPosts=[];
      
-      $scope.posts = $scope.getTagPosts(id);
-      
+      $scope.tagPosts = $scope.getTagPosts(id);
+      console.log($scope.tagPosts);
       
     }
     
     $scope.showTopTrends($scope.tag._id);
 
     $scope.showLatestTrends = (id) => {
-      $scope.show=true;
-      $scope.posts=[];
-      $scope.posts = $scope.getTagPosts(id); 
+      $scope.tagPosts=[];
+      $scope.tagPosts = $scope.getTagPosts(id); 
     }
 
     $scope.showPeople = () => {
