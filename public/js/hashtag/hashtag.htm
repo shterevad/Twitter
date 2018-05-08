@@ -32,12 +32,21 @@
         </aside>
 
         <div class='mainDiv'>
-            <div ng-show="show" ng-show="showTop">
-                <ol ng-repeat='post in tagPosts | orderBy: "sort"' >
+            <div>
+                <ol ng-repeat='post in tagPosts track by $index | orderBy: "likes" ' >
                     <li>
                         <post></post>
                     </li>
                 </ol>
+            </div>
+
+
+            <div>
+                    <ol ng-repeat='post in tagPosts track by $index' >
+                        <li>
+                            <post></post>
+                        </li>
+                    </ol>
             </div>
 
           

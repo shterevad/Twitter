@@ -260,6 +260,17 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise
     };
 
+
+    this.updateFields = (user) => {
+        let deferred = $q.defer();
+        $http.post('/users/user', user)
+            .then(response => {
+                deferred.resolve(response.data);
+            })
+            .catch(error => deferred.reject(error));
+        return deferred.promise
+    };
+
     this.getRandomUsers = () => {
         var deferred = $q.defer();
         var promise = $http.get('/users/randomusers/').then(function (response) {

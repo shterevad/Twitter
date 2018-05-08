@@ -2,8 +2,6 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     // get following posts and user posts
     /* $scope.tags=[]; */
     $scope.posts = [];
-    $scope.tweetText = '';
-    $scope.postUserLikes = [];
     $scope.newPost = {};
     $scope.userInSession = userService.getUserInSession();
 
@@ -15,18 +13,30 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             PostsService.getPostsByUserId(user._id).then(userPosts => {
                 let toPush = [];
                 userPosts.forEach(p => {
+                    p.likes.forEach(like=>{
+                        if(like===$scope.userInSession._id){
+                            p.liked = true;
+                        }else {
+                            p.liked = false;
+                        }
+                    })
                     p.userUsername = user.username;
                     p.profilePicture = user.profilePicture;
                     toPush.push(p);
-                })
-                toPush.forEach(post => {
-                    if ($scope.userInSession.likes.indexOf(post._id) >= 0) {
-                        post.liked = true;
-                    } else {
-                        post.liked = false;
-                    };
-                })
+                });
+
+
+                 
                 $scope.posts = $scope.posts.concat(toPush);
+
+                $scope.posts.forEach(post => {
+                    if (post.likes.indexOf($scope.userInSession._id) >= 0) {
+                            post.liked = true;
+                        } else {
+                            post.liked = false;
+                        }; 
+                    }) 
+
                 $scope.posts = PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
                 console.log(err);
@@ -52,13 +62,12 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     }
 
 
-    $scope.addPost = function (post) {
+    $scope.addPost = function (tweetText) {
         var tags = [],
             links = [],
             videos = [];
-
-        if (post) {
-            var postText = $scope.filterLinks(post, tags, videos, links);
+        if (tweetText) {
+            var postText = $scope.filterLinks(tweetText, tags, videos, links);
         }
 
         $scope.newPost = {
@@ -77,20 +86,17 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         if ($scope.newPost.photo) {
             let userToUpdate = userService.getUserInSession();
             userToUpdate.gallery.push($scope.newPost.photo);
-            console.log($scope.newPost.photo);
             userService.updateUserFields({ user: userToUpdate })
                 .catch(err => console.log(err));
         }
 
 
-
-        $scope.savePost($scope.newPost).then(res => {
-            console.log(res);
-            
-            $scope.posts.unshift(res);
-            $scope.tweetText = '';
-           
-        })
+        if($scope.newPost.photo || tweetText){
+            $scope.savePost($scope.newPost).then(res => {
+                $scope.posts.unshift(res);   
+            })
+        }
+       
        
     }
 
@@ -100,8 +106,11 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         });
         if (alreadyLiked != -1) {
             post.likes.splice(alreadyLiked, 1);
+            post.liked=false;
+           
         } else {
             post.likes.push($scope.userInSession._id);
+            post.liked=true;
         }
         PostsService.updatePost({ post: post }).then(p => {
             console.log(p.data);
@@ -141,7 +150,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         PostsService.updatePost({ post: post }).then(p => {
             console.log(p);
             $('#replyModal').modal('hide');
-            $scope.tweetText = '';
+        /*     $scope.tweetText = ''; */
         });
     }
 

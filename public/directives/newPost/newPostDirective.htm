@@ -1,28 +1,27 @@
 <section class='postSection container'>
-        <div>
-            <img src="{{user.profilePicture}}"   id="profilePic">
-            <textarea ng-model="tweetText" cols="90" rows="1" maxlength="230" placeholder="What's happening?" required></textarea>
-        </div>
+    <div ng-init="tweetText=''">
+        <img src="{{userInSession.profilePicture}}" id="profilePic">
+        <textarea ng-model="tweetText" cols="90" rows="1" maxlength="230" placeholder="What's happening?" required></textarea>
+    </div>
 
-        <div>
-                <ul>
-                    <li>
-                        <label for="photo">
-                                <img src="../images/home/icons/uploadPhoto.png" class="upload" ng-model="newPost.photos"/>
-                        </label>
-                        <input data-file type="file" ng-model="newPost.photo" ng-upload-change="upload($event)" accept="image/*" multiple="false" style="display:none" id="photo">
-                    </li>
-                    <li>
-                        <img src="../images/home/icons/gif.png" class="upload" id='gif' ng-model="newPost.giffs"/>
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        <a href="">
-                            <button ng-click="addPost(tweetText)" class="filledButton">Tweet</button>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    <div>
+        <ul>
+            <li>
+                <label for="photo">
+                    <img src="../images/home/icons/uploadPhoto.png" class="upload" ng-model="newPost.photos" />
+                </label>
+                <input data-file type="file" ng-model="newPost.photo" ng-upload-change="upload($event)" accept="image/*" multiple="false"
+                    style="display:none" id="photo">
+            </li>
+            <li>
+                <img src="../images/home/icons/gif.png" class="upload" id='gif' ng-model="newPost.giffs" />
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <button ng-click="addPost(tweetText); tweetText='';" class="filledButton">Tweet</button>
+            </li>
+        </ul>
+    </div>
 
-    </section>
+</section>

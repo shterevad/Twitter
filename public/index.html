@@ -53,15 +53,15 @@
   <script src="directives/upload-files/uploadFile.js"></script>
 
 
-    <!--mainController -->
-    <script src="js/mainController.js"></script>
-    <script src="js/posts/postController.js"></script>
-    <script src="js/profile/profileController.js"></script>
-    <script src="js/settings/settingsController.js"></script>
-    <script src="js/hashtag/hashtagController.js"></script>
-    <script src="js/messages/messagesController.js"></script>
-    <script src="directives/trends/trendsController.js"></script>
-    <script src="directives/follow/followController.js"></script>
+  <!--mainController -->
+  <script src="js/mainController.js"></script>
+  <script src="js/posts/postController.js"></script>
+  <script src="js/profile/profileController.js"></script>
+  <script src="js/settings/settingsController.js"></script>
+  <script src="js/hashtag/hashtagController.js"></script>
+  <script src="js/messages/messagesController.js"></script>
+  <script src="directives/trends/trendsController.js"></script>
+  <script src="directives/follow/followController.js"></script>
 
   <!-- css -->
 
@@ -80,9 +80,10 @@
 
 
 </head>
+
 <body ng-app="mainApp" ng-controller='mainAppController'>
-    <header class='greyBorder' ng-controller='headerController'>
-        <div>
+  <header class='greyBorder' ng-controller='headerController'>
+    <div>
       <nav id="mainNav">
         <ul>
           <li ng-controller="postController">
@@ -97,7 +98,7 @@
               <span>Notifications</span>
             </a>
           </li>
-          <li data-toggle="modal" data-target="#messageModal" ng-click="loadConversations()" >
+          <li data-toggle="modal" data-target="#messageModal" ng-click="messageSection=1; loadConversations()">
             <a class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
@@ -127,19 +128,19 @@
           </li>
           <li class="profile-wrapper">
             <a ng-click="toggleMenu($event)">
-              <img ng-src="{{user.profilePicture}}" class='greyBorder' title="Profile and settings">
+              <img ng-src="{{userInSession.profilePicture}}" class='greyBorder' title="Profile and settings">
             </a>
             <ul ng-show="menuOpened" id="profileMenu">
-              <li ng-click="collapsed=!collapsed">
-                <a href="#!profile/{{user.username}}">
-                  <h1>{{user.name}}</h1>
-                  <h2>@{{user.username}}</h2>
+              <li>
+                <a href="#!profile/{{userInSession.username}}">
+                  <h1>{{userInSession.name}}</h1>
+                  <h2>@{{userInSession.username}}</h2>
                 </a>
               </li>
-              <li ng-click="collapsed=!collapsed">
-                <a href="#!profile/{{user.username}}">Profile</a>
+              <li>
+                <a href="#!profile/{{userInSession.username}}">Profile</a>
               </li>
-              <li ng-click="collapsed=!collapsed">
+              <li>
                 <a href="#!settings">Settings and Privacy</a>
               </li>
               <li>
@@ -247,12 +248,12 @@
   </div>
 
   <!-- message modal -->
-  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController">
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
-          <button type="button" class="btn btn-primary filledButton" ng-click="messageSection = 1">New Message</button>
+          <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -263,9 +264,9 @@
           <p>Direct Messages are private conversations between you and other people on Twitter. Share Tweets, media, and more!</p>
         </div>
 
-        <div class="start-conversation" ng-if="messageSection == 1">
+        <div class="start-conversation" ng-if="messageSection==2">
           <h2>Send message to:</h2>
-          <input type="text" class='greyBorder' id='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()">
+          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()">
           <ul ng-show='messageSearch'>
             <h2>People</h2>
             <li ng-repeat="user in users | filter : {name:messageSearch}">
@@ -280,44 +281,51 @@
           </ul>
         </div>
 
-        <div ng-if="messageSection==2" class='all-conversations'>
+        <div ng-if="messageSection==1" class='all-conversations'>
           <ul>
-              <li ng-repeat="conversation in conversations" ng-click="startConversation(conversation.user)">
-                    <a href="#!profile/{{coversation.user.username}}">
-                        <img class="greyBorder" ng-src="{{conversation.user.profilePicture}}">
-                    </a>
-                    <a>
-                      <div>
-                          <div>
-                              <span>{{conversation.user.name}}</span>
-                              <span>@{{conversation.user.username}}</span>
-                              <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
-                            </div>
-                            <br>
-                            <div>
-                                {{conversation.messages[(conversation.messages.length-1)].message}}
-                            </div>
+            <li ng-repeat="conversation in conversations" ng-click="startConversation(conversation.user)">
+              <div>
+                <a href="#!profile/{{coversation.user.username}}">
+                  <img class="greyBorder" ng-src="{{conversation.user.profilePicture}}">
+                </a>
 
-                      </div>
-                  
-                  </a>
-                </li>
+                <div>
+                  <div>
+                    <span>{{conversation.user.name}}</span>
+                    <span>@{{conversation.user.username}}</span>
+                    <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
+                  </div>
+                  <br>
+                  <div>
+                    {{conversation.messages[(conversation.messages.length-1)].message}}
+                  </div>
+
+                </div>
+
+              </div>
+            </li>
           </ul>
         </div>
 
-        <div class="message-window" ng-if="messageSection == 3">
-          <ul>
-            <li ng-repeat="m in messages">
-              <div>
-                  <a href="">
-                      <img class="greyBorder" ng-src="{{m.profilePic}}">
+        <div class="message-window" ng-if="messageSection==3">
+          <div class='send-message-div'>
+            <input type="text" ng-model='messageToSend' class='input-field'>
+            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''";>Send</button>
+          </div>
+
+          <div class="message-container">
+            <ul>
+              <li ng-repeat="m in messages track by $index">
+                <div>
+                  <a href="#!profile/{{conversationUser.username}}">
+                    <img class="greyBorder" ng-src="{{m.profilePic}}">
                   </a>
-                  <p>{{m.message}}</p>
-              </div>  
-            </li>
-          </ul>
-            <input type="text" class='greyBorder' id='search' ng-model='messageToSend' autofocus>
-            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage()">Send</button>
+                  <p ng-class={myMessage:m.myMessage}>{{m.message}}</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
