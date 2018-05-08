@@ -44,12 +44,13 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.deleteImage = (pic) => {
         let data = {
             pic : pic,
-            userId : $scope.userInSession._id
+            user : userService.getUserInSession()
         }
-        console.log(data)
         userService.deleteImage(data)
-        // .then(response => console.log(response))
-        // .catch(error => console.log(error))
+        .then(response => {
+            $scope.userInSession = userService.getUserInSession();
+        })
+        .catch(error => console.log(error))
     }
 
     $scope.openImageNewTab = (pic) => {
