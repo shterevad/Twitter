@@ -33,7 +33,7 @@
 
         <div class='mainDiv' ng-class={expand:expandMain}>
             <div ng-if="hashtagSection==1">
-                <ol ng-repeat='post in tagPosts track by $index'>
+                <ol ng-repeat='post in tagPosts | orderBy: "-likes.length"  track by $index'>
                     <li>
                         <post></post>
                     </li>
@@ -42,7 +42,7 @@
 
 
             <div ng-if="hashtagSection==2">
-                <ol ng-repeat='post in tagPosts track by $index'>
+                <ol ng-repeat='post in tagPosts | orderBy: "-posted"  track by $index'>
                     <li>
                         <post></post>
                     </li>

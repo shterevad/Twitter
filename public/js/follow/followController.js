@@ -29,8 +29,8 @@ mainApp.controller('followController', function ($scope, $http, userService) {
         });
     };
 
-    $scope.deleteFollow = function (id,$index) {
-            $scope.users.splice($index, 1);
+    $scope.deleteFollow = function (id, $index) {
+        $scope.users.splice($index, 1);
     }
 
     $scope.refresh();

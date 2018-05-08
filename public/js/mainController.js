@@ -2,7 +2,20 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
-    $scope.messageSection = 1;
+    $scope.menuOpened = false;
+
+
+    $scope.toggleMenu = function (event) {
+        $scope.menuOpened = !($scope.menuOpened);
+        event.stopPropagation();
+    };
+
+    window.onclick = function () {
+        if ($scope.menuOpened) {
+            $scope.menuOpened = false;
+            $scope.$apply();
+        }
+    };
 
     $scope.loadUsers = function ($event) {
         userService.getAllUsers().then(users => {
@@ -12,20 +25,6 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
             }
             $scope.users = users;
         })
-    }
-
-    $scope.loadConversations = function () {
-        console.log($scope.messageSection);
-        $scope.messageSection = 1;
-        $scope.userInSession.conversations.forEach(conversation => {
-            userService.getUserById(conversation._userId).then(user => {
-                var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
-                if (index == -1) {
-                    $scope.conversations.push({ user: user, messages: conversation.messages });
-                    console.log($scope.conversations);
-                }
-            })
-        });
     }
 
     $scope.expandImage = (pic) => {
@@ -49,25 +48,30 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 });
 
-mainApp.controller('headerController', function ($scope, $location, userService) {
-    $scope.userInSession = userService.getUserInSession();
-    $scope.menuOpened = false;
 
-    $scope.toggleMenu = function (event) {
-        $scope.menuOpened = !($scope.menuOpened);
-        event.stopPropagation();
-    };
 
-    window.onclick = function () {
-        if ($scope.menuOpened) {
-            $scope.menuOpened = false;
-            $scope.$apply();
-        }
+
+// MainApp Filters
+mainApp.filter('unique', function () {
+    return function (collection, keyname) {
+        var output = [],
+            keys = [];
+        angular.forEach(collection, function (item) {
+            var key = item[keyname];
+            if (keys.indexOf(key) === -1) {
+                keys.push(key);
+                output.push(item);
+            }
+        });
+        return output;
     };
 });
 
 
-mainApp.controller('mainController', function ($scope) {
+mainApp.filter('trusted', ['$sce', function ($sce) {
+    return function (url) {
+        var video_id = url.split('v=')[1].split('&')[0];
+        return $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + video_id);
+    };
+}]);
 
-
-});

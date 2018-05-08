@@ -11,8 +11,9 @@
                     <h1>{{post.userName}}</h1>
                     <span>@{{post.userUsername}}</span>
                 </a>
-
-                <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
+                <br>
+                <span class="retweetBox" ng-show="post.retweetText">Retweeted with:</span>
+                <p ng-bind-HTML="post.retweetText" class='post-section retweetBox' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
                     ng-show="post.retweetText"></p>
                 <p ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
@@ -44,7 +45,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
-
 </section>

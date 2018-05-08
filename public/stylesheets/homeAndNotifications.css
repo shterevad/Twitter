@@ -79,8 +79,8 @@ main{
   
   
   #profileDiv{
-    height: 28%;
-    margin:0em 0em 1em 0em;
+    height: 31%;
+    margin: 0em 0em 1em 0em;
   }
   
   #profileDiv img{
@@ -181,6 +181,10 @@ main{
   #whoToFollow img:last-of-type{
     width: 26px;
   }
+
+  #whoToFollow{
+    height:auto;
+  }
   
   #whoToFollow a>img:first-of-type{
     border-radius: 50%;
@@ -220,9 +224,10 @@ main{
   #whoToFollow div>span{
     color: rgba(152,152,152,0.5);
     font-size: 12px;
+    float: right;
     position: relative;
-    top: -85%;
-    left: 61%;
+    top: -46px;
+    left: -3%;
     cursor: pointer;
   }
   #whoToFollow div>span:hover{

@@ -85,21 +85,6 @@ router.post('/user', function (req, res) {
             res.status(INVALID_PARAMS_STATUS).json(err)
         }
     })
-    // Users.findOne({ "_id": user._id }, {}, function (err, u) {
-    //     if (!err) {
-    //         for (var field in Users.schema.paths) {
-    //             if ((field !== '_id') && (field !== '__v')) {
-    //                 if (req.body.user[field] !== undefined) {
-    //                     u[field] = req.body.user[field];
-    //                 }
-    //             }
-    //         }
-    //         u.save();
-    //         res.json(u);
-    //     } else {
-    //         res.json(err);
-    //     }
-    // });
 });
 
 // Random users, Who to follow list
@@ -180,7 +165,7 @@ router.post('/unfollow', function (req, res, next) {
                 };
             })
         } else {
-            res.status(INVALID_PARAMS_STATUS).send({ messate: "Not following" });
+            res.status(INVALID_PARAMS_STATUS).send({ message: "Not following" });
             console.log("User not followed");
         }
     })

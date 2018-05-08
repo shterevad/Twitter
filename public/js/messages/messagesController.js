@@ -1,12 +1,26 @@
 mainApp.controller('messagesController', function ($scope, $http, $location, $window, $timeout, userService) {
     $scope.messageToSend='';
-    $scope.started = false;
     $scope.messages=[];
     $scope.userInSession = userService.getUserInSession();
+    $scope.messageSection=1;
+
+    $scope.loadConversations = function () {
+        
+        console.log($scope.messageSection);    
+        $scope.userInSession.conversations.forEach(conversation => {
+            userService.getUserById(conversation._userId).then(user => {
+                var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
+                if (index == -1) {
+                    $scope.conversations.push({ user: user, messages: conversation.messages });
+                    console.log($scope.conversations);
+                }
+            })
+        });
+    }
 
     $scope.startConversation = function (user) {
         $scope.messageSection=3;
-        $scope.started = true;
+
         console.log(user);
         console.log($scope.userInSession);
         $conversationUser=user;
