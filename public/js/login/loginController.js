@@ -3,7 +3,7 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
     const USER_DOESNT_EXIST_STATUS = 404;
     const USER_EXISTS_STATUS = 403;
     const INVALID_CREDENTIALS_STATUS = 401;
-
+    sessionStorage.removeItem("loggedUser");
 
     //SIGN UP FORM
     $scope.signUp = function (e) {

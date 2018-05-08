@@ -20,7 +20,7 @@
         </div>
         <div class="posts-frame-content" ng-if="post.videos.length>0 || post.photo">
             <a href="">
-                <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo'>
+                <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo' data-toggle="modal" data-target="#image-modal" ng-click="expandImage(post.photo)">
             </a>
             <div ng-show="!post.photo">
                 <a href="" class='posts-video'>

@@ -342,8 +342,6 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     this.deleteImage = (data) => {
         let self = this;
         let deferred = $q.defer();
-        console.log(data.user);
-
 
         //get the url to send to firebase
         let picToDeleteIndex = data.pic.slice(80).search(/.png|.jpg/);
@@ -355,14 +353,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             picToDelete = data.pic.slice(80, (80 + 5 + picToDeleteJpeg));
         }   
 
-        
-        console.log(picToDelete);
-
         //find the post that contains the image and delete it from user
         this.findImagePost(data.pic, data.user)
         .then(response => {
             let postToDeleteId = response.postToDeleteId
-            console.log(postToDeleteId);
             if(postToDeleteId != -1){
                 console.log(postToDeleteId);
                 data.postToDeleteId = postToDeleteId;
@@ -381,10 +375,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
                         let path = '/posts/posts/' + data.postToDeleteId;
                         $http.delete(path)
                             .then(response => {
-                                console.log(response)
                                 delete data.user.password;
-                                self.updateUserInSession(data.user);
-                                deferred.resolve(data.user)
+                                $http.post('/users/user', {user:data.user})
+                                .then(res => {
+                                    console.log(response)
+                                    self.updateUserInSession(data.user);
+                                    deferred.resolve(data.user)
+                                })
+                                .catch(er => deferred.reject(er))
                             })
                             .catch(error => {
                                 console.log(error)
