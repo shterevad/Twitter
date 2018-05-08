@@ -6,19 +6,19 @@
         <div>
             <ul>
                 <li>
-                    <a ng-click="showTopTrends(tag._id, $index); hashtagSection=1">Top</a>
+                    <a ng-click="showTopTrends(tag._id, $index); hashtagSection=1; expandMain=false">Top</a>
                 </li>
                 <li>
-                    <a ng-click="showLatestTrends(tag._id); hashtagSection=2">Latest</a>
+                    <a ng-click="showLatestTrends(tag._id); hashtagSection=2; expandMain=false" >Latest</a>
                 </li>
                 <li>
-                    <a ng-click="hashtagSection=3">People</a>
+                    <a ng-click="hashtagSection=3; expandMain=true">People</a>
                 </li>
                 <li>
                     <a ng-click="hashtagSection=4; expandMain=true">Photos</a>
                 </li>
                 <li>
-                    <a ng-click="hashtagSection=5">Videos</a>
+                    <a ng-click="hashtagSection=5 expandMain=false">Videos</a>
                 </li>
             </ul>
         </div>
