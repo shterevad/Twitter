@@ -55,3 +55,21 @@
     border-bottom: 2px solid #1da1f2;
     color:#1da1f2;
 }
+
+
+.hashtag-photos{
+    display: inline-block;
+    width: 48%;
+}
+
+.hashtag-photos img{
+    margin: 1.5em;
+    width: 96%;
+    border: 1px solid #1da1f2;
+    border-radius: 10px;
+}
+
+.hashtag-photos img:hover{
+    border: 5px solid #1da1f2;
+    width: 98%;
+}
