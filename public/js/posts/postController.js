@@ -94,6 +94,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         if($scope.newPost.photo || tweetText){
             $scope.savePost($scope.newPost).then(res => {
                 $scope.posts.unshift(res);   
+                $scope.newPost.photo='';
             })
         }
        
@@ -130,7 +131,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
     $scope.retweetReplyPost = function (post) {
         $scope.post = post;
-        $scope.posted = getDate(post.posted);
+        $scope.posted =PostsService.getDate(post.posted);
         console.log($scope.post);
     }
 
@@ -150,7 +151,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         PostsService.updatePost({ post: post }).then(p => {
             console.log(p);
             $('#replyModal').modal('hide');
-        /*     $scope.tweetText = ''; */
+             $scope.tweetText = '';
         });
     }
 
@@ -192,7 +193,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
     $scope.loadReplies = function (post) {
         $scope.post = post;
-        $scope.posted = getDate(post.posted);
+        $scope.posted = PostsService.getDate(post.posted);
         $scope.replies = $scope.post.replies;
     }
 
@@ -304,28 +305,9 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     }
 
 });
-/* }); */
-mainApp.filter('trusted', ['$sce', function ($sce) {
-    return function (url) {
-        var video_id = url.split('v=')[1].split('&')[0];
-        return $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + video_id);
-    };
-}]);
 
 
 
-function getDate(date) {
-    var date = new Date(date);
-    var hour = date.getHours(),
-        minute = date.getMinutes(),
-        second = date.getSeconds(),
-        hourFormatted = hour % 12 || 12, // hour returned in 24 hour format
-        minuteFormatted = minute < 10 ? "0" + minute : minute,
-        morning = hour < 12 ? "AM" : "PM";
-
-    return hourFormatted + ":" +
-        minuteFormatted + morning + " - " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-}
 
 
 

@@ -57,5 +57,18 @@ mainApp.service('PostsService', function ($q,$http, userService, TrendsService) 
          })
      }
 
+     this.getDate=function (date){
+        var date = new Date(date);
+        var hour = date.getHours(),
+            minute = date.getMinutes(),
+            second = date.getSeconds(),
+            hourFormatted = hour % 12 || 12,
+            minuteFormatted = minute < 10 ? "0" + minute : minute,
+            morning = hour < 12 ? "AM" : "PM";
+    
+        return hourFormatted + ":" +
+            minuteFormatted + morning + " - " + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+    }
+
      
 });

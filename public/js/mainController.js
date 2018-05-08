@@ -2,16 +2,7 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
-    $scope.messageSection=1;
-   
-
-/*     window.onclick = function() {
-        if ($scope.search) {
-            $scope.search = '';
-            $scope.$apply();
-        }
-    };  */
-
+    $scope.messageSection = 1;
 
     $scope.loadUsers = function ($event) {
         userService.getAllUsers().then(users => {
@@ -23,19 +14,18 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         })
     }
 
-   
     $scope.loadConversations = function () {
         console.log($scope.messageSection);
-        $scope.messageSection=1;
-            $scope.userInSession.conversations.forEach(conversation => {
-                userService.getUserById(conversation._userId).then(user => {
-                    var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
-                    if (index == -1) {
-                        $scope.conversations.push({ user: user, messages: conversation.messages });
-                        console.log($scope.conversations);
-                    }
-                })
-            });  
+        $scope.messageSection = 1;
+        $scope.userInSession.conversations.forEach(conversation => {
+            userService.getUserById(conversation._userId).then(user => {
+                var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
+                if (index == -1) {
+                    $scope.conversations.push({ user: user, messages: conversation.messages });
+                    console.log($scope.conversations);
+                }
+            })
+        });
     }
 
     $scope.expandImage = (pic) => {
@@ -44,14 +34,14 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
 
     $scope.deleteImage = (pic) => {
         let data = {
-            pic : pic,
-            user : userService.getUserInSession()
+            pic: pic,
+            user: userService.getUserInSession()
         }
         userService.deleteImage(data)
-        .then(response => {
-            $scope.userInSession = userService.getUserInSession();
-        })
-        .catch(error => console.log(error))
+            .then(response => {
+                $scope.userInSession = userService.getUserInSession();
+            })
+            .catch(error => console.log(error))
     }
 
     $scope.openImageNewTab = (pic) => {
@@ -63,12 +53,12 @@ mainApp.controller('headerController', function ($scope, $location, userService)
     $scope.userInSession = userService.getUserInSession();
     $scope.menuOpened = false;
 
-    $scope.toggleMenu = function(event) {
+    $scope.toggleMenu = function (event) {
         $scope.menuOpened = !($scope.menuOpened);
         event.stopPropagation();
     };
 
-    window.onclick = function() {
+    window.onclick = function () {
         if ($scope.menuOpened) {
             $scope.menuOpened = false;
             $scope.$apply();

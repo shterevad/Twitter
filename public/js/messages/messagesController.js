@@ -27,7 +27,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
             var userInSessionMessage = $scope.userInSession.conversations.findIndex(conv=> conv._userId===user._id);
             var userMessage= user.conversations.findIndex(conv=> conv._userId===$scope.userInSession._id);
 
-            $scope.messages=$scope.userInSession.conversations[userInSessionMessage].messages.reverse();
+            $scope.messages=$scope.userInSession.conversations[userInSessionMessage].messages;
             $scope.messages.forEach(message => {
                 if(message.userId===$scope.userInSession._id){
                     message.myMessage=true;
@@ -45,8 +45,8 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                         message: messageToSend,
                     }
                     console.log($scope.messageToSend);
-                    $scope.userInSession.conversations[userInSessionMessage].messages.unshift(message);
-                    user.conversations[userMessage].messages.unshift(message);
+                    $scope.userInSession.conversations[userInSessionMessage].messages.push(message);
+                    user.conversations[userMessage].messages.push(message);
                     console.log($scope.userInSession);
                     console.log(user);
 
@@ -55,7 +55,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                     )
                    
                 }   
-            $scope.messageToSend='';
+    
         }
     }
 });

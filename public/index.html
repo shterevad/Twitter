@@ -82,7 +82,7 @@
 </head>
 
 <body ng-app="mainApp" ng-controller='mainAppController'>
-  <header class='greyBorder' ng-controller='headerController'>
+  <header class='greyBorder' ng-controller='headerController' ng-init="messageSection=1">
     <div>
       <nav id="mainNav">
         <ul>
@@ -252,6 +252,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+          <span id='backButton' ng-click="messageSection=1" ng-if="messageSection==3 || messageSection==2">❮</span>
           <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
           <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -315,12 +316,14 @@
 
           <div class="message-container">
             <ul>
-              <li ng-repeat="m in messages track by $index">
+              <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage} >
                 <div>
-                  <a href="#!profile/{{conversationUser.username}}">
-                    <img class="greyBorder" ng-src="{{m.profilePic}}">
-                  </a>
-                  <p ng-class={myMessage:m.myMessage}>{{m.message}}</p>
+                  <div>
+                      <a href="#!profile/{{conversationUser.username}}">
+                        <img class="greyBorder" ng-src="{{m.profilePic}}">
+                      </a>
+                      <p>{{m.message}}</p>
+                  </div>   
                 </div>
               </li>
             </ul>
