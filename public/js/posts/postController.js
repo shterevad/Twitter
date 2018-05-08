@@ -228,6 +228,15 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 $scope.userInSession.likes.splice(like, 1);
             }
 
+            if(post.photo){
+                var postPic = $scope.userInSession.gallery.findIndex(pic => pic === post.photo);
+                if(postPic != -1) {
+                    $scope.userInSession.gallery.splice(postPic, 1);
+                } 
+            }         
+            
+            console.log($scope.userInSession.gallery)
+
             userService.updateUserFields({user:$scope.userInSession}).then(u => {
                 console.log(u);
                 console.log('Succesfully removed');

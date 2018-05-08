@@ -338,12 +338,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise
     }
 
-    //delete imagechangepass
+    //delete image
     this.deleteImage = (data) => {
         let self = this;
         let deferred = $q.defer();
-        console.log(data.user);
-
 
         //get the url to send to firebase
         let picToDeleteIndex = data.pic.slice(80).search(/.png|.jpg/);
@@ -355,14 +353,10 @@ mainApp.service('userService', function ($http, $q, $timeout) {
             picToDelete = data.pic.slice(80, (80 + 5 + picToDeleteJpeg));
         }   
 
-        
-        console.log(picToDelete);
-
         //find the post that contains the image and delete it from user
         this.findImagePost(data.pic, data.user)
         .then(response => {
             let postToDeleteId = response.postToDeleteId
-            console.log(postToDeleteId);
             if(postToDeleteId != -1){
                 console.log(postToDeleteId);
                 data.postToDeleteId = postToDeleteId;
