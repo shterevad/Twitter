@@ -9,6 +9,7 @@ mainApp.controller('settingsController', function ($scope, $window, $location, $
 
     $scope.saveProfileChanges = () => {
         userService.updateUserFields({user : $scope.userInSettings})
+        .then(response => $scope.userInSettings = response)
         .catch(err => console.log(err));
     }
 
@@ -25,6 +26,7 @@ mainApp.controller('settingsController', function ($scope, $window, $location, $
             $scope.hasError = true;
             $scope.response = err.message;
         });
+
         $scope.passwordChange = {}
     }
 

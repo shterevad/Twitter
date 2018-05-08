@@ -323,13 +323,12 @@
     </div>
   </div>
 
-  <!--  picture detail -->
+  <!--  picture detail modal -->
   <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog image-modal-dialog">
-        <div class="modal-content image-modal-container">
-          
+        <div class="modal-content image-modal-container">         
           <img class="expanded-image" ng-src="{{galleryPic}}" ng-click="openImageNewTab(galleryPic)">
-            <img src="images/icons/delete-icon.png" class="delete-image" ng-click="deleteImage(galleryPic)" tooltips tooltip-side="top" tooltip-template="Delete image" />
+            <img src="images/icons/delete-icon.png" data-toggle="modal" data-target="#image-modal" class="delete-image" ng-click="deleteImage(galleryPic)" tooltips tooltip-side="top" tooltip-template="Delete image" />
           <img>
       </div>
     </div>

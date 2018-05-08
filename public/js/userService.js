@@ -327,7 +327,7 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         return deferred.promise
     }
 
-    //delete image
+    //delete imagechangepass
     this.deleteImage = (data) => {
         let self = this;
         let deferred = $q.defer();
@@ -370,10 +370,14 @@ mainApp.service('userService', function ($http, $q, $timeout) {
                         let path = '/posts/posts/' + data.postToDeleteId;
                         $http.delete(path)
                             .then(response => {
-                                console.log(response)
                                 delete data.user.password;
-                                self.updateUserInSession(data.user);
-                                deferred.resolve(data.user)
+                                $http.post('/users/user', {user:data.user})
+                                .then(res => {
+                                    console.log(response)
+                                    self.updateUserInSession(data.user);
+                                    deferred.resolve(data.user)
+                                })
+                                .catch(er => deferred.reject(er))
                             })
                             .catch(error => {
                                 console.log(error)

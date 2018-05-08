@@ -1,20 +1,27 @@
 mainApp.controller('profileController', function ($scope, $window, $location, $timeout, PostsService, TrendsService, userService) {
+    const SETTINGS_BUTTON_INDEX = 0;
+    const UNFOLLOW_BUTTON_INDEX = 1;
+    const FOLLOW_BUTTON_INDEX = 2;
+    const POSTS_SECTION_INDEX = 1;
+    const FOLLOWING_SECTION_INDEX = 1;
+    const FOLLOWERS_SECTION_INDEX = 1;
+    const LIKES_SECTION_INDEX = 1;
 
-    $scope.sectionInUse = 1;
-    $scope.isFollowing = 0;
+    $scope.sectionInUse = POSTS_SECTION_INDEX;
+    $scope.isFollowing = SETTINGS_BUTTON_INDEX;
     let pageUser = $window.location.hash.substring(11);
     let userInSession = userService.getUserInSession();
 
     userService.getUserByUsername(pageUser).then(function (user) {
         if (user._id === userInSession._id) {
             $scope.isInSession = true;
-            $scope.isFollowing;
+            $scope.isFollowing = SETTINGS_BUTTON_INDEX;
         } else {
             $scope.isInSession = false;
             if(userInSession.following.indexOf(user._id) >= 0){
-                $scope.isFollowing = 1;
+                $scope.isFollowing = UNFOLLOW_BUTTON_INDEX;
             } else {
-                $scope.isFollowing = 2;
+                $scope.isFollowing = FOLLOW_BUTTON_INDEX;
             }
         }
 
@@ -29,13 +36,13 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
             userService.getUserById(u).then(function (toPush) {
                 
                 if (userInSession.following.indexOf(u) >= 0) {
-                    toPush.followBack = 1;
+                    toPush.followBack = UNFOLLOW_BUTTON_INDEX;
                 } else {
-                    toPush.followBack = 2;
+                    toPush.followBack = FOLLOW_BUTTON_INDEX;
                 };
                 
                 if (u === userInSession._id) {
-                    toPush.followBack = 0;
+                    toPush.followBack = SETTINGS_BUTTON_INDEX;
                 }
 
                 $scope.following.push(toPush);
@@ -45,13 +52,13 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
         user.followers.forEach(u => {
             userService.getUserById(u).then(function (toPush) {
                 if (userInSession.following.indexOf(u) >= 0) {
-                    toPush.followBack = 1;
+                    toPush.followBack = UNFOLLOW_BUTTON_INDEX;
                 } else {
-                    toPush.followBack = 2;
+                    toPush.followBack = FOLLOW_BUTTON_INDEX;
                 };
 
                 if (u === userInSession._id) {
-                    toPush.followBack = 0;
+                    toPush.followBack = SETTINGS_BUTTON_INDEX;
                 } 
 
                 $scope.followers.push(toPush);
@@ -68,12 +75,10 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
         });
 
         user.likes.forEach(like => {
-            console.log(user.likes)
             PostsService.getPostById(like).then(l => {
                 $scope.likes.push(l);
                 $scope.likes = PostsService.sortByDateEsc($scope.likes);
             });
-            console.log($scope.likes);
         });
 
     });
@@ -84,7 +89,9 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
             
             userService.followUser(userToFollowId).then(res => {
                 userService.getUserById(userToFollowId).then(function (toPush) {
-                    $scope.following[$index].followBack = 1;
+                    console.log($scope.following[$index])
+                    $scope.following[$index].followBack = UNFOLLOW_BUTTON_INDEX;
+                    // userInSession.following.push()
                 }).catch(err => {
                     console.log(err);
                 })
@@ -100,7 +107,7 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
 
             userService.unfollowUser(userToUnfollow).then(function (res) {
                 userService.getUserById(userToUnfollow).then(function (toPush) {
-                    $scope.following[$index].followBack = 2;
+                    $scope.following[$index].followBack = FOLLOW_BUTTON_INDEX;
                 }).catch(err => {
                     console.log(err);
                 })
