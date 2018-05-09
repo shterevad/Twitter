@@ -6,12 +6,12 @@
     <li ng-repeat="user in users">
       <div>
         <a class="who-to-follow-a" href="#!profile/{{user.username}}">
-           <img class="who-to-follow-img" ng-src="{{user.profilePicture}}"> 
+          <img class="who-to-follow-img" ng-src="{{user.profilePicture}}">
           <span>{{user.name}}</span>
         </a>
         <button ng-show="!user.followBack" ng-click="followUser($event, user._id, $index)" class="hollowButton">Follow</button>
         <button ng-show="user.followBack" ng-click="unfollowUser($event, user._id, $index)" class="hollowButton">Unfollow</button>
-        <span class='deleteFProposal' ng-click="deleteFollow(user._id)">&#xd7;</span>
+        <span class='deleteFProposal' ng-click="deleteFollow($index)">&#xd7;</span>
       </div>
     </li>
   </ul>

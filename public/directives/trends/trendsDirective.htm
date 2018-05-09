@@ -1,11 +1,11 @@
 <div id='trendsDiv' class="container" ng-controller="trendsController">
-        <h1>Trends for you</h1>
-        <ul>
-          <li ng-repeat="tag in tags">
-            <a href="#!tags/{{tag.title}}">
-              <h2>#{{tag.title}}</h2>
-              <span>{{tag.posts.length}} Tweets</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <h1>Trends for you</h1>
+  <ul>
+    <li ng-repeat="tag in tags">
+      <a href="#!tags/{{tag.title}}">
+        <h2>#{{tag.title}}</h2>
+        <span>{{tag.posts.length}} Tweets</span>
+      </a>
+    </li>
+  </ul>
+</div>

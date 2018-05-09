@@ -455,7 +455,24 @@
     position: unset !important
   }
 
+.message-container ul{
+  height: 100%;}
 
-  .myMessage{
-    color:pink;
+  .message-container ul li, .myMessage, .myMessage div{
+    width: 100%; 
+    
   }
+  .myMessage div{
+    float: right;
+  }
+
+  .modal-content .modal-header #backButton{
+    width: 8%;
+    margin-right: 1em;
+  }
+
+  #backButton:hover{
+    background-color:#1da1f2;
+  }
+
+  

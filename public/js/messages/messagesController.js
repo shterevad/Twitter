@@ -1,12 +1,26 @@
 mainApp.controller('messagesController', function ($scope, $http, $location, $window, $timeout, userService) {
     $scope.messageToSend='';
-    $scope.started = false;
     $scope.messages=[];
     $scope.userInSession = userService.getUserInSession();
+    $scope.messageSection=1;
+
+    $scope.loadConversations = function () {
+        
+        console.log($scope.messageSection);    
+        $scope.userInSession.conversations.forEach(conversation => {
+            userService.getUserById(conversation._userId).then(user => {
+                var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
+                if (index == -1) {
+                    $scope.conversations.push({ user: user, messages: conversation.messages });
+                    console.log($scope.conversations);
+                }
+            })
+        });
+    }
 
     $scope.startConversation = function (user) {
         $scope.messageSection=3;
-        $scope.started = true;
+
         console.log(user);
         console.log($scope.userInSession);
         $conversationUser=user;
@@ -27,7 +41,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
             var userInSessionMessage = $scope.userInSession.conversations.findIndex(conv=> conv._userId===user._id);
             var userMessage= user.conversations.findIndex(conv=> conv._userId===$scope.userInSession._id);
 
-            $scope.messages=$scope.userInSession.conversations[userInSessionMessage].messages.reverse();
+            $scope.messages=$scope.userInSession.conversations[userInSessionMessage].messages;
             $scope.messages.forEach(message => {
                 if(message.userId===$scope.userInSession._id){
                     message.myMessage=true;
@@ -45,8 +59,8 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                         message: messageToSend,
                     }
                     console.log($scope.messageToSend);
-                    $scope.userInSession.conversations[userInSessionMessage].messages.unshift(message);
-                    user.conversations[userMessage].messages.unshift(message);
+                    $scope.userInSession.conversations[userInSessionMessage].messages.push(message);
+                    user.conversations[userMessage].messages.push(message);
                     console.log($scope.userInSession);
                     console.log(user);
 
@@ -55,7 +69,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                     )
                    
                 }   
-            $scope.messageToSend='';
+    
         }
     }
 });

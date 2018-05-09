@@ -1,12 +1,19 @@
 var mongoose = require("mongoose");
 var random = require('mongoose-simple-random');
 var Schema = mongoose.Schema;
-const MAX_LENGTH_TITLE = 100;
+
+const MAX_LENGTH = 100;
+const MIN_LENGTH = 2;
+
 var TagsSchema = new Schema({
-   title: {
-       type:String,
-   },
-  posts: [],
+    title: {
+        type: String,
+        minlength: MIN_LENGTH,
+        maxlength: MAX_LENGTH,
+      /*   unique: true,
+        required:true */
+    },
+    posts: [String],
 
 });
 

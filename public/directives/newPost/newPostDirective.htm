@@ -14,12 +14,12 @@
                     style="display:none" id="photo">
             </li>
             <li>
-                <img src="../images/home/icons/gif.png" class="upload" id='gif' ng-model="newPost.giffs" />
+                <img src="../images/icons/uploaded.png" title="Photo uploaded!" id='uploaded' ng-if="uploaded">
             </li>
         </ul>
         <ul>
             <li>
-                <button ng-click="addPost(tweetText); tweetText='';" class="filledButton">Tweet</button>
+                <button ng-click="addPost(tweetText); tweetText='';" class="filledButton" ng-class={disabled:!tweetText}>Tweet</button>
             </li>
         </ul>
     </div>

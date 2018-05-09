@@ -1,29 +1,41 @@
-<div id='profileDiv'  class="container" ng-controller="postController">
-        <img ng-src="{{userInSession.headerPicture}}">
+<div id='profileDiv' class="container" ng-controller="postController">
+  <img ng-src="{{userInSession.headerPicture}}">
 
-        <img ng-src="{{userInSession.profilePicture}}">
-        <div>
-          <div ng-show='false'>{{userInSession._id}}</div>
-          <a href="#!profile/{{userInSession.username}}">
-            <h1 class='black'>{{userInSession.name}}</h1>
-          </a>
-          <br/>
-          <a href="#!profile/{{userInSession.username}}">
-            <h2 class='grey'>@{{userInSession.username}}</h2>
-          </a>
-        </div>
-        <div>
-          <table>
-            <tr class='grey bold'>
-              <td><a href="#!profile/{{userInSession.username}}">Tweets</a></td>
-              <td><a href="#!profile/{{userInSession.username}}">Following</a></td>
-              <td><a href="#!profile/{{userInSession.username}}">Followers</a></td>
-            </tr>
-            <tr class='blue bold'>
-              <td><a href="#!profile/{{userInSession.username}}">{{userInSession.posts.length}}</a></td>
-              <td><a href="#!profile/{{userInSession.username}}">{{userInSession.following.length}}</a></td>
-              <td><a href="#!profile/{{userInSession.username}}">{{userInSession.followers.length}}</a></td>
-            </tr>
-          </table>
-        </div>
-      </div>
+  <img ng-src="{{userInSession.profilePicture}}">
+  <div>
+    <div ng-show='false'>{{userInSession._id}}</div>
+    <a href="#!profile/{{userInSession.username}}">
+      <h1 class='black'>{{userInSession.name}}</h1>
+    </a>
+    <br/>
+    <a href="#!profile/{{userInSession.username}}">
+      <h2 class='grey'>@{{userInSession.username}}</h2>
+    </a>
+  </div>
+  <div>
+    <table>
+      <tr class='grey bold'>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">Tweets</a>
+        </td>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">Following</a>
+        </td>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">Followers</a>
+        </td>
+      </tr>
+      <tr class='blue bold'>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">{{userInSession.posts.length}}</a>
+        </td>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">{{userInSession.following.length}}</a>
+        </td>
+        <td>
+          <a href="#!profile/{{userInSession.username}}">{{userInSession.followers.length}}</a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

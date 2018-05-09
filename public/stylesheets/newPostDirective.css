@@ -51,6 +51,9 @@ section.postSection ul {
     display: inline-block;  
 }
 
+#uploaded{
+    width: 100%;
+}
 
 section.postSection ul:first-child {
     display: inline;
@@ -81,3 +84,6 @@ section.postSection ul:last-child button {
 }
 
 
+.disabled{
+    opacity: 0.4;
+}

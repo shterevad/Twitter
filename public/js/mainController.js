@@ -8,15 +8,20 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.users = [];
     $scope.conversations = [];
     $scope.messageSection=1;
+    $scope.menuOpened = false;
 
 
-/*     window.onclick = function() {
-        if ($scope.search) {
-            $scope.search = '';
+    $scope.toggleMenu = function (event) {
+        $scope.menuOpened = !($scope.menuOpened);
+        event.stopPropagation();
+    };
+
+    window.onclick = function () {
+        if ($scope.menuOpened) {
+            $scope.menuOpened = false;
             $scope.$apply();
         }
-    };  */
-
+    };
 
     $scope.loadUsers = function ($event) {
         userService.getAllUsers().then(users => {
@@ -28,35 +33,20 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         })
     }
 
-   
-    $scope.loadConversations = function () {
-        console.log($scope.messageSection);
-        $scope.messageSection=1;
-            $scope.userInSession.conversations.forEach(conversation => {
-                userService.getUserById(conversation._userId).then(user => {
-                    var index = $scope.conversations.findIndex(conv => conv.user._id === conversation._userId);
-                    if (index == -1) {
-                        $scope.conversations.push({ user: user, messages: conversation.messages });
-                        console.log($scope.conversations);
-                    }
-                })
-            });  
-    }
-
     $scope.expandImage = (pic) => {
         $scope.galleryPic = pic;
     }
 
     $scope.deleteImage = (pic) => {
         let data = {
-            pic : pic,
-            user : userService.getUserInSession()
+            pic: pic,
+            user: userService.getUserInSession()
         }
         userService.deleteImage(data)
-        .then(response => {
-            $scope.userInSession = userService.getUserInSession();
-        })
-        .catch(error => console.log(error))
+            .then(response => {
+                $scope.userInSession = userService.getUserInSession();
+            })
+            .catch(error => console.log(error))
     }
 
     $scope.openImageNewTab = (pic) => {
@@ -64,29 +54,28 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 });
 
-mainApp.controller('headerController', function ($scope, $location, $window, userService) {
-    if(!sessionStorage.getItem("loggedUser")){
-        $window.location.href = '/login'
-    }
-    
-    $scope.userInSession = userService.getUserInSession();
-    $scope.menuOpened = false;
 
-    $scope.toggleMenu = function(event) {
-        $scope.menuOpened = !($scope.menuOpened);
-        event.stopPropagation();
-    };
-
-    window.onclick = function() {
-        if ($scope.menuOpened) {
-            $scope.menuOpened = false;
-            $scope.$apply();
-        }
+// MainApp Filters
+mainApp.filter('unique', function () {
+    return function (collection, keyname) {
+        var output = [],
+            keys = [];
+        angular.forEach(collection, function (item) {
+            var key = item[keyname];
+            if (keys.indexOf(key) === -1) {
+                keys.push(key);
+                output.push(item);
+            }
+        });
+        return output;
     };
 });
 
 
-mainApp.controller('mainController', function ($scope) {
+mainApp.filter('trusted', ['$sce', function ($sce) {
+    return function (url) {
+        var video_id = url.split('v=')[1].split('&')[0];
+        return $sce.trustAsResourceUrl("https://www.youtube.com/embed/" + video_id);
+    };
+}]);
 
-
-});

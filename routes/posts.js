@@ -1,50 +1,36 @@
 var express = require('express');
 var router = express.Router();
-var Posts = require("../modules/posts.js")
+var Posts = require("../modules/posts.js");
 
-/* get all posts */
-router.get("/posts", function (req, res) {
-    Posts.find({}, {}, function (err, posts) {
-        if (!err) {
-            res.status(200);
-            res.json(posts);
-        } else {
-            res.status(404);
-            res.json("There are no posts yet");
-        }
+const OK_STATUS = 200;
+const DOESNT_EXISTS_STATUS = 404;
+const BAD_REQUEST = 400;
 
-    });
-});
 
 //get post by id
 router.get("/:id", function (req, res) {
     Posts.findOne({ _id: req.params.id }, {}, function (err, post) {
         if (!err) {
-            res.status(200);
-            res.json(post);
+            res.status(OK_STATUS).json(post);
         } else {
-            res.status(404);
-            res.json("There are no posts yet");
+            res.status(DOESNT_EXISTS_STATUS).send({ error: "Cannot find post with this ID!" });
         }
-
     });
 });
-
 
 //get users posts 
 router.get("/posts/:userId", function (req, res) {
     Posts.find({ _userId: req.params.userId }, {}, function (err, posts) {
         if (!err) {
-            res.status(200);
-            res.json(posts);
+            res.status(OK_STATUS).json(posts);
         } else {
-            res.status(404);
-            res.json("There are no posts yet");
+            res.status(DOESNT_EXISTS_STATUS).send({ error: "Cannot find post with this userID!" });
         }
     });
 })
 
 
+//update post fields
 router.post('/post/update', function (req, res) {
     var post = req.body.post;
     Posts.findOne({ _id: post._id }, {}, function (err, p) {
@@ -57,12 +43,11 @@ router.post('/post/update', function (req, res) {
                 }
             }
             p.save();
-            res.json(p);
+            res.status(OK_STATUS).json(p);
         } else {
-            res.status(404);
-            res.json("No such post!");
+            res.status(DOESNT_EXISTS_STATUS).send({ error: "Cannot find post with this ID!" });
         }
-});
+    });
 })
 
 
@@ -71,12 +56,9 @@ router.post('/newpost', function (req, res) {
     var post = req.body.post;
     Posts.create(post, function (err, post) {
         if (!err) {
-            res.status(200);
-            console.log(post);
-            res.json(post);
+            res.status(OK_STATUS).json(post);
         } else {
-            res.status(404);
-            res.json(err);
+            res.status(BAD_REQUEST).send({ error: "Post did not match the request syntax!" });
         }
     });
 });
@@ -86,14 +68,21 @@ router.post('/newpost', function (req, res) {
 router.delete('/posts/:id', function (req, res) {
     Posts.findByIdAndRemove(req.params.id, function (err, post) {
         if (!err) {
-            res.status(200);
-            res.json(post._id);
+            res.status(OK_STATUS).json(post);
         } else {
-            res.status(404);
-            res.json("No such post!");
+            res.status(DOESNT_EXISTS_STATUS).send({ error: "Cannot find post with this ID!" });
         }
     });
 });
 
+
+// get all posts 
+router.get("/posts", function (req, res) {
+    Posts.find({}, {}, function (err, posts) {
+        if (!err) {
+            res.status(OK_STATUS).json(posts);
+        }
+    });
+});
 
 module.exports = router;

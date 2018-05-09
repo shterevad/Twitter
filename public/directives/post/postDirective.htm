@@ -11,19 +11,20 @@
                     <h1>{{post.userName}}</h1>
                     <span>@{{post.userUsername}}</span>
                 </a>
-
-                <p ng-bind-HTML="post.retweetText" class='post-section' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
+                <br>
+                <span class="retweetBox" ng-show="post.retweetText">Retweeted with:</span>
+                <p ng-bind-HTML="post.retweetText" class='post-section retweetBox' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
                     ng-show="post.retweetText"></p>
                 <p ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></p>
             </div>
 
         </div>
         <div class="posts-frame-content" ng-if="post.videos.length>0 || post.photo">
-            <a href="">
+            <div>
                 <img ng-src="{{post.photo}}" class='posts-photo' ng-show='post.photo' data-toggle="modal" data-target="#image-modal" ng-click="expandImage(post.photo)">
-            </a>
+            </div>
             <div ng-show="!post.photo">
-                <a href="" class='posts-video'>
+                <a href="{{post.videos[0]}}" target="_blank" class='posts-video'>
                     <iframe ng-if="post.videos.length>0" ng-src="{{post.videos[0] | trusted}}" frameborder="0"></iframe>
                 </a>
             </div>
@@ -44,7 +45,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
-
 </section>

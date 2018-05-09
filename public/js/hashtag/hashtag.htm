@@ -6,19 +6,19 @@
         <div>
             <ul>
                 <li>
-                    <a href="" ng-click="showTopTrends(tag._id)">Top</a>
+                    <a ng-click="showTopTrends(tag._id, $index); hashtagSection=1; expandMain=false">Top</a>
                 </li>
                 <li>
-                    <a href="" ng-click="showLatestTrends(tag._id)">Latest</a>
+                    <a ng-click="showLatestTrends(tag._id); hashtagSection=2; expandMain=false" >Latest</a>
                 </li>
                 <li>
-                    <a href="" ng-click="showPeople(tag._id)">People</a>
+                    <a ng-click="hashtagSection=3; expandMain=true">People</a>
                 </li>
                 <li>
-                    <a href="">Photos</a>
+                    <a ng-click="hashtagSection=4; expandMain=true">Photos</a>
                 </li>
                 <li>
-                    <a href="">Videos</a>
+                    <a ng-click="hashtagSection=5; expandMain=false">Videos</a>
                 </li>
             </ul>
         </div>
@@ -31,9 +31,9 @@
             <foot></foot>
         </aside>
 
-        <div class='mainDiv'>
-            <div>
-                <ol ng-repeat='post in tagPosts track by $index | orderBy: "likes" ' >
+        <div class='mainDiv' ng-class={expand:expandMain}>
+            <div ng-if="hashtagSection==1">
+                <ol ng-repeat='post in tagPosts | orderBy: "-likes.length"  track by $index'>
                     <li>
                         <post></post>
                     </li>
@@ -41,20 +41,36 @@
             </div>
 
 
-            <div>
-                    <ol ng-repeat='post in tagPosts track by $index' >
-                        <li>
-                            <post></post>
-                        </li>
-                    </ol>
+            <div ng-if="hashtagSection==2">
+                <ol ng-repeat='post in tagPosts | orderBy: "-posted"  track by $index'>
+                    <li>
+                        <post></post>
+                    </li>
+                </ol>
             </div>
 
-          
 
-            <div>
-                <ol ng-show="!show" ng-repeat='user in users | unique : "_id"'>
+
+            <div ng-if="hashtagSection==3">
+                <ol ng-repeat='user in users | unique : "_id"'>
                     <li>
                         <user></user>
+                    </li>
+                </ol>
+            </div>
+
+
+            <div ng-if="hashtagSection==4">
+                <div ng-repeat='photo in hashtagPhotos track by $index' class='hashtag-photos'>
+                    <img ng-src="{{photo}}"  data-toggle="modal" data-target="#image-modal" ng-click="expandImage(photo)">
+                </div>
+            </div>
+
+
+            <div ng-if="hashtagSection==5">
+                <ol ng-repeat='post in hashtagVideos'>
+                    <li>
+                        <post></post>
                     </li>
                 </ol>
             </div>

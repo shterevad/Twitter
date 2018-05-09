@@ -29,13 +29,8 @@ mainApp.controller('followController', function ($scope, $http, userService) {
         });
     };
 
-    $scope.deleteFollow = function (id) {
-        var userIndex = $scope.users.findIndex(u => {
-            u._id === id;
-        });
-        if (userIndex) {
-            $scope.users.splice(userIndex, 1);
-        }
+    $scope.deleteFollow = function (id, $index) {
+        $scope.users.splice($index, 1);
     }
 
     $scope.refresh();

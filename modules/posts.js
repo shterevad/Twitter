@@ -1,35 +1,41 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-const MAX_LENGTH_TEXT = 230;
+
+const MAX_LENGTH = 230;
+const MIN_LENGTH = 2;
+
 var PostSchema = new Schema({
 
-   text: {
+  text: {
     type: String,
-    maxlength: MAX_LENGTH_TEXT
+    maxlength: MAX_LENGTH
   },
-  retweetText:{
-    type:String,
-    maxlength: MAX_LENGTH_TEXT
+
+  retweetText: {
+    type: String,
+    maxlength: MAX_LENGTH
   },
   _userId: {
     type: Schema.Types.ObjectId,
+    required:true,
   },
-  userUsername:String,
+
+  userUsername: String,
   userName: String,
   photo: String,
   tags: [String],
   links: [String],
   videos: [String],
-  giffs: [String],
   likes: [Schema.Types.ObjectId],
-  liked:Boolean,
+  liked: Boolean,
   retweets: [Schema.Types.Object],
-  replies: [],
+  retweetText:String,
+  replies: [String],
   posted: {
     type: Date,
     default: Date.now
   },
-  profilePicture:String
+  profilePicture: String
 });
 
 module.exports = mongoose.model('Posts', PostSchema);

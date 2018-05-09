@@ -30,15 +30,12 @@
   <!--  Angular Routing -->
   <script src="js/routing.js"></script>
 
-  <!-- Angular main application module -->
-  <script src="js/mainApp.js"></script>
-
 
   <!--  services -->
   <script src='js/userService.js'></script>
   <script src='js/posts/postsService.js'></script>
   <script src='js/messages/messagesService.js'></script>
-  <script src='directives/trends/trendsService.js'></script>
+  <script src='js/trends/trendsService.js'></script>
 
 
   <!-- directives  -->
@@ -53,18 +50,17 @@
   <script src="directives/upload-files/uploadFile.js"></script>
 
 
-  <!--mainController -->
+  <!--controllers -->
   <script src="js/mainController.js"></script>
   <script src="js/posts/postController.js"></script>
   <script src="js/profile/profileController.js"></script>
   <script src="js/settings/settingsController.js"></script>
   <script src="js/hashtag/hashtagController.js"></script>
   <script src="js/messages/messagesController.js"></script>
-  <script src="directives/trends/trendsController.js"></script>
-  <script src="directives/follow/followController.js"></script>
+  <script src="js/trends/trendsController.js"></script>
+  <script src="js/follow/followController.js"></script>
 
   <!-- css -->
-
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="./stylesheets/reset.css">
   <link rel="stylesheet" href="./stylesheets/fonts.css">
@@ -82,7 +78,7 @@
 </head>
 
 <body ng-app="mainApp" ng-cloak ng-controller='mainAppController'>
-  <header class='greyBorder' ng-controller='headerController'>
+  <header class='greyBorder'>
     <div>
       <nav id="mainNav">
         <ul>
@@ -92,13 +88,7 @@
               <span>Home</span>
             </a>
           </li>
-          <li>
-            <a href="#!notifications" class='grey'>
-              <img src="images/home/icons/notification.png" id='notificationImg'>
-              <span>Notifications</span>
-            </a>
-          </li>
-          <li data-toggle="modal" data-target="#messageModal" ng-click="messageSection=1; loadConversations()">
+          <li data-toggle="modal" data-target="#messageModal" ng-click="messageSection=1; loadConversations()" ng-controller="messagesController">
             <a class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
@@ -115,7 +105,7 @@
             </a>
           </li>
           <li>
-            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)">
+            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)" maxlength="100">
             <ul ng-show='search' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}">
@@ -252,6 +242,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
+          <button id='backButton' class="filledButton" ng-click="messageSection=1" ng-if="messageSection==3 || messageSection==2">❮</button>
           <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
           <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -266,7 +257,7 @@
 
         <div class="start-conversation" ng-if="messageSection==2">
           <h2>Send message to:</h2>
-          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()">
+          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()" maxlength="100">
           <ul ng-show='messageSearch'>
             <h2>People</h2>
             <li ng-repeat="user in users | filter : {name:messageSearch}">
@@ -309,18 +300,20 @@
 
         <div class="message-window" ng-if="messageSection==3">
           <div class='send-message-div'>
-            <input type="text" ng-model='messageToSend' class='input-field'>
-            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''";>Send</button>
+            <input type="text" ng-model='messageToSend' class='input-field' maxlength="500">
+            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
           </div>
 
           <div class="message-container">
             <ul>
-              <li ng-repeat="m in messages track by $index">
+              <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage} >
                 <div>
-                  <a href="#!profile/{{conversationUser.username}}">
-                    <img class="greyBorder" ng-src="{{m.profilePic}}">
-                  </a>
-                  <p ng-class={myMessage:m.myMessage}>{{m.message}}</p>
+                  <div>
+                      <a href="#!profile/{{conversationUser.username}}">
+                        <img class="greyBorder" ng-src="{{m.profilePic}}">
+                      </a>
+                      <p>{{m.message}}</p>
+                  </div>   
                 </div>
               </li>
             </ul>
