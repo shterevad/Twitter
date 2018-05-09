@@ -1,7 +1,13 @@
 mainApp.controller('mainAppController', function ($scope, $http, $location, $window, $timeout, PostsService, userService) {
+
+    if(!sessionStorage.getItem("loggedUser")){
+        $window.location.href = '/login'
+    }
+
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
+    $scope.messageSection=1;
     $scope.menuOpened = false;
 
 
@@ -47,8 +53,6 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
         $window.open(pic);
     }
 });
-
-
 
 
 // MainApp Filters
