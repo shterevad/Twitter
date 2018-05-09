@@ -7,7 +7,7 @@
       <div>
         <a class="who-to-follow-a" href="#!profile/{{user.username}}">
           <img class="who-to-follow-img" ng-src="{{user.profilePicture}}">
-          <span>{{user.name}}</span>
+          <div>{{user.name}}</div>
         </a>
         <button ng-show="!user.followBack" ng-click="followUser($event, user._id, $index)" class="hollowButton">Follow</button>
         <button ng-show="user.followBack" ng-click="unfollowUser($event, user._id, $index)" class="hollowButton">Unfollow</button>

@@ -13,9 +13,9 @@
                 </a>
                 <br>
                 <span class="retweetBox" ng-show="post.retweetText">Retweeted with:</span>
-                <p ng-bind-HTML="post.retweetText" class='post-section retweetBox' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
-                    ng-show="post.retweetText"></p>
-                <p ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></p>
+                <div ng-bind-HTML="post.retweetText" class='post-section retweetBox' ng-click="retweetReplyPost(post)" data-toggle="modal" data-target="#postModal"
+                    ng-show="post.retweetText"></div>
+                <div ng-bind-HTML="post.text" class='post-section' ng-click="loadReplies(post)" data-toggle="modal" data-target="#postModal"></div>
             </div>
 
         </div>

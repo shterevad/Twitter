@@ -1,7 +1,9 @@
 <div id='profileDiv' class="container" ng-controller="postController">
-  <img ng-src="{{userInSession.headerPicture}}">
+      <img ng-src="{{userInSession.headerPicture}}">
 
-  <img ng-src="{{userInSession.profilePicture}}">
+      <img ng-src="{{userInSession.profilePicture}}">
+  
+  
   <div>
     <div ng-show='false'>{{userInSession._id}}</div>
     <a href="#!profile/{{userInSession.username}}">
