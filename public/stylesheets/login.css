@@ -8,7 +8,7 @@ body{
 }
 
 #main-login-pg{
-    height: 93%;
+    height: 100%;
     overflow: auto;
 }
 
@@ -32,7 +32,7 @@ body{
 
 #login-left-text-container{
     position: absolute;
-    top: 30%;
+    top: 200px;
     left: 12%;
     width: 30%;
     height: 60%;
@@ -76,8 +76,8 @@ body{
 
 .login-right-logo{
     width: 10%;
-    margin-bottom: 6%;
-    margin-left: 30%;
+    margin-bottom: 5%;
+    margin-left: 33%;
 }
 
 .login-right-title{
@@ -131,38 +131,6 @@ body{
 }
 
 
-/* FOOTER */
-
-footer{
-    display: block;
-    height: 7%;
-    width: 100%;
-    background-color: white;
-    box-sizing: border-box;
-    padding: 0.7em;
-    text-align: center;
-}
-
-#footer-ul{
-    list-style-type: none;
-}
-
-#footer-ul>li{
-    display: inline;
-    margin: 0 1%;
-    font-size: 0.7em;
-    color: rgb(115, 196, 244);
-}
-
-#footer-ul>li>a{
-    all:unset;
-    cursor: pointer;
-}
-
-#footer-ul>li>a:hover{
-    text-decoration: underline;
-}
-
 /* LOGIN AND SIGNUP FORMS */
 
 #login-right-side-container-signup-field, 
@@ -172,14 +140,14 @@ footer{
     height: 100%;
     float: left;
     box-sizing: border-box;
-    padding: 5em 3em 1em 5em;
+    padding: 4em 3em 1em 5em;
 }
 
 #login-right-join-signup,
 #login-right-join-login{
     font-weight: bold;
     font-size: 1em;
-    margin-top: 8%;
+    margin-top: 6%;
 }
 
 #signup-form,
@@ -273,3 +241,401 @@ footer{
 .hidden-error{
     display: none;
 }
+
+/* RESPONSIVE */
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+
+    #login-right-side-container,
+    #login-left-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field {
+        float: none;
+        width: 100%;
+        height: 30%
+    }
+
+    #login-right-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        height: 70%;
+        padding: 13em 0 0 10em;
+    }
+
+    #login-left-text-container{
+        top: 90px;
+        left: 32%;
+        height: unset;
+        width: 50%;
+    }
+    .login-right-header{
+        margin-bottom: 0;
+    }
+
+    .login-right-title{
+        font-size: 2em;
+    }
+
+    .login-right-logo{
+        margin-left: 33%;
+    }
+
+    #login-right-join{
+        font-size: 1.2em
+    }
+    #login-right-buttons{
+        text-align: center
+    }
+
+    .log-pg-btn{
+        width: 40%
+    }
+
+    .log-pg-btn:first-of-type{
+        margin-right: 3em;
+    }
+
+    #signup-form>input#login-page-signup-submit, 
+    #login-form>input#login-page-login-submit{
+        width: 50%;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px)
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    #login-page-big-bird-logo{
+        top: 12%;
+        left: 12%;
+    }
+
+    #login-left-text-container{  
+        width: 40%;
+        height: unset;
+        top: 40%;
+        left: 11%;
+    }
+
+    #login-right-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        padding: 23% 0 0 5%;
+    }
+
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        padding-top: 19%;
+    }
+}
+
+/* ----------- iPhoneX ----------- */
+/* Portrait */
+@media only screen 
+  and (min-device-width: 315px) 
+  and (max-device-width: 767px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    #login-left-side-container,
+    #login-right-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        width: 100%;
+        height: 50%;
+    }
+
+    #login-left-side-container{
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+
+    #login-right-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 19% 0 0 15%
+    }
+
+    #login-page-big-bird-logo{
+        top: 0;
+    }
+
+    #login-left-text-container{
+        position: absolute;
+        top: 25%;
+        left: 26%;
+        width: 100%;
+        font-size: 1.3em;
+    }
+
+  }
+
+/* Landscape */
+/* @media only screen 
+and (min-device-width: 315px) 
+and (max-device-width: 767px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    #login-page-big-bird-logo{
+        top: 0;
+        width: 115%;
+    }
+
+    #login-left-text-container{
+        top: 32%;
+        left: 7%;
+    }
+
+    #login-right-side-container,
+    #login-right-side-container-signup-field,
+    #login-right-side-container-login-field{
+        padding-top: 5%;
+    }
+  } */
+
+  @media only screen and (max-width: 1224px){
+        
+        #login-page-big-bird-logo {
+            width: 150%;
+            left: 7%;
+        }
+
+        #login-right-side-container,
+        #login-right-side-container-signup-field,
+        #login-right-side-container-login-field
+        {
+            padding: 8% 0 0 6%
+        }
+
+        #login-left-text-container{
+            top: 33%;
+            left: 9%;
+            width: 37%;
+            height: unset
+        }
+
+        .login-right-logo {
+            margin-left: 33%;
+        }
+    }
+
+    @media only screen and (max-width: 966px){
+        .login-right-title {
+            font-size: 1.3em;
+        }
+
+        .login-left-text {
+            font-size: 1em;
+        }
+
+        #login-right-side-container{
+            padding-top: 12%
+        }
+
+        #login-page-big-bird-logo{
+            top: 4%
+        }
+    }
+
+    
+    @media only screen and (max-width: 600px){
+        #login-left-side-container,
+        #login-right-side-container,
+        #login-right-side-container-signup-field,
+        #login-right-side-container-login-field{
+            width: 100%;
+            height: 50%;
+        }
+    
+        #login-left-side-container{
+            position: absolute;
+            top: 50%;
+            left: 0;
+        }
+    
+        #login-right-side-container,
+        #login-right-side-container-signup-field,
+        #login-right-side-container-login-field{
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 5% 0 0 20%;
+        }
+    
+        #login-page-big-bird-logo{
+            top: 0;
+            width: 80%;
+            left: 10%;
+        }
+    
+        #login-left-text-container{
+            position: absolute;
+            /* top: 25%; */
+            /* left: 26%; */
+            width: 100%;
+            font-size: 1.3em;
+            left: 20%;
+            top: 12%;
+            font-size: 1em;
+        }
+
+        #login-right-header{
+            height: 30%;
+        }
+
+        #login-right-logo{
+            width: 7%
+        }
+
+        #login-right-join{
+            font-size: 0.8em;
+        }
+
+        #login-right-buttons{
+            height: 30%;
+            margin-top: 17%;
+        }
+
+        #login-right-join{
+            margin-top: 4%
+        }
+
+        .login-right-title{
+            font-size: 1em;
+        }
+        .login-right-header{
+            margin-bottom: 3%;
+        }
+
+        .login-right-logo{
+            width: 8%
+        }
+
+        .login-left-text-row{
+            width: 55%;
+        }
+
+        .login-left-text-row:nth-child(2){
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
+
+        .login-left-text{
+            font-size: 0.8em;
+        }
+
+        #login-page-login-form-sign-btn{
+            padding: 0.2em;
+        }
+
+        #login-page-login-form-sign-text>span{
+            font-size: 0.8em;
+        }
+
+        .login-right-logo{
+            margin-bottom: 2%;
+        }
+        #login-right-side-container{
+            height: 70%;
+        }
+
+        #login-right-join-login{
+            font-size: 0.8em;
+            margin-top:5%;
+        }
+        
+        #signup-form-disclamer{
+            font-size: 0.6em
+        }
+
+        #login-left-side-container{
+            top: 70%;
+            height: 30%
+        }
+
+        .login-left-text-row {
+            width: 80%;
+        }
+
+        #login-right-join-signup{
+            display: none;
+        }
+
+        .log-pg-btn {
+            display: block;
+            margin-left: 15%;
+            width: 60%;
+        }
+    }
+
+    @media only screen and (max-width: 450px){
+
+        #login-left-side-container{
+            top: 70%;
+            height: 30%
+        }
+
+        #login-right-side-container,
+        #login-right-side-container-signup-field,
+        #login-right-side-container-login-field{
+            height: 70%;
+        }
+
+        .log-pg-btn{
+            display: block;
+            margin-left: 15%;
+            width: 60%
+        }
+
+        #login-right-join-login{
+            display: none;
+        }
+
+        #login-left-text-container{
+            left: 20%;
+            top: 12%;
+            font-size: 1em;
+        }
+
+        .login-left-text-row {
+            width: 80%;
+        }
+
+        /* #login-form>input{
+            height: 10px;
+        } */
+        /* #login-page-login-form-sign-btn{
+            padding: 0.2em;
+        }
+
+        #login-page-login-form-sign-text>span{
+            font-size: 0.8em;
+        }
+
+        #login-right-logo{
+            margin-bottom: 3%;
+        }
+
+        #login-right-buttons{
+            margin-top: 10%;
+        } */
+    }

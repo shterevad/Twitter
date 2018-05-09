@@ -69,7 +69,7 @@
                 <p id="login-right-join-login">Login to Twitter.</p>
             </div>
 
-            <form action="/login" method="GET" id="login-form">
+            <form id="login-form">
                 <input type="text" ng-model="user" id="login-user" placeholder="Email or username" />
                 <input type="password" ng-model="password" id="login-pass" placeholder="Password" />
                 <p id="error-message-box-login" class="hidden-error"></p>
@@ -88,7 +88,7 @@
                 <p id="login-right-join-signup">Join Twitter today.</p>
             </div>
 
-            <form action="/signup" method="POST" id="signup-form">
+            <form id="signup-form">
                 <input type="text" ng-model="name" id="name-signup" placeholder="Full name" maxlength="20"/>
                 <input type="text" ng-model="username" id="username-signup" placeholder="Username" maxlength="20"/>                
                 <input type="email" ng-model="email" id="email-signup" placeholder="Email" />
@@ -96,39 +96,39 @@
                 <p id="error-message-box-signup" class="hidden-error"></p>
                 <input value="Sign up" id="login-page-signup-submit" ng-click="signUp($event)"/>
                 <p id="signup-form-disclamer">By signing up, you agree to the
-                    <a id="login-submit-tands">Terms of Service</a> and
-                    <a id="login-submit-pp">Privacy Policy</a>, including
-                    <a id="login-submit-cookieuse">Cookie Use</a>. Others will be able to find you by email or phone number when provided.</p>
+                    <span id="login-submit-tands">Terms of Service</span> and
+                    <span id="login-submit-pp">Privacy Policy</span>, including
+                    <span id="login-submit-cookieuse">Cookie Use</span>. Others will be able to find you by email or phone number when provided.</p>
             </form>
         </div> 
 
     </main>
 
-    <footer>
+    <!-- <footer>
         <ul id="footer-ul">
             <li class="footer-link">
-                <a href="/about">About</a>
+                <a href="/#!/footer/about">About</a>
             </li>
             <li class="footer-link">
-                <a>Help Center</a>
+                <a href="/#!/footer/help">Help Center</a>
             </li>
             <li class="footer-link">
-                <a>Blog</a>
+                <a href="/#!/footer/blog">Blog</a>
             </li>
             <li class="footer-link">
-                <a>Status</a>
+                <a href="/#!/footer/status">Status</a>
             </li>
             <li class="footer-link">
-                <a>Jobs</a>
+                <a href="/#!/footer/jobs">Jobs</a>
             </li>
             <li class="footer-link">
-                <a>Terms</a>
+                <a href="/#!/footer/terms">Terms</a>
             </li>
             <li class="footer-link">
-                <a>Privacy Policy</a>
+                <a href="/#!/footer/privacy">Privacy Policy</a>
             </li>
             <li class="footer-link">
-                <a>Cookies</a>
+                <a href="/#!/footer/cookies">Cookies</a>
             </li>
             <li class="footer-link">
                 <a>Ads Info</a>
@@ -156,7 +156,7 @@
             </li>
             <li id="copiright">&copy; 2018 Twitter</li>
         </ul>
-    </footer>
+    </footer> -->
 
     <!-- front end js -->
     <script src="/js/routing.js"></script>

@@ -14,6 +14,9 @@ mainApp.config(function($routeProvider) {
     .when("/settings", {
         templateUrl : "js/settings/settings.htm",
     })
+    .when("/footer/:page", {
+        templateUrl : "js/footerPages/footer.htm",
+    })
     .otherwise({
         redirectTo: '/'
     });

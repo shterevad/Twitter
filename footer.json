@@ -1,0 +1,46 @@
+{
+    "about" : {
+        "title" : "Twitter is",
+        "text" : "What’s happening in the world and what people are talking about right now."
+    },
+    "privacy" : {
+        "title" : "Privacy Policy",
+        "text" : "Оur Services instantly connect people everywhere to what's most meaningful to them. For example, any registered user of Twitter can send a Tweet, which is public by default."
+    },
+    "help" : {
+        "title" : "Help Center",
+        "text" : "Everything you need to know so you can use Twitter like a pro. <br/> <br/>Under construction. "
+    },
+    "blog" : {
+        "title" : "Twitter Blog",
+        "text" : "This page is under construction!"
+    },
+
+    "terms" : {
+        "title" : "Terms and Conditions",
+        "text" : "This page is under construction!"
+    },
+    "ads" : {
+        "title" : "Ads info",
+        "text" : "This page is under construction!"
+    },
+
+    "construction" : {
+        "title" : "Under construction",
+        "text" : "This page is under construction!"
+    },
+    "status" : {
+        "title" : "Status",
+        "text" : "This page is under construction!"
+    },
+    "jobs" : {
+        "title" : "Jobs",
+        "text" : "This page is under construction!"
+    },
+    "cookies" : {
+        "title" : "Cookie policy",
+        "text" : "Our services use cookies and other similar technologies, such as pixels or local storage, to help provide you with a better, faster, and safer experience."
+    }
+
+
+}

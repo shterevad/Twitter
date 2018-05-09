@@ -12,7 +12,6 @@
     "angular-route": "^1.6.10",
     "angular-sanitize": "^1.6.10",
     "angular-tooltips": "^1.2.2",
-    "angular-typed": "0.0.3",
     "bootstrap": "^4.1.0",
     "bootstrap-filestyle": "^1.2.1",
     "cookie-parser": "~1.4.3",
