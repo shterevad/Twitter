@@ -141,7 +141,7 @@
             </ul>
           </li>
           <li>
-            <button class='filledButton' id="tweet">Tweet</button>
+            <button class='filledButton' id="tweet" data-toggle="modal" data-target="#tweetModal">Tweet</button>
           </li>
         </ul>
       </nav>
@@ -193,6 +193,20 @@
       </div>
     </div>
 
+
+
+    <div class="modal fade" id="tweetModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title">Compose a tweet</h1>  
+          </div>
+          <div>
+              <newpost></newpost>
+              <button type="button" class="btn btn-primary filledButton replyButton" ng-click="addPost(tweetText); tweetText='';">Tweet</button>
+            </div>
+        </div>
+      </div>
 
     <!--     post information -->
     <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
@@ -289,11 +303,11 @@
                 <div>
                   <div>
                     <span>{{conversation.user.name}}</span>
-                    <span>@{{conversation.user.username}}</span>
+                    <span class="gray">@{{conversation.user.username}}</span>
                     <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
                   </div>
                   <br>
-                  <div>
+                  <div class="lastMessage gray">
                     {{conversation.messages[(conversation.messages.length-1)].message}}
                   </div>
 

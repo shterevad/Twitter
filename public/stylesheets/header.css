@@ -133,7 +133,7 @@ nav>ul>li{
 
 #logo{
   position: relative;
-  left: 28%;
+  left: 6%;
   top: 6px;
 }
 
@@ -212,9 +212,19 @@ nav>ul>li{
   }
   .search-wrapper span:last-of-type{
     color:gray;
-    padding:0em 1em;
+    padding:0em 0.5em;
   }
 
   .search-wrapper li{
     padding:0.5em;
+  }
+
+  .search-wrapper li:hover{
+    background-color: #eff2f4;
+  }
+
+
+  .search-wrapper span{
+    position: relative;
+    top: -12px;
   }

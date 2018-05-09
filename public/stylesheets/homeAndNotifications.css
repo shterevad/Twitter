@@ -154,6 +154,18 @@ main{
     padding:1em;
   }
   
+
+  #empty-posts{
+    width: 100%;
+    padding: 5em;
+  }
+
+  #empty-posts h1{
+    font-weight: bold;
+    font-size: 1.7em;
+    margin-bottom: 0.5em;
+  }
+  
   #trendsDiv ul, #whoToFollow ul{
     height: 100%;
     overflow: auto;
@@ -279,7 +291,9 @@ footer a, footer p{
 
   @media all and (max-width:1170px){
     .rightAside{
-      float:left;
+      float: left;
+      clear: left;
+  
     }
 
     aside{
