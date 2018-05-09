@@ -52,8 +52,7 @@ router.post('/tags', function (req, res) {
                 }
             });
         } else {
-            let posts = t.posts;
-            posts.push(tag.posts);
+            t.posts=t.posts.concat(tag.posts);
             t.save();
         }
     });

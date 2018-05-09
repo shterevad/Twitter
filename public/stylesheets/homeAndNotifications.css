@@ -165,7 +165,16 @@ main{
     font-size: 1.7em;
     margin-bottom: 0.5em;
   }
-  
+
+  #tagPhotos{
+    text-align: center;
+    font-size: 1.5em;
+    height: 154px;
+    padding-top: 3em;
+    font-weight: bold;
+    color: gray;
+  }
+
   #trendsDiv ul, #whoToFollow ul{
     height: 100%;
     overflow: auto;

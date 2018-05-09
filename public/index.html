@@ -91,7 +91,7 @@
               <span>Home</span>
             </a>
           </li>
-          <li data-toggle="modal" data-target="#messageModal" ng-click="messageSection=1; loadConversations()" ng-controller="messagesController">
+          <li data-toggle="modal" data-target="#messageModal" ng-click="loadConversations() && changeSection()" ng-controller="messagesController">
             <a class="grey">
               <img src="images/home/icons/messages.png">
               <span>Messages</span>
@@ -110,9 +110,9 @@
             <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
               maxlength="100">
               <img src="/images/icons/search.png" id="searchIcon" >
-            <ul ng-show='search' class="search-wrapper">
+            <ul ng-if='search' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
-                <a href="#!profile/{{user.username}}">
+                <a href="#!profile/{{user.username}}" ng-click="closeSearch()">
                   <img class="greyBorder" ng-src="{{user.profilePicture}}">
                   <span>{{user.name}}</span>
                   <span>@{{user.username}}</span>
@@ -205,7 +205,7 @@
           </div>
           <div>
               <newpost></newpost>
-              <button type="button" class="btn btn-primary filledButton replyButton" ng-click="addPost(tweetText); tweetText='';">Tweet</button>
+              <button type="button" class="btn btn-primary filledButton replyButton" ng-click="addPost(tweetText); tweetText='';" ng-class={disabled:!tweetText}>Tweet</button>
             </div>
         </div>
       </div>
@@ -240,7 +240,7 @@
                     <post></post>
                   </li>
                </ol>
-          </div>
+          </div> 
 
 
           <div class='retweet-input'>
@@ -263,7 +263,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button id='backButton' class="filledButton" ng-click="messageSection=1" ng-if="messageSection==3 || messageSection==2">❮</button>
+          <button id='backButton' class="filledButton" ng-click="changeSection()" ng-if="messageSection==3 || messageSection==2">❮</button>
           <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
           <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -312,9 +312,8 @@
                   <div class="lastMessage gray">
                     {{conversation.messages[(conversation.messages.length-1)].message}}
                   </div>
-
                 </div>
-
+                <button type="button" class="btn btn-primary filledButton" ng-click="deleteConversation(conversation)">Delete</button>
               </div>
             </li>
           </ul>
@@ -322,7 +321,7 @@
 
         <div class="message-window" ng-if="messageSection==3">
           <div class='send-message-div'>
-            <input type="text" ng-model='messageToSend' class='input-field' maxlength="500">
+            <input type="text" ng-model='messageToSend' ng-keyup="$event.keyCode == 13 && sendMessage(messageToSend)" class='input-field' maxlength="500">
             <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
           </div>
 

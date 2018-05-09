@@ -11,6 +11,8 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.menuOpened = false;
 
 
+
+    /* toggle settings menu */
     $scope.toggleMenu = function (event) {
         $scope.menuOpened = !($scope.menuOpened);
         event.stopPropagation();
@@ -52,6 +54,17 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.openImageNewTab = (pic) => {
         $window.open(pic);
     }
+
+
+    /* close search bar */
+    $scope.closeSearch=function(){
+        $scope.search='';
+    }
+    window.onclick = function () {
+            $scope.search='';
+            $scope.$apply();
+    };
+
 });
 
 

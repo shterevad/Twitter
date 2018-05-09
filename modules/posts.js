@@ -30,7 +30,7 @@ var PostSchema = new Schema({
   liked: Boolean,
   retweets: [Schema.Types.Object],
   retweetText:String,
-  replies: [String],
+  replies: [],
   posted: {
     type: Date,
     default: Date.now

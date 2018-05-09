@@ -4,6 +4,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.newPost = {};
     $scope.retweets=false;
     $scope.likes=false;
+    $scope.tags=[];
 
     $scope.retweetedPosts = [];
     $scope.postUserLikes = [];
@@ -108,6 +109,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             $scope.savePost($scope.newPost).then(res => {
                 $scope.posts.unshift(res);
                 $scope.newPost.photo = '';
+                $('#tweetModal').modal('hide');
             })
         }
     }
@@ -143,6 +145,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.replyPost = function (post) {
+        console.log(post);
         let reply = {
             text: $scope.tweetText,
             userName: $scope.userInSession.name,
@@ -150,8 +153,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
             userPhoto: $scope.userInSession.profilePicture,
             likes: []
         }
+        console.log(reply);
         post.replies.push(reply);
         PostsService.updatePost({ post: post }).then(p => {
+            console.log(p);
             $('#replyModal').modal('hide');
             $scope.tweetText = '';
         });

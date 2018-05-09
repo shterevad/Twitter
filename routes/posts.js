@@ -32,22 +32,13 @@ router.get("/posts/:userId", function (req, res) {
 
 //update post fields
 router.post('/post/update', function (req, res) {
-    var post = req.body.post;
-    Posts.findOne({ _id: post._id }, {}, function (err, p) {
-        if (p) {
-            for (var field in Posts.schema.paths) {
-                if ((field !== '_id') && (field !== '__v')) {
-                    if (req.body.post[field] !== undefined) {
-                        p[field] = req.body.post[field];
-                    }
-                }
-            }
-            p.save();
+    Posts.update({ _id: post._id }, req.body.post, function(err, p){
+        if(!err){
             res.status(OK_STATUS).json(p);
         } else {
-            res.status(DOESNT_EXISTS_STATUS).send({ error: "Cannot find post with this ID!" });
+            res.status(INVALID_PARAMS_STATUS).json(err)
         }
-    });
+    }) 
 })
 
 
