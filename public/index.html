@@ -45,6 +45,7 @@
   <script src='directives/footer/footerDirective.js'></script>
   <script src='directives/newPost/newPostDirective.js'></script>
   <script src='directives/post/postDirective.js'></script>
+  <script src='directives/likes/likesDirective.js'></script>
   <script src='directives/user/userDirective.js'></script>
   <script src='directives/reply/replyDirective.js'></script>
   <script src="directives/upload-files/uploadFile.js"></script>
@@ -98,16 +99,17 @@
           </li>
         </ul>
       </nav>
-      <nav id="rightNav">
 
+      <a href="#!/" id='logo'>
+        <img src="images/home/icons/logo.png">
+      </a>
+
+      <nav id="rightNav">
         <ul>
           <li>
-            <a href="#!/" id='logo'>
-              <img src="images/home/icons/logo.png">
-            </a>
-          </li>
-          <li>
-            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)" maxlength="100">
+            <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
+              maxlength="100">
+              <img src="/images/icons/search.png" id="searchIcon" >
             <ul ng-show='search' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}">
@@ -202,11 +204,30 @@
           <div class='modal-spans'>
             <span>{{posted}}</span>
             <br>
-            <span>
+            <span ng-click="showRetweets(post)" >
               <span>{{post.retweets.length}}</span> Retweets</span>
-            <span ng-click="showLikes(post)" data-toggle="modal" data-target="#likesModal">
+            <span ng-click="showLikes(post)">
               <span>{{post.likes.length}}</span> Likes</span>
           </div>
+
+          <div ng-show="likes">
+              <h1 class='blueHeader'>Liked {{post.likes.length}} times</h1>
+              <ol>
+                  <li ng-repeat="user in postUserLikes">
+                    <like></like>
+                  </li>
+               </ol>
+          </div>
+
+          <div ng-show="retweets">
+              <h1 class='blueHeader'>Retweeted {{post.retweets.length}} times</h1>
+              <ol>
+                  <li ng-repeat="post in retweetedPosts">
+                    <post></post>
+                  </li>
+               </ol>
+          </div>
+
 
           <div class='retweet-input'>
             <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
@@ -222,22 +243,6 @@
     </div>
   </div>
 
-  <!--   likes modal -->
-  <div class="modal fade" id="likesModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title" class="retweet-modal-label">Liked {{post.likes.length}} times</h1>
-        </div>
-
-        <ol>
-          <li ng-repeat="like in postUserLikes">
-            <like></like>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
 
   <!-- message modal -->
   <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">
@@ -259,7 +264,8 @@
 
         <div class="start-conversation" ng-if="messageSection==2">
           <h2>Send message to:</h2>
-          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()" maxlength="100">
+          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()"
+            maxlength="100">
           <ul ng-show='messageSearch'>
             <h2>People</h2>
             <li ng-repeat="user in users | filter : {name:messageSearch}">
@@ -308,14 +314,14 @@
 
           <div class="message-container">
             <ul>
-              <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage} >
+              <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage}>
                 <div>
                   <div>
-                      <a href="#!profile/{{conversationUser.username}}">
-                        <img class="greyBorder" ng-src="{{m.profilePic}}">
-                      </a>
-                      <p>{{m.message}}</p>
-                  </div>   
+                    <a href="#!profile/{{conversationUser.username}}">
+                      <img class="greyBorder" ng-src="{{m.profilePic}}">
+                    </a>
+                    <p>{{m.message}}</p>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -328,11 +334,12 @@
 
   <!--  picture detail modal -->
   <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog image-modal-dialog">
-        <div class="modal-content image-modal-container">         
-          <img class="expanded-image" ng-src="{{galleryPic}}" ng-click="openImageNewTab(galleryPic)">
-            <img src="images/icons/delete-icon.png" data-toggle="modal" data-target="#image-modal" class="delete-image" ng-click="deleteImage(galleryPic)" tooltips tooltip-side="top" tooltip-template="Delete image" />
-          <img>
+    <div class="modal-dialog image-modal-dialog">
+      <div class="modal-content image-modal-container">
+        <img class="expanded-image" ng-src="{{galleryPic}}" ng-click="openImageNewTab(galleryPic)">
+        <img src="images/icons/delete-icon.png" data-toggle="modal" data-target="#image-modal" class="delete-image" ng-click="deleteImage(galleryPic)"
+          tooltips tooltip-side="top" tooltip-template="Delete image" />
+        <img>
       </div>
     </div>
   </div>

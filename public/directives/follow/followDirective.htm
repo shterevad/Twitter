@@ -1,13 +1,12 @@
 <section id='whoToFollow' class="container" ng-controller='followController'>
   <h1>Who To Follow</h1>
   <a ng-click="refresh()">Refresh</a>
-  <a href="">View all</a>
   <ul>
     <li ng-repeat="user in users">
       <div>
         <a class="who-to-follow-a" href="#!profile/{{user.username}}">
           <img class="who-to-follow-img" ng-src="{{user.profilePicture}}">
-          <span>{{user.name}}</span>
+          <div>{{user.name}}</div>
         </a>
         <button ng-show="!user.followBack" ng-click="followUser($event, user._id, $index)" class="hollowButton">Follow</button>
         <button ng-show="user.followBack" ng-click="unfollowUser($event, user._id, $index)" class="hollowButton">Unfollow</button>

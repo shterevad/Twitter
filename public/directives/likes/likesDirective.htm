@@ -4,12 +4,10 @@
             <img ng-src="{{user.profilePicture}}" class="posts-user-photo">
         </a>
         <div class="reply-body">
-            <a href="#!profile/{{like.username}}">
+            <a href="#!profile/{{user.username}}">
                 <h1>{{user.name}}</h1>
                 <span>@{{user.username}}</span>
                 <div class='replyText'>{{user.description}}</div>
-                <button ng-show="user.followBack" ng-click="unfollowUser($event, user._id, $index)" class="hollowButton ng-hide">Unfollow</button>
-                <button ng-show="!user.followBack" ng-click="followUser($event, user._id, $index)" class="hollowButton">Follow</button>
             </a>
         </div>
     </div>

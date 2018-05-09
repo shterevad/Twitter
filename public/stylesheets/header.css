@@ -2,6 +2,8 @@ body {
   background-color: #e6ecf0;
   width: 100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-y: scroll;
+  position: relative;
 }
 
 * {
@@ -66,6 +68,10 @@ font-weight: bolder;
   color:#1da1f2;
 }
 
+#searchIcon{
+  display:none;
+}
+
 /* HEADER */
 header{
   background-color:white;
@@ -77,8 +83,8 @@ header{
 
 
 header>div{
-  width:82%;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0em 9%;
 }
 nav>ul{
   height: 50px;
@@ -117,15 +123,18 @@ nav>ul>li{
 
 #mainNav{
   float: left;
+  width: 35%;
 }
 
 #rightNav{
   float: right;
+  width:54%;
 }
 
 #logo{
   position: relative;
-  left:-226px;
+  left: 28%;
+  top: 6px;
 }
 
 #tweet, #search{
@@ -136,6 +145,10 @@ nav>ul>li{
 
 #rightNav>ul>li:last-of-type{
   padding:0em;
+}
+
+#rightNav ul{
+  float: right;
 }
 
 #mainNav li:hover{
