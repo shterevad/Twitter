@@ -1,6 +1,9 @@
 mainApp.controller('trendsController', function ($scope, TrendsService, PostsService) {
-    TrendsService.getRandomTags().then(tags =>{
-        $scope.tags=tags;
-        console.log($scope.tags);
-    })
+
+    $scope.refreshTags = () => {
+        TrendsService.getRandomTags().then(tags => {
+            $scope.tags = tags;
+        })
+    }
+    $scope.refreshTags();
 });

@@ -1,5 +1,6 @@
 <div id='trendsDiv' class="container" ng-controller="trendsController">
   <h1>Trends for you</h1>
+  <a ng-click="refreshTags()">Refresh</a>
   <ul>
     <li ng-repeat="tag in tags">
       <a href="#!tags/{{tag.title}}">

@@ -202,11 +202,30 @@
           <div class='modal-spans'>
             <span>{{posted}}</span>
             <br>
-            <span ng-click="showRetweets(post)" data-toggle="modal" data-target="#showRetweets">
+            <span ng-click="showRetweets(post)" >
               <span>{{post.retweets.length}}</span> Retweets</span>
-            <span ng-click="showLikes(post)" data-toggle="modal" data-target="#likesModal">
+            <span ng-click="showLikes(post)">
               <span>{{post.likes.length}}</span> Likes</span>
           </div>
+
+          <div ng-show="likes">
+              <h1 class='blueHeader'>Liked {{post.likes.length}} times</h1>
+              <ol>
+                  <li ng-repeat="user in postUserLikes">
+                    <like></like>
+                  </li>
+               </ol>
+          </div>
+
+          <div ng-show="retweets">
+              <h1 class='blueHeader'>Retweeted {{post.retweets.length}} times</h1>
+              <ol>
+                  <li ng-repeat="post in retweetedPosts">
+                    <post></post>
+                  </li>
+               </ol>
+          </div>
+
 
           <div class='retweet-input'>
             <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
@@ -222,40 +241,6 @@
     </div>
   </div>
 
-  <!--   likes modal -->
-  <div class="modal fade" id="likesModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title" class="retweet-modal-label">Liked {{post.likes.length}} times</h1>
-        </div>
-
-        <ol>
-          <li ng-repeat="user in postUserLikes">
-            <like></like>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
-
-
-  <!--   retweet modal -->
-  <div class="modal fade" id="showRetweets" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title" class="retweet-modal-label">Retweeted {{post.retweets.length}} times</h1>
-        </div>
-
-        <ol>
-          <li ng-repeat="post in retweetedPosts">
-            <post></post>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </div>
 
   <!-- message modal -->
   <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">

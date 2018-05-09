@@ -1,6 +1,12 @@
 mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
+    const MAX_LENGTH=260;
     $scope.posts = [];
     $scope.newPost = {};
+    $scope.retweets=false;
+    $scope.likes=false;
+
+    $scope.retweetedPosts = [];
+    $scope.postUserLikes = [];
 
 
     $scope.userInSession = userService.getUserInSession();
@@ -43,35 +49,32 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.showLikes = function (post) {
-        $scope.post=post;
-        $scope.postUserLikes=[];
-
+        $scope.likes=!$scope.likes;
         post.likes.forEach(userId => {
             userService.getUserById(userId).then(user => {
-
                 $scope.postUserLikes.push(user);
-                console.log( $scope.postUserLikes);
+                console.log($scope.postUserLikes);
             })
         });
-        console.log( $scope.postUserLikes);
-  
+        $scope.postUserLikes=[];
+        console.log($scope.postUserLikes);
+
     }
 
 
 
     $scope.showRetweets = function (post) {
-        $scope.post=post;
-        $scope.retweetedPosts=[];
-
+        $scope.retweets=!$scope.retweets;
         post.retweets.forEach(postId => {
             PostsService.getPostById(postId).then(post => {
 
                 $scope.retweetedPosts.push(post);
-                console.log( $scope.retweetedPosts);
+                console.log($scope.retweetedPosts);
             })
         });
-        console.log( $scope.retweetedPosts);
-  
+        $scope.retweetedPosts=[];
+        console.log($scope.retweetedPosts);
+
     }
 
     $scope.addPost = function (tweetText) {
@@ -101,7 +104,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 .catch(err => console.log(err));
         }
 
-        if (tweetText) {
+        if (tweetText && tweetText.length<MAX_LENGTH) {
             $scope.savePost($scope.newPost).then(res => {
                 $scope.posts.unshift(res);
                 $scope.newPost.photo = '';
@@ -156,31 +159,29 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.retweet = function (post) {
-       var newPost={
-        text:post.text,
-        videos:post.videos,
-        tags:post.tags,
-        _userId: $scope.userInSession._id,
-        userName: $scope.userInSession.name,
-        userUsername: $scope.userInSession.username,
-        profilePicture: $scope.userInSession.profilePicture,
-       }
+        var newPost = {
+            text: post.text,
+            videos: post.videos,
+            tags: post.tags,
+            _userId: $scope.userInSession._id,
+            userName: $scope.userInSession.name,
+            userUsername: $scope.userInSession.username,
+            profilePicture: $scope.userInSession.profilePicture,
+        }
         var tags = [],
-             links = [],
-             videos = [];
+            links = [],
+            videos = [];
 
-        if($scope.reply){
+        if ($scope.reply && $scope.reply.length<MAX_LENGTH) {
             newPost.retweetText = $scope.filterLinks($scope.reply, tags, links, videos);
         }
         $scope.savePost(newPost).then(res => {
             $scope.posts.unshift(res);
-            console.log(res);
             post.retweets.push(res._id);
-            console.log(post);
-            PostsService.updatePost({ post:post});
+            PostsService.updatePost({ post: post });
 
             $('#retweetModal').modal('hide');
-            $scope.reply = ''; 
+            $scope.reply = '';
         })
 
     }
@@ -207,7 +208,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                     }
                 })
             })
-          
+
             var index = $scope.userInSession.posts.findIndex(id => id === post.data._id);
             if (index != -1) {
                 $scope.userInSession.posts.splice(index, 1);
@@ -225,10 +226,11 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 }
             }
             userService.updateUserFields({ user: $scope.userInSession }).then(u => {
-                console.log('Succesfully removed');
-                $scope.posts.splice($index,1);
+                if(u){
+                    $scope.posts.splice($index, 1);
+                }
             })
-                .catch(err => console.log(err))
+                .catch(err => alert("Something went wrong! Try again!"));
         })
     }
 
