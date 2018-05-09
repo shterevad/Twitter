@@ -59,6 +59,7 @@
   <script src="js/messages/messagesController.js"></script>
   <script src="js/trends/trendsController.js"></script>
   <script src="js/follow/followController.js"></script>
+  <script src="js/footerPages/footerController.js"></script>
 
   <!-- css -->
   <link rel="shortcut icon" href="./images/icons/favicon.ico" type="image/x-icon">
@@ -72,6 +73,7 @@
   <link rel="stylesheet" href="./stylesheets/newPostDirective.css">
   <link rel="stylesheet" href="./stylesheets/postDirective.css">
   <link rel="stylesheet" href="./stylesheets/modal.css">
+  <link rel="stylesheet" href="./stylesheets/footer.css">
   <link rel="stylesheet" href="vendor/angular-tooltips/dist/angular-tooltips.min.css">
 
 
@@ -147,7 +149,7 @@
 
   </header>
 
-  <div ng-controller="postController">
+  <div ng-controller="postController" id="post-controller-div">
     <main ng-view>
     </main>
 

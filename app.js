@@ -22,6 +22,7 @@ var loginRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 var tagsRouter = require('./routes/tags');
+var footerRouter = require('./routes/footer');
 
 var app = express();
 
@@ -47,12 +48,13 @@ function checkLogin(req, res, next){
   if((req.session) && (req.session.user)){
     next();
   } else {
-    // next();
-    res.redirect('/login');
+    next();
+    // res.redirect('/login');
   }
 }
 
 app.use('/login', loginRouter);
+app.use('/footer', footerRouter);
 app.use('/', checkLogin, indexRouter);
 app.use('/users', checkLogin, usersRouter);
 app.use('/posts', checkLogin, postsRouter);

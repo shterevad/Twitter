@@ -1,0 +1,41 @@
+#post-controller-div{
+    height: 100%;
+}
+
+#footer-main{
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box
+}
+
+
+#container-footer-pg{
+    background-color: rgb(29, 163, 242);
+    height: 100%;
+    width: 100%;
+}
+
+#content-footer-pg{
+    width: 70%;
+    display: inline-block;
+    margin: 120px 0 0 15%;
+    color: white;
+    font-weight: bold;
+}
+
+#title-footer-pg{
+    color: rgb(115, 196, 244);
+    font-size: 1.5em;
+    margin-bottom: 2%;
+}
+
+#footer-text-pg{
+    font-size: 3.3em;
+    line-height: 1.3em;
+}
+
+
+/* .typed-cursor{
+    display: none;
+} */
+

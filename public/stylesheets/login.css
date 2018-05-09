@@ -8,7 +8,7 @@ body{
 }
 
 #main-login-pg{
-    height: 93%;
+    height: 100%;
     overflow: auto;
 }
 
@@ -32,7 +32,7 @@ body{
 
 #login-left-text-container{
     position: absolute;
-    top: 30%;
+    top: 200px;
     left: 12%;
     width: 30%;
     height: 60%;
@@ -132,7 +132,7 @@ body{
 
 
 /* FOOTER */
-
+/* 
 footer{
     display: block;
     height: 7%;
@@ -161,7 +161,7 @@ footer{
 
 #footer-ul>li>a:hover{
     text-decoration: underline;
-}
+} */
 
 /* LOGIN AND SIGNUP FORMS */
 
@@ -272,4 +272,66 @@ footer{
 
 .hidden-error{
     display: none;
+}
+
+/* RESPONSIVE */
+
+/* ----------- iPad Pro ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+    
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+
+    #login-right-side-container,
+    #login-left-side-container{
+        float: none;
+        width: 100%;
+        height: 30%
+    }
+
+    #login-right-side-container{
+        height: 70%;
+        padding: 13em 0 0 10em;
+    }
+
+    #login-left-text-container{
+        top: 90px;
+        left: 32%;
+        height: unset;
+        width: 50%;
+    }
+    .login-right-header{
+        margin-bottom: 0;
+    }
+
+    .login-right-title{
+        font-size: 2em;
+    }
+
+    .login-right-logo{
+        margin-left: 33%;
+    }
+
+    #login-right-join{
+        font-size: 1.2em
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1.5) {
+
 }
