@@ -1,9 +1,14 @@
 mainApp.controller('mainAppController', function ($scope, $http, $location, $window, $timeout, PostsService, userService) {
+
+    if(!sessionStorage.getItem("loggedUser")){
+        $window.location.href = '/login'
+    }
+
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
     $scope.messageSection=1;
-   
+
 
 /*     window.onclick = function() {
         if ($scope.search) {
@@ -59,7 +64,11 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 });
 
-mainApp.controller('headerController', function ($scope, $location, userService) {
+mainApp.controller('headerController', function ($scope, $location, $window, userService) {
+    if(!sessionStorage.getItem("loggedUser")){
+        $window.location.href = '/login'
+    }
+    
     $scope.userInSession = userService.getUserInSession();
     $scope.menuOpened = false;
 

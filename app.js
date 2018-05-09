@@ -47,8 +47,8 @@ function checkLogin(req, res, next){
   if((req.session) && (req.session.user)){
     next();
   } else {
-    next();
-    // res.redirect('/login');
+    // next();
+    res.redirect('/login');
   }
 }
 
