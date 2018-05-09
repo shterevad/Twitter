@@ -69,7 +69,7 @@
                 <p id="login-right-join-login">Login to Twitter.</p>
             </div>
 
-            <form action="/login" method="GET" id="login-form">
+            <form id="login-form">
                 <input type="text" ng-model="user" id="login-user" placeholder="Email or username" />
                 <input type="password" ng-model="password" id="login-pass" placeholder="Password" />
                 <p id="error-message-box-login" class="hidden-error"></p>
@@ -88,7 +88,7 @@
                 <p id="login-right-join-signup">Join Twitter today.</p>
             </div>
 
-            <form action="/signup" method="POST" id="signup-form">
+            <form id="signup-form">
                 <input type="text" ng-model="name" id="name-signup" placeholder="Full name" maxlength="20"/>
                 <input type="text" ng-model="username" id="username-signup" placeholder="Username" maxlength="20"/>                
                 <input type="email" ng-model="email" id="email-signup" placeholder="Email" />
