@@ -9,20 +9,12 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     $scope.conversations = [];
     $scope.messageSection=1;
     $scope.menuOpened = false;
-
-
+    $toggleSearch=false;
 
     /* toggle settings menu */
     $scope.toggleMenu = function (event) {
         $scope.menuOpened = !($scope.menuOpened);
         event.stopPropagation();
-    };
-
-    window.onclick = function () {
-        if ($scope.menuOpened) {
-            $scope.menuOpened = false;
-            $scope.$apply();
-        }
     };
 
     $scope.loadUsers = function ($event) {
@@ -62,6 +54,9 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
     window.onclick = function () {
             $scope.search='';
+            if ($scope.menuOpened) {
+                $scope.menuOpened = false;
+            }
             $scope.$apply();
     };
 

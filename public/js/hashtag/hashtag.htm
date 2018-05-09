@@ -9,7 +9,7 @@
                     <a ng-click="showTopTrends(tag._id, $index); hashtagSection=1; expandMain=false">Top</a>
                 </li>
                 <li>
-                    <a ng-click="showLatestTrends(tag._id); hashtagSection=2; expandMain=false" >Latest</a>
+                    <a ng-click="showLatestTrends(tag._id); hashtagSection=2; expandMain=false">Latest</a>
                 </li>
                 <li>
                     <a ng-click="hashtagSection=3; expandMain=true">People</a>
@@ -39,8 +39,6 @@
                     </li>
                 </ol>
             </div>
-
-
             <div ng-if="hashtagSection==2">
                 <ol ng-repeat='post in tagPosts | orderBy: "-posted"  track by $index'>
                     <li>
@@ -48,9 +46,6 @@
                     </li>
                 </ol>
             </div>
-
-
-
             <div ng-if="hashtagSection==3">
                 <ol ng-repeat='user in users | unique : "_id"'>
                     <li>
@@ -58,18 +53,14 @@
                     </li>
                 </ol>
             </div>
-
-
             <div ng-if="hashtagSection==4">
                 <div ng-repeat='photo in hashtagPhotos track by $index' class='hashtag-photos'>
-                    <img ng-src="{{photo}}"  data-toggle="modal" data-target="#image-modal" ng-click="expandImage(photo)">
+                    <img ng-src="{{photo}}" data-toggle="modal" data-target="#image-modal" ng-click="expandImage(photo)">
                 </div>
                 <div ng-if="!$scope.hashtagPhotos.length" id="tagPhotos">
-                        <h1>There are no photos associated with this tag!</h1>
+                    <h1>There are no photos associated with this tag!</h1>
                 </div>
             </div>
-
-
             <div ng-if="hashtagSection==5">
                 <ol ng-repeat='post in hashtagVideos'>
                     <li>

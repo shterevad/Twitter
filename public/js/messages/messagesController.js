@@ -1,3 +1,4 @@
+
 mainApp.controller('messagesController', function ($scope, $http, $location, $window, $timeout, userService) {
     $scope.messageToSend='';
     $scope.messages=[];
@@ -23,7 +24,7 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
     $scope.startConversation = function (user) {
         $scope.messageSection=3;
         $conversationUser=user;
-
+        
         var index = user.conversations.findIndex(u=>u._userId===$scope.userInSession._id);
         if (index == -1) {
             user.conversations.push({ _userId: $scope.userInSession._id, messages: [] });
@@ -55,12 +56,24 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
                     user.conversations[userMessage].messages.push(message);
 
                     userService.updateUserFields({user: $scope.userInSession}).then(
-                            userService.updateFields({user:user})
-                    )
-                   
+                        userService.updateFields({user:user}));
+                    $scope.loadConversations();
                 }   
-                messageToSend=''
-    
+                messageToSend='';
         }
     }
+
+    $scope.deleteConversation= function(conversation, $index){
+       var convIndex= $scope.userInSession.conversations.findIndex(c=>c.userId===conversation.user._id);
+        if(convIndex){
+            $scope.userInSession.conversations.splice(convIndex, 1);
+            userService.updateUserFields({user:$scope.userInSession}).then(u=>{
+                $scope.conversations.splice($index,1);
+            }).catch(err=>{
+                alert("Something went wrong! Please try again later!");
+            })
+        }
+    }
+
+   
 });

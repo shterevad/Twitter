@@ -14,7 +14,6 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
       TrendsService.getTagById(id).then(tag => {
         tag.posts.forEach(postId => {
           PostsService.getPostById(postId).then(post => {
-            console.log(post);
             if (post.videos) {
               $scope.hashtagVideos.push(post);
             }
@@ -44,11 +43,10 @@ mainApp.controller('hashtagController', function ($scope, $http, $location, $win
 
     $scope.showLatestTrends = (id) => {
       $scope.tagPosts = $scope.getTagPosts(id);
-      console.log($scope.tagPosts);
     }
   })
     .catch(err => {
-      console.log(err);
+      alert("Something went wrong! Please try again later.")
     })
 });
 

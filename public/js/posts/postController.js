@@ -9,7 +9,6 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.retweetedPosts = [];
     $scope.postUserLikes = [];
 
-
     $scope.userInSession = userService.getUserInSession();
     var followingIds = $scope.userInSession.following.slice();
     followingIds.push($scope.userInSession._id);
@@ -54,12 +53,9 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         post.likes.forEach(userId => {
             userService.getUserById(userId).then(user => {
                 $scope.postUserLikes.push(user);
-                console.log($scope.postUserLikes);
             })
         });
         $scope.postUserLikes=[];
-        console.log($scope.postUserLikes);
-
     }
 
 
@@ -68,14 +64,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         $scope.retweets=!$scope.retweets;
         post.retweets.forEach(postId => {
             PostsService.getPostById(postId).then(post => {
-
                 $scope.retweetedPosts.push(post);
-                console.log($scope.retweetedPosts);
             })
         });
         $scope.retweetedPosts=[];
-        console.log($scope.retweetedPosts);
-
     }
 
     $scope.addPost = function (tweetText) {
@@ -101,8 +93,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         if ($scope.newPost.photo) {
             let userToUpdate = userService.getUserInSession();
             userToUpdate.gallery.push($scope.newPost.photo);
-            userService.updateUserFields({ user: userToUpdate })
-                .catch(err => console.log(err));
+            userService.updateUserFields({ user: userToUpdate }).then(u=>{
+                $scope.userInSession=u;
+            })
+                .catch(err => alert("Something went wrong! Please try again later."));
         }
 
         if (tweetText && tweetText.length<MAX_LENGTH) {
@@ -145,21 +139,22 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.replyPost = function (post) {
-        console.log(post);
-        let reply = {
-            text: $scope.tweetText,
-            userName: $scope.userInSession.name,
-            userUsername: $scope.userInSession.username,
-            userPhoto: $scope.userInSession.profilePicture,
-            likes: []
+
+        if($scope.retweetText.length<260 && $scope.retweetText.length>0)
+        {
+            let reply = {
+                text: $scope.tweetText,
+                userName: $scope.userInSession.name,
+                userUsername: $scope.userInSession.username,
+                userPhoto: $scope.userInSession.profilePicture,
+                likes: []
+            }
+            post.replies.push(reply);
+            PostsService.updatePost({ post: post }).then(p => {
+                $('#replyModal').modal('hide');
+                $scope.tweetText = '';
+            });
         }
-        console.log(reply);
-        post.replies.push(reply);
-        PostsService.updatePost({ post: post }).then(p => {
-            console.log(p);
-            $('#replyModal').modal('hide');
-            $scope.tweetText = '';
-        });
     }
 
 

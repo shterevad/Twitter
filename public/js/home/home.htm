@@ -13,11 +13,10 @@
             </li>
         </ol>
 
-        <div ng-if='!$scope.posts.length' id="empty-posts">
+        <div ng-if='posts.length==0' id="empty-posts">
             <h1>What? No Tweets yet?</h1>
             <p class='gray'>This empty timeline won’t be around for long. Start following people and you’ll see Tweets show up here.</p>
         </div>
-
     </div>
 
     <aside class='rightAside'>

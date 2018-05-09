@@ -316,6 +316,10 @@ footer a, footer p{
     .mainContent{
       margin: 5em 7.5em;
     }
+    #hiddenSearch{
+      display:none;
+    }
+    
     
   }
 
@@ -344,15 +348,31 @@ footer a, footer p{
    }
 
 
+   div>#hashtagHeader h1 {
+    padding: 2.5% 4%;
+}
+
+div>#hashtagHeader ul {
+  margin: 0% 2%;
+}
+
    #search{
      width:100%
    }
+   #hiddenSearch{
+    display:none;
+  }
+  
 }
 
 @media all and (max-width: 770px) {
   #logo{
-    left:36%;
+    left: 5%;
   }
+  #hiddenSearch{
+    display:none;
+  }
+  
 }
 
 @media all and (max-width: 700px) {
@@ -411,6 +431,11 @@ footer a, footer p{
     width: 68px;
   }
 
+  #hiddenSearch{
+    display:none;
+  }
+  
+
 }
 
 
@@ -431,8 +456,38 @@ footer a, footer p{
   width: 23%;
 }
 #logo{
-  left:47%;
+  left: 8%;
 }
+
+.posts-action-list li {
+  margin: 1em 1em 1em 0em !important;
+}
+.posts-frame-content div {
+  margin-left: -5em;
+}
+
+#profileDiv img:last-of-type {
+  width: 28%;
+  height: 127px;
+}
+
+#whoToFollow div>span {
+  top: -74px;
+}
+#whoToFollow div {
+  top: -26px;
+}
+
+#whoToFollow button {
+  left: 60px;
+  height: 28px;
+  top: -29px;
+}
+
+.search-wrapper {
+  width: 48%;
+}
+
 
 }
 
@@ -453,6 +508,10 @@ footer a, footer p{
   #rightNav{
     width:59%;
   }
+  .posts-user-photo{
+    width: 13%;
+      height: 42px !important ;
+  }
 
   #rightNav ul li button{
     width: 45px;
@@ -463,6 +522,10 @@ footer a, footer p{
     width: 100%;
   }
 
+  .profile-wrapper ul{
+    width: 90%;
+    left: 8%;
+  }
   
 nav>ul>li {
   padding: 0.2em 1em;
@@ -488,6 +551,16 @@ margin: 1em 0.2em 1em !important;
   left: -10%;
 }
 
+#whoToFollow button {
+  left: 114px !important;
+  top: -51px;
+}
+
+#whoToFollow div {
+  top: -54px;
+  left: 37px;
+}
+
 #profileDiv div:last-of-type{
 top: -63px;
 left: 28px;
@@ -505,9 +578,37 @@ left: 28px;
   left:-87px;
 }
 
+div .postSection #profilePic{
+  width: 9%;
+  position: relative;
+  height: 29%;
+  top: 15px;
+}
 
+aside, .mainDiv{
+  width: 99%;
+}
 
+.posts-frame-content div{
+  margin-left: -6em;
+}
 
+#whoToFollow button{
+  left: 88px;
+}
+
+.upload{
+  position: relative;
+  width: 35px !important;
+  top: -5px;
+  left: -27px;
+
+}
+
+section.postSection ul:last-child button {
+  position: relative;
+  left: 19px;
+}
 #hashtagHeader div:first-child {
   height:48px;}
 }

@@ -109,7 +109,9 @@
           <li>
             <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
               maxlength="100">
-              <img src="/images/icons/search.png" id="searchIcon" >
+            <input type="text" class='greyBorder' id='hiddenSearch' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
+              maxlength="100" ng-if='toggleSearch'>
+            <img src="/images/icons/search.png" id="searchIcon" ng-click='toggleSearch=!toggleSearch'>
             <ul ng-if='search' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}" ng-click="closeSearch()">
@@ -189,7 +191,7 @@
           <post></post>
           <div>
             <newpost></newpost>
-            <button type="button" class="btn btn-primary filledButton replyButton" ng-click="replyPost(post)">Reply</button>
+            <button type="button" class="btn btn-primary filledButton replyButton" ng-click="replyPost(post)" ng-class={disabled:!tweetText}>Reply</button>
           </div>
         </div>
       </div>
@@ -198,164 +200,164 @@
 
 
     <div class="modal fade" id="tweetModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title">Compose a tweet</h1>  
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title">Compose a tweet</h1>
           </div>
           <div>
-              <newpost></newpost>
-              <button type="button" class="btn btn-primary filledButton replyButton" ng-click="addPost(tweetText); tweetText='';" ng-class={disabled:!tweetText}>Tweet</button>
-            </div>
+            <newpost></newpost>
+            <button type="button" class="btn btn-primary filledButton replyButton" ng-click="addPost(tweetText); tweetText='';" ng-class={disabled:!tweetText}>Tweet</button>
+          </div>
         </div>
       </div>
 
-    <!--     post information -->
-    <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <post></post>
-          <div class='modal-spans'>
-            <span>{{posted}}</span>
-            <br>
-            <span ng-click="showRetweets(post)" >
-              <span>{{post.retweets.length}}</span> Retweets</span>
-            <span ng-click="showLikes(post)">
-              <span>{{post.likes.length}}</span> Likes</span>
-          </div>
+      <!--     post information -->
+      <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <post></post>
+            <div class='modal-spans'>
+              <span>{{posted}}</span>
+              <br>
+              <span ng-click="showRetweets(post)">
+                <span>{{post.retweets.length}}</span> Retweets</span>
+              <span ng-click="showLikes(post)">
+                <span>{{post.likes.length}}</span> Likes</span>
+            </div>
 
-          <div ng-show="likes">
+            <div ng-show="likes">
               <h1 class='blueHeader'>Liked {{post.likes.length}} times</h1>
               <ol>
-                  <li ng-repeat="user in postUserLikes">
-                    <like></like>
-                  </li>
-               </ol>
-          </div>
+                <li ng-repeat="user in postUserLikes">
+                  <like></like>
+                </li>
+              </ol>
+            </div>
 
-          <div ng-show="retweets">
+            <div ng-show="retweets">
               <h1 class='blueHeader'>Retweeted {{post.retweets.length}} times</h1>
               <ol>
-                  <li ng-repeat="post in retweetedPosts">
-                    <post></post>
-                  </li>
-               </ol>
-          </div> 
+                <li ng-repeat="post in retweetedPosts">
+                  <post></post>
+                </li>
+              </ol>
+            </div>
 
 
-          <div class='retweet-input'>
-            <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
-            <button ng-click="replyPost(post)" class="filledButton">Reply</button>
+            <div class='retweet-input'>
+              <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
+              <button ng-click="replyPost(post)" class="filledButton">Reply</button>
+            </div>
+            <ol>
+              <li ng-repeat="reply in replies">
+                <reply></reply>
+              </li>
+            </ol>
           </div>
-          <ol>
-            <li ng-repeat="reply in replies">
-              <reply></reply>
-            </li>
-          </ol>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <!-- message modal -->
-  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button id='backButton' class="filledButton" ng-click="changeSection()" ng-if="messageSection==3 || messageSection==2">❮</button>
-          <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
-          <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-        <div class='modal-body' ng-if="userInSession.conversations.length==0">
-          <h1>Send a message, get a message</h1>
-          <p>Direct Messages are private conversations between you and other people on Twitter. Share Tweets, media, and more!</p>
-        </div>
-
-        <div class="start-conversation" ng-if="messageSection==2">
-          <h2>Send message to:</h2>
-          <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()"
-            maxlength="100">
-          <ul ng-show='messageSearch'>
-            <h2>People</h2>
-            <li ng-repeat="user in users | filter : {name:messageSearch}">
-              <a ng-click="startConversation(user)">
-                <img class="greyBorder" ng-src="{{user.profilePicture}}">
-                <div>
-                  <span>{{user.name}}</span>
-                  <span>@{{user.username}}</span>
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div ng-if="messageSection==1" class='all-conversations'>
-          <ul>
-            <li ng-repeat="conversation in conversations" ng-click="startConversation(conversation.user)">
-              <div>
-                <a href="#!profile/{{coversation.user.username}}">
-                  <img class="greyBorder" ng-src="{{conversation.user.profilePicture}}">
-                </a>
-
-                <div>
-                  <div>
-                    <span>{{conversation.user.name}}</span>
-                    <span class="gray">@{{conversation.user.username}}</span>
-                    <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
-                  </div>
-                  <br>
-                  <div class="lastMessage gray">
-                    {{conversation.messages[(conversation.messages.length-1)].message}}
-                  </div>
-                </div>
-                <button type="button" class="btn btn-primary filledButton" ng-click="deleteConversation(conversation)">Delete</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="message-window" ng-if="messageSection==3">
-          <div class='send-message-div'>
-            <input type="text" ng-model='messageToSend' ng-keyup="$event.keyCode == 13 && sendMessage(messageToSend)" class='input-field' maxlength="500">
-            <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
+    <!-- message modal -->
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" ng-controller="messagesController" ng-init="messageToSend=''">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button id='backButton' class="filledButton" ng-click="changeSection()" ng-if="messageSection==3 || messageSection==2">❮</button>
+            <h1 class="modal-title" class="retweet-modal-label">Dirrect messages</h1>
+            <button type="button" class="btn btn-primary filledButton" ng-click="messageSection=2">New Message</button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
 
-          <div class="message-container">
-            <ul>
-              <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage}>
-                <div>
+          <div class='modal-body' ng-if="userInSession.conversations.length==0">
+            <h1>Send a message, get a message</h1>
+            <p>Direct Messages are private conversations between you and other people on Twitter. Share Tweets, media, and more!</p>
+          </div>
+
+          <div class="start-conversation" ng-if="messageSection==2">
+            <h2>Send message to:</h2>
+            <input type="text" class='greyBorder' class='search' ng-model='messageSearch' placeholder="Enter a name..." ng-click="loadUsers()"
+              maxlength="100">
+            <ul ng-show='messageSearch'>
+              <h2>People</h2>
+              <li ng-repeat="user in users | filter : {name:messageSearch}">
+                <a ng-click="startConversation(user)">
+                  <img class="greyBorder" ng-src="{{user.profilePicture}}">
                   <div>
-                    <a href="#!profile/{{conversationUser.username}}">
-                      <img class="greyBorder" ng-src="{{m.profilePic}}">
-                    </a>
-                    <p>{{m.message}}</p>
+                    <span>{{user.name}}</span>
+                    <span>@{{user.username}}</span>
                   </div>
-                </div>
+                </a>
               </li>
             </ul>
           </div>
 
+          <div ng-if="messageSection==1" class='all-conversations'>
+            <ul>
+              <li ng-repeat="conversation in conversations">
+                <div ng-click="startConversation(conversation.user)">
+                  <a href="#!profile/{{coversation.user.username}}">
+                    <img class="greyBorder" ng-src="{{conversation.user.profilePicture}}">
+                  </a>
+                  <span ng-show="false">{{conversation._id}}</span>
+                  <div>
+                    <div>
+                      <span>{{conversation.user.name}}</span>
+                      <span class="gray">@{{conversation.user.username}}</span>
+                      <span ng-show="false" id="conversation-user-id">{{conversation.user._id}}</span>
+                    </div>
+                    <br>
+                    <div class="lastMessage gray">
+                      {{conversation.messages[(conversation.messages.length-1)].message}}
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary filledButton" ng-click="deleteConversation(conversation,$index)">Delete</button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="message-window" ng-if="messageSection==3">
+            <div class='send-message-div'>
+              <input type="text" ng-model='messageToSend' ng-keyup="$event.keyCode == 13 && sendMessage(messageToSend)" class='input-field'
+                maxlength="500">
+              <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
+            </div>
+
+            <div class="message-container">
+              <ul>
+                <li ng-repeat="m in messages.slice().reverse() track by $index" ng-class={myMessage:m.myMessage}>
+                  <div>
+                    <div>
+                      <a href="#!profile/{{conversationUser.username}}">
+                        <img class="greyBorder" ng-src="{{m.profilePic}}">
+                      </a>
+                      <p>{{m.message}}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!--  picture detail modal -->
-  <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog image-modal-dialog">
-      <div class="modal-content image-modal-container">
-        <img class="expanded-image" ng-src="{{galleryPic}}" ng-click="openImageNewTab(galleryPic)">
-        <img src="images/icons/delete-icon.png" data-toggle="modal" data-target="#image-modal" class="delete-image" ng-click="deleteImage(galleryPic)"
-          tooltips tooltip-side="top" tooltip-template="Delete image" />
-        <img>
+    <!--  picture detail modal -->
+    <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog image-modal-dialog">
+        <div class="modal-content image-modal-container">
+          <img class="expanded-image" ng-src="{{galleryPic}}" ng-click="openImageNewTab(galleryPic)">
+          <img src="images/icons/delete-icon.png" data-toggle="modal" data-target="#image-modal" class="delete-image" ng-click="deleteImage(galleryPic)"
+            tooltips tooltip-side="top" tooltip-template="Delete image" />
+          <img>
+        </div>
       </div>
     </div>
-  </div>
 
 </body>
 

@@ -163,7 +163,7 @@ nav>ul>li{
     line-height: 1em;
     z-index: 10;
     background-color: white;
-    border: 0.5px ridge;
+    border: 1px solid #1da1f2;
     width: 16%;
     left: 68%;
     top: 101%;
@@ -200,11 +200,9 @@ nav>ul>li{
     width: 25%;
     background-color: white;
     border-radius: 10px;
+    border: 1px solid #1da1f2;
   }
 
-  #profileMenu li{
-    border-bottom: 1px solid gray;
-  }
 
 
   .search-wrapper span:first-of-type{
@@ -227,4 +225,16 @@ nav>ul>li{
   .search-wrapper span{
     position: relative;
     top: -12px;
+  }
+
+
+  #hiddenSearch{
+    position: absolute;
+    top: 48px;
+    height: 48px;
+    width: 90%;
+    left: 23px;
+    font-size: 1.4em;
+    border: 1px solid #1da1f2;
+    border-radius: 10px;
   }
