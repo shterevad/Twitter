@@ -621,5 +621,23 @@ section.postSection ul:last-child button {
 #hashtagHeader div:first-child {
   height:48px;}
 
+
+  .modal-content .modal-header #backButton {
+    margin-left: 2em;
+    margin-right: 0.5em;
+}
+
+.send-message-div input {
+
+  margin-left: 3em;
+  margin-top: 1em;}
     
+
+  .message-container div {
+    padding: 0.1em 1em 0em 1.5em;}
+
+
+
+#messageModal h2 {
+  margin: 3em 1em 0em;}
 }
