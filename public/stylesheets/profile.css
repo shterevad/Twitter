@@ -337,6 +337,30 @@ body{
     #profile-page-main-div-tweets-inner{
      width: 100%;   
     }
+
+    
+    .followed-user-profile-pic{
+        width: 70px;
+        height: 70px;
+    }
+
+    #profile-page-main-div-following{
+        font-size: 0.9em;
+    }
+
+    .followed-user-button,
+    .follower-button {
+        top: -50px;
+    }
+
+    .followed-user-details,
+    .follower-details {
+        top: -33px;
+    }
+
+    #profile-page-main-div-following{
+        margin-left: 1%;
+    }
 }
 
 @media only screen and (max-width: 950px){
@@ -385,6 +409,16 @@ body{
         height: 150px;
         width: 150px;
     }
+
+    .followed-user-container,
+    .follower-container {
+        height: 280px
+    }
+
+    .followed-user-button,
+    .follower-button{
+        font-size: 0.85em;
+    }
 }
 
 @media only screen and (max-width: 737px){
@@ -410,6 +444,37 @@ body{
    #rightNav>ul>li:first-of-type{
     width: 58%;
   }
+
+  .followed-user-button,
+  .follower-button {
+    left: 10%;
+    font-size: 0.75em;
+    top: -60px;
+  }
+
+  .followed-user-profile-pic,
+  .follower-profile-pic {
+      width: 60px;
+      height: 60px;
+      top: -50px;
+  }
+
+  .followed-user-details,
+  .follower-details{
+    top: -50px;
+  }
+
+  .followed-user-container,
+  .follower-container {
+    height: 260px;
+  }
+}
+
+@media only screen and (max-width: 700px){
+    #profile-page-main-div-following,
+    #profile-page-main-div-followers{
+        font-size: 0.75em;
+    }
 }
 
 @media only screen and (max-width: 640px){
@@ -423,7 +488,7 @@ body{
     }
 
     #profile-page-header-banner-container{
-        height: 170px;
+        height: 160px;
     }
 
     #profile-page-profile-picture-nav-container{
@@ -465,16 +530,17 @@ body{
     #profile-page-dynamic-content-container{
         width: 95%;
     }
+
 }
 
 @media only screen and (max-width: 550px){
     #profile-page-profile-picture-nav-container{
-        top: 194px;
+        top: 230px;
         left: 2%
     }
 
     #profile-pg-user-details{
-        width: 76%;
+        width: 70%;
         float: right;
         margin-top: 0;
         margin-bottom: 0
@@ -482,7 +548,7 @@ body{
 
     #profile-page-user-gallery-container{
         width: 95%;
-        margin-top: 0;
+        margin-top: 8%;
     }
 
     #profile-page-gallery-title{
@@ -493,4 +559,32 @@ body{
         height: auto;
         widows: 98%;
     }
+
+    #profile-page-header-nav{
+        margin-left: 15%;
+        width: 55%;
+    }
+
 }
+
+
+
+/*     
+.followed-user-profile-pic{
+    width: 60px;
+    height: 60px;
+}
+
+#profile-page-main-div-following{
+    font-size: 0.7em;
+}
+
+.followed-user-button,
+.follower-button {
+    top: -50px;
+ }
+
+.followed-user-details,
+.follower-details {
+     top: -33px;
+} */
