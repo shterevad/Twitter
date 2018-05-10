@@ -86,6 +86,7 @@ body{
     cursor: pointer;
     text-align: center;
     height: 100%;
+
 }
 
 
@@ -213,7 +214,7 @@ body{
 
 /* DYNAMIC CONTENT CONTAINER */
 #profile-page-dynamic-content-container{
-    width: 73%;
+    width: 70%;
     float: right;
 }
 
@@ -323,4 +324,173 @@ body{
 
 #profile-page-right-aside-likes, #profile-page-right-aside-tweets{
     width: 34%
+}
+
+/* RESPONSEIVE */
+@media only screen and (max-width: 1171px){
+    #profile-page-right-aside-tweets,
+    #profile-page-right-aside-likes
+    {
+        display:none;
+    }
+
+    #profile-page-main-div-tweets-inner{
+     width: 100%;   
+    }
+}
+
+@media only screen and (max-width: 950px){
+    #profile-pg-left-aside{
+        width: 24%;
+        margin-left: 3%
+    }
+
+    #profile-page-inner-content-div{
+        width: 95%;
+    }
+
+    #profile-page-dynamic-content-container{
+        float: none;
+        display: inline-block
+    }
+}
+
+@media only screen and (max-width: 853px){
+        
+    #profile-page-header{
+        height: 200px;
+    }
+
+    #profile-page-header-banner-container{
+        height: 200px;
+    }
+
+    #profile-page-header-nav{
+        width: 50%
+    }
+
+    #profile-page-header-nav>li{
+        padding: 0.5em 1.5em
+    }
+
+    #profile-pg-left-aside{
+        margin-top: 9%;
+    }
+
+    #profile-page-inner-content-div{
+        margin-top: 11%;
+    }
+
+    #profile-page-profile-picture-nav-container{
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 737px){
+    #profile-page-profile-picture-nav-container{
+        height: 135px;
+        width: 135px;
+    }
+
+    #profile-page-main-div-tweets-inner>ol{
+        font-size: 0.8em;
+    }
+
+   #profile-pg-left-aside{
+       font-size: 0.7em;
+   }
+   #profile-page-header-nav{
+       margin-left: 26%;
+   }
+   #profile-page-header-nav>li{
+       padding: 0.5em 1em;
+   }
+
+   #rightNav>ul>li:first-of-type{
+    width: 58%;
+  }
+}
+
+@media only screen and (max-width: 640px){
+    #profile-page-profile-picture-nav-container{
+        height: 135px;
+        width: 135px;
+    }
+
+    #profile-page-header{
+        height: 170px;
+    }
+
+    #profile-page-header-banner-container{
+        height: 170px;
+    }
+
+    #profile-page-profile-picture-nav-container{
+        top: 140px;
+        left: 4%;
+    }
+
+    #profile-page-header-nav>li{    
+        width: 24%;
+    }
+
+    #profile-page-profile-picture-nav-container{
+        top: 170px;
+        left: 3%;
+    }
+
+    #profile-pg-left-aside{
+        display: block;
+        width: 100%;
+        margin-top:2%
+    }
+
+    #profile-pg-user-details{
+        width: 50%;
+        float: left;
+        margin-top: 12%;
+    }
+
+    #profile-page-user-gallery-container{
+        width: 50%;
+        float: right;
+        margin-top: 5%
+    }
+
+    #profile-page-main-div-tweets{
+        width: 100%;
+    }
+
+    #profile-page-dynamic-content-container{
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    #profile-page-profile-picture-nav-container{
+        top: 194px;
+        left: 2%
+    }
+
+    #profile-pg-user-details{
+        width: 76%;
+        float: right;
+        margin-top: 0;
+        margin-bottom: 0
+    }
+
+    #profile-page-user-gallery-container{
+        width: 95%;
+        margin-top: 0;
+    }
+
+    #profile-page-gallery-title{
+        width: 60%;
+    }
+
+    #profile-pg-left-aside{
+        height: auto;
+        widows: 98%;
+    }
 }
