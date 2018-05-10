@@ -2,7 +2,6 @@ mainApp.service('TrendsService', function ($q, $http) {
     this.getRandomTags = () => {
         var deferred = $q.defer();
         var promise = $http.get('http://localhost:3000/tags/randomtags').then(function (response) {
-            console.log(response.data);
             deferred.resolve(response.data);
         });
         return deferred.promise;
