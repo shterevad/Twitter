@@ -3,13 +3,14 @@ mainApp.controller('profileController', function ($scope, $window, $location, $t
     const UNFOLLOW_BUTTON_INDEX = 1;
     const FOLLOW_BUTTON_INDEX = 2;
     const POSTS_SECTION_INDEX = 1;
-    const FOLLOWING_SECTION_INDEX = 1;
-    const FOLLOWERS_SECTION_INDEX = 1;
-    const LIKES_SECTION_INDEX = 1;
+    const FOLLOWING_SECTION_INDEX = 2;
+    const FOLLOWERS_SECTION_INDEX = 3;
+    const LIKES_SECTION_INDEX = 4;
+    const LINK_CROP_LENGTH = 11
 
     $scope.sectionInUse = POSTS_SECTION_INDEX;
     $scope.isFollowing = SETTINGS_BUTTON_INDEX;
-    let pageUser = $window.location.hash.substring(11);
+    let pageUser = $window.location.hash.substring(LINK_CROP_LENGTH);
     let userInSession = userService.getUserInSession();
 
     userService.getUserByUsername(pageUser).then(function (user) {
