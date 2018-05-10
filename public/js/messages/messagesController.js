@@ -63,17 +63,18 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
         }
     }
 
-    $scope.deleteConversation= function(conversation, $index){
+    /* $scope.deleteConversation= function(conversation, $index){
        var convIndex= $scope.userInSession.conversations.findIndex(c=>c.userId===conversation.user._id);
         if(convIndex){
             $scope.userInSession.conversations.splice(convIndex, 1);
             userService.updateUserFields({user:$scope.userInSession}).then(u=>{
+
                 $scope.conversations.splice($index,1);
             }).catch(err=>{
                 alert("Something went wrong! Please try again later!");
             })
         }
-    }
+    } */
 
    
 });

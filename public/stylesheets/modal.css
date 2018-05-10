@@ -531,3 +531,8 @@
     #replyModal .upload{
       display: none;
     }
+
+
+    #postInfoInput{
+      width: 72%;
+    }

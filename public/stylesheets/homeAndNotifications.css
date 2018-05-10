@@ -316,9 +316,7 @@ footer a, footer p{
     .mainContent{
       margin: 5em 7.5em;
     }
-    #hiddenSearch{
-      display:none;
-    }
+   
     
     
   }
@@ -359,9 +357,7 @@ div>#hashtagHeader ul {
    #search{
      width:100%
    }
-   #hiddenSearch{
-    display:none;
-  }
+
   
 }
 
@@ -369,9 +365,7 @@ div>#hashtagHeader ul {
   #logo{
     left: 5%;
   }
-  #hiddenSearch{
-    display:none;
-  }
+
   
 }
 
@@ -431,9 +425,6 @@ div>#hashtagHeader ul {
     width: 68px;
   }
 
-  #hiddenSearch{
-    display:none;
-  }
   
 
 }
@@ -537,7 +528,13 @@ nav>ul>li {
 }
 
 
-
+.search-wrapper {
+  width: 90%;
+  position: absolute;
+  left: 23px;
+  top: 96px;
+  border-top: none;
+}
 .posts-action-list li {
 font-size: 0.9em;
 margin: 1em 0.2em 1em !important;

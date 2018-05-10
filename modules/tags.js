@@ -10,8 +10,6 @@ var TagsSchema = new Schema({
         type: String,
         minlength: MIN_LENGTH,
         maxlength: MAX_LENGTH,
-      /*   unique: true,
-        required:true */
     },
     posts: [String],
 
