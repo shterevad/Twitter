@@ -393,8 +393,8 @@ div>#hashtagHeader ul {
   .mainContent{
     font-size: 1.2em;
    width: 96%;
-   margin: 3em 1em;
-   margin-top: 0;
+   /* margin: 3em 1em; */
+   margin: 0;
   }
 
   #whoToFollow, footer{
