@@ -58,7 +58,7 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     /* close all drop-down menus */
     window.onclick = function () {
         $scope.search = '';
-        $toggleSearch = false;
+       
         if ($scope.menuOpened) {
             $scope.menuOpened = false;
         }
