@@ -30,6 +30,7 @@ main{
   .mainContent{
     width: 82%;
     margin:5em auto;
+    margin-top: 1em;
     height: auto;
   }
 
@@ -319,6 +320,7 @@ footer a, footer p{
 
     .mainContent{
       margin: 5em 7.5em;
+      margin-top: 1em;
     }
    
     
@@ -330,6 +332,7 @@ footer a, footer p{
    .mainContent{
     width: 100%;
     margin: 5em 1.2em;
+    margin-top: 1em;
    }
 
    .mainDiv{
@@ -343,6 +346,7 @@ footer a, footer p{
    .mainContent{
     width: 100%;
     margin: 5em 2em;
+    margin-top: 1em;
    }
 
    header>div{
@@ -380,13 +384,17 @@ div>#hashtagHeader ul {
   }
   aside, .mainDiv {
     width: 93%;
-    margin: 1em;
+    padding: 1em;
+  }
+  .mainDiv{
+    margin: 0;
   }
 
   .mainContent{
     font-size: 1.2em;
    width: 96%;
    margin: 3em 1em;
+   margin-top: 0;
   }
 
   #whoToFollow, footer{
