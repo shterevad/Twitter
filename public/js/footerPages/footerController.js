@@ -1,6 +1,5 @@
 mainApp.controller("footerController", function($scope, $window, $http){
     let footerPage = $window.location.hash.substring(10);
-    console.log(footerPage)
 
     $http.get("/footer/foot/" + footerPage)
     .then(response => {
@@ -12,7 +11,7 @@ mainApp.controller("footerController", function($scope, $window, $http){
         }
         
     })
-    .catch(err => console.log(err))
+    .catch(err => alert("Something went wrong! Please try again!"));
 
 
 })

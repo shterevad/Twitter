@@ -37,10 +37,10 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
                 $scope.posts = PostsService.sortByDateEsc($scope.posts);
             }).catch(err => {
-                console.log(err);
+                alert("Something went wrong! Please try again!");
             })
         }).catch(err => {
-            console.log(err);
+            alert("Something went wrong! Please try again!");
         })
     });
 
@@ -137,7 +137,6 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.retweetReplyPost = function (post) {
         $scope.post = post;
         $scope.posted = PostsService.getDate(post.posted);
-        console.log($scope.post);
     }
 
 
@@ -193,7 +192,6 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         $scope.post = post;
         $scope.posted = PostsService.getDate(post.posted);
         $scope.replies = $scope.post.replies;
-        console.log($scope.replies);
     }
 
 
@@ -257,11 +255,11 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                         $scope.userInSession = u.data;
                     })
                     .catch(err => {
-                        console.log(err);
+                        alert("Something went wrong! Please try again!");
                     })
                 resolve(post);
             }).catch(err => {
-                //todo:validation
+                alert("Something went wrong! Please try again!");
             });
         })
     }
@@ -277,7 +275,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
                 $scope.uploaded = true;
                 $scope.newPost.photo = response;
             })
-            .catch(err => console.log(err));
+            .catch(err => alert("Something went wrong! Please try again!"));
     }
 
     $scope.filterLinks = function (post, tags, videos, links) {

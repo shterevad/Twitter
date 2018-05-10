@@ -19,8 +19,6 @@ mainApp.controller('LoginController', function ($scope, $http, $location, $windo
             userService.signUpNewUser(newUser).then(function (res) {
                 if (res === OK_STATUS) {
                     $window.location.reload();
-                } else {
-                    console.log(res);
                 }
             }).catch(function (err) {
                 var element = document.getElementById("error-message-box-signup");

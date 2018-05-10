@@ -69,7 +69,6 @@ mainApp.controller('messagesController', function ($scope, $http, $location, $wi
     }
 
      $scope.deleteConversation= function(conversation, $index){
-        console.log(conversation);
       var loggedUserIndex= $scope.userInSession.conversations.findIndex(c=>c._userId===conversation.user._id);
        var userIndex= conversation.user.conversations.findIndex(c=>c._userId===$scope.userInSession._id);
         if(loggedUserIndex!=-1 && userIndex!=-1){

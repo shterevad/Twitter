@@ -43,7 +43,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             $scope.users[$index].followBack = true;
         })
             .catch(function (err) {
-                console.log(err)
+                alert("Something went wrong! Please try again!");
             });
     }
 
@@ -55,7 +55,7 @@ mainApp.controller('followController', function ($scope, $http, userService) {
             $scope.users[$index].followBack = false;
         })
             .catch(function (err) {
-                console.log(err)
+                alert("Something went wrong! Please try again!");
             })
     }
 
