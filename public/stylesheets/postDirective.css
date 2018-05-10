@@ -165,3 +165,7 @@ span.retweetBox{
     margin-left: 15%;
     margin-top: -4%;
 }
+@media only screen and (max-width: 1171px){
+    .posts-user-photo {
+        height: unset;
+}}

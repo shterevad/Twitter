@@ -114,7 +114,7 @@
             <ul ng-if='search || hiddenSearch' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}" ng-click="closeSearch()">
-                  <img class="greyBorder" ng-src="{{user.profilePicture}}">
+                  <img class="greyBorder" ng-src="{{user.profilePicture}}" ng-controller="postController">
                   <span>{{user.name}}</span>
                   <span>@{{user.username}}</span>
                 </a>
@@ -319,7 +319,7 @@
 
           <div class="message-window" ng-if="messageSection==3">
             <div class='send-message-div'>
-              <input type="text" ng-model='messageToSend' ng-keyup="$event.keyCode == 13 && sendMessage(messageToSend)" class='input-field'
+              <input type="text" ng-model='messageToSend' class='input-field'
                 maxlength="500">
               <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
             </div>

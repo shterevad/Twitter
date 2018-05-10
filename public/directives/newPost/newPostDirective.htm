@@ -1,6 +1,6 @@
 <section class='postSection container'>
     <div ng-init="tweetText=''">
-        <img src="{{userInSession.profilePicture}}" id="profilePic">
+        <img src="{{userInSession.profilePicture}}" id="profilePic" ng-controller="postController">
         <textarea ng-model="tweetText" cols="90" rows="1" maxlength="250" placeholder="What's happening?" required></textarea>
     </div>
 

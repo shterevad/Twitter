@@ -2,8 +2,8 @@
     <div>
         <div ng-show="false">{{post._id}}</div>
         <div class="posts-item-header">
-            <a href="#!profile/{{post.userUsername}}">
-                <img ng-src="{{post.profilePicture}}" class="posts-user-photo">
+            <a href="#!profile/{{post.userUsername}}" >
+                <img ng-src="{{post.profilePicture}}" class="posts-user-photo" ng-controller="postController">
             </a>
             <div>
                 <span class='deletePost' ng-click="deletePost(post._id, $index)" ng-if="post._userId === userInSession._id">&#xd7;</span>
