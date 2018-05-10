@@ -1,21 +1,16 @@
 mainApp.controller('mainAppController', function ($scope, $http, $location, $window, $timeout, PostsService, userService) {
 
-    if(!sessionStorage.getItem("loggedUser")){
+    if (!sessionStorage.getItem("loggedUser")) {
         $window.location.href = '/login'
     }
 
     $scope.userInSession = userService.getUserInSession();
     $scope.users = [];
     $scope.conversations = [];
-    $scope.messageSection=1;
+    $scope.messageSection = 1;
     $scope.menuOpened = false;
-    $toggleSearch=false;
+    $scope.toggleSearch = false;
 
-    /* toggle settings menu */
-    $scope.toggleMenu = function (event) {
-        $scope.menuOpened = !($scope.menuOpened);
-        event.stopPropagation();
-    };
 
     $scope.loadUsers = function ($event) {
         userService.getAllUsers().then(users => {
@@ -48,17 +43,35 @@ mainApp.controller('mainAppController', function ($scope, $http, $location, $win
     }
 
 
-    /* close search bar */
-    $scope.closeSearch=function(){
-        $scope.search='';
-    }
-    window.onclick = function () {
-            $scope.search='';
-            if ($scope.menuOpened) {
-                $scope.menuOpened = false;
-            }
-            $scope.$apply();
+     /* toggle settings menu */
+     $scope.toggleMenu = function (event) {
+        $scope.menuOpened = !($scope.menuOpened);
+        event.stopPropagation();
     };
+    
+    /* close search bar */
+    $scope.closeSearch = function () {
+        $scope.search = '';
+        $scope.toggleSearch = false;
+    }
+
+    /* close all drop-down menus */
+    window.onclick = function () {
+        $scope.search = '';
+        $toggleSearch = false;
+        if ($scope.menuOpened) {
+            $scope.menuOpened = false;
+        }
+        $scope.$apply();
+    };
+
+    /* close all drop-down menus on resize */
+    angular.element($window).bind('resize', function () {
+        $scope.hiddenSearch = '';
+        $scope.toggleSearch = false;
+        $scope.$digest();
+        $scope.search = '';
+    });
 
 });
 

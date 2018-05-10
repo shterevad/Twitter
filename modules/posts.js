@@ -1,14 +1,15 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-const MAX_LENGTH = 230;
+const MAX_LENGTH = 300;
 const MIN_LENGTH = 2;
 
 var PostSchema = new Schema({
 
   text: {
     type: String,
-    maxlength: MAX_LENGTH
+    maxlength:MAX_LENGTH,
+    minlength:MIN_LENGTH
   },
 
   retweetText: {

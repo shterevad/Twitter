@@ -32,7 +32,7 @@ router.get("/posts/:userId", function (req, res) {
 
 //update post fields
 router.post('/post/update', function (req, res) {
-    Posts.update({ _id: post._id }, req.body.post, function(err, p){
+    Posts.update({ _id: req.body.post._id }, req.body.post, function(err, p){
         if(!err){
             res.status(OK_STATUS).json(p);
         } else {
@@ -45,13 +45,14 @@ router.post('/post/update', function (req, res) {
 //add  new post 
 router.post('/newpost', function (req, res) {
     var post = req.body.post;
-    Posts.create(post, function (err, post) {
-        if (!err) {
-            res.status(OK_STATUS).json(post);
-        } else {
-            res.status(BAD_REQUEST).send({ error: "Post did not match the request syntax!" });
-        }
-    });
+        Posts.create(post, function (err, post) {
+            if (!err) {
+                res.status(OK_STATUS).json(post);
+            } else {
+                res.status(BAD_REQUEST).send({ error: "Post did not match the request syntax!" });
+            }
+        });
+    
 });
 
 

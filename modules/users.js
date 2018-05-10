@@ -62,7 +62,7 @@ var UserSchema = new Schema({
     following: [],
     gallery: [],
     likes: [],
-    conversations:[{_userId: Object, messages:[{profilePic: String, message: String, userId:String}]}]
+    conversations:[{_userId: String, messages:[{profilePic: String, message: String, userId:String}]}]
   });
 
 

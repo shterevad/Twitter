@@ -1,13 +1,10 @@
 mainApp.controller('postController', function ($scope, PostsService, TrendsService, userService) {
-    const MAX_LENGTH=260;
+    const MAX_LENGTH=261;
     $scope.posts = [];
     $scope.newPost = {};
     $scope.retweets=false;
     $scope.likes=false;
     $scope.tags=[];
-
-    $scope.retweetedPosts = [];
-    $scope.postUserLikes = [];
 
     $scope.userInSession = userService.getUserInSession();
     var followingIds = $scope.userInSession.following.slice();
@@ -49,6 +46,9 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.showLikes = function (post) {
+        $scope.post = post;
+        $scope.postUserLikes = [];
+        var users = [];
         $scope.likes=!$scope.likes;
         post.likes.forEach(userId => {
             userService.getUserById(userId).then(user => {
@@ -61,6 +61,8 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
 
 
     $scope.showRetweets = function (post) {
+        $scope.retweetedPosts = [];
+        $scope.post=post;
         $scope.retweets=!$scope.retweets;
         post.retweets.forEach(postId => {
             PostsService.getPostById(postId).then(post => {
@@ -135,12 +137,13 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
     $scope.retweetReplyPost = function (post) {
         $scope.post = post;
         $scope.posted = PostsService.getDate(post.posted);
+        console.log($scope.post);
     }
 
 
     $scope.replyPost = function (post) {
 
-        if($scope.retweetText.length<260 && $scope.retweetText.length>0)
+        if($scope.tweetText.length<260 && $scope.tweetText.length>0)
         {
             let reply = {
                 text: $scope.tweetText,
@@ -190,6 +193,7 @@ mainApp.controller('postController', function ($scope, PostsService, TrendsServi
         $scope.post = post;
         $scope.posted = PostsService.getDate(post.posted);
         $scope.replies = $scope.post.replies;
+        console.log($scope.replies);
     }
 
 

@@ -34,7 +34,6 @@
   <!--  services -->
   <script src='js/userService.js'></script>
   <script src='js/posts/postsService.js'></script>
-  <script src='js/messages/messagesService.js'></script>
   <script src='js/trends/trendsService.js'></script>
 
 
@@ -108,14 +107,14 @@
         <ul>
           <li>
             <input type="text" class='greyBorder' id='search' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
-              maxlength="100">
+              maxlength="100" ng-style="hidden">
             <input type="text" class='greyBorder' id='hiddenSearch' ng-model='search' placeholder="Search Twitter" ng-click="loadUsers($event)"
-              maxlength="100" ng-if='toggleSearch'>
-            <img src="/images/icons/search.png" id="searchIcon" ng-click='toggleSearch=!toggleSearch'>
-            <ul ng-if='search' class="search-wrapper">
+              maxlength="100" ng-show='toggleSearch'>
+            <img src="/images/icons/search.png" id="searchIcon" ng-click="toggleSearch=!toggleSearch">
+            <ul ng-if='search || hiddenSearch' class="search-wrapper">
               <li ng-repeat="user in users | filter : {name:search}">
                 <a href="#!profile/{{user.username}}" ng-click="closeSearch()">
-                  <img class="greyBorder" ng-src="{{user.profilePicture}}">
+                  <img class="greyBorder" ng-src="{{user.profilePicture}}" ng-controller="postController">
                   <span>{{user.name}}</span>
                   <span>@{{user.username}}</span>
                 </a>
@@ -197,8 +196,6 @@
       </div>
     </div>
 
-
-
     <div class="modal fade" id="tweetModal" tabindex="-1" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -211,53 +208,52 @@
           </div>
         </div>
       </div>
-
-      <!--     post information -->
-      <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <post></post>
-            <div class='modal-spans'>
-              <span>{{posted}}</span>
-              <br>
-              <span ng-click="showRetweets(post)">
-                <span>{{post.retweets.length}}</span> Retweets</span>
-              <span ng-click="showLikes(post)">
-                <span>{{post.likes.length}}</span> Likes</span>
-            </div>
-
-            <div ng-show="likes">
-              <h1 class='blueHeader'>Liked {{post.likes.length}} times</h1>
-              <ol>
-                <li ng-repeat="user in postUserLikes">
-                  <like></like>
-                </li>
-              </ol>
-            </div>
-
-            <div ng-show="retweets">
-              <h1 class='blueHeader'>Retweeted {{post.retweets.length}} times</h1>
-              <ol>
-                <li ng-repeat="post in retweetedPosts">
-                  <post></post>
-                </li>
-              </ol>
-            </div>
+    </div>
 
 
-            <div class='retweet-input'>
-              <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150">
-              <button ng-click="replyPost(post)" class="filledButton">Reply</button>
-            </div>
+    <div class="modal fade" id="postModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <post></post>
+          <div class='modal-spans'>
+            <span>{{posted}}</span>
+            <br>
+            <span ng-click="showRetweets(post)">
+              <span>{{post.retweets.length}}</span> Retweets</span>
+            <span ng-click="showLikes(post)">
+              <span>{{post.likes.length}}</span> Likes</span>
+          </div>
+
+          <div ng-show="likes">
+            <h1 class='blueHeader'>Liked {{post.likes.length}} times</h1>
             <ol>
-              <li ng-repeat="reply in replies">
-                <reply></reply>
+              <li ng-repeat="user in postUserLikes">
+                <like></like>
               </li>
             </ol>
           </div>
+
+          <div ng-show="retweets">
+            <h1 class='blueHeader'>Retweeted {{post.retweets.length}} times</h1>
+            <ol>
+              <li ng-repeat="post in retweetedPosts">
+                <post></post>
+              </li>
+            </ol>
+          </div>
+          <div class='retweet-input'>
+            <input type="text" placeholder="Tweet your reply..." ng-model="tweetText" maxlength="150" id="postInfoInput">
+            <button ng-click="replyPost(post)" class="filledButton">Reply</button>
+          </div>
+          <ol>
+            <li ng-repeat="reply in replies">
+              <reply></reply>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
+
 
 
     <!-- message modal -->
@@ -323,7 +319,7 @@
 
           <div class="message-window" ng-if="messageSection==3">
             <div class='send-message-div'>
-              <input type="text" ng-model='messageToSend' ng-keyup="$event.keyCode == 13 && sendMessage(messageToSend)" class='input-field'
+              <input type="text" ng-model='messageToSend' class='input-field'
                 maxlength="500">
               <button type="button" class="btn btn-primary filledButton" ng-click="sendMessage(messageToSend); messageToSend=''">Send</button>
             </div>
