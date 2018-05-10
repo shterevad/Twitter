@@ -18,7 +18,7 @@ body{
     height: 100%;
     width: 100%;
     margin: 0;
-    margin-top: 3.8%;
+    /* margin-top: 3.8%; */
     font-family: 'Noto Sans';
     background-color: unset;
 }
@@ -488,7 +488,7 @@ body{
     }
 
     #profile-page-header-banner-container{
-        height: 147px;
+        height: 140px;
     }
 
     #profile-page-profile-picture-nav-container{
