@@ -299,6 +299,10 @@ footer a, footer p{
   }
 
   @media all and (max-width:1170px){
+
+    #rightNav>ul>li:first-of-type {
+      width: 38% !important;
+  }
     .rightAside{
       float: left;
       clear: left;
@@ -545,7 +549,7 @@ margin: 1em 0.2em 1em !important;
   width: 39%;
   height: 141px;
   top: -74px;
-  left: -10%;
+  left: -4%;
 }
 
 #whoToFollow button {
@@ -608,4 +612,6 @@ section.postSection ul:last-child button {
 }
 #hashtagHeader div:first-child {
   height:48px;}
+
+    
 }
