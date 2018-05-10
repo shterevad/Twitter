@@ -5,6 +5,7 @@ var ObjectIdSchema = Schema.ObjectId;
 
 const MIN_LENGTH_NAME = 2;
 const MAX_LENGTH_NAME = 20;
+const INVALID_EMAIL_STATUS = 401;
 const EMAIL_VALIDATION = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 var UserSchema = new Schema({
@@ -31,7 +32,7 @@ var UserSchema = new Schema({
           return EMAIL_VALIDATION.test(v);
         },
         message: 'Not a valid email!',
-        status: 401
+        status: INVALID_EMAIL_STATUS
       },
       unique: true,
       required: true

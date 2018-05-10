@@ -7,6 +7,9 @@ mainApp.service('userService', function ($http, $q, $timeout) {
     const INVALID_CREDENTIALS_STATUS = 401;
     const USER_EXISTS_STATUS = 403;
     const DOESNT_EXIST_STATUS = 404;
+    const PIC_DELETE_CROP_LENGTH = 80;
+    const PIC_DELETE_JPG_PNG_LENGTH = 4;
+    const PIC_DELETE_JPEG_LENGTH = 5;
 
     //firebase setup
     let config = {
@@ -344,13 +347,13 @@ mainApp.service('userService', function ($http, $q, $timeout) {
         let deferred = $q.defer();
 
         //get the url to send to firebase
-        let picToDeleteIndex = data.pic.slice(80).search(/.png|.jpg/);
-        let picToDeleteJpeg = data.pic.slice(80).search(".jpeg");
+        let picToDeleteIndex = data.pic.slice(PIC_DELETE_CROP_LENGTH).search(/.png|.jpg/);
+        let picToDeleteJpeg = data.pic.slice(PIC_DELETE_CROP_LENGTH).search(".jpeg");
         let picToDelete = null;
         if(picToDeleteIndex >= 0){
-            picToDelete = data.pic.slice(80, (80 + 4 + picToDeleteIndex));
+            picToDelete = data.pic.slice(PIC_DELETE_CROP_LENGTH, (PIC_DELETE_CROP_LENGTH + PIC_DELETE_JPG_PNG_LENGTH + picToDeleteIndex));
         } else {
-            picToDelete = data.pic.slice(80, (80 + 5 + picToDeleteJpeg));
+            picToDelete = data.pic.slice(PIC_DELETE_CROP_LENGTH, (PIC_DELETE_CROP_LENGTH + PIC_DELETE_JPEG_LENGTH + picToDeleteJpeg));
         }   
 
         //find the post that contains the image and delete it from user

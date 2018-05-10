@@ -12,6 +12,7 @@ const OK_STATUS = 200;
 const DOESNT_EXISTS_STATUS = 404;
 const INVALID_CREDENTIALS_STATUS = 401;
 const INVALID_PARAMS_STATUS = 406;
+const RANDOM_USERS_LIMIT = 10;
 
 //get user user by id
 router.get('/id/:id', function (req, res, next) {
@@ -64,10 +65,10 @@ router.post('/post', function (req, res, next) {
         if (user) {
             user.posts.push(post);
             user.save();
-            res.status(200);
+            res.status(OK_STATUS);
             res.json(user);
         } else {
-            res.status(404);
+            res.status(DOESNT_EXISTS_STATUS);
             res.json(err);
         }
     });
@@ -89,7 +90,7 @@ router.post('/user', function (req, res) {
 
 // Random users, Who to follow list
 router.get("/randomusers", function (req, res) {
-    Users.findRandom({}, {}, { limit: 10 }, function (err, results) {
+    Users.findRandom({}, {}, { limit: RANDOM_USERS_LIMIT }, function (err, results) {
         if (!err) {
             res.json(results);
         }
@@ -181,7 +182,7 @@ router.post('/unfollow', function (req, res, next) {
                 };
             })
         } else {
-            res.status(INVALID_PARAMS_STATUS).send({ messate: "Not following" });
+            res.status(INVALID_PARAMS_STATUS).send({ message: "Not following" });
         }
     })
     res.status(OK_STATUS).send({ message: "Success" })
@@ -213,32 +214,6 @@ router.put("/pass-change", function (req, res, next) {
             }
         }
     });
-
-// DELETE IMAGE FROM GALLERY + POST
-    
-router.delete("/delete-image", function(req, res, next){
-    res.setHeader('content-type', 'application/json');
-    console.log(req.body);
-    // Users.findOne({ "_id": req.body.userId }, {}, function (err, user) {
-    //     if (!user) {
-    //         res.status(DOESNT_EXISTS_STATUS).send({ message: "Something went wrong" })
-    //     } else {
-    //         if (sha1(oldPass) == user.password) {
-    //             user.password = sha1(newPass);
-    //             user.save(function (err) {
-    //                 if (err) {
-    //                     console.log(err)
-    //                 };
-    //                 res.status(OK_STATUS).send({ message: "Password changed" });
-    //             })
-    //         } else {
-    //             res.status(INVALID_CREDENTIALS_STATUS).send({ message: "Invalid password" })
-    //         }
-    //     }
-    // })
-})
-
-
 
 });
 

@@ -228,9 +228,15 @@
 }
 
 /* PASSWORD SETTINGS */
-#response-password-container{
+#response-password-container,
+#response-account-container {
     text-align: center;
     font-size: 0.9em;
+    font-style: italic;
+}
+
+.upload-status-span{
+    color: rgb(49, 249, 17);
     font-style: italic;
 }
 

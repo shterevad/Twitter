@@ -15,11 +15,11 @@
         </div>
 
         <ul id="settings-page-options-container" class="container">
-            <li ng-click="settingsSection = 1" ng-class="(settingsSection === 1) ? 'settings-page-option settings-page-selected-option' : 'settings-page-option'" id="settings-page-account-option">
+            <li ng-click="settingsSection = 1; hasResponse = false" ng-class="(settingsSection === 1) ? 'settings-page-option settings-page-selected-option' : 'settings-page-option'" id="settings-page-account-option">
                 Account
                 <img class="settings-page-right-arrow-icon" src="images/icons/right_arrow_icon.png" alt="">
             </li>
-            <li ng-click="settingsSection = 2" ng-class="(settingsSection === 2) ? 'settings-page-option settings-page-selected-option' : 'settings-page-option'" id="settings-page-password-option">
+            <li ng-click="settingsSection = 2; hasResponse = false" ng-class="(settingsSection === 2) ? 'settings-page-option settings-page-selected-option' : 'settings-page-option'" id="settings-page-password-option">
                 Password
                 <img class="settings-page-right-arrow-icon" src="images/icons/right_arrow_icon.png" alt="">
             </li>
@@ -64,6 +64,7 @@
                             <td class="account-field-content">
                                 <input data-file type="file" name="profilePicture" ng-model="userInSettings.profilePicture" ng-upload-change="upload($event)" id="account-profile-picture" class="inputfile">
                                 <label for="account-profile-picture">Chose a file</label>
+                                <span class="upload-status-span" ng-show="profilePicUploaded">Uploaded</span>
                             </td>
                         </tr>
                         <tr>
@@ -71,6 +72,7 @@
                             <td class="account-field-content">
                                 <input data-file type="file" name="headerPicture" ng-model="userInSettings.headerPicture" ng-upload-change="upload($event)" id="account-banner" class="inputfile">
                                 <label for="account-banner">Chose a file</label>
+                                <span class="upload-status-span" ng-show="headerPicUploaded">Uploaded</span>
                             </td>
                         </tr>
                         <tr>
@@ -87,6 +89,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <p id="response-account-container" ng-hide="!hasResponse" ng-class="hasError ? 'password-has-error' : 'password-success'">{{response}}</p>
                 <input type="submit" value="Save Changes" ng-click="saveProfileChanges()" id="settings-account-submit-btn">
             </form>
 
