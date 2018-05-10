@@ -548,7 +548,7 @@ body{
 
     #profile-page-user-gallery-container{
         width: 95%;
-        margin-top: 8%;
+        margin-top: 15%;
     }
 
     #profile-page-gallery-title{
@@ -563,6 +563,13 @@ body{
     #profile-page-header-nav{
         margin-left: 15%;
         width: 55%;
+    }
+
+    #profile-page-main-div-tweets,
+    #profile-page-main-div-following,
+    #profile-page-main-div-followers,
+    #profile-page-main-div-likes{
+        margin-top:15%;
     }
 
 }
